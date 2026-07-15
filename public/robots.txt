@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://promptingbi.com/sitemap-index.xml

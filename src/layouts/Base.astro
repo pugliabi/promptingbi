@@ -1,0 +1,147 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+const {
+  title = 'Prompting BI - Where Business Intelligence & Prompt Engineering Meet',
+  description = 'A space for dialogue on how to navigate the everchanging world of BI, especially through the use of AI.',
+  ogImage,
+} = Astro.props;
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/images/2024/05/Icon-1-e1716581578686.jpg" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Prompting BI" />
+    <meta property="og:type" content="website" />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" type="application/rss+xml" title="Prompting BI" href="/rss.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <p class="site-title"><a href="/">Prompting BI</a></p>
+      <p class="site-tagline">Where Business Intelligence &amp; Prompt Engineering Meet</p>
+      <nav aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer id="contact" class="site-footer">
+      <div class="footer-cols">
+        <section>
+          <h2>Contact</h2>
+          <ul>
+            <li><a href="https://www.x.com/tommypuglia">X</a></li>
+            <li><a href="https://www.linkedin.com/in/tommypuglia">LinkedIn</a></li>
+            <li><a href="https://www.youtube.com/channel/UCPwPrIpZwlfIKcoUpRwl9OQ">YouTube</a></li>
+            <li><a href="https://outlook.office365.com/owa/calendar/PugliaBI@pugliabi.com/bookings/">Book Time With Me</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>About Prompting BI</h2>
+          <p>
+            This platform is to be a space for dialogue on how to navigate the everchanging
+            world of BI, especially through the use of AI. Having this space, to debate and
+            share ideas, is crucial to understanding the next generation of curating data.
+          </p>
+          <p><strong>Tommy Puglia</strong><br />CEO Puglia BI Consulting</p>
+        </section>
+      </div>
+      <p class="copyright">&copy; {year} Puglia BI Consulting</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --ink: #1c1c1c;
+    --muted: #6b6b6b;
+    --line: #e4e4e4;
+    --accent: #14606a;
+    --bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 17px; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--bg);
+    font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+    line-height: 1.65;
+  }
+  h1, h2, h3, .site-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+  a { color: var(--accent); }
+  .skip {
+    position: absolute; left: -9999px;
+  }
+  .skip:focus { left: 1rem; top: 1rem; background: #fff; padding: .5rem; }
+
+  .site-header {
+    text-align: center;
+    padding: 3rem 1rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .site-title { font-size: 2.4rem; margin: 0; }
+  .site-title a { color: var(--ink); text-decoration: none; }
+  .site-tagline { color: var(--muted); margin: .4rem 0 1.2rem; font-size: .95rem; }
+  .site-header nav a {
+    color: var(--ink); text-decoration: none; margin: 0 .9rem;
+    font-weight: 600; font-size: .95rem; letter-spacing: .02em;
+  }
+  .site-header nav a:hover { color: var(--accent); }
+
+  main { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+  .post-list { list-style: none; padding: 0; margin: 0; }
+  .post-list li { padding: 2rem 0; border-bottom: 1px solid var(--line); }
+  .post-list h2 { margin: 0 0 .3rem; font-size: 1.7rem; }
+  .post-list h2 a { color: var(--ink); text-decoration: none; }
+  .post-list h2 a:hover { color: var(--accent); }
+  .post-date { color: var(--muted); font-size: .9rem; margin: 0 0 .6rem; }
+  .read-more { font-weight: 600; text-decoration: none; }
+
+  article h1 { font-size: 2.1rem; margin-bottom: .3rem; }
+  article img { max-width: 100%; height: auto; border-radius: 6px; }
+  article figure { margin: 2rem 0; }
+  blockquote { border-left: 3px solid var(--accent); margin: 1.5rem 0; padding: .2rem 0 .2rem 1.2rem; color: var(--muted); }
+  code { background: #f4f4f4; padding: .15em .35em; border-radius: 4px; font-size: .9em; }
+
+  .site-footer { border-top: 1px solid var(--line); padding: 2.5rem 1.25rem 2rem; background: #fafafa; }
+  .footer-cols { max-width: 960px; margin: 0 auto; display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .site-footer h2 { font-size: 1.15rem; margin: 0 0 .6rem; }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; }
+  .site-footer li { margin: .3rem 0; }
+  .site-footer p { margin: .4rem 0; font-size: .95rem; }
+  .copyright { text-align: center; color: var(--muted); margin-top: 2.5rem; font-size: .85rem; }
+</style>
