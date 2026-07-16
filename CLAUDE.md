@@ -32,7 +32,7 @@ Standard Astro static-site layout. Everything renders at build time to `dist/`.
 
 ## Adding a post
 
-Create `src/content/blog/<name>.md` with front matter matching `content.config.ts`:
+Create `src/content/blog/YYYY-MM-DD-<slug>.md` (date prefix = the post's front-matter date; the filename never affects the URL, `permalink` does) with front matter matching `content.config.ts`:
 
 ```markdown
 ---

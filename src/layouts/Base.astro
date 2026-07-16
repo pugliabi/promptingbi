@@ -77,6 +77,21 @@ const year = new Date().getFullYear();
       </div>
       <p class="copyright">&copy; {year} Puglia BI Consulting</p>
     </footer>
+    <script type="module">
+      const nodes = document.querySelectorAll('pre.mermaid');
+      if (nodes.length) {
+        const { default: mermaid } = await import(
+          'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
+        );
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'neutral',
+          securityLevel: 'strict',
+          fontFamily: "'Source Sans 3', system-ui, sans-serif",
+        });
+        await mermaid.run({ nodes });
+      }
+    </script>
   </body>
 </html>
 
@@ -137,6 +152,8 @@ const year = new Date().getFullYear();
   article figure { margin: 2rem 0; }
   blockquote { border-left: 3px solid var(--accent); margin: 1.5rem 0; padding: .2rem 0 .2rem 1.2rem; color: var(--muted); }
   code { background: #f4f4f4; padding: .15em .35em; border-radius: 4px; font-size: .9em; }
+  pre.mermaid { background: none; margin: 2rem 0; text-align: center; }
+  pre.mermaid:not([data-processed]) { color: transparent; }
 
   .site-footer { border-top: 1px solid var(--line); padding: 2.5rem 1.25rem 2rem; background: #fafafa; }
   .footer-cols { max-width: 960px; margin: 0 auto; display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }

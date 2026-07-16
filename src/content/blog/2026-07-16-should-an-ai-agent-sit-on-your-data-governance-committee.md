@@ -2,6 +2,7 @@
 title: "Should an AI Agent Sit on Your Data Governance Committee?"
 date: 2026-07-16T09:00:00Z
 permalink: "2026/07/16/should-an-ai-agent-sit-on-your-data-governance-committee"
+draft: true
 description: "AI agents won't lead your data governance program, but they can own its hardest job: transparency. Where to point them first, plus a 30-day plan."
 ---
 
