@@ -1,7 +1,7 @@
 ---
 title: '"What Do You See?" Is the Best First Prompt in Fabric'
-date: 2026-07-16T16:00:00Z
-permalink: "2026/07/16/what-do-you-see-first-prompt-fabric"
+date: 2026-08-27T16:00:00Z
+permalink: "2026/08/27/what-do-you-see-first-prompt-fabric"
 draft: true
 description: 'Connect an agent to Microsoft Fabric and the first prompt matters more than the first build. Why "what do you see?" earns trust before you delegate.'
 ---

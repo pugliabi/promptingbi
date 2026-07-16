@@ -1,7 +1,7 @@
 ---
 title: "Good for Humans, Bad for Agents: The Gold Semantic Model Meets Its Match"
-date: 2026-07-16T10:00:00Z
-permalink: "2026/07/16/good-for-humans-bad-for-agents"
+date: 2026-07-30T10:00:00Z
+permalink: "2026/07/30/good-for-humans-bad-for-agents"
 draft: true
 description: "The gold semantic model rule that made Power BI teams scalable is the same thing that makes AI agents fail. Perspectives might be the layer that saves both."
 ---
