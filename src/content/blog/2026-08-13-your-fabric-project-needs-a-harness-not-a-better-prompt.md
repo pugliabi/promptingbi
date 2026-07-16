@@ -1,7 +1,7 @@
 ---
 title: "Your Fabric Project Doesn't Need a Better Prompt. It Needs a Harness"
-date: 2026-07-16T13:00:00Z
-permalink: "2026/07/16/your-fabric-project-needs-a-harness-not-a-better-prompt"
+date: 2026-08-13T09:00:00Z
+permalink: "2026/08/13/your-fabric-project-needs-a-harness-not-a-better-prompt"
 draft: true
 description: "The model is fine, and your prompt is probably fine too. What your Fabric project is missing is the harness: skills, agents, organized context, and tools that talk to each other."
 ---

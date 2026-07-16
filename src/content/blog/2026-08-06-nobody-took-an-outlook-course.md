@@ -1,7 +1,7 @@
 ---
 title: "Nobody Took an Outlook Course: AI Adoption Is a Company Language"
-date: 2026-07-16T12:00:00Z
-permalink: "2026/07/16/nobody-took-an-outlook-course"
+date: 2026-08-06T09:00:00Z
+permalink: "2026/08/06/nobody-took-an-outlook-course"
 draft: true
 description: "Companies keep treating AI as an individual skill, like Googling. Real adoption is an organization learning a shared company language, the way Outlook and Excel became the language of work."
 ---
