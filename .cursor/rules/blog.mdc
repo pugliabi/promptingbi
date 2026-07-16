@@ -1,0 +1,48 @@
+---
+description: Prompting BI blog conventions — how to create and edit posts
+globs: ["src/content/blog/**", "src/pages/**"]
+alwaysApply: true
+---
+
+# Prompting BI blog rules
+
+Astro 5 static blog deployed to GitHub Pages at https://promptingbi.com. Content lives in `src/content/blog/` as markdown. Every push to `main` auto-deploys via GitHub Actions; a daily scheduled build also publishes future-dated posts when their date arrives.
+
+## Creating a new post
+
+Preferred: run `npm run new-post "My Post Title"` (scaffolds file + image folder). Or create `src/content/blog/<slug>.md` with EXACTLY this front matter shape:
+
+```markdown
+---
+title: "Post Title Here"
+date: 2026-07-20T09:00:00Z
+permalink: "2026/07/20/post-slug-here"
+description: "One-sentence teaser. Shown on homepage, RSS, and meta description."
+featured: /images/2026/07/some-image.png   # optional
+draft: true                                 # flip to false to publish
+---
+```
+
+Rules:
+- `permalink` must be `YYYY/MM/DD/slug` matching the date — preserves the WordPress-era URL structure
+- `date` must be ISO with Z suffix; future dates publish automatically on the daily build
+- `draft: true` posts never build; remove or set false to publish
+- slug = kebab-case; `description` under 160 characters
+
+## Images
+
+- Store in `public/images/YYYY/MM/` (mirror the post date)
+- Reference as `/images/YYYY/MM/name.png` (absolute path, no `public/` prefix)
+- Always include descriptive alt text
+
+## Voice and style
+
+- Author: Tommy Puglia, BI consultant (Power BI / Microsoft Fabric / AI). First person, conversational, practical, opinionated but friendly
+- Posts teach through worked examples with screenshots, then end with a short "Takeaways" bullet list
+- Audience: Power BI / Fabric professionals learning to use generative AI well
+
+## Do not
+
+- Do not edit `public/CNAME`, the `site` URL in `astro.config.mjs`, or `.github/workflows/deploy.yml` unless explicitly asked
+- Do not change permalinks of existing posts (breaks inbound links)
+- Do not add npm dependencies without asking

@@ -1,15 +1,14 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { publishedPosts } from '../lib/posts';
 
 export async function GET(context) {
-  const posts = await getCollection('blog');
+  const posts = await publishedPosts();
   return rss({
     title: 'Prompting BI',
     description:
       'Where Business Intelligence & Prompt Engineering Meet',
     site: context.site,
     items: posts
-      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
       .map((post) => ({
         title: post.data.title,
         pubDate: post.data.date,

@@ -9,6 +9,7 @@ const blog = defineCollection({
     description: z.string().optional(),
     permalink: z.string(), // original WordPress path, e.g. "2024/07/17/slug"
     featured: z.string().optional(),
+    draft: z.boolean().default(false), // true = never built or listed
   }),
 });
 

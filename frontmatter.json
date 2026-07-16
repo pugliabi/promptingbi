@@ -1,0 +1,27 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "Blog posts",
+      "path": "[[workspace]]/src/content/blog"
+    }
+  ],
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": false,
+      "previewPath": null,
+      "fields": [
+        { "title": "Title", "name": "title", "type": "string" },
+        { "title": "Publish date", "name": "date", "type": "datetime", "default": "{{now}}", "isPublishDate": true },
+        { "title": "Permalink (YYYY/MM/DD/slug)", "name": "permalink", "type": "string" },
+        { "title": "Description (teaser, <160 chars)", "name": "description", "type": "string" },
+        { "title": "Featured image", "name": "featured", "type": "image" },
+        { "title": "Draft", "name": "draft", "type": "draft", "default": true }
+      ]
+    }
+  ]
+}

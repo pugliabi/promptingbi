@@ -1,0 +1,16 @@
+# Keeps Astro + Actions patched automatically — the "unpatched WordPress" failure mode, solved
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      npm-all:
+        patterns: ["*"]
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday

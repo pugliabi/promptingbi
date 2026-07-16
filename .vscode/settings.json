@@ -1,0 +1,31 @@
+{
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": { "other": false, "comments": false, "strings": false }
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "pasteImage.path": "${projectRoot}/public/images/pasted",
+  "pasteImage.basePath": "${projectRoot}/public",
+  "pasteImage.insertPattern": "![](/${imageFilePath})",
+  "pasteImage.forceUnixStyleSeparator": true,
+  "markdownlint.config": {
+    "MD013": false,
+    "MD033": false,
+    "MD041": false
+  },
+  "cSpell.words": [
+    "astro",
+    "DAX",
+    "Deneb",
+    "frontmatter",
+    "giscus",
+    "lakehouse",
+    "pagefind",
+    "promptingbi",
+    "Puglia",
+    "pugliabi",
+    "SnagIt"
+  ]
+}
