@@ -1,7 +1,7 @@
 ---
 title: "Before the Fabric Adoption Roadmap, Run the Step-Zero Test"
-date: 2026-07-16T11:00:00Z
-permalink: "2026/07/16/step-zero-before-the-fabric-adoption-roadmap"
+date: 2026-08-06T11:00:00Z
+permalink: "2026/08/06/step-zero-before-the-fabric-adoption-roadmap"
 draft: true
 description: "Adoption roadmaps and governance programs keep failing at companies that never defined what they measure. Run the step-zero test before you invest in any framework."
 ---

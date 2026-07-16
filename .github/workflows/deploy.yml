@@ -1,5 +1,7 @@
 # Deploys to GitHub Pages on every push to main.
-# The daily cron rebuild publishes future-dated posts when their date arrives.
+# Before each build, scripts/publish-due.mjs flips due drafts to published and
+# syncs post filenames/permalinks to their front-matter date. The daily cron is
+# what publishes future-dated posts when their day arrives.
 name: Deploy to GitHub Pages
 
 on:
@@ -14,11 +16,36 @@ permissions:
   pages: write
   id-token: write
 
+# Don't let a scheduled run collide with a push-triggered run.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # allow committing auto-published / renamed posts
+      pages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
+
+      - name: Publish due posts and sync filenames
+        run: node scripts/publish-due.mjs
+
+      - name: Commit any auto-publish / rename changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "chore: auto-publish due posts & sync filenames [skip ci]"
+            git push
+          else
+            echo "Nothing to commit."
+          fi
+
       - uses: withastro/action@v3
 
   deploy:
