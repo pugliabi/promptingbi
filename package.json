@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
-    "new-post": "node scripts/new-post.mjs"
+    "new-post": "node scripts/new-post.mjs",
+    "publish-due": "node scripts/publish-due.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.11",
