@@ -4,6 +4,7 @@ date: 2026-07-16T09:00:00Z
 permalink: "2026/07/16/should-an-ai-agent-sit-on-your-data-governance-committee"
 draft: false
 description: "AI agents won't lead your data governance program, but they can own its hardest job: transparency. Where to point them first, plus a 30-day plan."
+featured: /images/2026/07/governance-agent-banner.png
 ---
 
 Try this at your next leadership meeting. Say the words "data governance" out loud and ask everyone for the first word that pops into their head. I run this exercise with clients all the time, and I get the same two answers back: security and painful. Sometimes both, in that order, with a sigh.

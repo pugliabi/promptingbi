@@ -3,7 +3,7 @@ title: "Diagramming for DAX with Generative AI"
 date: 2024-09-11T17:28:02Z
 permalink: "2024/09/11/diagramming-for-dax-with-generative-ai"
 description: "On a conversation on the podcast I host with 2 fine gentlemen (Explicit Measures Podcast, a lot of fun) we tend to bring up the intersection of AI & Business Intelligence quite a bit."
-featured: /images/2024/09/2024-09-11_14-44-47.png
+featured: /images/2024/09/diagramming-dax-banner.png
 ---
 
 On a conversation on the [podcast I host with 2 fine gentlemen (Explicit Measures Podcast, a lot of fun)](https://www.youtube.com/channel/UCPwPrIpZwlfIKcoUpRwl9OQ) we tend to bring up the intersection of AI & Business Intelligence quite a bit. We know that CoPilot in Fabric is available in a multitude of areas, however tools like ChatGPT seem to be not fully capable of achieving DAX solutions for us.

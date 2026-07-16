@@ -10,6 +10,11 @@ const fmt = (d: Date) =>
   <ul class="post-list">
     {posts.map((post) => (
       <li>
+        {post.data.featured && (
+          <a class="post-thumb" href={`/${post.data.permalink}/`}>
+            <img src={post.data.featured} alt={post.data.title} loading="lazy" />
+          </a>
+        )}
         <h2><a href={`/${post.data.permalink}/`}>{post.data.title}</a></h2>
         <p class="post-date">{fmt(post.data.date)}</p>
         {post.data.description && <p>{post.data.description}</p>}
