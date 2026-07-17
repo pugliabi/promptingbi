@@ -26,7 +26,12 @@ const year = new Date().getFullYear();
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/images/2024/05/Icon-1-e1716581578686.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32-dark.png" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16-dark.png" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -42,7 +47,15 @@ const year = new Date().getFullYear();
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header">
-      <p class="site-title"><a href="/">Prompting BI</a></p>
+      <p class="site-title">
+        <a href="/">
+          <picture class="site-logo">
+            <source srcset="/images/brand/promptingbi-logo-dark.png" media="(prefers-color-scheme: dark)" />
+            <img src="/images/brand/promptingbi-logo-512.png" alt="" width="56" height="56" loading="eager" />
+          </picture>
+          <span>Prompting BI</span>
+        </a>
+      </p>
       <p class="site-tagline">Where Business Intelligence &amp; Prompt Engineering Meet</p>
       <nav aria-label="Main">
         <a href="/">Home</a>
@@ -137,7 +150,16 @@ const year = new Date().getFullYear();
     border-bottom: 1px solid var(--line);
   }
   .site-title { font-size: 2.4rem; margin: 0; }
-  .site-title a { color: var(--ink); text-decoration: none; }
+  .site-title a {
+    color: var(--ink); text-decoration: none;
+    display: inline-flex; align-items: center; gap: .7rem;
+  }
+  .site-logo { display: inline-flex; flex: none; }
+  .site-logo img { width: 56px; height: 56px; display: block; }
+  @media (max-width: 480px) {
+    .site-title { font-size: 1.9rem; }
+    .site-logo img { width: 44px; height: 44px; }
+  }
   .site-tagline { color: var(--muted); margin: .4rem 0 1.2rem; font-size: .95rem; }
   .site-header nav a {
     color: var(--ink); text-decoration: none; margin: 0 .9rem;

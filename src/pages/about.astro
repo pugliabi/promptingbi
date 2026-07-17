@@ -1,14 +1,216 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const bookingUrl =
+  'https://outlook.office.com/owa/calendar/PugliaBIConsulting@pugliabi.com/bookings/';
+
+const credentials = [
+  {
+    img: '/images/about/microsoft-mvp.png',
+    alt: 'Microsoft Most Valuable Professional (MVP) award badge',
+    label: 'Microsoft MVP',
+  },
+  {
+    img: '/images/about/cert-power-bi-data-analyst.png',
+    alt: 'Microsoft Certified: Power BI Data Analyst Associate badge',
+    label: 'Power BI Data Analyst Associate',
+  },
+  {
+    img: '/images/about/cert-azure-enterprise-data-analyst.png',
+    alt: 'Microsoft Certified: Azure Enterprise Data Analyst Associate badge',
+    label: 'Azure Enterprise Data Analyst Associate',
+  },
+  {
+    img: '/images/about/cert-power-platform-app-maker.png',
+    alt: 'Microsoft Certified: Power Platform App Maker Associate badge',
+    label: 'Power Platform App Maker Associate',
+  },
+  {
+    img: '/images/about/cert-mcsa-bi-reporting.png',
+    alt: 'Microsoft Certified Solutions Associate: BI Reporting badge',
+    label: 'MCSA: BI Reporting',
+  },
+];
 ---
-<Base title="About - Prompting BI">
-  <article>
-    <h1>About Prompting BI</h1>
-    <p>
-      This platform is to be a space for dialogue on how to navigate the everchanging
-      world of BI, especially through the use of AI. Having this space, to debate and
-      share ideas, is crucial to understanding the next generation of curating data.
-    </p>
-    <p><strong>Tommy Puglia</strong><br />CEO Puglia BI Consulting</p>
+<Base
+  title="About - Prompting BI"
+  description="Tommy Puglia — Microsoft MVP, Power BI consultant, and host of the Explicit Measures Podcast — on why Prompting BI exists."
+  ogImage="/images/about/tommy-puglia.jpg"
+>
+  <article class="about">
+    <header class="about-hero">
+      <img
+        class="about-photo"
+        src="/images/about/tommy-puglia.jpg"
+        alt="Portrait of Tommy Puglia"
+        width="220"
+        height="220"
+      />
+      <div class="about-intro">
+        <p class="eyebrow">About</p>
+        <h1>Tommy Puglia</h1>
+        <p class="lede">
+          Microsoft MVP, Power BI consultant, and CEO of Puglia BI Consulting.
+          I write here about where business intelligence and prompt engineering meet.
+        </p>
+        <p class="about-cta">
+          <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book time with me</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/tommypuglia/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        </p>
+      </div>
+    </header>
+
+    <section class="about-body">
+      <h2>Why Prompting BI</h2>
+      <p>
+        Prompting BI is a space for dialogue on how to navigate the ever-changing
+        world of business intelligence — especially through the use of AI. Having a
+        place to debate ideas, share what works, and pressure-test what doesn't is
+        crucial to understanding the next generation of curating data.
+      </p>
+
+      <h2>About me</h2>
+      <p>
+        I've been passionate about Power BI and the impact of data analysis on
+        decision-making since the tool was still called "Power BI Designer." I
+        consume whatever I can to constantly learn and apply, so that the people I
+        work with can make decisions based on data that actually matters.
+      </p>
+      <p>
+        As a consultant, I focus on advisory work around adoption and process,
+        training, and development for Power BI and Microsoft Fabric inside
+        organizations. I lead the Chicago Power BI User Group (downtown), which
+        meets every month, and I'm one of the hosts of the
+        <a href="https://powerbi.tips/" target="_blank" rel="noopener">powerbi.tips</a>
+        Explicit Measures Podcast, where Mike Carlo, Seth Bauer, and I dig into the
+        impact and the "why" behind Microsoft's Power BI features and tools — every
+        Tuesday and Thursday at 7:30am on YouTube.
+      </p>
+      <p>
+        I'm based in Chicago, originally from Long Island, NY, and a HUGE Yankees fan —
+        probably too much of one. Any new experiment on what can be done with data and
+        statistics usually gets tested on baseball stats first.
+      </p>
+    </section>
+
+    <section class="about-creds">
+      <h2>Recognition &amp; certifications</h2>
+      <ul class="cred-grid">
+        {credentials.map((c) => (
+          <li>
+            <img src={c.img} alt={c.alt} loading="lazy" />
+            <span>{c.label}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="about-contact">
+      <h2>Let's talk</h2>
+      <p>
+        Whether you want help getting started with Power BI, leveling up your team, or
+        figuring out how AI fits into your BI practice — grab a time and let's chat.
+      </p>
+      <p class="about-cta">
+        <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a session</a>
+      </p>
+      <ul class="social-row">
+        <li><a href="https://www.linkedin.com/in/tommypuglia/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://www.x.com/tommypuglia" target="_blank" rel="noopener">X</a></li>
+        <li><a href="https://www.youtube.com/channel/UCPwPrIpZwlfIKcoUpRwl9OQ" target="_blank" rel="noopener">YouTube</a></li>
+      </ul>
+    </section>
   </article>
 </Base>
+
+<style>
+  .about-hero {
+    display: flex;
+    gap: 1.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .about-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .about-intro { flex: 1 1 300px; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 .3rem;
+  }
+  .about-intro h1 { font-size: 2.4rem; margin: 0 0 .5rem; }
+  .lede { font-size: 1.15rem; color: var(--ink); margin: 0 0 1.25rem; }
+
+  .about-cta { display: flex; gap: .75rem; flex-wrap: wrap; margin: 0; }
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: .6rem 1.2rem;
+    border-radius: 6px;
+    font-size: .95rem;
+  }
+  .btn:hover { opacity: .9; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .about-body h2,
+  .about-creds h2,
+  .about-contact h2 {
+    font-size: 1.6rem;
+    margin: 2.25rem 0 .6rem;
+  }
+
+  .cred-grid {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem 1rem;
+  }
+  .cred-grid li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: .6rem;
+  }
+  .cred-grid img { height: 96px; width: auto; object-fit: contain; }
+  .cred-grid span { font-size: .85rem; color: var(--muted); line-height: 1.3; }
+
+  .about-contact {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .social-row {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+    padding: 0;
+    margin: 1rem 0 0;
+    font-weight: 600;
+  }
+  .social-row a { text-decoration: none; }
+
+  @media (max-width: 560px) {
+    .about-hero { flex-direction: column; text-align: center; }
+    .about-cta { justify-content: center; }
+  }
+</style>
