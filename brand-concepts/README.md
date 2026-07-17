@@ -1,35 +1,66 @@
 # Prompting BI — Logo Concepts
 
 Private scratch folder. **Not** built or served by Astro (only `public/` ships to the site).
-Open this file with Markdown preview to eyeball the options anytime.
+Open this file in Markdown preview to browse the options anytime.
 
-## Currently in use
+## Quick comparison
 
-| Light (site header + light favicon) | Dark (dark-mode favicon) |
+Left = light (on white) · Right = dark (on near-black):
+
+![contact sheet](./contact-sheet.png)
+
+## What's in each concept folder
+
+Every `alt-*` folder contains a full asset set, brand palette `#0c566b` navy + `#34c99a` green:
+
+| File | Purpose |
 | --- | --- |
-| ![current light](./current-logo-light.png) | ![current dark](./current-logo-dark.png) |
+| `source.png` | Original 1024² generation |
+| `logo-light.png` | Icon, transparent bg — for light backgrounds |
+| `logo-dark.png` | Same mark recolored (light strokes) — for dark backgrounds |
+| `logo-light-full.png` / `logo-dark-full.png` | Includes wordmark where present (matters for alt-2) |
+| `icon-512.png` | 512px app/OG icon |
+| `favicon-32.png` / `favicon-16.png` | Light-mode favicons |
+| `favicon-32-dark.png` / `favicon-16-dark.png` | Dark-mode favicons |
+| `favicon.ico` | 48px multi-use icon |
+| `apple-touch-icon.png` | 180px, **white-backed** (iOS renders transparency as black) |
 
-Brain-circuit badge. Light version has transparent corners with a white-filled circle.
+---
 
-## Alternatives
+## Currently in use (`current/`)
 
-### 1 — PBI monogram
-![monogram](./alt-1-monogram.png)
+Brain-circuit badge. Light = transparent corners + white circle; dark = teal/light strokes.
 
-Cleanest at tiny (favicon) sizes and most brand-able. Weakest at signaling *what* the site is about.
+| Light | Dark |
+| --- | --- |
+| ![current light](./current/logo-light.png) | ![current dark](./current/logo-dark.png) |
 
-### 2 — Bars → circuit
-![bars to circuit](./alt-2-bars-to-circuit.png)
+## 1 — PBI monogram (`alt-1-monogram/`)
 
-Best story: data (bars) becoming intelligence (circuit/nodes). Busier — would need an icon-only crop for the favicon.
+| Light | Dark |
+| --- | --- |
+| ![a1 light](./alt-1-monogram/logo-light.png) | ![a1 dark](./alt-1-monogram/logo-dark.png) |
 
-### 3 — Chat bubble + chart
-![chat chart](./alt-3-chat-chart.png)
+Cleanest at 16–32px, most brand-able. Weakest at signaling *what* the site is.
 
-Nails "prompting + BI" fusion, friendly tone. Node cluster competes with the bars at very small sizes.
+## 2 — Bars → circuit (`alt-2-bars-to-circuit/`)
+
+| Light (icon) | Dark (icon) |
+| --- | --- |
+| ![a2 light](./alt-2-bars-to-circuit/logo-light.png) | ![a2 dark](./alt-2-bars-to-circuit/logo-dark.png) |
+
+Best story: data (bars) becoming intelligence (circuit). Favicons use the icon-only crop; `*-full.png` keeps the "Prompting BI" wordmark for headers.
+
+## 3 — Chat bubble + chart (`alt-3-chat-chart/`)
+
+| Light | Dark |
+| --- | --- |
+| ![a3 light](./alt-3-chat-chart/logo-light.png) | ![a3 dark](./alt-3-chat-chart/logo-dark.png) |
+
+Nails "prompting + BI" fusion, friendly tone.
 
 ---
 
 ## Notes / TODO
-- All files here are AI-generated **raster** PNGs. Whichever direction wins, get a **vector (SVG)** version for crisp scaling and tiny file size.
-- For favicons, monogram or an icon-only crop reads best at 16–32px.
+- All files are AI-generated **raster** PNGs. Whichever wins, get a **vector (SVG)** — dark version becomes a trivial CSS recolor instead of a separate file, and icons stay crisp at every size.
+- To adopt one: copy that folder's `favicon-*`, `apple-touch-icon.png` into `public/`, and its `logo-light.png` / `logo-dark.png` into `public/images/brand/`, then update the `<link rel="icon">` set + header `<picture>` in `src/layouts/Base.astro`.
