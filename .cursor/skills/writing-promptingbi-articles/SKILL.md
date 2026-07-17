@@ -47,7 +47,9 @@ Write 1,200–1,800 words following `references/voice-and-style.md` (how it soun
 
 ## Step 6 — Banner and image prompts
 
-Produce 2–3 **ready-to-run image-generation prompts**: one banner concept plus supporting diagram ideas, each with alt text. Write them as complete standalone prompts (subject, setting, style, composition) that Tommy can paste straight into Grok Imagine or any generator. Nothing gets generated here; prompts only.
+Read `references/image-style.md` first — it is the PromptingBI image house style (monochrome teal on white, flat editorial vector, left→right BI narrative) and is mandatory for every image so new art matches the existing banners. Produce 2–3 **ready-to-run image-generation prompts**: one banner concept plus supporting in-article diagram ideas, each with alt text. Write them as complete standalone prompts (subject, setting, composition) with the style suffix from the reference appended, so Tommy can paste them straight into Grok Imagine or any generator. Default to prompts only; generate directly only if Tommy asks, still following the house style.
+
+When an image is meant to sit inside the article after a section (not the banner), follow the placement rules in `references/image-style.md`: reference it in the markdown body as `![alt](/images/YYYY/MM/name.png)`, store it in `public/images/YYYY/MM/`, and keep it to a single tighter diagram concept in the same style.
 
 ## Step 7 — Deliver to Notion
 

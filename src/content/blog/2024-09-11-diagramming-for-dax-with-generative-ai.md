@@ -12,6 +12,16 @@ The answer is obvious: If Generative AI relies on Context, and DAX has it's own 
 
 So let's combine the need to feed your model to OpenAI and if ChatGPT can also understand data visualization… Can it? Well, of course it can!
 
+Here is the whole method at a glance. Notice how each step is bounded and confirmed before the next one starts.
+
+```mermaid
+flowchart LR
+  Model["Model diagram + relationships"] --> Confirm["AI repeats the context back"]
+  Confirm --> Visual["Annotated visual of the desired output"]
+  Visual --> Iterate["Bounded back-and-forth"]
+  Iterate --> DAX["Working DAX solution"]
+```
+
 ### Feeding OpenAI Your Model
 
 The example below demonstrates a series of steps of what I found works incredibly well to get ChatGPT to have the proper context knowing YOUR evaluation context in your model.

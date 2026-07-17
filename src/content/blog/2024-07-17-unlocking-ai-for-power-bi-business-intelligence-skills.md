@@ -22,6 +22,12 @@ Consider this comparison: Imagine you're at an upscale Italian eatery where they
 
 However, if you specify a southern Italian seafood dish or opt for a variety with diverse cheeses and a delicate sauce, not only will you receive a meal that's better suited to your palate, but you'll also provide the chef with precise guidance on your culinary expectations.
 
+```mermaid
+flowchart LR
+  Vague["Vague prompt: 'Pasta'"] --> Generic["A fine, generic dish"]
+  Specific["Specific prompt: 'Southern Italian seafood, light sauce'"] --> Tailored["Exactly what you wanted"]
+```
+
 Prompting and AI are not only useful for creating visuals and reports, but also for exploring new possibilities and scenarios. You can use prompting and AI to ask "what if" questions, to test hypotheses, to discover patterns and trends, and to uncover hidden opportunities and risks. You can also use prompting and AI to automate and streamline your data workflows, to enhance your data quality and governance, and to scale your data solutions across your organization.
 
 I hope you start to understand the significance of our trajectory. In any sector, one could exclaim "WHAT??" with confidence, especially in Business Intelligence, where experts are expected to comprehend, possess, and administer data. And let's not forget that AI operates on DATA.

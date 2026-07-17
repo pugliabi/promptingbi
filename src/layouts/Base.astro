@@ -16,6 +16,14 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNCW6PFPR9"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CNCW6PFPR9');
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/images/2024/05/Icon-1-e1716581578686.jpg" />
@@ -146,18 +154,10 @@ const year = new Date().getFullYear();
   .post-list h2 a:hover { color: var(--accent); }
   .post-date { color: var(--muted); font-size: .9rem; margin: 0 0 .6rem; }
   .read-more { font-weight: 600; text-decoration: none; }
-  .post-thumb { display: block; margin: 0 0 1rem; }
-  .post-thumb img {
-    width: 100%; height: auto; max-height: 340px;
-    object-fit: cover; border-radius: 8px; display: block;
-  }
 
   article h1 { font-size: 2.1rem; margin-bottom: .3rem; }
   article img { max-width: 100%; height: auto; border-radius: 6px; }
-  article .post-banner {
-    width: 100%; max-height: 420px; object-fit: cover;
-    border-radius: 8px; margin: 1.5rem 0 2rem; display: block;
-  }
+  .post-banner { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin: 1.2rem 0 2.2rem; border: 1px solid var(--line); }
   article figure { margin: 2rem 0; }
   blockquote { border-left: 3px solid var(--accent); margin: 1.5rem 0; padding: .2rem 0 .2rem 1.2rem; color: var(--muted); }
   code { background: #f4f4f4; padding: .15em .35em; border-radius: 4px; font-size: .9em; }
