@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+
+const bookingUrl =
+  'https://outlook.office.com/owa/calendar/PugliaBIConsulting@pugliabi.com/bookings/';
+const linkedInUrl = 'https://www.linkedin.com/in/tommypuglia/';
+---
+<Base
+  title="Contact - Prompting BI"
+  description="Book time with Tommy Puglia or connect on LinkedIn to talk Power BI, Microsoft Fabric, and AI."
+  ogImage="/images/about/tommy-puglia.jpg"
+>
+  <article class="contact">
+    <header class="contact-hero">
+      <p class="eyebrow">Contact</p>
+      <h1>Let's connect</h1>
+      <p class="lede">
+        Want help getting started with Power BI, leveling up your team, or figuring
+        out how AI fits into your BI practice? Grab a time on my calendar or reach
+        out on LinkedIn.
+      </p>
+    </header>
+
+    <div class="contact-cards">
+      <section class="contact-card">
+        <h2>Book time with me</h2>
+        <p>
+          Pick a slot that works for you and let's talk through what you're working on —
+          no strings attached.
+        </p>
+        <a class="btn" href={bookingUrl} target="_blank" rel="noopener">Book a session</a>
+      </section>
+
+      <section class="contact-card">
+        <h2>Connect on LinkedIn</h2>
+        <p>
+          Prefer to say hi first? Send a connection request and drop me a message —
+          I read them all.
+        </p>
+        <a class="btn btn-ghost" href={linkedInUrl} target="_blank" rel="noopener">Connect on LinkedIn</a>
+      </section>
+    </div>
+
+    <section class="contact-more">
+      <h2>Find me elsewhere</h2>
+      <ul class="social-row">
+        <li><a href="https://www.x.com/tommypuglia" target="_blank" rel="noopener">X</a></li>
+        <li><a href="https://www.youtube.com/channel/UCPwPrIpZwlfIKcoUpRwl9OQ" target="_blank" rel="noopener">YouTube</a></li>
+      </ul>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .contact-hero { margin-bottom: 2.5rem; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 .3rem;
+  }
+  .contact-hero h1 { font-size: 2.4rem; margin: 0 0 .5rem; }
+  .lede { font-size: 1.15rem; color: var(--ink); margin: 0; }
+
+  .contact-cards {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .contact-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.5rem;
+    background: #fafafa;
+  }
+  .contact-card h2 { font-size: 1.35rem; margin: 0 0 .5rem; }
+  .contact-card p { margin: 0 0 1.25rem; color: var(--muted); }
+
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: .6rem 1.2rem;
+    border-radius: 6px;
+    font-size: .95rem;
+  }
+  .btn:hover { opacity: .9; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .contact-more {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .contact-more h2 { font-size: 1.6rem; margin: 0 0 .6rem; }
+  .social-row {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+    padding: 0;
+    margin: 1rem 0 0;
+    font-weight: 600;
+  }
+  .social-row a { text-decoration: none; }
+</style>
