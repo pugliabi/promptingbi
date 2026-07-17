@@ -176,6 +176,11 @@ const year = new Date().getFullYear();
   .post-list h2 a:hover { color: var(--accent); }
   .post-date { color: var(--muted); font-size: .9rem; margin: 0 0 .6rem; }
   .read-more { font-weight: 600; text-decoration: none; }
+  .post-thumb { display: block; margin: 0 0 1rem; }
+  .post-thumb img {
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+    border-radius: 8px; border: 1px solid var(--line); display: block;
+  }
 
   article h1 { font-size: 2.1rem; margin-bottom: .3rem; }
   article img { max-width: 100%; height: auto; border-radius: 6px; }
