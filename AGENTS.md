@@ -25,3 +25,10 @@ Images: `public/images/YYYY/MM/`, referenced as `/images/YYYY/MM/name.png`.
 - Never modify `public/CNAME`, `astro.config.mjs` site URL, or deploy workflow triggers without explicit request
 - Never change existing permalinks
 - Voice: first-person Tommy Puglia, practical BI/AI content, "Takeaways" list at the end of posts
+
+## Cursor Cloud specific instructions
+
+- No lint or test tooling is configured. "Build" (`npm run build`) is the only automated check; run it before claiming work is done.
+- The committed `package-lock.json` is out of sync with `package.json` (missing the `@pagefind/*` platform binaries), so `npm ci` fails. Use `npm install` to set up dependencies. The startup update script already runs `npm install`.
+- Dev server: `npm run dev` serves on `http://localhost:4321`. Post edits and `draft`/`date` changes hot-reload; `src/content/blog/*.md` renders at its `permalink` path.
+- `search.astro` (Pagefind) only returns results against a built site (`npm run build` + `npm run preview`), not under `npm run dev`.
