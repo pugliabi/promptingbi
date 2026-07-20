@@ -2,3 +2,8 @@ node_modules/
 dist/
 .astro/
 .DS_Store
+
+# Local-only junction: workspace-root /images -> public/images so markdown
+# preview extensions resolve absolute /images/... paths. Astro serves the
+# real files from public/; never commit this bridge.
+/images/

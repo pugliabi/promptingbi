@@ -45,11 +45,27 @@ Before drafting, go through the planned areas with Tommy, one quick pass: for ea
 
 Write 1,200–1,800 words following `references/voice-and-style.md` (how it sounds) and `references/article-structure.md` (how it's shaped). Hard rules worth repeating because they get violated: first person, no em dashes anywhere, no episode references, no invented facts/features/stats not supported by the transcript or by Tommy in Step 4, end with the meta description and 5–8 topic tags.
 
-## Step 6 — Banner and image prompts
+## Step 6 — Generate the banner AND in-article helper diagrams
 
-Read `references/image-style.md` first — it is the PromptingBI image house style (monochrome teal on white, flat editorial vector, left→right BI narrative) and is mandatory for every image so new art matches the existing banners. Produce 2–3 **ready-to-run image-generation prompts**: one banner concept plus supporting in-article diagram ideas, each with alt text. Write them as complete standalone prompts (subject, setting, composition) with the style suffix from the reference appended, so Tommy can paste them straight into Grok Imagine or any generator. Default to prompts only; generate directly only if Tommy asks, still following the house style.
+Read `references/image-style.md` first — it is the PromptingBI image house style (monochrome teal on white, flat editorial vector, left→right BI narrative) and is mandatory for every image so new art matches the existing banners.
 
-When an image is meant to sit inside the article after a section (not the banner), follow the placement rules in `references/image-style.md`: reference it in the markdown body as `![alt](/images/YYYY/MM/name.png)`, store it in `public/images/YYYY/MM/`, and keep it to a single tighter diagram concept in the same style.
+**Generate real images by default, not just prompts, and not just the hero.** Every article ships with:
+
+1. **One hero banner** (16:9) used as the `featured` front-matter image (doubles as the OG image).
+2. **Two to four in-article helper diagrams**, one per major section or concept — the visuals that walk a reader through each area of the argument, not decoration. Map each planned diagram to the section it illustrates before generating.
+
+Workflow for each image:
+
+- Write a complete standalone subject description (subject, setting, left→right composition) and append the style suffix from `references/image-style.md`.
+- Pass an existing banner (e.g. `public/images/2026/07/governance-agent-banner.png`) as a **style reference image** so palette and line weight stay consistent. If the generator borrows too literally from the reference's motifs (it will sometimes reuse the boardroom circle or folder), regenerate that one image tighter and without the reference.
+- Aspect ratio: **16:9** for the banner, **4:3** for in-article diagrams (the built-in generator accepts `1:1 / 4:3 / 3:4 / 16:9 / 9:16` only — 3:2 is rejected, use 4:3).
+- Name files `<slug>-banner.png` for the hero and `<slug>-<concept>.png` for each diagram (e.g. `stop-re-prompting-handoff.png`).
+- Save/copy every file into `public/images/YYYY/MM/` mirroring the post date.
+- Wire them in: set `featured: /images/YYYY/MM/<slug>-banner.png` in front matter, and reference each diagram in the body right after the paragraph it illustrates as `![descriptive alt](/images/YYYY/MM/name.png)`. The `featured` banner only renders on the built site, so if the article benefits from an at-a-glance overview, also place the banner inline in the body once. Write real, descriptive alt text for all of them (images carry no text, so alt text does the explaining).
+
+If Tommy hands a hand-drawn diagram or sketch, treat it as the source of truth for the banner concept and break its regions into the per-section helper diagrams.
+
+**Fallback (only when no image-generation tool is available in the environment):** output 2–4 ready-to-run, paste-ready prompts instead (same subjects + style suffix), tell Tommy the target filenames and where they go, and still wire the markdown `![alt](...)` references so dropping the files in later is zero-friction.
 
 ## Step 7 — Deliver to Notion
 
@@ -65,7 +81,7 @@ The repo is `prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/
 
 ## Step 9 — Close the loop
 
-When Tommy approves a post: flip `draft: true` to `false` in the repo frontmatter (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. If he generated a banner, remind him it goes in `public/images/YYYY/MM/` and gets referenced via the `featured` front-matter field.
+When Tommy approves a post: flip `draft: true` to `false` in the repo frontmatter (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. The banner and in-article diagrams were already generated, placed in `public/images/YYYY/MM/`, and wired in during Step 6 — just confirm the `featured` path resolves and the body `![alt](...)` references render.
 
 ## Environment fallbacks
 

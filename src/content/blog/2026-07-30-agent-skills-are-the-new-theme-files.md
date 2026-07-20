@@ -1,7 +1,7 @@
 ---
 title: "Agent Skills Are the New Theme Files"
-date: 2026-07-16T09:00:00Z
-permalink: "2026/07/16/agent-skills-are-the-new-theme-files"
+date: 2026-07-30T09:00:00Z
+permalink: "2026/07/30/agent-skills-are-the-new-theme-files"
 draft: true
 description: "Everything BI teams learned governing Power BI theme files and PBITs over SharePoint is the playbook for governing agent skills. One rule decides what gets standardized and what stays personal."
 ---
