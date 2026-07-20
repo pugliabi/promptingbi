@@ -2,7 +2,6 @@
 title: "Stop Re-Prompting: Your Second Brain Should Write Your Agent's Instructions"
 date: 2026-07-20T09:00:00Z
 permalink: "2026/07/20/stop-re-prompting-second-brain-agent-instructions"
-draft: true
 description: "Stop re-prompting your AI agent. Build a two-harness workflow where your second brain writes the agent's instructions and MCP executes in Power BI and Fabric."
 featured: /images/2026/07/stop-re-prompting-banner.png
 ---
