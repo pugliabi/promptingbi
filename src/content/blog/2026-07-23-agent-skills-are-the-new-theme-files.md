@@ -1,8 +1,8 @@
 ---
 title: "Agent Skills Are the New Theme Files"
-date: 2026-07-30T09:00:00Z
-permalink: "2026/07/30/agent-skills-are-the-new-theme-files"
-draft: true
+date: 2026-0723T09:00:00Z
+permalink: "2026/07/23/agent-skills-are-the-new-theme-files"
+draft: false
 description: "What BI teams learned governing theme files and PBITs is the playbook for agent skills. One rule sorts what gets governed from what stays personal."
 featured: /images/2026/07/agent-skills-theme-files-banner.png
 ---
