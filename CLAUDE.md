@@ -24,7 +24,7 @@ There are no tests, linter, or formatter configured.
 
 Standard Astro static-site layout. Everything renders at build time to `dist/`.
 
-- **Content is a git-tracked collection, not a CMS.** Posts live as markdown in `src/content/blog/`. The schema is defined in `src/content.config.ts` and is enforced at build — a post missing a required front-matter field fails the build.
+- **Content is a git-tracked collection, not a CMS.** Posts live as markdown under `src/content/blog/{backlog,drafts,published}/`. The loader only includes `published/` + `drafts/` (`backlog/` is freeform and never built). Schema in `src/content.config.ts` is enforced at build — a post missing a required front-matter field fails the build.
 - **`permalink` front-matter preserves the old WordPress URLs.** Each post declares its original path (e.g. `2024/07/17/slug`, no leading/trailing slash). `src/pages/[...permalink].astro` reads the collection and generates one page per post at exactly that path via `getStaticPaths`. This is the mechanism that keeps inbound links from the old site alive — do not route posts by filename or slug.
 - **`src/layouts/Base.astro` is the whole design system.** It holds the entire page shell (header nav, footer contact block, meta/OG tags, RSS `<link>`, Google Fonts) and *all* global CSS in one `<style is:global>` block with CSS-variable theming (`--ink`, `--accent`, etc.). There is no separate stylesheet. Every page wraps its content in `<Base>`.
 - **Pages** (`src/pages/`): `index.astro` (homepage post list, sorted newest-first), `[...permalink].astro` (post template), `about.astro`, `404.astro`, and `rss.xml.js` (feed built from the same collection). Index and RSS both re-sort by `date` descending — keep the two consistent if you change ordering.
@@ -32,7 +32,7 @@ Standard Astro static-site layout. Everything renders at build time to `dist/`.
 
 ## Adding a post
 
-Create `src/content/blog/YYYY-MM-DD-<slug>.md` (date prefix = the post's front-matter date; the filename never affects the URL, `permalink` does) with front matter matching `content.config.ts`:
+Create `src/content/blog/drafts/YYYY-MM-DD-<slug>.md` (`npm run new-post` does this). Date prefix = front-matter date; filename never affects the URL (`permalink` does). Front matter must match `content.config.ts`:
 
 ```markdown
 ---
@@ -41,8 +41,11 @@ date: 2026-07-20T09:00:00Z
 permalink: "2026/07/20/my-new-post"   # required; no leading/trailing slash
 description: "Teaser shown on homepage and in RSS."   # optional
 featured: "/images/..."   # optional; used as OG image
+draft: true
 ---
 ```
+
+Publish: move to `src/content/blog/published/` and set `draft: false`. Ideas go in `backlog/` (not loaded by Astro).
 
 Push to `main`; `.github/workflows/deploy.yml` builds with `withastro/action` and deploys to GitHub Pages automatically.
 

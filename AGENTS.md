@@ -10,7 +10,12 @@ Astro 5 static blog → GitHub Pages (repo `pugliabi/promptingbi`, custom domain
 
 ## Content model
 
-Posts: `src/content/blog/*.md`. Schema (`src/content.config.ts`): `title`, `date` (ISO, Z), `permalink` ("YYYY/MM/DD/slug" — must match date; never change on existing posts), `description` (<160 chars), `featured` (optional image path), `draft` (default false). Filtering lives in `src/lib/posts.ts` (`publishedPosts()`): drafts and future-dated posts are excluded everywhere (homepage, RSS, page generation).
+Posts live in stage folders under `src/content/blog/`:
+- `backlog/` — ideas/outlines; **not** in the Astro collection (never on site)
+- `drafts/` — WIP; collection-loaded, keep `draft: true` (filtered out of site)
+- `published/` — live / scheduled; `draft: false`
+
+Loader only picks `{published,drafts}/**/*.md`. Schema (`src/content.config.ts`): `title`, `date` (ISO, Z), `permalink` ("YYYY/MM/DD/slug" — must match date; never change on existing posts), `description` (<160 chars), `featured` (optional image path), `draft` (default false). Filtering lives in `src/lib/posts.ts` (`publishedPosts()`): drafts and future-dated posts are excluded everywhere (homepage, RSS, page generation). Promote: move file + flip `draft`.
 
 Images: `public/images/YYYY/MM/`, referenced as `/images/YYYY/MM/name.png`.
 

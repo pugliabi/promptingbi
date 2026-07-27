@@ -28,14 +28,16 @@ Page content follows the pattern in `article-structure.md` (body + Image Ideas t
 - Local path: `C:\Github\prompting-bi` (Claude Desktop / Windows) or `/mnt/c/Github/prompting-bi` (WSL). It's a static Astro site rebuilt after the old WordPress install was hacked; pushing `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`.
 - **Before writing, read the repo's `CLAUDE.md` and `src/content.config.ts`.** Front matter is schema-enforced at build; a missing required field fails the deploy.
 
-Post file: `src/content/blog/<YYYY-MM-DD>-<kebab-slug>.md` — the date prefix is the post's front-matter date (today for new posts) and the rest is the kebab slug. Example: `2026-07-20-post-slug.md`. Every post in the folder follows this pattern.
+Folder stages under `src/content/blog/`: `backlog/` (ideas, not loaded), `drafts/` (WIP), `published/` (live). Write new posts to **`drafts/`**.
+
+Post file: `src/content/blog/drafts/<YYYY-MM-DD>-<kebab-slug>.md` — the date prefix is the post's front-matter date (today for new posts) and the rest is the kebab slug. Example: `drafts/2026-07-20-post-slug.md`.
 
 ```markdown
 ---
 title: "Post Title"
 date: 2026-07-20T09:00:00Z          # ISO 8601 with time, UTC
 permalink: "2026/07/20/post-slug"    # REQUIRED; no leading/trailing slash
-draft: true                          # ALWAYS on new posts; flip to false at publish
+draft: true                          # ALWAYS on new posts; keep true while in drafts/
 description: "Teaser for homepage + RSS."   # optional but always provide it
 featured: "/images/2026/07/banner.png"      # optional; set once a banner exists
 ---
@@ -43,7 +45,7 @@ featured: "/images/2026/07/banner.png"      # optional; set once a banner exists
 Article body in plain markdown...
 ```
 
-The schema also defines `draft` (boolean, default `false`; `true` = never built or listed). Write every new post with `draft: true` so an unrelated push to `main` can never publish an unreviewed article; flipping it to `false` happens at the publish step, when Tommy approves.
+The schema also defines `draft` (boolean, default `false`; `true` = never built or listed). Write every new post into `drafts/` with `draft: true` so an unrelated push to `main` can never publish an unreviewed article. At publish: move the file to `published/` and set `draft: false`.
 
 Why `permalink` matters: it is the routing mechanism (`src/pages/[...permalink].astro`) and it preserves the URL structure from the WordPress era so old inbound links keep working. Never route by filename; never omit it. Use today's date for new posts unless Tommy says otherwise, and keep one slug everywhere: the SEO Notes slug, the permalink's final segment, and the filename after its `YYYY-MM-DD-` prefix must all match. Renaming a file never changes a URL (only `permalink` does), but keep them aligned anyway.
 

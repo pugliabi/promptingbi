@@ -9,7 +9,7 @@ Convert what Tommy said on a recording into an original article on promptingbi.c
 
 Every article ships to BOTH places, every run, in this order:
 1. A page in the **✍️ Prompting BI Articles** Notion database (working copy, Episode relation, SEO + image toggles).
-2. A markdown post written into the **prompting-bi** Astro repo at `C:\Github\prompting-bi\src\content\blog\` in the repo's schema-enforced format, ready to commit. This is not an optional handoff and never something to merely offer; writing this file is part of every article run. If the repo is unreachable from the current environment, produce the exact finished `.md` as a download so Tommy can drop it in unchanged. promptingbi.com deploys from `main`.
+2. A markdown post written into the **prompting-bi** Astro repo at `C:\Github\prompting-bi\src\content\blog\drafts\` in the repo's schema-enforced format, ready to commit. This is not an optional handoff and never something to merely offer; writing this file is part of every article run. If the repo is unreachable from the current environment, produce the exact finished `.md` as a download so Tommy can drop it in unchanged. promptingbi.com deploys from `main`.
 
 Read `references/voice-and-style.md` and `references/article-structure.md` before drafting a single sentence, and `references/publishing-targets.md` before writing to Notion or the repo. They are short and they are the spec.
 
@@ -75,13 +75,13 @@ Create the page in the ✍️ Prompting BI Articles data source using the proper
 
 The repo is `prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/prompting-bi` under WSL). Before writing anything, read the repo's `CLAUDE.md` and `src/content.config.ts` — the front-matter schema is enforced at build time and a bad post fails the deploy. Write the post per the contract in `references/publishing-targets.md`, including the required `permalink` in `YYYY/MM/DD/slug` form (this preserves URL structure from the WordPress era; never route by filename).
 
-**Filename rule (always):** name the file `src/content/blog/YYYY-MM-DD-<slug>.md`, where `YYYY-MM-DD` is the post's `date` and `<slug>` is the kebab-case title slug (the same slug used in the `permalink`). Example: date `2026-07-20` + slug `my-post` -> `2026-07-20-my-post.md`. The filename does not affect the URL (routing is by `permalink`), but the date prefix keeps `src/content/blog/` chronological and unambiguous. The repo's `npm run new-post "Title"` produces exactly this name automatically.
+**Filename rule (always):** name the file `src/content/blog/drafts/YYYY-MM-DD-<slug>.md`, where `YYYY-MM-DD` is the post's `date` and `<slug>` is the kebab-case title slug (the same slug used in the `permalink`). Example: date `2026-07-20` + slug `my-post` -> `drafts/2026-07-20-my-post.md`. The filename does not affect the URL (routing is by `permalink`). Stages: `backlog/` (ideas, not loaded) → `drafts/` (WIP) → `published/` (live, `draft: false`). The repo's `npm run new-post "Title"` scaffolds into `drafts/`.
 
 **Never commit or push without Tommy's explicit go.** Pushing `main` deploys the live site via GitHub Actions. Offer: preview with `npm run dev`, then he says push, or he pushes himself. If the repo isn't reachable from the current environment, produce the finished `.md` file (correct name, correct front matter) as a download and say exactly where to drop it.
 
 ## Step 9 — Close the loop
 
-When Tommy approves a post: flip `draft: true` to `false` in the repo frontmatter (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. The banner and in-article diagrams were already generated, placed in `public/images/YYYY/MM/`, and wired in during Step 6 — just confirm the `featured` path resolves and the body `![alt](...)` references render.
+When Tommy approves a post: move the file from `drafts/` to `published/` and flip `draft: true` to `false` (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. The banner and in-article diagrams were already generated, placed in `public/images/YYYY/MM/`, and wired in during Step 6 — just confirm the `featured` path resolves and the body `![alt](...)` references render.
 
 ## Environment fallbacks
 

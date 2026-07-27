@@ -15,7 +15,15 @@ npm run dev        # http://localhost:4321
 
 ## Writing a new post
 
-Drop a markdown file in `src/content/blog/`:
+Posts live in stage folders:
+
+| Folder | Purpose |
+|--------|---------|
+| `src/content/blog/backlog/` | Ideas / outlines — never loaded by Astro |
+| `src/content/blog/drafts/` | WIP — keep `draft: true` |
+| `src/content/blog/published/` | Live / scheduled — `draft: false` |
+
+`npm run new-post "My Post Title"` scaffolds into `drafts/`. Or drop a markdown file there:
 
 ```markdown
 ---
@@ -23,12 +31,13 @@ title: "My New Post"
 date: 2026-07-20T09:00:00Z
 permalink: "2026/07/20/my-new-post"
 description: "One-sentence teaser shown on the homepage and in RSS."
+draft: true
 ---
 
 Post content here. Images go in public/images/ and are referenced as /images/...
 ```
 
-Push to main — the site rebuilds and deploys automatically. Old WordPress URLs (`/YYYY/MM/DD/slug/`) are preserved via the `permalink` field.
+To publish: move the file to `published/` and set `draft: false`. Push to main — the site rebuilds and deploys automatically. Old WordPress URLs (`/YYYY/MM/DD/slug/`) are preserved via the `permalink` field.
 
 ## Deploy option A — GitHub Pages (free)
 

@@ -15,7 +15,9 @@ const mm = String(now.getUTCMonth() + 1).padStart(2, '0');
 const dd = String(now.getUTCDate()).padStart(2, '0');
 const slug = title.toLowerCase().replace(/['".,!?&:;()]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
 
-const file = join('src', 'content', 'blog', `${yyyy}-${mm}-${dd}-${slug}.md`);
+const draftsDir = join('src', 'content', 'blog', 'drafts');
+mkdirSync(draftsDir, { recursive: true });
+const file = join(draftsDir, `${yyyy}-${mm}-${dd}-${slug}.md`);
 if (existsSync(file)) {
   console.error(`Already exists: ${file}`);
   process.exit(1);
@@ -64,6 +66,7 @@ Short closing opinion and a forward-looking prediction. Light CTA: stick around 
 
 writeFileSync(file, fm);
 mkdirSync(join('public', 'images', String(yyyy), mm), { recursive: true });
-console.log(`Created ${file} (draft: true — flip to false to publish)`);
+console.log(`Created ${file} (in drafts/, draft: true)`);
+console.log(`When ready: move to src/content/blog/published/ and set draft: false`);
 console.log(`Image folder ready: public/images/${yyyy}/${mm}/`);
 console.log(`URL will be: https://promptingbi.com/${yyyy}/${mm}/${dd}/${slug}/`);
