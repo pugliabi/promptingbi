@@ -1,8 +1,7 @@
 ---
 title: "Before the Fabric Adoption Roadmap, Run the Step-Zero Test"
-date: 2026-07-30T09:00:00Z
-permalink: "2026/07/30/step-zero-before-the-fabric-adoption-roadmap"
-draft: true
+date: 2026-07-27T09:00:00Z
+permalink: "2026/07/27/step-zero-before-the-fabric-adoption-roadmap"
 description: "Adoption roadmaps fail at companies that never defined what they measure. Run the step-zero test before you invest in any Fabric framework."
 featured: /images/2026/07/step-zero-roadmap-banner.png
 ---
@@ -15,9 +14,9 @@ I keep coming back to that question, because it explains why so many adoption pr
 
 ## The Roadmap Is Step One. Step Zero Comes First.
 
-Let me be clear about what I'm NOT saying. Microsoft's **Fabric adoption roadmap** is genuinely useful guidance. It gives you a published standard to baseline against, from governance to data culture. And per Microsoft's own guidance, the number one success factor for Power BI is an executive sponsor who understands it and puts resources behind it. I don't argue with any of that.
+Let me be clear about what I'm NOT saying. Microsoft's **Fabric adoption roadmap** is genuinely useful guidance. It gives you a published standard to baseline against, from governance to data culture. And per Microsoft's own guidance, the number one success factor for Power BI is an executive sponsor who understands it and puts resources behind it. I don't argue with any of that. Is the roadmap good? Of course it's good. That was never the problem.
 
-But the roadmap is step one. And a lot of companies are not ready for step one.
+The problem is that the roadmap is step one. And a lot of companies are not ready for step one.
 
 Step zero is a blunter question. Does this company even have **OKRs**, or some semblance of them? Not a mission statement. Not a slide that says "growth." Actual objectives with key results that real people are measured against. Here's what I've found: companies that never bought into analytics usually never bought into expectations around what they're measuring in the first place. The dashboard problem is downstream of the definition problem.
 
@@ -68,28 +67,56 @@ That question, asked consistently, is what speaking the same language actually l
 
 ![A single company goal at the top with team nodes beneath it, and every report card in the bottom row tracing a line up through its team to the goal](/images/2026/07/step-zero-roadmap-alignment.png)
 
-## How to Run the Step-Zero Test
+## The Step-Zero Playbook
 
-Here's how I would run this at your company, starting now.
+Enough diagnosis. Here's how I would actually run this at your company, starting this week. None of it requires budget, a committee, or a single new license.
 
-**1. Ask the step-zero questions.** Quietly, honestly, before any roadmap conversation:
+### 1. Score the company on four questions
 
-- Does the company have defined goals for the year or the quarter, beyond a number that should go up?
-- Can each leader say what they are measured against?
-- Can each leader say what their team must accomplish to support those goals?
-- Can your BI backlog trace each request back to one of those goals?
+Quietly and honestly, before any roadmap conversation, answer these. Not what the company SAYS about itself. What you can actually observe.
 
-Four nos means the roadmap can wait. You just found the real project.
+- **Does the company have defined goals for the year or the quarter, beyond a number that should go up?** A pass means a leader can recite them without pulling up a deck.
+- **Can each leader say what they are measured against?** A pass is a specific answer in one sentence. "Performance" is not an answer.
+- **Can each leader say what their team must accomplish to support those goals?** A pass means they can name their team's contribution without checking with their boss first.
+- **Can your BI backlog trace each request back to one of those goals?** A pass means more than half of your open requests connect to something a leader would recognize as a goal.
 
-**2. Have the "what keeps you up at night" conversation.** When I sit down with an executive, I ask exactly that: what keeps you up at night? Now we can talk the same language, because I know what bothers them and what they're trying to do. Brace for the disconnect, though. They'll name the thing giving them agita, then ask for 18 reports that are just shortcuts, none of which touch it. Don't get cynical. The gap between what they fear and what they request is your work list.
+Four yeses? Congratulations, run the roadmap and go all in. Two or three? Run the roadmap, but treat the gaps as first-class work items, not footnotes. Zero or one? Stop. The roadmap can wait. You just found the real project.
+
+### 2. Run the "what keeps you up at night" conversation
+
+When I sit down with an executive, I ask exactly that: what keeps you up at night? Now we can talk the same language, because I know what bothers them and what they're trying to do.
+
+Don't stop at the first answer. Here are the follow-ups I lean on:
+
+- "If that got better, what number would move?"
+- "Who on your team owns that number today?"
+- "Of the reports we've built for you, which one actually helps with it?"
+
+Write the answers down. Their words, not your translation. You will need them verbatim later.
+
+And brace for the disconnect. They'll name the thing giving them agita, then ask for 18 reports that are just shortcuts, none of which touch it. Don't get cynical. The gap between what they fear and what they request is your work list.
 
 ![An executive with a worry cloud on one side and a pile of disconnected report requests on the other, separated by a dotted, unbridged gap](/images/2026/07/step-zero-roadmap-gap.png)
 
-**3. Get buy-in before you get ambitious.** Do not go roguely meeting with the CFO on your own authority. That's how this dies. Talk to your boss, and your boss's boss if there is one, and frame it as a company initiative: we're aligning our reporting with the goals of the company. Now you're not randomly booking meetings with leadership; you're running a program. And I guarantee executives have their own pain points with reporting today. This is a win-win.
+### 3. Audit your own backlog
 
-**4. Keep the cadence.** Send a progress update every two weeks on what you talked about, especially to the C-level. Those goals become the BI team's goals, and the updates prove you meant it.
+This one takes an hour and produces the single most persuasive artifact in the whole playbook. Pull your last ten report requests. Make three columns: the request, who asked for it, and the company goal it supports.
 
-**5. Collect the payoff.** Do this right and the BI team stops being the people who build apps. You become a strategic part of leadership doing their job. That buys authority, a little more budget, and leverage. Skip it and you're swimming upstream indefinitely.
+Now look at column three. Every blank cell is evidence. When you go ask for buy-in, you're not walking in with a philosophy; you're walking in with a list that says six of our last ten requests connect to nothing anyone is measured on. That's a conversation an executive can't wave away.
+
+### 4. Get buy-in, in the right order
+
+Do not go roguely meeting with the CFO on your own authority. That's how this dies. Talk to your boss first, and your boss's boss if there is one, and frame it as a company initiative, not a BI project: "we're aligning our reporting with the goals of the company." Now you're not randomly booking meetings with leadership; you're running a program. And I guarantee executives have their own pain points with reporting today. This is a win-win, and you're offering to fix their problem, not create a new one.
+
+### 5. Keep the cadence
+
+Send a progress update every two weeks to everyone in the conversation, especially the C-level. Keep it to four bullets: what we heard from leadership, which reports we connected to a goal, which requests we retired or paused, and what we need next. No charts required (yes, I'm telling a BI team to send an update with no visuals; the discipline is the point). Those goals become the BI team's goals, and the updates prove you meant it.
+
+### 6. If the company fails the test, start with one team
+
+A failing grade doesn't mean you sulk in the corner until leadership finds religion. It means you shrink the scope. Pick the ONE leader who came closest to passing, the one who could almost articulate what their team is measured on. Sit with them, define their measures of success, and rebuild their reporting around those measures and nothing else. Then let that team become the reference story. Alignment spreads by example, not by mandate. One team that can say "every report we have maps to a goal" is worth more than a governance deck nobody reads.
+
+Do this right and the payoff is real: the BI team stops being the people who build apps. You become a strategic part of leadership doing their job. That buys authority, a little more budget, and leverage. Skip it and you're swimming upstream indefinitely.
 
 My favorite way to gauge progress costs nothing. Walk to get your coffee. If you pass a leadership meeting and they're gathered around a Power BI dashboard, you're on the right track.
 
@@ -104,7 +131,9 @@ So run the test before the roadmap. If your company passes, the roadmap lands on
 - The Fabric adoption roadmap is step one. Step zero is whether leadership has real OKRs with defined measures of success for every team.
 - "We want sales to go up" is a wish, not an OKR. Nobody owns it, and no report can support it.
 - The step-zero test is technology-agnostic. Pass it and even SSRS can work; fail it and no amount of Fabric capacity helps.
-- Power BI can grow from the bottom up, but real success comes from the top down: data culture, data literacy, cognitive load, and buy-in.
-- The gap between what an executive fears and what they request is your work list. Start there, with buy-in and a two-week update cadence.
+- Score the four questions honestly: defined goals, leaders who know their measures, teams that know their contribution, a backlog that traces to goals.
+- The one-hour backlog audit (request, requester, goal it supports) is your most persuasive artifact. Blank cells are evidence.
+- Get buy-in through your boss and frame it as a company initiative. Then keep a two-week update cadence to prove you meant it.
+- If the company fails the test, don't mandate. Pick one team, define their measures, and let the reference story spread.
 
 Here's my prediction. Building reports keeps getting faster and cheaper; with AI in the mix, a report will soon cost less than the meeting about it. When building costs nothing, the only durable advantage left is knowing what to measure and why. So this week, ask one executive a single question: "What keeps you up at night?" Write down the answer, pull their last three report requests, and check whether even one connects to it. That gap is your step zero, and it's where the real roadmap begins. Keep the conversation going with us on the Explicit Measures podcast, and subscribe at PromptingBI for more.
