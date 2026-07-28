@@ -5,6 +5,12 @@ permalink: "2026/07/27/what-keeps-you-up-at-night"
 draft: true
 description: "Stop trying to educate executives on data. One question, real buy-in, and a reporting cadence anchored to their goals builds the shared language."
 featured: /images/2026/07/what-keeps-you-up-at-night-banner.png
+tags:
+  - reporting
+  - business-intelligence
+  - data-culture
+  - data-visualization
+  - power-bi
 ---
 
 Here's a moment that still jars me every time it happens. I sit down with an executive and ask what's bothering them about the business. They tell me. Clearly, specifically, sometimes passionately. Margins on the new product line. Utilization across two merging workforces. Whether the sales team is chasing the right accounts. Then, in the very same meeting, they hand me a report request that has NOTHING to do with any of it. Eighteen asks, all shortcuts, none of them connected to the thing they just told me keeps them up at night.

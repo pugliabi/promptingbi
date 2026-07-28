@@ -4,6 +4,13 @@ date: 2024-07-17T14:05:15Z
 permalink: "2024/07/17/unlocking-ai-for-power-bi-business-intelligence-skills"
 description: "I have been lucky enough to be in the Business Intelligence space for the past 9 years with a focus on Power BI and the amazing application it has for organizations."
 featured: /images/2024/07/unlocking-ai-banner.png
+tags:
+  - prompt-engineering
+  - business-intelligence
+  - power-bi
+  - data-visualization
+  - microsoft-fabric
+  - dax
 ---
 
 I have been lucky enough to be in the Business Intelligence space for the past 9 years with a focus on Power BI and the amazing application it has for organizations. I have been a Data Analyst, a Director of Business Intelligence, and now lead my own Consulting firm. In just this span, I have seen incredible change, growth, and evolution of how people and organizations act and react with their data.

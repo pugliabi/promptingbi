@@ -5,6 +5,13 @@ permalink: "2026/08/05/youre-ai-ready-your-organization-isnt"
 draft: true
 description: "Individual AI skill doesn't scale into organizational adoption. Why AI adoption is a team language, and a 30-60-90 plan that starts with data quality."
 featured: /images/2026/08/youre-ai-ready-your-organization-isnt-banner.png
+tags:
+  - ai-agents
+  - adoption
+  - reporting
+  - governance
+  - power-bi
+  - microsoft-fabric
 ---
 
 I'll own something up front: I am AI ready. I can deploy agents, manage them, and wire them into just about every corner of my workflow. Research, documentation, semantic model work, project tracking... if there's a mundane loop in my day, there's probably an agent chewing on it. I can even measure whether it's working, for me.

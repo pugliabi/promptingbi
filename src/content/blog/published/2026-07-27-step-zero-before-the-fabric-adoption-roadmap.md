@@ -4,6 +4,13 @@ date: 2026-07-27T09:00:00Z
 permalink: "2026/07/27/step-zero-before-the-fabric-adoption-roadmap"
 description: "Adoption roadmaps fail at companies that never defined what they measure. Run the step-zero test before you invest in any Fabric framework."
 featured: /images/2026/07/step-zero-roadmap-banner.png
+tags:
+  - reporting
+  - adoption
+  - governance
+  - okrs
+  - microsoft-fabric
+  - business-intelligence
 ---
 
 A partner of mine is helping two companies through a merger. Two workforces about to become one. He suggested a dashboard showing staff utilization. Leadership's response? What a great idea. It had not crossed their minds.

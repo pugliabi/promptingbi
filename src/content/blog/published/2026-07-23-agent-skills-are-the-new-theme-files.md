@@ -4,6 +4,13 @@ date: 2026-07-23T09:00:00Z
 permalink: "2026/07/23/agent-skills-are-the-new-theme-files"
 description: "What BI teams learned governing theme files and PBITs is the playbook for agent skills. One rule sorts what gets governed from what stays personal."
 featured: /images/2026/07/agent-skills-theme-files-banner.png
+tags:
+  - agent-skills
+  - ai-agents
+  - reporting
+  - governance
+  - claude
+  - power-bi
 ---
 
 Every BI team I've ever worked with has a theme file story. Somebody built the perfect JSON, dropped it on SharePoint next to a PBIT template, and declared the design problem solved. Six months later there were five quietly edited copies floating around and nobody could tell you which version was the truth. theme_FINAL_v3 was not, in fact, final.

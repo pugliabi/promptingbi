@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+const { post } = Astro.props;
+const dateLabel = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+<li>
+  <h2><a href={`/${post.data.permalink}/`}>{post.data.title}</a></h2>
+  {post.data.featured && (
+    <a class="post-thumb" href={`/${post.data.permalink}/`}>
+      <img src={post.data.featured} alt={`Banner illustration for ${post.data.title}`} loading="lazy" />
+    </a>
+  )}
+  <p class="post-date">{dateLabel}</p>
+  {post.data.description && <p>{post.data.description}</p>}
+  <a class="read-more" href={`/${post.data.permalink}/`}>Read More →</a>
+</li>

@@ -4,6 +4,13 @@ date: 2026-07-20T09:00:00Z
 permalink: "2026/07/20/stop-re-prompting-second-brain-agent-instructions"
 description: "Stop re-prompting your AI agent. Build a two-harness workflow where your second brain writes the agent's instructions and MCP executes in Power BI and Fabric."
 featured: /images/2026/07/stop-re-prompting-banner.png
+tags:
+  - ai-agents
+  - mcp
+  - prompt-engineering
+  - microsoft-fabric
+  - semantic-models
+  - claude
 ---
 
 Every session with an AI agent starts the same way for most people I work with. Open the chat, paste in the background, re-explain the project, re-list the requirements, and pray the model holds it all together long enough to do something useful. Then the session ends, the context is gone, and tomorrow you do the whole dance again.

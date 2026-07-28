@@ -5,6 +5,13 @@ permalink: "2026/07/30/hard-data-soft-data"
 draft: true
 description: "Your semantic model is only half your data. Why soft data, the decision logs and business context around your tables, decides if agentic analytics works."
 featured: /images/2026/07/hard-data-soft-data-banner.png
+tags:
+  - ai-agents
+  - semantic-models
+  - claude
+  - data-visualization
+  - governance
+  - microsoft-fabric
 ---
 
 Picture the cleanest semantic model you've ever shipped. Star schema, documented measures, certified, refreshing on schedule. Now wire an agent to it and let a business user ask, "How did the Q2 launch do?" The agent confidently sums revenue for calendar Q2. Except at this company, "the Q2 launch" is the nickname for one specific product, the question is really about that product's first ninety days, and the person is asking because a board meeting is on Thursday. The agent answered what the user asked. It had no way to know what they meant.

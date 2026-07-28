@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostListItem from '../../components/PostListItem.astro';
+import { publishedPosts, PAGE_SIZE } from '../../lib/posts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await publishedPosts();
+  // Page 1 lives at "/" — only generate /page/2/ and up.
+  return paginate(posts, { pageSize: PAGE_SIZE }).filter(
+    (route) => (route.props.page as Page).currentPage > 1
+  );
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>;
+}
+const { page } = Astro.props;
+const newerUrl = page.currentPage === 2 ? '/' : page.url.prev;
+---
+<Base title={`Page ${page.currentPage} - Prompting BI`}>
+  <ul class="post-list">
+    {page.data.map((post) => <PostListItem post={post} />)}
+  </ul>
+  <nav class="pagination" aria-label="Pagination">
+    {newerUrl && <a href={newerUrl}>← Newer posts</a>}
+    <span class="page-count">Page {page.currentPage} of {page.lastPage}</span>
+    {page.url.next && <a href={page.url.next}>Older posts →</a>}
+  </nav>
+</Base>

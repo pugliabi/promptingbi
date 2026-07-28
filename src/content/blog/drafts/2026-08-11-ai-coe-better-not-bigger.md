@@ -5,6 +5,13 @@ permalink: "2026/08/11/ai-coe-better-not-bigger"
 draft: true
 description: "AI can flood your Power BI Center of Excellence with content overnight. Here's the maturity ladder for making it measurably better, not just bigger."
 featured: /images/2026/08/ai-coe-better-not-bigger-banner.png
+tags:
+  - ai-agents
+  - adoption
+  - mcp
+  - microsoft-fabric
+  - semantic-models
+  - governance
 ---
 
 Ask a leadership team how they plan to make their Center of Excellence better this year and watch the room go quiet. It's not a question anyone prepares for, because almost nobody asks it. In most organizations I work with, the honest position on the CoE is this: we're happy we have one at all, even if it's not perfect.

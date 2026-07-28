@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { render } from 'astro:content';
 import { publishedPosts } from '../lib/posts';
+import { tagDisplay } from '../lib/tags.mjs';
 import Comments from '../components/Comments.astro';
 
 export async function getStaticPaths() {
@@ -29,6 +30,16 @@ const fmt = (d: Date) =>
       <img class="post-banner" src={post.data.featured} alt={`Banner illustration for ${post.data.title}`} />
     )}
     <Content />
+    {post.data.tags.length > 0 && (
+      <nav class="post-tags" aria-label="Post tags">
+        <span class="post-tags-label">Tags:</span>
+        <div class="tag-pills">
+          {post.data.tags.map((tag) => (
+            <a class="tag-pill" href={`/tags/${tag}/`}>{tagDisplay(tag)}</a>
+          ))}
+        </div>
+      </nav>
+    )}
     <Comments />
   </article>
 </Base>

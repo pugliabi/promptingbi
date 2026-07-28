@@ -5,6 +5,13 @@ permalink: "2026/08/02/your-semantic-model-needs-a-dot-ai-folder"
 draft: true
 description: "AI context for your data should live inside the semantic model, not in a bolt-on agent. Why Power BI needs a .ai folder, and what to build today."
 featured: /images/2026/08/dot-ai-folder-banner.png
+tags:
+  - ai-agents
+  - semantic-models
+  - power-bi
+  - reporting
+  - microsoft-fabric
+  - business-intelligence
 ---
 
 If I could get one feature request in front of the Power BI team, it would be this: put a **.ai folder inside the semantic model**. A place in the model definition itself where instructions, skills, and business context for AI agents actually live. Markdown files. An agents file. Lightweight stuff. Nothing exotic.

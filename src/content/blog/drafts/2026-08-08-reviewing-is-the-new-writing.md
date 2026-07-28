@@ -5,6 +5,13 @@ permalink: "2026/08/08/reviewing-is-the-new-writing"
 description: "AI agents now write the DAX and build the models. The Power BI skill that pays is reviewing their work, and most of us never trained for it."
 featured: /images/2026/08/reviewing-is-the-new-writing-banner.png
 draft: true
+tags:
+  - ai-agents
+  - mcp
+  - dax
+  - power-bi
+  - prompt-engineering
+  - microsoft-fabric
 ---
 
 I did an honest audit of my own work recently, and it stung a little. The DAX, the model changes, the notebook code, the pipeline logic... almost none of it started life under my fingers. It started in an agent, running against an MCP server, guided by skills and a harness I set up months ago. My direct, hands-on-keyboard building has dropped off a cliff. And I know I'm not the only one, because every practitioner I talk to who has leaned into agentic tooling says the same thing.

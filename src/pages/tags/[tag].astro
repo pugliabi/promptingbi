@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostListItem from '../../components/PostListItem.astro';
+import { publishedPosts } from '../../lib/posts';
+import { tagDisplay } from '../../lib/tags.mjs';
+
+export async function getStaticPaths() {
+  const all = await publishedPosts();
+  const byTag = new Map<string, typeof all>();
+  for (const post of all) {
+    for (const tag of post.data.tags) {
+      if (!byTag.has(tag)) byTag.set(tag, []);
+      byTag.get(tag)!.push(post);
+    }
+  }
+  return [...byTag.entries()].map(([tag, posts]) => ({
+    params: { tag },
+    props: { tag, posts },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+const display = tagDisplay(tag);
+
+// Tags that co-occur with this one on the same posts, by co-occurrence count.
+const coCounts = new Map<string, number>();
+for (const post of posts) {
+  for (const other of post.data.tags) {
+    if (other === tag) continue;
+    coCounts.set(other, (coCounts.get(other) ?? 0) + 1);
+  }
+}
+const related = [...coCounts.entries()].sort(
+  (a, b) => b[1] - a[1] || a[0].localeCompare(b[0])
+);
+---
+<Base
+  title={`${display} - Prompting BI`}
+  description={`All Prompting BI posts tagged ${display}.`}
+>
+  <section class="tag-header">
+    <h1>Tagged: {display}</h1>
+    <p class="post-date">{posts.length} {posts.length === 1 ? 'post' : 'posts'} · <a href="/tags/">All tags</a></p>
+  </section>
+  <ul class="post-list">
+    {posts.map((post) => <PostListItem post={post} />)}
+  </ul>
+  {related.length > 0 && (
+    <section class="related-tags">
+      <h2>Related tags</h2>
+      <div class="tag-pills">
+        {related.map(([slug, count]) => (
+          <a class="tag-pill" href={`/tags/${slug}/`}>
+            {tagDisplay(slug)} <span class="tag-count">({count})</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</Base>

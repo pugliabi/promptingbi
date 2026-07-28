@@ -29,6 +29,7 @@ date: ${yyyy}-${mm}-${dd}T${String(now.getUTCHours()).padStart(2, '0')}:00:00Z
 permalink: "${yyyy}/${mm}/${dd}/${slug}"
 description: "TODO: one-sentence teaser (under 160 chars)"
 # featured: /images/${yyyy}/${mm}/${slug}.png  # uncomment once the hero image exists
+tags: []  # leave empty and run \`npm run auto-tag\`, or list slugs from src/lib/tags.mjs
 draft: true
 ---
 

@@ -1,25 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
-import { publishedPosts } from '../lib/posts';
+import PostListItem from '../components/PostListItem.astro';
+import { publishedPosts, PAGE_SIZE } from '../lib/posts';
 
-const posts = await publishedPosts();
-const fmt = (d: Date) =>
-  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const allPosts = await publishedPosts();
+const posts = allPosts.slice(0, PAGE_SIZE);
+const hasOlder = allPosts.length > PAGE_SIZE;
 ---
 <Base>
+  <section class="home-intro">
+    <p>
+      Prompting BI is where business intelligence and prompt engineering meet —
+      a space for dialogue on navigating the ever-changing world of BI through AI.
+      I'm <a href="/about/">Tommy Puglia</a>, Microsoft MVP and Power BI consultant,
+      writing for the Power BI and Fabric professionals figuring out how to use
+      generative AI well.
+    </p>
+  </section>
   <ul class="post-list">
-    {posts.map((post) => (
-      <li>
-        <h2><a href={`/${post.data.permalink}/`}>{post.data.title}</a></h2>
-        {post.data.featured && (
-          <a class="post-thumb" href={`/${post.data.permalink}/`}>
-            <img src={post.data.featured} alt={`Banner illustration for ${post.data.title}`} loading="lazy" />
-          </a>
-        )}
-        <p class="post-date">{fmt(post.data.date)}</p>
-        {post.data.description && <p>{post.data.description}</p>}
-        <a class="read-more" href={`/${post.data.permalink}/`}>Read More →</a>
-      </li>
-    ))}
+    {posts.map((post) => <PostListItem post={post} />)}
   </ul>
+  {hasOlder && (
+    <nav class="pagination" aria-label="Pagination">
+      <a href="/page/2/">Older posts →</a>
+    </nav>
+  )}
 </Base>
