@@ -1,9 +1,9 @@
 ---
 title: "Anatomy of a Project Hub: Where Your Agent's Context Actually Lives"
-date: 2026-08-14T09:00:00Z
-permalink: "2026/08/14/anatomy-of-a-project-hub"
+date: 2026-07-29T09:00:00Z
+permalink: "2026/07/29/anatomy-of-a-project-hub"
 description: "A tour of the project hub that feeds my AI agents context, so every session starts informed instead of from zero."
-featured: /images/2026/08/anatomy-of-a-project-hub-banner.png
+featured: /images/2026/07/anatomy-of-a-project-hub-banner.png
 draft: false
 tags:
   - ai-agents
@@ -19,7 +19,7 @@ Fair enough. This post is the tour. It also kicks off a three-part series on the
 
 So let's take a project. We'll call it **Northside Baseball**, a baseball team with a front office sitting on ticketing data, a CRM, and a books system that don't talk to each other. The engagement covers a semantic model and Power BI reporting, a Fabric data platform underneath it, and the notebooks that tie it all together. The structure you're about to see is the structure of every project I run.
 
-![A central project hub node connected by relation lines to milestone cards, meeting notes, deliverable checklists, and agent badges, flowing right into a Power BI dashboard](/images/2026/08/anatomy-of-a-project-hub-banner.png)
+![A central project hub node connected by relation lines to milestone cards, meeting notes, deliverable checklists, and agent badges, flowing right into a Power BI dashboard](/images/2026/07/anatomy-of-a-project-hub-banner.png)
 
 ## The Project Is the Hub, Everything Else Is a Relation
 
@@ -39,7 +39,7 @@ For Northside, the shape is:
 
 Could you do all this in a folder of markdown files? You could. I did, for a while. Then I asked my first cross-cutting question and watched the agent flail. Relations are what let an agent **reason** instead of just search. When I ask "does anything from today's call block the Ticket Sales dashboard," the agent doesn't grep for keywords. It walks the graph: today's meeting relates to Northside, Northside relates to the semantic model milestone, that milestone owns the dashboard deliverable, and the deliverable has a status. That's a chain of joins. If you've spent your career in star schemas, you already know why joins beat string matching. Your data modeling instincts transfer directly to context engineering. That's the thesis of this whole post.
 
-![A project hub at the center with labeled relation lines radiating to a milestones database, a meetings database, a deliverables checklist, and a resources index](/images/2026/08/anatomy-of-a-project-hub-relations.png)
+![A project hub at the center with labeled relation lines radiating to a milestones database, a meetings database, a deliverables checklist, and a resources index](/images/2026/07/anatomy-of-a-project-hub-relations.png)
 
 ## What the Hub Page Actually Does
 
@@ -59,7 +59,7 @@ Take the medallion architecture milestone, the data engineering backbone of the 
 
 Why does the uniform skeleton matter to an agent? For the same reason a scorebook matters in baseball. Any scorekeeper can pick up any scorebook in any ballpark and read it cold, because 6-4-3 means the same thing everywhere. Same idea here. If every milestone page has the same shape, the agent never wonders where the deliverables live or which section is current. It reads position, not prose. An agent parsing seven differently-organized pages burns tokens and makes mistakes. An agent parsing seven identical skeletons is fast and boringly reliable. Boring is what you WANT from infrastructure.
 
-![Three identical milestone page skeletons side by side, each with the same stacked sections, feeding into a single agent node that reads them in one pass](/images/2026/08/anatomy-of-a-project-hub-skeleton.png)
+![Three identical milestone page skeletons side by side, each with the same stacked sections, feeding into a single agent node that reads them in one pass](/images/2026/07/anatomy-of-a-project-hub-skeleton.png)
 
 ## The Hub Writes the Instructions
 

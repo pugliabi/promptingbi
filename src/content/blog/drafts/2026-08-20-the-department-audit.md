@@ -16,7 +16,7 @@ tags:
 
 Every consulting project I've ever seen has the same quiet lie in it: the records say one thing and reality says another. The milestone reads "In progress" two weeks after the work shipped. The deliverable says "Not started" when it was finished on a Tuesday call nobody logged. Left alone, that gap grows until the status update becomes an archaeology project you do the night before the client call.
 
-I used to close that gap by hand. Now two agents close it for me, and my whole job is checking boxes. This is part three of the project hub series ([part one](/2026/08/14/anatomy-of-a-project-hub/) built the hub, [part two](/2026/08/17/inside-an-mcp-execution-session/) ran the MCP execution session), and it's the part that makes the other two trustworthy. Because a second brain with stale records isn't a second brain. It's a liability with good formatting.
+I used to close that gap by hand. Now two agents close it for me, and my whole job is checking boxes. This is part three of the project hub series ([part one](/2026/07/29/anatomy-of-a-project-hub/) built the hub, [part two](/2026/08/17/inside-an-mcp-execution-session/) ran the MCP execution session), and it's the part that makes the other two trustworthy. Because a second brain with stale records isn't a second brain. It's a liability with good formatting.
 
 ![Two agent figures at a project board on the left passing a checklist through a human approval checkpoint into an updated status document on the right](/images/2026/08/the-department-audit-banner.png)
 

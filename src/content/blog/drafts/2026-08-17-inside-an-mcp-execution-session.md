@@ -14,7 +14,7 @@ tags:
   - dax
 ---
 
-Part one of this series ([Anatomy of a Project Hub](/2026/08/14/anatomy-of-a-project-hub/)) covered where the context lives. This one covers the moment it turns into work: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
+Part one of this series ([Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)) covered where the context lives. This one covers the moment it turns into work: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
 
 The whole trick sits in a single artifact. For every project I run, my Notion agents generate a **Claude instructions page**, written from the hub: every meeting, every deliverable status, every scope decision. It's the handoff between the second brain that organizes and the harness that executes. And because I get asked what one actually looks like, I'm going to walk you through the real one from my Northside Baseball Club demo project (the fictional team from part one) section by section.
 
