@@ -4,7 +4,6 @@ date: 2026-07-29T09:00:00Z
 permalink: "2026/07/29/anatomy-of-a-project-hub"
 description: "A tour of the project hub that feeds my AI agents context, so every session starts informed instead of from zero."
 featured: /images/2026/07/anatomy-of-a-project-hub-banner.png
-draft: false
 tags:
   - ai-agents
   - context-engineering
