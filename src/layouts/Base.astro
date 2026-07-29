@@ -206,6 +206,16 @@ const year = new Date().getFullYear();
   article figure { margin: 2rem 0; }
   blockquote { border-left: 3px solid var(--accent); margin: 1.5rem 0; padding: .2rem 0 .2rem 1.2rem; color: var(--muted); }
   code { background: #f4f4f4; padding: .15em .35em; border-radius: 4px; font-size: .9em; }
+  pre:not(.mermaid) {
+    background: #0d1117;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    font-size: .88rem;
+    line-height: 1.55;
+  }
+  pre code { background: none; padding: 0; border-radius: 0; font-size: 1em; }
   pre.mermaid { background: none; margin: 2rem 0; text-align: center; }
   pre.mermaid:not([data-processed]) { color: transparent; }
 

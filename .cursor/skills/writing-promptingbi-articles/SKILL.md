@@ -43,7 +43,7 @@ Before drafting, go through the planned areas with Tommy, one quick pass: for ea
 
 ## Step 5 — Draft
 
-Write 1,200–1,800 words following `references/voice-and-style.md` (how it sounds) and `references/article-structure.md` (how it's shaped). Hard rules worth repeating because they get violated: first person, no em dashes anywhere, no episode references, no invented facts/features/stats not supported by the transcript or by Tommy in Step 4, end with the meta description and 5–8 topic tags.
+Write 1,200–1,800 words following `references/voice-and-style.md` (how it sounds) and `references/article-structure.md` (how it's shaped). Hard rules worth repeating because they get violated: first person, no em dashes anywhere, no episode references, no invented facts/features/stats not supported by the transcript or by Tommy in Step 4, end with the meta description and 5–8 topic tags. If the article walks a worked example or shows agent tooling, follow the "Worked examples and code blocks" section of `voice-and-style.md`: no demo/fictional framing, no plumbing code (SQL/MCP config), instruction-page markdown slices as the signature code blocks, sourced from Tommy's real instruction pages when they exist.
 
 ## Step 6 — Generate the banner AND in-article helper diagrams
 

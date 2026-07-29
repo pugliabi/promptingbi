@@ -29,6 +29,16 @@ Grounded in Tommy's published posts ("Diagramming for DAX with Generative AI", "
 - Bold **key terms**, not decoration. Bullets for genuine lists, prose for argument.
 - Topics stay centered on Power BI, Microsoft Fabric, semantic models, AI and Copilot, prompting/agentic workflows, and data governance.
 
+## Worked examples and code blocks
+
+Learned from Tommy's edits on the project hub series. Treat these as hard rules whenever an article walks a worked example or shows agent tooling.
+
+- **Introduce the example project like a real engagement.** "Let's take a project. We'll call it Northside Baseball." The words demo, dummy, fictional, and sample stay out of the article body; the disclaimer kills the story and the reader doesn't need it.
+- **Show code the reader would write or read, never plumbing an agent handles.** No SQL against Notion databases, no MCP server JSON config blocks. If the point is "the agent queries the relations," say that in prose and keep the concept tool-agnostic.
+- **Instruction pages ARE the code worth showing.** A stripped-down markdown slice of a Claude/agent instructions page (role statement, priority callout, autonomy directive, read-first table, report-back rule, hand-off rules) is the signature code block of these articles. Condense from Tommy's real instruction pages in Notion when they exist; never invent structure he doesn't use.
+- **Describe system pages functionally, not as inventories.** What the hub page does (connects milestones, holds resources, turns meetings into blockers), not a walkthrough of its callouts and sections.
+- DAX blocks earn their place when they demonstrate a point, especially agent deviations documented in comments.
+
 ## Smell test before delivering
 
 Read the hook and one middle section aloud. If it sounds like a webinar abstract or a LinkedIn engagement post, it's wrong. If it sounds like Tommy explaining something to a smart client over coffee, with one moment of wit and one strong opinion, it's right.

@@ -1,6 +1,6 @@
-# NBC Shot List — Topic → Pages, State, and Frame
+# NB Shot List — Topic → Pages, State, and Frame
 
-Capture-ready mapping for blog screenshots and demos. Each entry: what to capture in order, what state NBC must be in, and prep notes. Page IDs resolve via `notion-map.md`.
+Capture-ready mapping for blog screenshots and demos. Each entry: what to capture in order, what state NB must be in, and prep notes. Page IDs resolve via `notion-map.md`.
 
 Before any capture session, run the freshness pass (update "as of <date>" strings on the hub callouts to today) — stale dates are the most common screenshot ruiner.
 

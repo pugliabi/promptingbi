@@ -24,5 +24,6 @@ export default defineConfig({
   trailingSlash: 'ignore',
   markdown: {
     remarkPlugins: [remarkMermaid],
+    shikiConfig: { theme: 'github-dark-default' },
   },
 });

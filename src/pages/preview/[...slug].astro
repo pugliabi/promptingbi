@@ -1,0 +1,175 @@
+---
+// DEV-ONLY preview for drafts, scheduled posts, and backlog ideas.
+// `npm run dev` → http://localhost:4321/preview/
+// In `npm run build` getStaticPaths returns [], so nothing here is ever
+// emitted to dist/ or deployed.
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import Base from '../../layouts/Base.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { tagDisplay } from '../../lib/tags.mjs';
+
+export async function getStaticPaths() {
+  if (!import.meta.env.DEV) return [];
+  const posts = await getCollection('blog');
+  const backlog = import.meta.glob('../../content/blog/backlog/*.md', { eager: true });
+  return [
+    { params: { slug: undefined }, props: { kind: 'index' } },
+    ...posts.map((post) => ({
+      params: { slug: post.id },
+      props: { kind: 'post', post },
+    })),
+    ...Object.entries(backlog).map(([path, mod]) => ({
+      params: { slug: `backlog/${path.split('/').pop()!.replace(/\.md$/, '')}` },
+      props: { kind: 'backlog', path, mod },
+    })),
+  ];
+}
+
+const props = Astro.props as
+  | { kind: 'index' }
+  | { kind: 'post'; post: CollectionEntry<'blog'> }
+  | { kind: 'backlog'; path: string; mod: any };
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const now = new Date();
+
+// Index data
+let drafts: CollectionEntry<'blog'>[] = [];
+let scheduled: CollectionEntry<'blog'>[] = [];
+let backlogFiles: { slug: string; title: string }[] = [];
+if (props.kind === 'index') {
+  const posts = await getCollection('blog');
+  const newestFirst = (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+    b.data.date.valueOf() - a.data.date.valueOf();
+  drafts = posts.filter((p) => p.data.draft).sort(newestFirst);
+  scheduled = posts.filter((p) => !p.data.draft && p.data.date.valueOf() > now.valueOf()).sort(newestFirst);
+  const backlog = import.meta.glob('../../content/blog/backlog/*.md', { eager: true });
+  backlogFiles = Object.entries(backlog).map(([path, mod]: [string, any]) => {
+    const file = path.split('/').pop()!.replace(/\.md$/, '');
+    return { slug: `backlog/${file}`, title: mod.frontmatter?.title ?? file };
+  });
+}
+
+// Post preview data
+let Content: any = null;
+let post: CollectionEntry<'blog'> | null = null;
+let bannerMissing = false;
+if (props.kind === 'post') {
+  post = props.post;
+  ({ Content } = await render(post));
+  if (post.data.featured) {
+    bannerMissing = !existsSync(resolve(process.cwd(), 'public', post.data.featured.replace(/^\//, '')));
+  }
+}
+
+const title =
+  props.kind === 'index'
+    ? 'Preview — Prompting BI'
+    : props.kind === 'post'
+      ? `[PREVIEW] ${props.post.data.title}`
+      : `[BACKLOG] ${props.mod.frontmatter?.title ?? props.path.split('/').pop()}`;
+---
+<Base title={title} description="Local preview. Not published.">
+  <div class="preview-ribbon">
+    {props.kind === 'index' && 'PREVIEW MODE — dev only, nothing here is on the live site'}
+    {props.kind === 'post' && post && (
+      <>
+        {post.data.draft ? 'DRAFT' : 'SCHEDULED'} · publishes at /{post.data.permalink}/ ·{' '}
+        <a href="/preview/">back to preview index</a>
+      </>
+    )}
+    {props.kind === 'backlog' && (
+      <>BACKLOG IDEA · not in the content collection · <a href="/preview/">back to preview index</a></>
+    )}
+  </div>
+
+  {props.kind === 'index' && (
+    <article>
+      <h1>Content preview</h1>
+      <p>Everything not on the live site, rendered with the real post template.</p>
+
+      <h2>Drafts ({drafts.length})</h2>
+      <ul>
+        {drafts.map((p) => (
+          <li>
+            <a href={`/preview/${p.id}/`}>{p.data.title}</a>
+            <small> — {fmt(p.data.date)}{p.data.featured ? ' · has banner' : ' · no banner'}</small>
+          </li>
+        ))}
+      </ul>
+
+      <h2>Scheduled ({scheduled.length})</h2>
+      {scheduled.length === 0 && <p><small>None — no future-dated published posts.</small></p>}
+      <ul>
+        {scheduled.map((p) => (
+          <li>
+            <a href={`/preview/${p.id}/`}>{p.data.title}</a>
+            <small> — goes live {fmt(p.data.date)}</small>
+          </li>
+        ))}
+      </ul>
+
+      <h2>Backlog ({backlogFiles.length})</h2>
+      <ul>
+        {backlogFiles.map((f) => (
+          <li><a href={`/preview/${f.slug}/`}>{f.title}</a></li>
+        ))}
+      </ul>
+    </article>
+  )}
+
+  {props.kind === 'post' && post && (
+    <article>
+      {bannerMissing && (
+        <p class="preview-warning">
+          ⚠️ Featured image <code>{post.data.featured}</code> not found in <code>public/</code>
+        </p>
+      )}
+      <h1>{post.data.title}</h1>
+      <p class="post-date">{fmt(post.data.date)} · Tommy Puglia</p>
+      {post.data.featured && !bannerMissing && (
+        <img class="post-banner" src={post.data.featured} alt={`Banner illustration for ${post.data.title}`} />
+      )}
+      <Content />
+      {post.data.tags.length > 0 && (
+        <nav class="post-tags" aria-label="Post tags">
+          <span class="post-tags-label">Tags:</span>
+          <div class="tag-pills">
+            {post.data.tags.map((tag) => (
+              <span class="tag-pill">{tagDisplay(tag)}</span>
+            ))}
+          </div>
+        </nav>
+      )}
+    </article>
+  )}
+
+  {props.kind === 'backlog' && (
+    <article>
+      <h1>{props.mod.frontmatter?.title ?? props.path.split('/').pop()}</h1>
+      <props.mod.Content />
+    </article>
+  )}
+</Base>
+
+<style>
+  .preview-ribbon {
+    background: repeating-linear-gradient(45deg, #fff8e1, #fff8e1 12px, #ffecb3 12px, #ffecb3 24px);
+    border: 1px solid #f0c36d;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .preview-warning {
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  small { color: #777; }
+</style>
