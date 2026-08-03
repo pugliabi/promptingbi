@@ -4,6 +4,7 @@ date: 2026-08-03T09:00:00Z
 permalink: "2026/08/03/meet-my-assistants"
 description: "Part two of my harness series: the Notion assistants that organize context, drive requirements, and draft status updates for my Fabric projects."
 featured: /images/2026/08/the-department-audit-banner.png
+draft: false
 tags:
   - ai-agents
   - context-engineering
