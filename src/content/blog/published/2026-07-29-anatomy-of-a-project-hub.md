@@ -14,7 +14,7 @@ tags:
 
 When I wrote [Stop Re-Prompting](/2026/07/20/stop-re-prompting-second-brain-agent-instructions/), the idea that got the most questions wasn't the agents. It wasn't the MCP servers either. It was the hub. People wanted to see it. What does "the project is the hub" actually look like on the page? What kinds of pages? How do they connect? What does an agent actually read when it walks in the door?
 
-Fair enough. This post is the tour. It also kicks off a three-part series on the two-harness loop: this one covers the **organized context**, the next covers the **MCP execution session**, and the third covers the **department audit** that keeps the whole thing honest.
+Fair enough. This post is the tour. It also kicks off a series on the two-harness loop: this one covers the **organized context**, the next introduces **my assistants**, the agents that keep the whole thing honest, and the third runs the **MCP execution session**.
 
 So let's take a project. We'll call it **Northside Baseball**, a baseball team with a front office sitting on ticketing data, a CRM, and a books system that don't talk to each other. The engagement covers a semantic model and Power BI reporting, a Fabric data platform underneath it, and the notebooks that tie it all together. The structure you're about to see is the structure of every project I run.
 
@@ -94,9 +94,9 @@ built, validated, flagged, and what's next. A session without a
 recap is not done.
 ```
 
-Every line of that traces back to a hub page. The priority came from the milestone and the latest ops sync. The do-not-touch list came from scope decisions logged on the hub. The read-first table IS the hub, expressed as a reading order. An instructions page written from a well-related hub scrolls for pages and is accurate. An instructions page written from a folder of notes is a guess. Part two of this series runs a full session off one of these.
+Every line of that traces back to a hub page. The priority came from the milestone and the latest ops sync. The do-not-touch list came from scope decisions logged on the hub. The read-first table IS the hub, expressed as a reading order. An instructions page written from a well-related hub scrolls for pages and is accurate. An instructions page written from a folder of notes is a guess. The last part of this series runs a full session off one of these.
 
-The **department audit** that catches drift between what we said and what we did? It works by comparing the deliverables database against meeting notes and update logs, which is only possible because both sides of that comparison are structured and related.
+The review **my assistants** run that catches drift between what we said and what we did? It works by comparing the deliverables database against meeting notes and update logs, which is only possible because both sides of that comparison are structured and related.
 
 And the loop closes back here. When an execution session finishes its work, the recap files into the hub, the checkboxes flip, the briefing updates, and tomorrow's instructions page already knows. The hub is both the source and the destination. That's what makes it a harness and not a diary.
 
@@ -120,4 +120,4 @@ Do that for ONE project and run it for two weeks. The first time you ask an agen
 - Identical milestone page skeletons are context engineering; agents read structure faster and more reliably than prose.
 - The instructions pages are the payoff: written from the hub, scoped to one job, ending with a required report-back that closes the loop.
 
-Next in this series: the MCP execution session, where the instructions page my hub writes gets picked up by Claude and turned into real semantic model work over the Power BI Modeling MCP. If this sparked something, keep the conversation going with us on the Explicit Measures podcast, and subscribe at PromptingBI for more.
+Next in this series: meet my assistants, the agents that organize this context, drive the requirements, and keep the hub honest. Then the MCP execution session, where the instructions page my hub writes gets picked up by Claude and turned into real semantic model work over the Power BI Modeling MCP. If this sparked something, keep the conversation going with us on the Explicit Measures podcast, and subscribe at PromptingBI for more.

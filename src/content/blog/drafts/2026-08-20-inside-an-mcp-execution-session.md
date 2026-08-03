@@ -1,7 +1,7 @@
 ---
 title: "From Notion Page to Power BI Model: Inside an MCP Execution Session"
-date: 2026-08-17T09:00:00Z
-permalink: "2026/08/17/inside-an-mcp-execution-session"
+date: 2026-08-20T09:00:00Z
+permalink: "2026/08/20/inside-an-mcp-execution-session"
 description: "What a real Claude instructions page contains and how one line kicks off semantic model work over the Power BI Modeling MCP, start to recap."
 featured: /images/2026/08/inside-an-mcp-execution-session-banner.png
 draft: true
@@ -14,9 +14,9 @@ tags:
   - dax
 ---
 
-Part one of this series ([Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)) covered where the context lives. This one covers the moment it turns into work: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
+Part one of this series ([Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)) covered where the context lives, and [part two](/2026/08/03/meet-my-assistants/) introduced the assistants that keep it honest. This one covers the moment it all turns into work: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
 
-The whole trick sits in a single artifact. For every project I run, my Notion agents generate a **Claude instructions page**, written from the hub: every meeting, every deliverable status, every scope decision. It's the handoff between the second brain that organizes and the harness that executes. And because I get asked what one actually looks like, I'm going to walk you through the real one from my Northside Baseball Club demo project (the fictional team from part one) section by section.
+The whole trick sits in a single artifact. For every project I run, my Notion agents generate a **Claude instructions page**, written from the hub: every meeting, every deliverable status, every scope decision. It's the handoff between the second brain that organizes and the harness that executes. And because I get asked what one actually looks like, I'm going to walk you through the real one from my Northside Baseball project (the team from part one) section by section.
 
 ![A scrolling instructions document on the left streaming through a central MCP connector node into a Power BI semantic model with measures and relationships on the right](/images/2026/08/inside-an-mcp-execution-session-banner.png)
 
@@ -145,7 +145,7 @@ The last instruction on the page is the one that makes this a loop instead of a 
 
 Skip the recap and you're back where everyone starts: a pile of good work your system never learned from, and a next session that opens with re-explaining. The recap is cheap. Amnesia is expensive. The instructions page ends with the whole philosophy in one line: a session without a recap is not done.
 
-The full audit workflow that reviews all this, catches what the records missed, and puts a human checkpoint on the changes? That's part three.
+The assistants that review all this, catch what the records missed, and put a human checkpoint on the changes? That was [part two](/2026/08/03/meet-my-assistants/).
 
 ## Run One Session This Week
 
@@ -166,4 +166,4 @@ Then open your harness, type the one line, and let the page do the talking.
 - Wrap bulk model changes in transactions and validate with DAX queries over MCP before calling anything done.
 - The session ends when the recap lands in the hub, not when the code runs.
 
-Next up, the final part of this series: the department audit, where my Notion agents review the project records against reality and I approve changes with checkboxes instead of writing status updates. If this sparked something, keep the conversation going with us on the Explicit Measures podcast, and subscribe at PromptingBI for more.
+That's the series: a hub that organizes the context, assistants that keep it honest, and a session that executes it over MCP and writes back. The prompt was never the product; the loop is. If this sparked something, keep the conversation going with us on the Explicit Measures podcast, and subscribe at PromptingBI for more.
