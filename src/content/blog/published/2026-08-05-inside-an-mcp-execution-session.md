@@ -1,10 +1,10 @@
 ---
 title: "From Notion Page to Power BI Model: Inside an MCP Execution Session"
-date: 2026-08-20T09:00:00Z
-permalink: "2026/08/20/inside-an-mcp-execution-session"
-description: "What a real Claude instructions page contains and how one line kicks off semantic model work over the Power BI Modeling MCP, start to recap."
+date: 2026-08-05T09:00:00Z
+permalink: "2026/08/05/inside-an-mcp-execution-session"
+description: "What a real Claude instructions page contains and how one line kicks off semantic model work over the Power BI Modeling MCP, kickoff to write-back."
 featured: /images/2026/08/inside-an-mcp-execution-session-banner.png
-draft: true
+draft: false
 tags:
   - mcp
   - ai-agents
@@ -14,7 +14,7 @@ tags:
   - dax
 ---
 
-Part one of this series ([Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)) covered where the context lives, and [part two](/2026/08/03/meet-my-assistants/) introduced the assistants that keep it honest. This one covers the moment it all turns into work: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
+At the end of [part two](/2026/08/03/meet-my-assistants/) I said a harness needs four wheels: skills, agents, organized context, and the ability to talk to other harnesses. [Part one](/2026/07/29/anatomy-of-a-project-hub/) built the organized context. Part two covered the agents and the skills. This is the fourth wheel, and it's my whole thesis in one sentence: harnesses work best when they can talk to each other. This post is that conversation happening: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
 
 The whole trick sits in a single artifact. For every project I run, my Notion agents generate a **Claude instructions page**, written from the hub: every meeting, every deliverable status, every scope decision. It's the handoff between the second brain that organizes and the harness that executes. And because I get asked what one actually looks like, I'm going to walk you through the real one from my Northside Baseball project (the team from part one) section by section.
 
@@ -32,7 +32,7 @@ The first thing people get wrong about instructions pages is scale. This isn't t
 
 **Deferral notices.** Scope that got cut stays ON the page, marked deferred, with the date and the reason. On Northside that's concession and sponsorship revenue: the fact tables exist, the relationships are wired, and the callout says build nothing against them until the STH Insights dashboard is signed off. When the client asks about it in three weeks, the context is right there, and the agent doesn't accidentally rebuild something we parked on purpose.
 
-**A verified model state.** The current truth: 18 data tables, 63 relationships, AXS ticketing CSV as the primary source, the data dictionary validated, and the measure inventory by display folder. Critically, this section carries a date and a warning: anything below written before the build uses assumed column names, always read the verified state first. Instructions pages age, and honest ones SAY so. The actual line on the page: instructions age; the model is the truth.
+**A verified model state.** The current truth: 18 data tables, 63 relationships, AXS ticketing CSV as the primary source, the data dictionary validated, and the measure inventory by display folder. Nobody hand-counted any of that; the model stats come off the same MCP server that does the building, which is the only reason I trust them. Critically, this section carries a date and a warning: anything below written before the build uses assumed column names, always read the verified state first. Instructions pages age, and honest ones SAY so. The actual line on the page: instructions age; the model is the truth.
 
 **What to read before starting.** A table of Notion pages, each with "what to look for": the milestone page for scope, the data dictionary for column truth, the latest meeting notes for anything that moved. The agent pulls these itself over the Notion MCP. I don't paste anything.
 
@@ -60,7 +60,9 @@ And every page in the library ends the same way: a named list of Notion pages to
 
 ## The Tools Section: MCP Is Spelled Out, Not Assumed
 
-The middle of the page documents the two MCP servers like you'd document any dependency. For the Power BI side, that's Microsoft's [Power BI Modeling MCP server](https://github.com/microsoft/powerbi-modeling-mcp), and the instructions don't just name the server. They spell out what the agent is able to DO with it, and the rules for doing it. Straight off the page:
+The middle of the page documents the two MCP servers like you'd document any dependency. For the Power BI side, that's Microsoft's [Power BI Modeling MCP server](https://github.com/microsoft/powerbi-modeling-mcp), and it deserves a proper introduction, because half the people I talk to don't know it exists. It's an official Microsoft server, currently in public preview, that runs locally on your machine as an npm package and gives an agent direct modeling access to a semantic model, whether that model is open in Power BI Desktop, sitting in a Fabric workspace, or living in PBIP files. Microsoft's [Power BI MCP overview on Learn](https://learn.microsoft.com/en-us/power-bi/developer/mcp/mcp-servers-overview) covers the full picture, including its hosted sibling, the remote Power BI MCP server, which is built for asking questions of published models rather than changing them. Modeling work wants the local one.
+
+The instructions don't just name the server. They spell out what the agent is able to DO with it, and the rules for doing it. Straight off the page:
 
 ```markdown
 ## Your MCP Tools: Power BI Modeling MCP Server
@@ -68,12 +70,14 @@ The middle of the page documents the two MCP servers like you'd document any dep
 Direct access to tables, columns, measures, relationships, and
 DAX queries inside the open semantic model.
 
-| Operation               | Use it for                          |
-| connection_operations   | Connect to the open model           |
-| measure_operations      | Create and update the measure set   |
-| relationship_operations | Verify and adjust relationships     |
-| dax_query_operations    | Execute and validate DAX            |
-| transaction_operations  | Wrap bulk changes so they roll back |
+| Operation                | Use it for                           |
+| connection_operations    | Find and connect to the open model   |
+| table_operations         | Tables, schemas, refreshes           |
+| batch_measure_operations | Create the measure set in one call   |
+| relationship_operations  | Verify, adjust, activate, find       |
+| dax_query_operations     | Validate, execute, clear cache       |
+| transaction_operations   | Begin, commit, roll back bulk work   |
+| model_operations         | Model stats and TMDL export          |
 
 Connect with: Connect to 'Northside_TicketSales' in Power BI Desktop
 
@@ -83,7 +87,17 @@ Rules:
 - Run the validation queries before reporting anything as done
 ```
 
+And that table is the short list. This server covers the entire modeling surface: columns and partitions, calculation groups, user hierarchies, perspectives, row-level security roles, translations, even Power Query parameters. The batch operations take a whole list of measures in one call, with a flag to continue on error and a flag to wrap the batch in a transaction. It can export any object, or the whole model, to TMDL for source control, and deploy to Fabric when the work is signed off. Everything a modeler touches in Desktop, an agent can now touch over MCP. Which is exactly why the scope fences at the top of the page exist: an agent with this much reach and no fences is a liability.
+
 Two habits in there worth copying. First, bulk changes get wrapped in a **transaction** so a bad batch rolls back instead of leaving the model half-modified. Second, validation is demanded, not suggested: after building, run DAX queries through the MCP to check row counts, orphaned keys, and that the new measures return sane numbers. The agent doesn't declare victory because the code ran. It declares victory because the checks passed.
+
+## Fabric Doesn't Have to Be the Second Brain
+
+Before the session, one opinion, because I get pushback on this. People keep wishing the second brain lived INSIDE Fabric. I love Fabric, and I'll tell you it's the wrong lane. Fabric is meant for the data, the models, the workloads, and it's quietly becoming a great backend: services with APIs and MCP servers on top. I'm completely fine with Fabric not being my second brain, as long as it picks up when my harnesses call. MCP is that bridge.
+
+And the Fabric MCP servers are shipping software, not a roadmap slide. There are [two of them](https://learn.microsoft.com/en-us/rest/api/fabric/articles/mcp-servers/what-is-fabric-mcp-server), both worth knowing. The **Fabric Core MCP server** is a hosted endpoint an agent calls to search the OneLake catalog, manage workspaces and items, and handle permissions, all under your own Entra ID, so it can only do what YOU can do. The **[Fabric MCP server (local)](https://github.com/microsoft/mcp/tree/main/servers/Fabric.Mcp.Server)** is open source and runs on your machine: it hands the agent the full Fabric API specs, item definitions, OneLake file operations, and built-in best practices. That local one is how my notebook sessions know what a correct pipeline definition looks like before anything runs against the tenant.
+
+Think of the instructions page plus the MCP server as a **data contract** between two harnesses. Notion holds the context and the scope; the MCP moves the work. And the payoff is real: I can have Claude Desktop build and validate my Fabric notebooks over MCP while I'm drinking coffee. I never even open fabric.com.
 
 ## The Session Itself
 
@@ -91,13 +105,13 @@ Here's the entire kickoff, typed into Claude Desktop or Cursor:
 
 > Read the Claude instructions for the Northside semantic model work. Let's start there.
 
-That's it. That's the prompt. Watch what happens next.
+That's it. That's the prompt. If you're still hunting for the perfect prompt, you're optimizing the wrong layer. One boring line is enough when the context engineering already happened somewhere else. Watch what happens next.
 
 The agent pulls the instructions page over the Notion MCP and reads it clean. It sees the priority callout, so it knows this session is Ticket Sales measures and nothing else. It sees the "read first" table, so it fetches the milestone page and the data dictionary. It sees last session's recap sitting in the page, so it knows the star schema is done and where the measure work left off. Then it connects to the `Northside_TicketSales` model in Power BI Desktop, exactly the way the tools section told it to.
 
 <!-- SCREENSHOT: Claude Desktop session showing the Notion MCP call reading the instructions page, followed by the Power BI Modeling MCP connection -->
 
-From there it's a working session. It begins a transaction. It builds the game-day revenue measures, the section utilization calculations, the pricing tier yield set, each one anchored to the patterns and fences in the instructions, each one written with the autonomy directive in effect.
+From there it's a working session. It begins a transaction. It creates the measures as a batch, not one measure per prompt: the game-day revenue set, the section utilization calculations, the pricing tier yield measures, each with its format string and display folder set on the way in, each one anchored to the patterns and fences in the instructions, each one written with the autonomy directive in effect.
 
 Here's one measure from that batch, and it's the directive working exactly as designed. The instructions sketched a `DATEADD` pattern over DimDate for the game-over-game comparison. The agent noticed that breaks on doubleheaders, two games sharing one date, so it walked the game sequence on DimGame instead, and documented the deviation right where I'd look for it:
 
@@ -119,7 +133,7 @@ RETURN
 
 I didn't write that measure. I read the comment, understood the reasoning in ten seconds, and moved on. That's the review posture this whole system is built for.
 
-When the batch is in, it runs the validation queries: table counts against the verified model state, orphan checks on the relationship keys, and a spot check that revenue by event matches the AXS source totals. Straight DAX over the same MCP:
+When the batch is in, the checks start. DAX validation first, because the MCP can validate an expression without executing it, so syntax garbage never touches the model. Then the real queries: table counts against the verified model state, orphan checks on the relationship keys, and a spot check that revenue by event matches the AXS source totals. Straight DAX over the same MCP:
 
 ```dax
 -- Validation: ticket revenue by game must tie to the AXS export totals
@@ -141,7 +155,7 @@ I want to be honest about what I'm doing during this: not much. I review the pla
 
 ## The Session Isn't Over Until Notion Knows
 
-The last instruction on the page is the one that makes this a loop instead of a one-off. The agent writes a recap back to the Northside hub over the Notion MCP: what was built, what was validated, what got flagged, what's next. Statuses flip on the deliverables. The milestone news updates. The next instructions page, whenever it gets generated, already knows the Ticket Sales measures exist.
+The last instruction on the page is the one that makes this a loop instead of a one-off. The agent writes a recap back to the Northside hub over the Notion MCP: what was built, what was validated, what got flagged, what's next, plus fresh model stats pulled over the Modeling MCP so the verified state section stays true. And the recap isn't a note, it's a trigger. It flows back into the hub, the deliverable statuses flip because the measure set shipped, the milestone news updates, and the next instructions page, whenever it gets generated, already knows the Ticket Sales measures exist.
 
 Skip the recap and you're back where everyone starts: a pile of good work your system never learned from, and a next session that opens with re-explaining. The recap is cheap. Amnesia is expensive. The instructions page ends with the whole philosophy in one line: a session without a recap is not done.
 
@@ -161,9 +175,10 @@ Then open your harness, type the one line, and let the page do the talking.
 
 - An instructions page is an operational brief, not a prompt: role, dated priorities, standing directives, deferred scope, verified model state, and the MCP tools spelled out in one place.
 - Instructions scale as a library, not a mega-document: one page per tool plus job (model work, API discovery, notebook standards), hanging off a resource index the agent can navigate.
-- Scope fences and deferral notices keep agents from drifting or rebuilding things you parked on purpose.
+- The Modeling MCP reaches everything a modeler touches, tables to RLS roles to TMDL export, so scope fences and deferral notices are what keep an agent from drifting or rebuilding things you parked on purpose.
 - The autonomy directive turns the agent from a template-follower into a modeler: patterns are starting points, deviations get documented.
 - Wrap bulk model changes in transactions and validate with DAX queries over MCP before calling anything done.
+- MCP is the bridge between harnesses: Notion holds the context, the MCP server moves the work, and Fabric gets to stay in its lane as the data backend.
 - The session ends when the recap lands in the hub, not when the code runs.
 
-That's the series: a hub that organizes the context, assistants that keep it honest, and a session that executes it over MCP and writes back. The prompt was never the product; the loop is. If this sparked something, keep the conversation going with us on the Explicit Measures podcast, and subscribe at PromptingBI for more.
+That's the series, and that's the car: skills, agents, organized context, and harnesses that talk to each other. A hub that organizes the context, assistants that keep it honest, and a session that executes over MCP and writes back. The prompt was never the product; the loop is. If this sparked something, keep the conversation going with us on the Explicit Measures podcast, and subscribe at PromptingBI for more.
