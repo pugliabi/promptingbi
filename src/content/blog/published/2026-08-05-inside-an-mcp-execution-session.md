@@ -24,9 +24,33 @@ The whole trick sits in a single artifact. For every project I run, my Notion ag
 
 The first thing people get wrong about instructions pages is scale. This isn't three sentences of "you are a helpful Power BI assistant." The Northside page scrolls, man. Here's the anatomy, top to bottom.
 
-**A role statement.** One paragraph: you are a Power BI modeling agent, your job is to build out the Northside semantic model, you have two MCP servers available, the Power BI Modeling MCP and the Notion MCP, use both together.
+**A role statement.** One paragraph: you are a Power BI modeling agent, your job is to build out the Northside semantic model, you have two MCP servers available, the Power BI Modeling MCP and the Notion MCP. And then the sentence that defines the whole session: use both together, read requirements from Notion, build the model over MCP, report back when done.
 
-**A dated priority callout at the very top.** Big, red, impossible to miss, and titled like it means it: #1 priority, only focus until shipped. Right now on Northside that's the Ticket Sales dashboard measure set, because sandbox session one with the ops team can't be scheduled until it ships. The callout names the measures in priority order (game over game revenue, season to date revenue, section utilization for the heat map page, yield per seat, the trailing five game attendance pair), pins the format rules (dollars get zero decimals, percentages get one), and says explicitly what NOT to touch: the STH churn work and the concession scoping are separate sessions. Agents drift exactly like junior consultants drift. Scope fences fix both.
+**A dated priority callout at the very top.** Big, red, impossible to miss, and titled like it means it: #1 priority, only focus until shipped. Right now on Northside that's the Ticket Sales dashboard measure set, because sandbox session one with the ops team can't be scheduled until it ships. And here's the detail level, because this is where most instructions pages are too thin. The callout doesn't just name the measures. Straight off the page:
+
+```markdown
+### What to build (in _Ticket Sales, priority order)
+- This Game Revenue, Prior Game Revenue, Game over Game Revenue %
+- Season to Date Revenue (season boundary from DimGame[SeasonKey])
+- Section Utilization % = DIVIDE([Tickets Sold], [Section Capacity])
+- Yield per Seat = DIVIDE([This Game Revenue], [Section Capacity])
+- Trailing 5 Game Avg Attendance and Attendance vs 5 Game Avg %
+
+### Format (non-negotiable)
+- Every dollar measure: currency, zero decimals
+- Every percentage measure: percentage, 1 decimal
+
+### Smart anchor pattern (use on every game-window measure)
+VAR _LatestGame =
+    IF ( ISFILTERED ( DimDate[Date] ),
+        MAX ( DimDate[Date] ),
+        CALCULATE ( MAX ( FactTicketSales[GameDate] ), REMOVEFILTERS () ) )
+
+Dashboards must show current data on load with no slicer selected;
+if a user applies a date or game filter, respect it.
+```
+
+Measure names with expression sketches, format rules the agent can't negotiate, and a DAX pattern with the business behavior it protects written underneath it. That last line is the part people skip: the anchor pattern exists because the dashboards must open on current data with nothing clicked, and the agent needs to know WHY, not just what. The callout also says explicitly what NOT to touch: the STH churn work and the concession scoping are separate sessions. Agents drift exactly like junior consultants drift. Scope fences fix both.
 
 **Standing directives.** These are the rules that survive across sessions. My favorite one, and I'd tell you to steal it verbatim, is the DAX autonomy directive: the DAX patterns written in the instructions are starting points, not templates. The agent has full authority to write better DAX than I sketched, so long as it documents its reasoning in code comments where it deviates. I want an expert modeler, not a copy machine.
 
@@ -57,6 +81,20 @@ All of it hangs off a **Data Resource Index**, one page that lists the library i
 <!-- SCREENSHOT: the Northside Data Resource Index page showing the instruction library and source status table -->
 
 And every page in the library ends the same way: a named list of Notion pages to update when the work is done, with a line that says the session isn't finished until those updates land. More on that at the end, because it's the whole game.
+
+## What MCP Actually Is, and Why a Modeler Should Care
+
+Before we get to the tools, let's define the thing, because I've watched too many people nod along at "MCP" without knowing what it buys them. **MCP is the Model Context Protocol**, an open standard that lets an application publish a menu of operations an AI agent is allowed to call. Not screen scraping. Not browser clicking. Not me copying code out of a chat window. The application says "here is what you can do to me, and here's the shape of each request," and the agent connects and does it. If you've ever handed a client an API contract, you already have the mental model.
+
+That standard part is why my whole loop works. Notion publishes an MCP server. Microsoft publishes one for Power BI. Claude sits in the middle speaking the same protocol to both. So in one session, the agent reads my instructions page and walks the hub's relations over the Notion MCP, then turns around and changes the semantic model over the Power BI Modeling MCP, then writes the recap back through Notion again. The second brain and Power BI have no idea the other exists. They don't need to. The agent is the conversation, and MCP is the language it's speaking on both sides.
+
+Now the part that matters if you build semantic models for a living. Without MCP, an AI-assisted modeling session looks like this: the chat writes DAX, and I'm the courier. Copy out of the chat, paste into Desktop, discover it guessed a column name that doesn't exist, paste the error back, repeat. The model living in the chat's head is fiction, because the chat has never seen your model. Over MCP, three things change:
+
+- **The agent reads the real metadata before it writes anything.** Actual table names, actual columns, actual data types, actual relationships. It doesn't hallucinate `FactSales[Revenue]`, because it can list what's there and look.
+- **Changes land as typed modeling operations, not pasted text.** A measure arrives with its expression, format string, and display folder in one call, the same TOM surface Tabular Editor and the XMLA endpoint speak, so nothing about your model gets dumbed down for the AI.
+- **The agent can check its own work against the model.** It executes DAX and reads the numbers that come back. A chat can write DAX. An MCP session can PROVE it.
+
+That third one is the whole game to me. The difference between a code suggestion and a working measure set is somebody running the queries, and with MCP that somebody doesn't have to be you.
 
 ## The Tools Section: MCP Is Spelled Out, Not Assumed
 
@@ -89,7 +127,30 @@ Rules:
 
 And that table is the short list. This server covers the entire modeling surface: columns and partitions, calculation groups, user hierarchies, perspectives, row-level security roles, translations, even Power Query parameters. The batch operations take a whole list of measures in one call, with a flag to continue on error and a flag to wrap the batch in a transaction. It can export any object, or the whole model, to TMDL for source control, and deploy to Fabric when the work is signed off. Everything a modeler touches in Desktop, an agent can now touch over MCP. Which is exactly why the scope fences at the top of the page exist: an agent with this much reach and no fences is a liability.
 
-Two habits in there worth copying. First, bulk changes get wrapped in a **transaction** so a bad batch rolls back instead of leaving the model half-modified. Second, validation is demanded, not suggested: after building, run DAX queries through the MCP to check row counts, orphaned keys, and that the new measures return sane numbers. The agent doesn't declare victory because the code ran. It declares victory because the checks passed.
+Two habits in there worth copying. First, bulk changes get wrapped in a **transaction** so a bad batch rolls back instead of leaving the model half-modified. Second, validation is demanded, not suggested. And on that second one, here's the real secret of running MCP sessions well, because the page doesn't just point at `dax_query_operations` and hope. It writes the agent's acceptance tests for it. This section sits near the bottom of the instructions, titled "Validate Before You Report":
+
+```markdown
+## Validate Before You Report
+Run these through dax_query_operations after building:
+
+-- Row counts against the verified model state
+EVALUATE ROW ( "Games", COUNTROWS ( DimGame ),
+               "TicketRows", COUNTROWS ( FactTicketSales ) )
+
+-- Orphaned keys
+EVALUATE FILTER ( FactTicketSales,
+    NOT ( FactTicketSales[GameKey] IN VALUES ( DimGame[GameKey] ) ) )
+
+-- Spot check: revenue by game matches AXS source totals
+EVALUATE SUMMARIZECOLUMNS ( DimGame[GameKey],
+    "Revenue", [This Game Revenue] )
+
+-- New measures return sane numbers with no filter context
+EVALUATE ROW ( "ThisGame", [This Game Revenue],
+               "Trailing5Attend", [Trailing 5 Game Avg Attendance] )
+```
+
+This is what "instructions for MCP" actually means, and it's the part I'd tell you to steal above everything else. Not "you have tools." Which tool, in what order, wrapped in what safety, with which exact queries deciding whether the work counts as done. The MCP gives the agent hands. The instructions give it a checklist for what its hands just did.
 
 ## Fabric Doesn't Have to Be the Second Brain
 
@@ -133,23 +194,11 @@ RETURN
 
 I didn't write that measure. I read the comment, understood the reasoning in ten seconds, and moved on. That's the review posture this whole system is built for.
 
-When the batch is in, the checks start. DAX validation first, because the MCP can validate an expression without executing it, so syntax garbage never touches the model. Then the real queries: table counts against the verified model state, orphan checks on the relationship keys, and a spot check that revenue by event matches the AXS source totals. Straight DAX over the same MCP:
-
-```dax
--- Validation: ticket revenue by game must tie to the AXS export totals
-EVALUATE
-SUMMARIZECOLUMNS (
-    DimGame[GameDate],
-    DimOpponent[OpponentName],
-    "Ticket Revenue", [This Game Revenue],
-    "Transactions", COUNTROWS ( FactTicketSales )
-)
-ORDER BY DimGame[GameDate] DESC
-```
+When the batch is in, the checks start. DAX validation first, because the MCP can validate an expression without executing it, so syntax garbage never touches the model. Then it runs the Validate Before You Report block you saw earlier, exactly as written on the page: the row counts against the verified state, the orphan key check, the AXS spot check, the sanity row with no filter context. I didn't ask for any of that in the session. The page did.
 
 <!-- SCREENSHOT: MCP measure_operations calls creating the Ticket Sales measures, with the transaction wrapper visible -->
 
-I want to be honest about what I'm doing during this: not much. I review the plan it proposes at the start, I answer the occasional judgment question, and I read the diff at the end. The re-prompting, the context pasting, the "no wait, remember the fiscal calendar" corrections that used to eat my sessions? Gone, because all of it lives in the page. The instructions did the remembering.
+I want to be honest about what I'm doing during this: not much. I review the plan it proposes at the start, I answer the occasional judgment question, and I read the diff at the end. I used to be the courier between the chat and Desktop, copying DAX one direction and error messages the other. MCP fired me from that job, and I don't miss it. The re-prompting, the context pasting, the "no wait, remember the fiscal calendar" corrections that used to eat my sessions? Gone, because all of it lives in the page. The instructions did the remembering.
 
 ![An agent session timeline in four nodes from left to right: read instructions, connect to model, build within a transaction, validate with DAX queries, with a dotted recap arrow curving back from the last node](/images/2026/08/inside-an-mcp-execution-session-flow.png)
 
@@ -173,6 +222,7 @@ Then open your harness, type the one line, and let the page do the talking.
 
 ## Takeaways
 
+- MCP is a contract, not a gimmick: the agent reads real model metadata, makes typed modeling changes, and proves its own DAX against the live model instead of pasting suggestions into a chat.
 - An instructions page is an operational brief, not a prompt: role, dated priorities, standing directives, deferred scope, verified model state, and the MCP tools spelled out in one place.
 - Instructions scale as a library, not a mega-document: one page per tool plus job (model work, API discovery, notebook standards), hanging off a resource index the agent can navigate.
 - The Modeling MCP reaches everything a modeler touches, tables to RLS roles to TMDL export, so scope fences and deferral notices are what keep an agent from drifting or rebuilding things you parked on purpose.
