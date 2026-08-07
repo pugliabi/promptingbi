@@ -31,6 +31,10 @@ description: "TODO: one-sentence teaser (under 160 chars)"
 # featured: /images/${yyyy}/${mm}/${slug}.png  # uncomment once the hero image exists
 tags: []  # leave empty and run \`npm run auto-tag\`, or list slugs from src/lib/tags.mjs
 draft: true
+# source:                    # editor-only; omit if not from an EMP episode
+#   episode: 544
+#   title: "Episode Title"
+#   notion: "https://app.notion.com/p/..."
 ---
 
 Open with a hook: 2-3 sentences on the idea itself. Ask a question, then answer it. No em dashes.

@@ -12,7 +12,16 @@ tags:
   - microsoft-fabric
   - power-bi
   - reporting
+source:
+  episode: 544
+  title: "Using Harnesses for Fabric Projects"
+  notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
+
+**Harness series**
+1. [Part 1 — Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)
+2. [Part 2 — Meet My Assistants](/2026/08/03/meet-my-assistants/) *(this post)*
+3. [Part 3 — Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/)
 
 Every consulting project I've ever seen has the same quiet lie in it: the records say one thing and reality says another. The milestone reads "In progress" two weeks after the work shipped. The deliverable says "Not started" when it was finished on a Tuesday call nobody logged. Left alone, that gap grows until the status update becomes an archaeology project you do the night before the client call.
 

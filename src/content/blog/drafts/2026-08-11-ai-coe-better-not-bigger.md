@@ -12,6 +12,10 @@ tags:
   - microsoft-fabric
   - semantic-models
   - governance
+source:
+  episode: 529
+  title: "AI Driving Your CoE"
+  notion: "https://app.notion.com/p/353e74c69c18807fb7d6ddfaa3124948"
 ---
 
 Ask a leadership team how they plan to make their Center of Excellence better this year and watch the room go quiet. It's not a question anyone prepares for, because almost nobody asks it. In most organizations I work with, the honest position on the CoE is this: we're happy we have one at all, even if it's not perfect.

@@ -12,6 +12,10 @@ tags:
   - reporting
   - microsoft-fabric
   - business-intelligence
+source:
+  episode: 541
+  title: "Helping Leaders Speak Data"
+  notion: "https://app.notion.com/p/368e74c69c18804aa729d4a7e0f51e86"
 ---
 
 If I could get one feature request in front of the Power BI team, it would be this: put a **.ai folder inside the semantic model**. A place in the model definition itself where instructions, skills, and business context for AI agents actually live. Markdown files. An agents file. Lightweight stuff. Nothing exotic.

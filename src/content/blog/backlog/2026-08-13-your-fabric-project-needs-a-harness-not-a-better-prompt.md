@@ -5,6 +5,10 @@ permalink: "2026/08/13/your-fabric-project-needs-a-harness-not-a-better-prompt"
 draft: true
 description: "The model is the engine. The harness is the whole car. Why your Fabric project needs skills, agents, organized context, and interop, not a better prompt."
 featured: /images/2026/08/fabric-harness-banner.png
+source:
+  episode: 544
+  title: "Using Harnesses for Fabric Projects"
+  notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
 
 A few mornings ago, Claude worked through roughly 25 discovery API calls in Postman for one of my Fabric projects while I drank my coffee and played catch with my son. I never opened Postman. I never wrote some genius prompt to kick it off, either. My agents wrote the instructions, Claude did the work, and every finding landed back in the hub that runs the project.

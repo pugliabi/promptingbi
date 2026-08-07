@@ -12,6 +12,10 @@ tags:
   - microsoft-fabric
   - semantic-models
   - mcp
+source:
+  episode: 545
+  title: "Agents Helping with Data Governance"
+  notion: "https://app.notion.com/p/397e74c69c188056a08dc50d9279dbd4"
 ---
 
 Try this at your next leadership meeting. Say the words "data governance" out loud and ask everyone for the first word that pops into their head. I run this exercise with clients all the time, and I get the same two answers back: security and painful. Sometimes both, in that order, with a sigh.

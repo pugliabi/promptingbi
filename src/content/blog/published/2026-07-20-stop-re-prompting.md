@@ -11,6 +11,10 @@ tags:
   - microsoft-fabric
   - semantic-models
   - claude
+source:
+  episode: 544
+  title: "Using Harnesses for Fabric Projects"
+  notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
 
 Every session with an AI agent starts the same way for most people I work with. Open the chat, paste in the background, re-explain the project, re-list the requirements, and pray the model holds it all together long enough to do something useful. Then the session ends, the context is gone, and tomorrow you do the whole dance again.

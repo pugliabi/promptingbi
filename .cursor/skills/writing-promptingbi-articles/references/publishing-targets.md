@@ -40,16 +40,22 @@ permalink: "2026/07/20/post-slug"    # REQUIRED; no leading/trailing slash
 draft: true                          # ALWAYS on new posts; keep true while in drafts/
 description: "Teaser for homepage + RSS."   # optional but always provide it
 featured: "/images/2026/07/banner.png"      # optional; set once a banner exists
+tags: []                             # optional; kebab-case slugs from src/lib/tags.mjs
+# Editor/agent-only — required when the article came from an EMP episode. Not rendered on site.
+source:
+  episode: 544
+  title: "Using Harnesses for Fabric Projects"
+  notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
 
 Article body in plain markdown...
 ```
 
-The schema also defines `draft` (boolean, default `false`; `true` = never built or listed). Write every new post into `drafts/` with `draft: true` so an unrelated push to `main` can never publish an unreviewed article. At publish: move the file to `published/` and set `draft: false`.
+The schema also defines `draft` (boolean, default `false`; `true` = never built or listed) and optional `source` (episode number, title, Notion URL; optional `youtube` / `transcript` path). Write every new post into `drafts/` with `draft: true` so an unrelated push to `main` can never publish an unreviewed article. At publish: move the file to `published/` and set `draft: false`.
 
 Why `permalink` matters: it is the routing mechanism (`src/pages/[...permalink].astro`) and it preserves the URL structure from the WordPress era so old inbound links keep working. Never route by filename; never omit it. Use today's date for new posts unless Tommy says otherwise, and keep one slug everywhere: the SEO Notes slug, the permalink's final segment, and the filename after its `YYYY-MM-DD-` prefix must all match. Renaming a file never changes a URL (only `permalink` does), but keep them aligned anyway.
 
-Use ONLY the schema fields shown above. Do not invent frontmatter keys (no `tags`, no `author`, no `category`): the schema in `src/content.config.ts` is enforced at build and unknown or missing fields break the deploy. Tags, keywords, and banner prompts live on the Notion page, not in frontmatter. This repo write happens on EVERY article run; it is not optional.
+Use ONLY schema fields from `src/content.config.ts` (`title`, `date`, `permalink`, `description`, `featured`, `tags`, `draft`, `source`). When the source was an EMP episode, always set `source.episode`, `source.title`, and `source.notion` from the EMP page (EpNum + Name + page URL) so later edits can fetch the transcript via Notion (`include_transcript: true`). Omit `source` for original / non-episode posts. This repo write happens on EVERY article run; it is not optional.
 
 Images: files go in `public/images/YYYY/MM/`, referenced as `/images/YYYY/MM/name.png` in `featured` or the body. Banners start as prompts; when Tommy generates one, that's where it lands.
 

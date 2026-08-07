@@ -77,6 +77,8 @@ The repo is `prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/
 
 **Filename rule (always):** name the file `src/content/blog/drafts/YYYY-MM-DD-<slug>.md`, where `YYYY-MM-DD` is the post's `date` and `<slug>` is the kebab-case title slug (the same slug used in the `permalink`). Example: date `2026-07-20` + slug `my-post` -> `drafts/2026-07-20-my-post.md`. The filename does not affect the URL (routing is by `permalink`). Stages: `backlog/` (ideas, not loaded) → `drafts/` (WIP) → `published/` (live, `draft: false`). The repo's `npm run new-post "Title"` scaffolds into `drafts/`.
 
+**Source metadata (when from an EMP episode):** set frontmatter `source.episode` (EpNum), `source.title` (episode Name), and `source.notion` (EMP page URL) so later edits can pull the transcript from Notion. Omit `source` for original / YouTube-only / non-episode posts. This is editor-only and must never appear in the published article body.
+
 **Never commit or push without Tommy's explicit go.** Pushing `main` deploys the live site via GitHub Actions. Offer: preview with `npm run dev`, then he says push, or he pushes himself. If the repo isn't reachable from the current environment, produce the finished `.md` file (correct name, correct front matter) as a download and say exactly where to drop it.
 
 ## Step 9 — Close the loop

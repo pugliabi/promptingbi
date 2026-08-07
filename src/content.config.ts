@@ -12,6 +12,16 @@ const blog = defineCollection({
     featured: z.string().optional(),
     tags: z.array(z.string()).default([]), // lowercase kebab-case slugs, see src/lib/tags.mjs
     draft: z.boolean().default(false), // true = never built or listed
+    // Editor/agent-only: EMP episode that inspired the post. Not rendered on the site.
+    source: z
+      .object({
+        episode: z.number().optional(),
+        title: z.string().optional(),
+        notion: z.string().url().optional(),
+        youtube: z.string().url().optional(),
+        transcript: z.string().optional(),
+      })
+      .optional(),
   }),
 });
 

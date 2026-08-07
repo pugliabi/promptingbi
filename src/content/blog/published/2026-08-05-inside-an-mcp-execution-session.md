@@ -12,7 +12,16 @@ tags:
   - semantic-models
   - power-bi
   - dax
+source:
+  episode: 544
+  title: "Using Harnesses for Fabric Projects"
+  notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
+
+**Harness series**
+1. [Part 1 — Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)
+2. [Part 2 — Meet My Assistants](/2026/08/03/meet-my-assistants/)
+3. [Part 3 — Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/) *(this post)*
 
 At the end of [part two](/2026/08/03/meet-my-assistants/) I said a harness needs four wheels: skills, agents, organized context, and the ability to talk to other harnesses. [Part one](/2026/07/29/anatomy-of-a-project-hub/) built the organized context. Part two covered the agents and the skills. This is the fourth wheel, and it's my whole thesis in one sentence: harnesses work best when they can talk to each other. This post is that conversation happening: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
 

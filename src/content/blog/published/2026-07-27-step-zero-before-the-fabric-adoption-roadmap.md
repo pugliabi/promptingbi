@@ -11,6 +11,10 @@ tags:
   - okrs
   - microsoft-fabric
   - business-intelligence
+source:
+  episode: 541
+  title: "Helping Leaders Speak Data"
+  notion: "https://app.notion.com/p/368e74c69c18804aa729d4a7e0f51e86"
 ---
 
 A partner of mine is helping two companies through a merger. Two workforces about to become one. He suggested a dashboard showing staff utilization. Leadership's response? What a great idea. It had not crossed their minds.

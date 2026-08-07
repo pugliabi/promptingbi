@@ -31,6 +31,11 @@ permalink: "2026/07/20/post-slug-here"
 description: "One-sentence teaser. Shown on homepage, RSS, and meta description."
 featured: /images/2026/07/some-image.png   # optional
 draft: true                                 # keep true in drafts/; false when moving to published/
+# Editor-only: EMP episode that inspired the post (not rendered on site)
+source:
+  episode: 544
+  title: "Using Harnesses for Fabric Projects"
+  notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
 ```
 
@@ -39,6 +44,7 @@ Rules:
 - `date` must be ISO with Z suffix; future dates publish automatically on the daily build
 - To publish: move file to `published/` and set `draft: false`
 - slug = kebab-case; `description` under 160 characters
+- `source` is optional editor/agent metadata pointing at the EMP episode + Notion page; fetch the transcript from Notion when editing. Never render it on the site.
 
 ## Images
 

@@ -11,6 +11,10 @@ tags:
   - governance
   - claude
   - power-bi
+source:
+  episode: 538
+  title: "Team vs Individual Microsoft Fabric Agent skills"
+  notion: "https://app.notion.com/p/368e74c69c188038b9b4d4a213b7d625"
 ---
 
 Every BI team I've ever worked with has a theme file story. Somebody built the perfect JSON, dropped it on SharePoint next to a PBIT template, and declared the design problem solved. Six months later there were five quietly edited copies floating around and nobody could tell you which version was the truth. theme_FINAL_v3 was not, in fact, final.

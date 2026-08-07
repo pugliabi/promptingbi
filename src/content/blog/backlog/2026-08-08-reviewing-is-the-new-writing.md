@@ -12,6 +12,10 @@ tags:
   - power-bi
   - prompt-engineering
   - microsoft-fabric
+source:
+  episode: 537
+  title: "Are We Now Professional QA?"
+  notion: "https://app.notion.com/p/cbfc083d03ef4d6e90aee5b32de69c65"
 ---
 
 I did an honest audit of my own work recently, and it stung a little. The DAX, the model changes, the notebook code, the pipeline logic... almost none of it started life under my fingers. It started in an agent, running against an MCP server, guided by skills and a harness I set up months ago. My direct, hands-on-keyboard building has dropped off a cliff. And I know I'm not the only one, because every practitioner I talk to who has leaned into agentic tooling says the same thing.

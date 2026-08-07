@@ -10,7 +10,16 @@ tags:
   - microsoft-fabric
   - power-bi
   - business-intelligence
+source:
+  episode: 544
+  title: "Using Harnesses for Fabric Projects"
+  notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
+
+**Harness series**
+1. [Part 1 — Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/) *(this post)*
+2. [Part 2 — Meet My Assistants](/2026/08/03/meet-my-assistants/)
+3. [Part 3 — Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/)
 
 When I wrote [Stop Re-Prompting](/2026/07/20/stop-re-prompting-second-brain-agent-instructions/), the idea that got the most questions wasn't the agents. It wasn't the MCP servers either. It was the hub. People wanted to see it. What does "the project is the hub" actually look like on the page? What kinds of pages? How do they connect? What does an agent actually read when it walks in the door?
 
