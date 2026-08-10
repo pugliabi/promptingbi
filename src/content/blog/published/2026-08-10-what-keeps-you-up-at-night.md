@@ -2,7 +2,6 @@
 title: "What Keeps You Up at Night? Getting Executives and BI Teams to Speak the Same Language"
 date: 2026-08-10T09:00:00Z
 permalink: "2026/08/10/what-keeps-you-up-at-night"
-draft: false
 description: "Stop trying to educate executives on data. One question, real buy-in, and a reporting cadence anchored to their goals builds the shared language."
 featured: /images/2026/08/what-keeps-you-up-at-night-banner.png
 tags:
