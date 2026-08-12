@@ -2,6 +2,7 @@
 title: "You're AI Ready. Your Organization Isn't."
 date: 2026-08-12T09:00:00Z
 permalink: "2026/08/12/youre-ai-ready-your-organization-isnt"
+draft: false
 description: "Nobody has defined what AI ready means for an organization. The roles and delivery gaps behind slow AI adoption, plus a 30-60-90 that starts with data quality."
 featured: /images/2026/08/youre-ai-ready-your-organization-isnt-banner.png
 tags:
