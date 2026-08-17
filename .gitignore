@@ -7,3 +7,15 @@ dist/
 # preview extensions resolve absolute /images/... paths. Astro serves the
 # real files from public/; never commit this bridge.
 /images/
+
+# Secrets. Agent skills keep service-principal credentials next to their
+# scripts, so these must never be tracked. Templates ending .env.example are.
+*.env
+!*.env.example
+
+# Packaged skill bundles: these zips embed the skill's credentials.env, so the
+# secret hides inside an archive where *.env above cannot catch it.
+.cursor/skills/*.zip
+
+__pycache__/
+*.pyc
