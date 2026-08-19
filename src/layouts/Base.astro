@@ -1,4 +1,6 @@
 ---
+import CodeCopy from '../components/CodeCopy.astro';
+
 interface Props {
   title?: string;
   description?: string;
@@ -60,6 +62,7 @@ const year = new Date().getFullYear();
       <nav aria-label="Main">
         <a href="/">Home</a>
         <a href="/about/">About</a>
+        <a href="/prompts/">Prompts</a>
         <a href="/search/">Search</a>
         <a href="/contact/">Contact</a>
       </nav>
@@ -81,8 +84,9 @@ const year = new Date().getFullYear();
         <section>
           <h2>Resources</h2>
           <ul>
-            <li><a href="/">Home</a></li>
             <li><a href="/">Blog</a></li>
+            <li><a href="/prompts/">Prompts &amp; Resources</a></li>
+            <li><a href="/tags/">Topics</a></li>
             <li><a href="/about/">About</a></li>
           </ul>
         </section>
@@ -113,6 +117,7 @@ const year = new Date().getFullYear();
         await mermaid.run({ nodes });
       }
     </script>
+    <CodeCopy />
   </body>
 </html>
 
@@ -177,9 +182,9 @@ const year = new Date().getFullYear();
 
   .post-list { list-style: none; padding: 0; margin: 0; }
   .post-list li { padding: 1.25rem 0; border-bottom: 1px solid var(--line); }
-  .post-list h2 { margin: 0 0 .5rem; font-size: 1.7rem; }
-  .post-list h2 a { color: var(--ink); text-decoration: none; }
-  .post-list h2 a:hover { color: var(--accent); }
+  .post-list h2, .post-list h3 { margin: 0 0 .5rem; font-size: 1.7rem; }
+  .post-list h2 a, .post-list h3 a { color: var(--ink); text-decoration: none; }
+  .post-list h2 a:hover, .post-list h3 a:hover { color: var(--accent); }
   .post-date { color: var(--muted); font-size: .9rem; margin: 0 0 .6rem; }
   .read-more { font-weight: 600; text-decoration: none; }
   .post-thumb { display: block; margin: 0 0 .7rem; }
@@ -218,6 +223,60 @@ const year = new Date().getFullYear();
   pre code { background: none; padding: 0; border-radius: 0; font-size: 1em; }
   pre.mermaid { background: none; margin: 2rem 0; text-align: center; }
   pre.mermaid:not([data-processed]) { color: transparent; }
+
+  /* Copy button. .code-wrap is injected at runtime by CodeCopy.astro, which moves
+     the block's margin onto the wrapper so the button can sit still while pre scrolls. */
+  .code-wrap { position: relative; margin: 1.5rem 0; }
+  .code-wrap pre:not(.mermaid) { margin: 0; }
+  .copy-btn {
+    position: absolute; top: .5rem; right: .5rem;
+    padding: .2rem .6rem;
+    border: 1px solid #30363d; border-radius: 5px;
+    background: #161b22; color: #c9d1d9;
+    font-family: inherit; font-size: .78rem; font-weight: 600;
+    line-height: 1.5; cursor: pointer;
+    opacity: 0; transition: opacity .15s ease, color .15s ease;
+  }
+  .code-wrap:hover .copy-btn, .code-wrap:focus-within .copy-btn { opacity: 1; }
+  .copy-btn:hover { color: #fff; border-color: #6b7681; }
+  .copy-btn:focus-visible { opacity: 1; outline: 2px solid #58a6ff; outline-offset: 1px; }
+  .copy-btn.is-copied { color: #7ee787; border-color: #2ea043; }
+
+  /* Prompts library */
+  .eyebrow {
+    margin: 0 0 .3rem; font-size: .8rem; font-weight: 700;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+  }
+  .eyebrow a { color: inherit; text-decoration: none; }
+  .eyebrow a:hover { color: var(--accent); }
+  .prompt-intro { font-size: 1.05rem; color: var(--muted); }
+  .prompt-jump { margin: 1.5rem 0 0; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+  .prompt-group { margin-top: 2.5rem; }
+  .prompt-group > h2 { font-size: 1.5rem; margin: 0 0 .3rem; }
+  .prompt-group-blurb { margin: 0 0 .5rem; color: var(--muted); font-size: .95rem; }
+  .format-badge {
+    display: inline-block; padding: 0 .45rem;
+    border: 1px solid var(--line); border-radius: 4px; background: #fafafa;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .75rem; font-weight: 600; text-transform: lowercase; color: var(--muted);
+  }
+  .prompt-source {
+    margin: 1.5rem 0 2rem; padding: .9rem 1.1rem;
+    border-left: 3px solid var(--accent); background: #fafafa; border-radius: 0 6px 6px 0;
+    font-size: .95rem;
+  }
+  .prompt-source-note { display: block; color: var(--muted); font-size: .9rem; }
+  .prompt-back { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+
+  .post-prompts {
+    margin-top: 2.5rem; padding: 1.25rem 1.4rem;
+    border: 1px solid var(--line); border-radius: 8px; background: #fafafa;
+  }
+  .post-prompts h2 { font-size: 1.25rem; margin: 0 0 .7rem; }
+  .post-prompts ul { list-style: none; margin: 0 0 .9rem; padding: 0; }
+  .post-prompts li { margin: 0 0 .7rem; }
+  .post-prompts li a { font-weight: 600; margin-right: .4rem; }
+  .post-prompts-desc { display: block; color: var(--muted); font-size: .9rem; }
 
   .tag-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
   .tag-pill {

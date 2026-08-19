@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import { render } from 'astro:content';
+import { publishedPrompts, sourceLink } from '../../lib/prompts';
+import { categoryLabel } from '../../lib/prompt-categories.mjs';
+
+export async function getStaticPaths() {
+  const prompts = await publishedPrompts();
+  return prompts.map((prompt) => ({
+    params: { slug: prompt.id },
+    props: { prompt },
+  }));
+}
+
+const { prompt } = Astro.props;
+const { Content } = await render(prompt);
+const source = await sourceLink(prompt);
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const shown = prompt.data.updated ?? prompt.data.date;
+---
+<Base title={`${prompt.data.title} - Prompting BI`} description={prompt.data.description}>
+  <article data-pagefind-meta="type:Prompt">
+    <p class="eyebrow">
+      <a href={`/prompts/#${prompt.data.category}`}>{categoryLabel(prompt.data.category)}</a>
+    </p>
+    <h1>{prompt.data.title}</h1>
+    <p class="post-date">
+      <span class="format-badge">{prompt.data.format}</span>
+      {prompt.data.updated ? ' Updated ' : ' '}{fmt(shown)}
+    </p>
+    <p class="prompt-intro">{prompt.data.description}</p>
+
+    {source && (
+      <aside class="prompt-source">
+        <strong>From the post:</strong>{' '}
+        {source.href ? <a href={source.href}>{source.label}</a> : source.label}
+        <span class="prompt-source-note">
+          Read it there for the reasoning behind every rule in here.
+        </span>
+      </aside>
+    )}
+
+    <Content />
+
+    <nav class="prompt-back">
+      <a class="read-more" href="/prompts/">← All prompts &amp; resources</a>
+    </nav>
+  </article>
+</Base>

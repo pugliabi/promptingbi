@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import { publishedPrompts, groupByCategory, promptHref, sourceLink } from '../../lib/prompts';
+
+const prompts = await publishedPrompts();
+const groups = groupByCategory(prompts);
+
+// Resolve source posts once, keyed by prompt id, so the list can render links.
+const sources = new Map(
+  await Promise.all(
+    prompts.map(async (prompt) => [prompt.id, await sourceLink(prompt)] as const)
+  )
+);
+---
+<Base
+  title="Prompts & Resources - Prompting BI"
+  description="The full instruction pages, agent briefs, DAX validation queries, and notebook patterns from the posts, ready to copy."
+>
+  <article>
+    <h1>Prompts &amp; Resources</h1>
+    <p class="prompt-intro">
+      The posts show slices. This is the library: the complete instruction pages, agent
+      briefs, validation queries, and notebook patterns, ready to copy. Every artifact
+      links back to the post that explains why it's shaped the way it is.
+    </p>
+
+    {groups.length > 1 && (
+      <nav class="tag-pills prompt-jump" aria-label="Categories">
+        {groups.map((group) => (
+          <a class="tag-pill" href={`#${group.id}`}>
+            {group.label} <span class="tag-count">{group.prompts.length}</span>
+          </a>
+        ))}
+      </nav>
+    )}
+
+    {groups.map((group) => (
+      <section class="prompt-group" id={group.id}>
+        <h2>{group.label}</h2>
+        <p class="prompt-group-blurb">{group.blurb}</p>
+        <ul class="post-list">
+          {group.prompts.map((prompt) => {
+            const source = sources.get(prompt.id);
+            return (
+              <li>
+                <h3><a href={promptHref(prompt)}>{prompt.data.title}</a></h3>
+                <p class="post-date">
+                  <span class="format-badge">{prompt.data.format}</span>
+                  {source && (
+                    <>
+                      {' from '}
+                      {source.href ? <a href={source.href}>{source.label}</a> : source.label}
+                    </>
+                  )}
+                </p>
+                <p>{prompt.data.description}</p>
+                <a class="read-more" href={promptHref(prompt)}>Open →</a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
+
+    {groups.length === 0 && <p>Nothing published here yet. Check back shortly.</p>}
+  </article>
+</Base>

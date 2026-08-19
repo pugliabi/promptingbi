@@ -27,7 +27,8 @@ Standard Astro static-site layout. Everything renders at build time to `dist/`.
 - **Content is a git-tracked collection, not a CMS.** Posts live as markdown under `src/content/blog/{backlog,drafts,published}/`. The loader only includes `published/` + `drafts/` (`backlog/` is freeform and never built). Schema in `src/content.config.ts` is enforced at build — a post missing a required front-matter field fails the build.
 - **`permalink` front-matter preserves the old WordPress URLs.** Each post declares its original path (e.g. `2024/07/17/slug`, no leading/trailing slash). `src/pages/[...permalink].astro` reads the collection and generates one page per post at exactly that path via `getStaticPaths`. This is the mechanism that keeps inbound links from the old site alive — do not route posts by filename or slug.
 - **`src/layouts/Base.astro` is the whole design system.** It holds the entire page shell (header nav, footer contact block, meta/OG tags, RSS `<link>`, Google Fonts) and *all* global CSS in one `<style is:global>` block with CSS-variable theming (`--ink`, `--accent`, etc.). There is no separate stylesheet. Every page wraps its content in `<Base>`.
-- **Pages** (`src/pages/`): `index.astro` (homepage post list, sorted newest-first), `[...permalink].astro` (post template), `about.astro`, `404.astro`, and `rss.xml.js` (feed built from the same collection). Index and RSS both re-sort by `date` descending — keep the two consistent if you change ordering.
+- **Pages** (`src/pages/`): `index.astro` (homepage post list, sorted newest-first), `[...permalink].astro` (post template), `prompts/` (the artifact library), `about.astro`, `404.astro`, and `rss.xml.js` (feed built from the same collection). Index and RSS both re-sort by `date` descending — keep the two consistent if you change ordering.
+- **A second `prompts` collection backs `/prompts/`.** Flat folder `src/content/prompts/<slug>.md`, routed by filename via `prompts/[...slug].astro` (unlike posts, which route by `permalink`). It holds the *complete* artifacts that posts only excerpt, so text duplicated between a post and its artifact is deliberate. Categories are defined once in `src/lib/prompt-categories.mjs` and feed both the zod enum and the section order/anchors on the index; helpers live in `src/lib/prompts.ts`. `source.permalink` wires each artifact to its post, and both directions of that link are generated — the post template queries `promptsForPost()` so no post needs editing when an artifact is added.
 - **Images** live in `public/images/YYYY/MM/...` mirroring the old WordPress upload paths, referenced in markdown as `/images/...`. They are populated by `download-images.ps1`, not committed as originals.
 
 ## Adding a post
@@ -48,6 +49,12 @@ draft: true
 Publish: move to `src/content/blog/published/` and set `draft: false`. Ideas go in `backlog/` (not loaded by Astro).
 
 Push to `main`; `.github/workflows/deploy.yml` builds with `withastro/action` and deploys to GitHub Pages automatically.
+
+## Adding a prompts-library artifact
+
+`npm run new-prompt "Artifact Title" <category-id>` creates `src/content/prompts/<slug>.md` as `draft: true`. Required front matter: `title`, `description`, `category` (an id from `src/lib/prompt-categories.mjs`), `date`, and normally `source.permalink` pointing at the post it came from. Optional: `updated`, `format` (badge text, defaults to `markdown`).
+
+The filename is the permanent URL slug, and category ids are permanent because they're the anchors on `/prompts/`. Publish by setting `draft: false`. A `source.permalink` that matches no published post warns at build and renders without a link, so check build output.
 
 ## Site config
 

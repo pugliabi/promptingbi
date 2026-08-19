@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { render } from 'astro:content';
 import { publishedPosts } from '../lib/posts';
+import { promptsForPost, promptHref } from '../lib/prompts';
 import { tagDisplay } from '../lib/tags.mjs';
 import Comments from '../components/Comments.astro';
 
@@ -15,6 +16,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const prompts = await promptsForPost(post.data.permalink);
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
@@ -30,6 +32,21 @@ const fmt = (d: Date) =>
       <img class="post-banner" src={post.data.featured} alt={`Banner illustration for ${post.data.title}`} />
     )}
     <Content />
+    {prompts.length > 0 && (
+      <aside class="post-prompts">
+        <h2>Prompts and code from this post</h2>
+        <ul>
+          {prompts.map((prompt) => (
+            <li>
+              <a href={promptHref(prompt)}>{prompt.data.title}</a>
+              <span class="format-badge">{prompt.data.format}</span>
+              <span class="post-prompts-desc">{prompt.data.description}</span>
+            </li>
+          ))}
+        </ul>
+        <a class="read-more" href="/prompts/">Browse the full library →</a>
+      </aside>
+    )}
     {post.data.tags.length > 0 && (
       <nav class="post-tags" aria-label="Post tags">
         <span class="post-tags-label">Tags:</span>

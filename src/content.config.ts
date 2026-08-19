@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { CATEGORY_IDS } from './lib/prompt-categories.mjs';
 
 const blog = defineCollection({
   // Only published/ + drafts/ are loaded. backlog/ is ignored (ideas/outlines, never on site).
@@ -25,4 +26,27 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const prompts = defineCollection({
+  // The /prompts/ library: full copy-paste artifacts (instruction pages, briefs,
+  // validation cells). Flat folder; draft: true is the only gate.
+  loader: glob({ pattern: '**/*.md', base: './src/content/prompts' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(), // one-liner shown on the /prompts/ index
+    category: z.enum(CATEGORY_IDS as [string, ...string[]]), // see src/lib/prompt-categories.mjs
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    format: z.string().default('markdown'), // badge text: markdown, dax, python
+    // The post this artifact came from. permalink must match an existing post's
+    // permalink; the post title is resolved at build time.
+    source: z
+      .object({
+        permalink: z.string(),
+        label: z.string().optional(),
+      })
+      .optional(),
+    draft: z.boolean().default(false), // true = never built or listed
+  }),
+});
+
+export const collections = { blog, prompts };

@@ -1,6 +1,6 @@
 ---
 description: Prompting BI blog conventions — how to create and edit posts
-globs: ["src/content/blog/**", "src/pages/**"]
+globs: ["src/content/blog/**", "src/content/prompts/**", "src/pages/**"]
 alwaysApply: true
 ---
 
@@ -45,6 +45,34 @@ Rules:
 - To publish: move file to `published/` and set `draft: false`
 - slug = kebab-case; `description` under 160 characters
 - `source` is optional editor/agent metadata pointing at the EMP episode + Notion page; fetch the transcript from Notion when editing. Never render it on the site.
+
+## Prompts library (`/prompts/`)
+
+Full copy-paste artifacts — instruction pages, agent briefs, DAX validation queries, notebook patterns. A post shows a slice; the artifact page holds the complete version. That duplication is intentional.
+
+Preferred: `npm run new-prompt "Artifact Title" <category-id>`. Or create `src/content/prompts/<slug>.md`:
+
+```markdown
+---
+title: "Artifact Title"
+description: "One-sentence summary shown on the /prompts/ index."
+category: agent-briefs        # an id from src/lib/prompt-categories.mjs
+date: 2026-08-19T09:00:00Z
+updated: 2026-09-01T09:00:00Z  # optional
+format: markdown               # badge text: markdown, dax, python
+source:
+  permalink: "2026/08/05/inside-an-mcp-execution-session"  # must match a real post
+draft: true                    # false to publish
+---
+```
+
+Rules:
+- Flat folder, no staging. URL is `/prompts/<filename>/`, so the filename is the permanent slug.
+- `category` ids in `src/lib/prompt-categories.mjs` are permanent — they're the anchors on `/prompts/`. Array order controls section order.
+- `source.permalink` must match an existing post's permalink; a mismatch warns at build and renders unlinked.
+- Both directions of the post ↔ artifact link are generated. Never write them by hand.
+- Never link from a published artifact to a `draft: true` one (dead link).
+- Page shape: a sentence or two of setup, the artifact in a fenced block, then a short "Adapting it" list of the load-bearing lines. No "Takeaways" section; that's for posts.
 
 ## Images
 
