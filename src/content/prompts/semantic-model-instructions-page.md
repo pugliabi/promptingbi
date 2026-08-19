@@ -5,7 +5,9 @@ category: agent-briefs
 date: 2026-08-05T09:00:00Z
 format: markdown
 source:
-  permalink: "2026/08/05/inside-an-mcp-execution-session"
+  permalink:
+    - "2026/08/05/inside-an-mcp-execution-session"
+    - "2026/07/29/anatomy-of-a-project-hub"
 draft: true
 ---
 

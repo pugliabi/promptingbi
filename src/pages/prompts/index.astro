@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { publishedPrompts, groupByCategory, promptHref, sourceLink } from '../../lib/prompts';
+import { publishedPrompts, groupByCategory, promptHref, sourceLinks } from '../../lib/prompts';
 
 const prompts = await publishedPrompts();
 const groups = groupByCategory(prompts);
@@ -8,7 +8,7 @@ const groups = groupByCategory(prompts);
 // Resolve source posts once, keyed by prompt id, so the list can render links.
 const sources = new Map(
   await Promise.all(
-    prompts.map(async (prompt) => [prompt.id, await sourceLink(prompt)] as const)
+    prompts.map(async (prompt) => [prompt.id, await sourceLinks(prompt)] as const)
   )
 );
 ---
@@ -40,18 +40,19 @@ const sources = new Map(
         <p class="prompt-group-blurb">{group.blurb}</p>
         <ul class="post-list">
           {group.prompts.map((prompt) => {
-            const source = sources.get(prompt.id);
+            const links = sources.get(prompt.id) ?? [];
             return (
               <li>
                 <h3><a href={promptHref(prompt)}>{prompt.data.title}</a></h3>
                 <p class="post-date">
                   <span class="format-badge">{prompt.data.format}</span>
-                  {source && (
+                  {links.length > 0 && ' from '}
+                  {links.map((link, i) => (
                     <>
-                      {' from '}
-                      {source.href ? <a href={source.href}>{source.label}</a> : source.label}
+                      {i > 0 && ' and '}
+                      {link.href ? <a href={link.href}>{link.label}</a> : link.label}
                     </>
-                  )}
+                  ))}
                 </p>
                 <p>{prompt.data.description}</p>
                 <a class="read-more" href={promptHref(prompt)}>Open →</a>

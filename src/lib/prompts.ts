@@ -30,10 +30,17 @@ export function groupByCategory(prompts: Prompt[]) {
   })).filter((group) => group.prompts.length > 0);
 }
 
-/** Prompts that name this post as their source, in CATEGORIES order. */
+/** The post permalinks an artifact cites, normalized to an array. */
+export function sourcePermalinks(prompt: Prompt): string[] {
+  const permalink = prompt.data.source?.permalink;
+  if (!permalink) return [];
+  return Array.isArray(permalink) ? permalink : [permalink];
+}
+
+/** Prompts that name this post as a source, in CATEGORIES order. */
 export async function promptsForPost(permalink: string): Promise<Prompt[]> {
   const all = await publishedPrompts();
-  const matches = all.filter((p) => p.data.source?.permalink === permalink);
+  const matches = all.filter((p) => sourcePermalinks(p).includes(permalink));
   const order = CATEGORIES.map((c) => c.id);
   return matches.sort(
     (a, z) =>
@@ -43,23 +50,28 @@ export async function promptsForPost(permalink: string): Promise<Prompt[]> {
 }
 
 /**
- * Resolve a prompt's source post, or null if it has no source. `href` is null when
- * the permalink matches no published post, so the page renders the label as plain
- * text instead of a dead link. Warns at build time to catch typos and drift.
+ * Resolve a prompt's source posts to links, empty when it has no source. `href` is
+ * null when a permalink matches no published post, so the page renders the label as
+ * plain text instead of a dead link. Warns at build time to catch typos and drift.
+ * `source.label` only overrides the text when there is a single source.
  */
-export async function sourceLink(
+export async function sourceLinks(
   prompt: Prompt
-): Promise<{ href: string | null; label: string } | null> {
-  const source = prompt.data.source;
-  if (!source) return null;
+): Promise<{ href: string | null; label: string }[]> {
+  const permalinks = sourcePermalinks(prompt);
+  if (permalinks.length === 0) return [];
 
   const posts = await publishedPosts();
-  const post = posts.find((p) => p.data.permalink === source.permalink);
-  if (!post) {
-    console.warn(
-      `[prompts] ${prompt.id}: source.permalink "${source.permalink}" matches no published post`
-    );
-    return { href: null, label: source.label ?? source.permalink };
-  }
-  return { href: `/${source.permalink}/`, label: source.label ?? post.data.title };
+  const only = permalinks.length === 1 ? prompt.data.source?.label : undefined;
+
+  return permalinks.map((permalink) => {
+    const post = posts.find((p) => p.data.permalink === permalink);
+    if (!post) {
+      console.warn(
+        `[prompts] ${prompt.id}: source.permalink "${permalink}" matches no published post`
+      );
+      return { href: null, label: only ?? permalink };
+    }
+    return { href: `/${permalink}/`, label: only ?? post.data.title };
+  });
 }

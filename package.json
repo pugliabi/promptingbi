@@ -5,10 +5,11 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "node scripts/scan-prompts.mjs --quiet && astro build && pagefind --site dist",
     "preview": "astro preview",
     "new-post": "node scripts/new-post.mjs",
     "new-prompt": "node scripts/new-prompt.mjs",
+    "scan-prompts": "node scripts/scan-prompts.mjs",
     "auto-tag": "node scripts/auto-tag.mjs"
   },
   "dependencies": {

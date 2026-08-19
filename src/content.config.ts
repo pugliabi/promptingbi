@@ -13,6 +13,9 @@ const blog = defineCollection({
     featured: z.string().optional(),
     tags: z.array(z.string()).default([]), // lowercase kebab-case slugs, see src/lib/tags.mjs
     draft: z.boolean().default(false), // true = never built or listed
+    // Editor-only: silences `npm run scan-prompts` for a post whose code blocks
+    // don't belong in the /prompts/ library. Not rendered on the site.
+    promptsExempt: z.boolean().default(false),
     // Editor/agent-only: EMP episode that inspired the post. Not rendered on the site.
     source: z
       .object({
@@ -37,11 +40,12 @@ const prompts = defineCollection({
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     format: z.string().default('markdown'), // badge text: markdown, dax, python
-    // The post this artifact came from. permalink must match an existing post's
-    // permalink; the post title is resolved at build time.
+    // The post(s) this artifact came from. Each permalink must match an existing
+    // post's permalink; titles are resolved at build time. A list is allowed so a
+    // composite artifact (assembled from two posts) backlinks to both.
     source: z
       .object({
-        permalink: z.string(),
+        permalink: z.union([z.string(), z.array(z.string()).min(1)]),
         label: z.string().optional(),
       })
       .optional(),

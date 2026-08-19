@@ -5,9 +5,10 @@ Astro 5 static blog → GitHub Pages (repo `pugliabi/promptingbi`, custom domain
 ## Commands
 
 - `npm run dev` — local dev at localhost:4321
-- `npm run build` — production build to `dist/` + Pagefind search index (always run before claiming work is done)
+- `npm run build` — runs `scan-prompts --quiet`, then the production build to `dist/` + Pagefind search index (always run before claiming work is done)
 - `npm run new-post "Title"` — scaffold a new post (created as `draft: true`)
 - `npm run new-prompt "Title" [category-id]` — scaffold a `/prompts/` artifact (created as `draft: true`)
+- `npm run scan-prompts` — report published posts whose code blocks aren't in the library yet; `-- --write` scaffolds drafts, `-- --all` also lists blocks it judged incidental
 
 ## Content model
 
