@@ -19,6 +19,12 @@ export const CATEGORIES = [
       'Operational briefs for execution sessions. Role, dated priority callout, standing directives, verified state, report-back requirement.',
   },
   {
+    id: 'agent-skills',
+    label: 'Agent Skills & Definitions',
+    blurb:
+      'Skill files and agent definitions, front matter included: what triggers them, what they read first, and the guardrails that keep them in their lane.',
+  },
+  {
     id: 'fabric-guardrails',
     label: 'Fabric Recon & Guardrails',
     blurb:
