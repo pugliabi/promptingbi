@@ -15,15 +15,21 @@ Read `references/voice-and-style.md` and `references/article-structure.md` befor
 
 ## Step 1 — Get the transcript
 
-Three routes. Pick whichever matches what Tommy gave you; ask only if none apply.
+**Local cache first.** Transcripts live in the prompting-bi repo at `transcripts/ep-{N}.txt`. Before Notion or YouTube:
 
-**A. EMP episode (Notion).** Find the episode page in the EMP data source (`collection://3bb02401-3320-4eb7-92fe-d5197943f569`) by name or EpNum. The transcript is usually a Notion AI meeting note on or linked from the episode page: fetch it with `include_transcript: true`. The episode page also carries the agent agenda columns (GPT / Google / Claude) and the Description — useful for framing, but the transcript is the source of truth for what Tommy actually argued.
+1. If Tommy named an episode (or a post's `source.episode` is set), read `transcripts/ep-{N}.txt` if it exists.
+2. Use it as-is unless he said refresh/update.
+3. On a miss or refresh, fetch via A/B/C below, then write that file (overwrite on refresh). Set `source.transcript: "transcripts/ep-{N}.txt"` on the post.
 
-**B. YouTube URL.** Run `scripts/fetch_youtube_transcript.py <url>`. It pulls the manual or auto captions with yt-dlp, cleans the rolling-caption duplication, and writes a readable transcript file (no video download). Requires `pip install yt-dlp`. Episodes stream at youtube.com/powerbitips, so any published episode is reachable this way even before a Notion transcript exists.
+Three fetch routes. Pick whichever matches what Tommy gave you; ask only if none apply.
 
-**C. Pasted or uploaded transcript.** Use as-is.
+**A. EMP episode (Notion).** Find the episode page in the EMP data source (`collection://3bb02401-3320-4eb7-92fe-d5197943f569`) by name or EpNum. The transcript is usually a Notion AI meeting note on or linked from the episode page: fetch it with `include_transcript: true`. The episode page also carries the agent agenda columns (GPT / Google / Claude) and the Description — useful for framing, but the transcript is the source of truth for what Tommy actually argued. After fetching, save the meeting-note transcript (not the AI summary) to `transcripts/ep-{N}.txt`.
 
-YouTube auto-captions carry no speaker labels; Notion meeting notes usually do. Note which situation you are in — it changes how you do Step 2.
+**B. YouTube URL.** Run `scripts/fetch_youtube_transcript.py <url>` from the repo. It pulls captions with yt-dlp, cleans rolling-caption duplication, and writes `transcripts/ep-{N}.txt` by default. Requires `pip install yt-dlp`. Episodes stream at youtube.com/powerbitips.
+
+**C. Pasted or uploaded transcript.** Save it to `transcripts/ep-{N}.txt` (or `transcripts/{kebab}.txt` if it isn't an episode), then use that file.
+
+YouTube auto-captions carry no speaker labels; Notion meeting notes usually do. Note which situation you are in — it changes how you do Step 2. Never leave transcripts in `src/content/blog/backlog/` or the repo root.
 
 ## Step 2 — Mine Tommy's points
 
@@ -75,15 +81,15 @@ Create the page in the ✍️ Prompting BI Articles data source using the proper
 
 The repo is `prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/prompting-bi` under WSL). Before writing anything, read the repo's `CLAUDE.md` and `src/content.config.ts` — the front-matter schema is enforced at build time and a bad post fails the deploy. Write the post per the contract in `references/publishing-targets.md`, including the required `permalink` in `YYYY/MM/DD/slug` form (this preserves URL structure from the WordPress era; never route by filename).
 
-**Filename rule (always):** name the file `src/content/blog/drafts/YYYY-MM-DD-<slug>.md`, where `YYYY-MM-DD` is the post's `date` and `<slug>` is the kebab-case title slug (the same slug used in the `permalink`). Example: date `2026-07-20` + slug `my-post` -> `drafts/2026-07-20-my-post.md`. The filename does not affect the URL (routing is by `permalink`). Stages: `backlog/` (ideas, not loaded) → `drafts/` (WIP) → `published/` (live, `draft: false`). The repo's `npm run new-post "Title"` scaffolds into `drafts/`.
+**Filename rule (always):** name the file `src/content/blog/drafts/YYYY-MM-DD-<slug>.md`, where `YYYY-MM-DD` is the post's `date` and `<slug>` is the kebab-case title slug (the same slug used in the `permalink`). Example: date `2026-07-20` + slug `my-post` -> `drafts/2026-07-20-my-post.md`. The filename does not affect the URL (routing is by `permalink`). Stages: `backlog/` (ideas, not loaded) → `drafts/` (WIP) → `published/YYYY-MM/` (live, `draft: false`; month folder from the post date). The repo's `npm run new-post "Title"` scaffolds into `drafts/`.
 
-**Source metadata (when from an EMP episode):** set frontmatter `source.episode` (EpNum), `source.title` (episode Name), and `source.notion` (EMP page URL) so later edits can pull the transcript from Notion. Omit `source` for original / YouTube-only / non-episode posts. This is editor-only and must never appear in the published article body.
+**Source metadata (when from an EMP episode):** set frontmatter `source.episode` (EpNum), `source.title` (episode Name), `source.notion` (EMP page URL), and `source.transcript` (`transcripts/ep-{N}.txt`). Later edits read that file first; Notion/YouTube only on a miss or refresh. Omit `source` for original / non-episode posts. This is editor-only and must never appear in the published article body.
 
 **Never commit or push without Tommy's explicit go.** Pushing `main` deploys the live site via GitHub Actions. Offer: preview with `npm run dev`, then he says push, or he pushes himself. If the repo isn't reachable from the current environment, produce the finished `.md` file (correct name, correct front matter) as a download and say exactly where to drop it.
 
 ## Step 9 — Close the loop
 
-When Tommy approves a post: move the file from `drafts/` to `published/` and flip `draft: true` to `false` (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. The banner and in-article diagrams were already generated, placed in `public/images/YYYY/MM/`, and wired in during Step 6 — just confirm the `featured` path resolves and the body `![alt](...)` references render.
+When Tommy approves a post: move the file from `drafts/` to `published/YYYY-MM/` (YYYY-MM from the post date) and flip `draft: true` to `false` (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Do not move images. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. The banner and in-article diagrams were already generated, placed in `public/images/YYYY/MM/`, and wired in during Step 6 — just confirm the `featured` path resolves and the body `![alt](...)` references render.
 
 ## Environment fallbacks
 

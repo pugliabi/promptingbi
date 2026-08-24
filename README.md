@@ -21,7 +21,7 @@ Posts live in stage folders:
 |--------|---------|
 | `src/content/blog/backlog/` | Ideas / outlines — never loaded by Astro |
 | `src/content/blog/drafts/` | WIP — keep `draft: true` |
-| `src/content/blog/published/` | Live / scheduled — `draft: false` |
+| `src/content/blog/published/YYYY-MM/` | Live / scheduled — `draft: false`; month folder from the post date |
 
 `npm run new-post "My Post Title"` scaffolds into `drafts/`. Or drop a markdown file there:
 
@@ -37,7 +37,7 @@ draft: true
 Post content here. Images go in public/images/ and are referenced as /images/...
 ```
 
-To publish: move the file to `published/` and set `draft: false`. Push to main — the site rebuilds and deploys automatically. Old WordPress URLs (`/YYYY/MM/DD/slug/`) are preserved via the `permalink` field.
+To publish: move the file to `published/YYYY-MM/` (from the post date) and set `draft: false`. Do not move images (`public/images/YYYY/MM/` is independent). Push to main — the site rebuilds and deploys automatically. Old WordPress URLs (`/YYYY/MM/DD/slug/`) are preserved via the `permalink` field.
 
 ## Deploy option A — GitHub Pages (free)
 

@@ -3,7 +3,8 @@ import { glob } from 'astro/loaders';
 import { CATEGORY_IDS } from './lib/prompt-categories.mjs';
 
 const blog = defineCollection({
-  // Only published/ + drafts/ are loaded. backlog/ is ignored (ideas/outlines, never on site).
+  // Only published/ + drafts/ are loaded (published is nested as YYYY-MM/).
+  // backlog/ is ignored (ideas/outlines, never on site).
   loader: glob({ pattern: '{published,drafts}/**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
@@ -23,7 +24,7 @@ const blog = defineCollection({
         title: z.string().optional(),
         notion: z.string().url().optional(),
         youtube: z.string().url().optional(),
-        transcript: z.string().optional(),
+        transcript: z.string().optional(), // local cache, e.g. transcripts/ep-545.txt
       })
       .optional(),
   }),

@@ -9,7 +9,8 @@ Usage:
     python fetch_youtube_transcript.py URL [--out FILE] [--lang en]
                                            [--timestamps] [--keep-vtt]
 
-Requires: yt-dlp  (pip install yt-dlp)
+Default output (no --out): <prompting-bi>/transcripts/ep-{N}.txt when the
+video title contains Ep.N, else transcripts/<title>.txt. Requires: yt-dlp.
 
 Notes:
 - Auto-captions have NO speaker labels. The header of the output file says
@@ -25,7 +26,10 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from datetime import date
 from pathlib import Path
+
+EP_RE = re.compile(r"Ep\.?\s*(\d+)", re.I)
 
 TAG_RE = re.compile(r"<[^>]+>")
 TIME_RE = re.compile(r"(\d+):(\d{2}):(\d{2})[.,](\d{3})")
@@ -138,11 +142,37 @@ def fmt_ts(seconds: float) -> str:
     return f"{s // 3600:02d}:{s % 3600 // 60:02d}:{s % 60:02d}"
 
 
+def transcripts_dir() -> Path:
+    """Resolve prompting-bi/transcripts from cwd or this file's parents."""
+    seen: set[Path] = set()
+    for p in (Path.cwd(), *Path.cwd().parents, *Path(__file__).resolve().parents):
+        if p in seen:
+            continue
+        seen.add(p)
+        if (p / "astro.config.mjs").exists() or (p / "transcripts").is_dir():
+            d = p / "transcripts"
+            d.mkdir(exist_ok=True)
+            return d
+    d = Path.cwd() / "transcripts"
+    d.mkdir(exist_ok=True)
+    return d
+
+
+def default_out_path(title: str) -> Path:
+    d = transcripts_dir()
+    m = EP_RE.search(title or "")
+    if m:
+        return d / f"ep-{m.group(1)}.txt"
+    safe = re.sub(r"[^\w\s-]", "", title).strip()
+    safe = re.sub(r"[\s]+", "_", safe)[:80] or "video"
+    return d / f"{safe}.txt"
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("url", help="YouTube video URL")
-    ap.add_argument("--out", help="Output .txt path (default: <video title>_transcript.txt)")
+    ap.add_argument("--out", help="Output .txt path (default: transcripts/ep-{N}.txt)")
     ap.add_argument("--lang", default="en", help="Caption language code (default: en)")
     ap.add_argument("--timestamps", action="store_true",
                     help="Prefix each paragraph with [hh:mm:ss]")
@@ -171,18 +201,21 @@ def main():
         entries = dedupe(cues)
         paras = to_paragraphs(entries)
 
-        safe_title = re.sub(r"[^\w\s-]", "", meta["title"]).strip()
-        safe_title = re.sub(r"[\s]+", "_", safe_title)[:80] or "video"
-        out_path = Path(args.out) if args.out else Path(f"{safe_title}_transcript.txt")
+        out_path = Path(args.out) if args.out else default_out_path(meta["title"])
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        ep = EP_RE.search(meta["title"] or "")
 
         header = (
             f"Title: {meta['title']}\n"
-            f"Channel: {meta['channel']}\n"
+            + (f"Episode: {ep.group(1)}\n" if ep else "")
+            + f"Channel: {meta['channel']}\n"
             f"Uploaded: {meta['upload_date']}   Duration: {meta['duration']}\n"
-            f"Source: {args.url}\n"
+            f"Source: youtube\n"
+            f"URL: {args.url}\n"
             f"Captions: {kind} ({args.lang})"
             + ("" if kind == "manual" else "  [auto-generated: no speaker labels, expect transcription errors]")
-            + "\n" + "-" * 72 + "\n\n"
+            + f"\nFetched: {date.today().isoformat()}\n"
+            + "-" * 72 + "\n\n"
         )
         body = "\n\n".join(
             (f"[{fmt_ts(start)}] " if args.timestamps else "") + text

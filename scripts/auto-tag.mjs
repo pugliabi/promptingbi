@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Auto-tag blog posts: npm run auto-tag [-- --force]
 //
-// Scans src/content/blog/{published,drafts}/ and writes a `tags:` list into the
+// Scans src/content/blog/{published,drafts}/ (published is nested YYYY-MM/) and writes a `tags:` list into the
 // front matter of any post that doesn't already have one, using the deterministic
 // keyword taxonomy in src/lib/tags.mjs (no AI calls). Idempotent: existing tags
 // are left alone unless --force is passed.
@@ -21,7 +21,9 @@ let skipped = 0;
 
 for (const stage of stages) {
   const dir = join('src', 'content', 'blog', stage);
-  const files = readdirSync(dir).filter((f) => f.endsWith('.md')).sort();
+  const files = readdirSync(dir, { recursive: true })
+    .filter((f) => typeof f === 'string' && f.endsWith('.md'))
+    .sort();
   for (const name of files) {
     const file = join(dir, name);
     const raw = readFileSync(file, 'utf8');

@@ -1,0 +1,24 @@
+---
+description: Local EMP/YouTube transcript cache. Save fetched transcripts here; always read from here when drafting or editing posts.
+alwaysApply: true
+---
+
+# Transcript cache (`transcripts/`)
+
+Local source-of-truth for episode transcripts. Not a content collection. Never on the site.
+
+## When Tommy asks for a transcript
+
+1. Check `transcripts/ep-{N}.txt` first. If it exists, use it (do not re-fetch unless he says refresh/update).
+2. Otherwise fetch: Notion meeting note preferred (speaker labels; `include_transcript: true`). Else YouTube via `.cursor/skills/writing-promptingbi-articles/scripts/fetch_youtube_transcript.py`. Else a paste.
+3. Write `transcripts/ep-{N}.txt` with the header in `transcripts/README.md`. Overwrite on refresh.
+
+Filename: `ep-{N}.txt` (`ep-545.txt`). Non-episode recordings: kebab slug, still under `transcripts/`.
+
+## When creating or editing an article
+
+1. If the post has `source.episode` or Tommy names an episode, read `transcripts/ep-{N}.txt` **before** Notion/YouTube.
+2. If missing, fetch, save, then draft/edit from that file.
+3. Set `source.transcript: "transcripts/ep-{N}.txt"` in front matter (editor-only, never rendered).
+
+Never dump transcripts into `src/content/blog/backlog/` or the repo root.

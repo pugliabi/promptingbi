@@ -114,11 +114,16 @@ function fenceFor(code) {
   return '`'.repeat(Math.max(3, longest + 1));
 }
 
+/** Relative .md paths under dir, including nested published/YYYY-MM/ folders. */
+function mdFiles(dir) {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir, { recursive: true })
+    .filter((f) => typeof f === 'string' && f.endsWith('.md'))
+    .sort();
+}
+
 function readPosts() {
-  if (!existsSync(POSTS_DIR)) return [];
-  return readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith('.md'))
-    .sort()
+  return mdFiles(POSTS_DIR)
     .map((name) => {
       const parts = split(readFileSync(join(POSTS_DIR, name), 'utf8'));
       if (!parts) return null;

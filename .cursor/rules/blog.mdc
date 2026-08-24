@@ -12,12 +12,13 @@ Astro 5 static blog deployed to GitHub Pages at https://promptingbi.com. Content
 
 ```
 src/content/blog/
-  backlog/     # ideas / outlines — NOT loaded by Astro (never on site)
-  drafts/      # WIP — in collection, keep draft: true (filtered out of site)
-  published/   # live (or future-dated scheduled) — draft: false
+  backlog/              # ideas / outlines — NOT loaded by Astro (never on site)
+  drafts/               # WIP — in collection, keep draft: true (filtered out of site)
+  published/            # live (or future-dated scheduled) — draft: false
+    YYYY-MM/            # month buckets from the post date, e.g. 2026-08/
 ```
 
-Promote by moving the file: backlog → drafts → published. Agents: focus on `drafts/` unless asked about backlog or published.
+Promote by moving the file: backlog → drafts → `published/YYYY-MM/`. Filename stays `YYYY-MM-DD-slug.md`. Agents: focus on `drafts/` unless asked about backlog or published. Images stay in `public/images/YYYY/MM/` — do not nest or move them with the post.
 
 ## Creating a new post
 
@@ -30,21 +31,23 @@ date: 2026-07-20T09:00:00Z
 permalink: "2026/07/20/post-slug-here"
 description: "One-sentence teaser. Shown on homepage, RSS, and meta description."
 featured: /images/2026/07/some-image.png   # optional
-draft: true                                 # keep true in drafts/; false when moving to published/
+draft: true                                 # keep true in drafts/; false when moving to published/YYYY-MM/
 # Editor-only: EMP episode that inspired the post (not rendered on site)
 source:
   episode: 544
   title: "Using Harnesses for Fabric Projects"
   notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
+  transcript: "transcripts/ep-544.txt"
 ---
 ```
 
 Rules:
 - `permalink` must be `YYYY/MM/DD/slug` matching the date — preserves the WordPress-era URL structure
 - `date` must be ISO with Z suffix; future dates publish automatically on the daily build
-- To publish: move file to `published/` and set `draft: false`
+- To publish: move file to `published/YYYY-MM/` (YYYY-MM from the post date) and set `draft: false`. URLs do not change (`permalink` is the route). Do not move images.
 - slug = kebab-case; `description` under 160 characters
-- `source` is optional editor/agent metadata pointing at the EMP episode + Notion page; fetch the transcript from Notion when editing. Never render it on the site.
+- `source` is optional editor/agent metadata (episode, Notion URL, local transcript path). Never render it on the site.
+- Transcripts live in `transcripts/ep-{N}.txt`. Fetching one always writes there. Creating or editing a post always reads from there first (Notion/YouTube only on a miss). Never dump transcripts in `backlog/` or the repo root.
 
 ## Prompts library (`/prompts/`)
 

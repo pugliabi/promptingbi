@@ -28,7 +28,7 @@ Page content follows the pattern in `article-structure.md` (body + Image Ideas t
 - Local path: `C:\Github\prompting-bi` (Claude Desktop / Windows) or `/mnt/c/Github/prompting-bi` (WSL). It's a static Astro site rebuilt after the old WordPress install was hacked; pushing `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`.
 - **Before writing, read the repo's `CLAUDE.md` and `src/content.config.ts`.** Front matter is schema-enforced at build; a missing required field fails the deploy.
 
-Folder stages under `src/content/blog/`: `backlog/` (ideas, not loaded), `drafts/` (WIP), `published/` (live). Write new posts to **`drafts/`**.
+Folder stages under `src/content/blog/`: `backlog/` (ideas, not loaded), `drafts/` (WIP), `published/YYYY-MM/` (live; month folder from the post date). Write new posts to **`drafts/`**.
 
 Post file: `src/content/blog/drafts/<YYYY-MM-DD>-<kebab-slug>.md` — the date prefix is the post's front-matter date (today for new posts) and the rest is the kebab slug. Example: `drafts/2026-07-20-post-slug.md`.
 
@@ -46,16 +46,17 @@ source:
   episode: 544
   title: "Using Harnesses for Fabric Projects"
   notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
+  transcript: "transcripts/ep-544.txt"
 ---
 
 Article body in plain markdown...
 ```
 
-The schema also defines `draft` (boolean, default `false`; `true` = never built or listed) and optional `source` (episode number, title, Notion URL; optional `youtube` / `transcript` path). Write every new post into `drafts/` with `draft: true` so an unrelated push to `main` can never publish an unreviewed article. At publish: move the file to `published/` and set `draft: false`.
+The schema also defines `draft` (boolean, default `false`; `true` = never built or listed) and optional `source` (episode number, title, Notion URL; optional `youtube` / `transcript` path). Write every new post into `drafts/` with `draft: true` so an unrelated push to `main` can never publish an unreviewed article. At publish: move the file to `published/YYYY-MM/` (from the post date) and set `draft: false`. Images stay in `public/images/YYYY/MM/`.
 
 Why `permalink` matters: it is the routing mechanism (`src/pages/[...permalink].astro`) and it preserves the URL structure from the WordPress era so old inbound links keep working. Never route by filename; never omit it. Use today's date for new posts unless Tommy says otherwise, and keep one slug everywhere: the SEO Notes slug, the permalink's final segment, and the filename after its `YYYY-MM-DD-` prefix must all match. Renaming a file never changes a URL (only `permalink` does), but keep them aligned anyway.
 
-Use ONLY schema fields from `src/content.config.ts` (`title`, `date`, `permalink`, `description`, `featured`, `tags`, `draft`, `source`). When the source was an EMP episode, always set `source.episode`, `source.title`, and `source.notion` from the EMP page (EpNum + Name + page URL) so later edits can fetch the transcript via Notion (`include_transcript: true`). Omit `source` for original / non-episode posts. This repo write happens on EVERY article run; it is not optional.
+Use ONLY schema fields from `src/content.config.ts` (`title`, `date`, `permalink`, `description`, `featured`, `tags`, `draft`, `source`). When the source was an EMP episode, always set `source.episode`, `source.title`, `source.notion` (EMP page URL), and `source.transcript` (`transcripts/ep-{N}.txt`). Later edits read that local file first; Notion/YouTube only on a miss or refresh. Omit `source` for original / non-episode posts. This repo write happens on EVERY article run; it is not optional.
 
 Images: files go in `public/images/YYYY/MM/`, referenced as `/images/YYYY/MM/name.png` in `featured` or the body. Banners start as prompts; when Tommy generates one, that's where it lands.
 

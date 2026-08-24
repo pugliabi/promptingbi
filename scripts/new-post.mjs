@@ -72,6 +72,6 @@ Short closing opinion and a forward-looking prediction. Light CTA: stick around 
 writeFileSync(file, fm);
 mkdirSync(join('public', 'images', String(yyyy), mm), { recursive: true });
 console.log(`Created ${file} (in drafts/, draft: true)`);
-console.log(`When ready: move to src/content/blog/published/ and set draft: false`);
+console.log(`When ready: move to src/content/blog/published/${yyyy}-${mm}/ and set draft: false`);
 console.log(`Image folder ready: public/images/${yyyy}/${mm}/`);
 console.log(`URL will be: https://promptingbi.com/${yyyy}/${mm}/${dd}/${slug}/`);
