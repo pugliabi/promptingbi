@@ -132,12 +132,16 @@ const title =
         ))}
       </ul>
 
-      <h2>Backlog ({backlogFiles.length})</h2>
-      <ul>
-        {backlogFiles.map((f) => (
-          <li><a href={`/preview/${f.slug}/`}>{f.title}</a></li>
-        ))}
-      </ul>
+      {ideaSections.map((section) => (
+        <>
+          <h2>{section.folder === 'angles' ? 'Angles' : 'Backlog'} ({section.files.length})</h2>
+          <ul>
+            {section.files.map((f) => (
+              <li><a href={`/preview/${f.slug}/`}>{f.title}</a></li>
+            ))}
+          </ul>
+        </>
+      ))}
     </article>
   )}
 
@@ -167,7 +171,7 @@ const title =
     </article>
   )}
 
-  {props.kind === 'backlog' && (
+  {props.kind === 'idea' && (
     <article>
       <h1>{props.mod.frontmatter?.title ?? props.path.split('/').pop()}</h1>
       <props.mod.Content />
