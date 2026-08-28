@@ -28,4 +28,4 @@ Fetched: 2026-08-24
 3. Set `source.transcript: "transcripts/ep-{N}.txt"` on the post front matter (editor-only, never rendered).
 4. Prefer a Notion meeting-note transcript (speaker labels) over YouTube auto-captions when both exist. YouTube script: `.cursor/skills/writing-promptingbi-articles/scripts/fetch_youtube_transcript.py` — defaults to this folder.
 
-Do not leave transcripts in `src/content/blog/backlog/` or the repo root.
+Do not leave transcripts in `src/content/blog/angles/`, `src/content/blog/backlog/`, or the repo root. The per-episode ore file that gets drafted *from* a transcript lives in `src/content/blog/angles/ep-{N}-angles.md`; the transcript itself stays here.

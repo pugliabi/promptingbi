@@ -5,7 +5,7 @@
 - **Status:** Idea (not a draft article)
 - **Source:** Tommy, original. No dedicated recording.
 - **Notion:** https://app.notion.com/p/3c8e74c69c1881169fa7c77b253172a3 (Status: Idea)
-- **Repo note:** Distinct from `ep-*-angles.md` (other agent) and from `2026-08-02-your-semantic-model-needs-a-dot-ai-folder.md` (where context lives). This is who authors the first-party slot Microsoft already shipped.
+- **Repo note:** Distinct from `angles/ep-*-angles.md` (other agent) and from `2026-08-02-your-semantic-model-needs-a-dot-ai-folder.md` (where context lives). This is who authors the first-party slot Microsoft already shipped.
 
 ## Core thesis
 

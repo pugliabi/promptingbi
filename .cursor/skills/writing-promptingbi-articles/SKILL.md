@@ -29,7 +29,7 @@ Three fetch routes. Pick whichever matches what Tommy gave you; ask only if none
 
 **C. Pasted or uploaded transcript.** Save it to `transcripts/ep-{N}.txt` (or `transcripts/{kebab}.txt` if it isn't an episode), then use that file.
 
-YouTube auto-captions carry no speaker labels; Notion meeting notes usually do. Note which situation you are in — it changes how you do Step 2. Never leave transcripts in `src/content/blog/backlog/` or the repo root.
+YouTube auto-captions carry no speaker labels; Notion meeting notes usually do. Note which situation you are in — it changes how you do Step 2. Never leave transcripts in `src/content/blog/angles/`, `src/content/blog/backlog/`, or the repo root.
 
 ## Step 2 — Mine Tommy's points
 
@@ -38,6 +38,8 @@ Extract the ideas, arguments, opinions, examples, and analogies **Tommy** raised
 ## Step 3 — Map the angles, then Tommy picks ONE
 
 Don't pick for him. Lay out the distinct angles the transcript supports — usually 3 to 6 — each as a one-line thesis with a title direction, the transcript material that powers it, and how fresh it is against articles already in the database (check for existing rows tied to the same episode first; the meeting-note automation may have already claimed the top angle). Recommend one, but the choice is his. Once he picks, the whole post is built around that single angle. Leftover angles become new rows in the articles database with an early-stage Status ("Idea" if the option exists) and a one-paragraph note — the backlog builds itself.
+
+In the repo, the whole mapping lives in one ore file per episode: `src/content/blog/angles/ep-{N}-angles.md` (source links, mined Tommy material, attribution landmines, locked decisions once he picks, leftover angles). Not loaded by Astro. See `src/content/blog/angles/README.md`.
 
 If Tommy grants batch autonomy ("don't ask, take the best topic"), pick the strongest fresh angle yourself, still checking the database for angle collisions first, and still filing the leftovers as Ideas.
 
@@ -81,7 +83,7 @@ Create the page in the ✍️ Prompting BI Articles data source using the proper
 
 The repo is `prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/prompting-bi` under WSL). Before writing anything, read the repo's `CLAUDE.md` and `src/content.config.ts` — the front-matter schema is enforced at build time and a bad post fails the deploy. Write the post per the contract in `references/publishing-targets.md`, including the required `permalink` in `YYYY/MM/DD/slug` form (this preserves URL structure from the WordPress era; never route by filename).
 
-**Filename rule (always):** name the file `src/content/blog/drafts/YYYY-MM-DD-<slug>.md`, where `YYYY-MM-DD` is the post's `date` and `<slug>` is the kebab-case title slug (the same slug used in the `permalink`). Example: date `2026-07-20` + slug `my-post` -> `drafts/2026-07-20-my-post.md`. The filename does not affect the URL (routing is by `permalink`). Stages: `backlog/` (ideas, not loaded) → `drafts/` (WIP) → `published/YYYY-MM/` (live, `draft: false`; month folder from the post date). The repo's `npm run new-post "Title"` scaffolds into `drafts/`.
+**Filename rule (always):** name the file `src/content/blog/drafts/YYYY-MM-DD-<slug>.md`, where `YYYY-MM-DD` is the post's `date` and `<slug>` is the kebab-case title slug (the same slug used in the `permalink`). Example: date `2026-07-20` + slug `my-post` -> `drafts/2026-07-20-my-post.md`. The filename does not affect the URL (routing is by `permalink`). Stages: `angles/` (per-episode ore, not loaded) and `backlog/` (freeform ideas, not loaded) → `drafts/` (WIP) → `published/YYYY-MM/` (live, `draft: false`; month folder from the post date). The repo's `npm run new-post "Title"` scaffolds into `drafts/`.
 
 **Source metadata (when from an EMP episode):** set frontmatter `source.episode` (EpNum), `source.title` (episode Name), `source.notion` (EMP page URL), and `source.transcript` (`transcripts/ep-{N}.txt`). Later edits read that file first; Notion/YouTube only on a miss or refresh. Omit `source` for original / non-episode posts. This is editor-only and must never appear in the published article body.
 

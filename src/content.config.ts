@@ -4,7 +4,7 @@ import { CATEGORY_IDS } from './lib/prompt-categories.mjs';
 
 const blog = defineCollection({
   // Only published/ + drafts/ are loaded (published is nested as YYYY-MM/).
-  // backlog/ is ignored (ideas/outlines, never on site).
+  // angles/ (per-episode ore) and backlog/ (freeform ideas) are ignored, never on site.
   loader: glob({ pattern: '{published,drafts}/**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),

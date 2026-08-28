@@ -28,7 +28,7 @@ Page content follows the pattern in `article-structure.md` (body + Image Ideas t
 - Local path: `C:\Github\prompting-bi` (Claude Desktop / Windows) or `/mnt/c/Github/prompting-bi` (WSL). It's a static Astro site rebuilt after the old WordPress install was hacked; pushing `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`.
 - **Before writing, read the repo's `CLAUDE.md` and `src/content.config.ts`.** Front matter is schema-enforced at build; a missing required field fails the deploy.
 
-Folder stages under `src/content/blog/`: `backlog/` (ideas, not loaded), `drafts/` (WIP), `published/YYYY-MM/` (live; month folder from the post date). Write new posts to **`drafts/`**.
+Folder stages under `src/content/blog/`: `angles/` (per-episode ore files `ep-{N}-angles.md`, not loaded), `backlog/` (freeform ideas, not loaded), `drafts/` (WIP), `published/YYYY-MM/` (live; month folder from the post date). Transcripts sit outside the collection at `transcripts/ep-{N}.txt` in the repo root. Write new posts to **`drafts/`**.
 
 Post file: `src/content/blog/drafts/<YYYY-MM-DD>-<kebab-slug>.md` — the date prefix is the post's front-matter date (today for new posts) and the rest is the kebab slug. Example: `drafts/2026-07-20-post-slug.md`.
 

@@ -19,9 +19,12 @@ Posts live in stage folders:
 
 | Folder | Purpose |
 |--------|---------|
-| `src/content/blog/backlog/` | Ideas / outlines — never loaded by Astro |
+| `src/content/blog/angles/` | Per-episode ore files (`ep-{N}-angles.md`) — never loaded by Astro |
+| `src/content/blog/backlog/` | Freeform ideas / outlines — never loaded by Astro |
 | `src/content/blog/drafts/` | WIP — keep `draft: true` |
 | `src/content/blog/published/YYYY-MM/` | Live / scheduled — `draft: false`; month folder from the post date |
+
+Episode transcripts sit outside the collection at `transcripts/ep-{N}.txt` in the repo root — also never loaded by Astro.
 
 `npm run new-post "My Post Title"` scaffolds into `drafts/`. Or drop a markdown file there:
 

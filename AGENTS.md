@@ -13,11 +13,14 @@ Astro 5 static blog → GitHub Pages (repo `pugliabi/promptingbi`, custom domain
 ## Content model
 
 Posts live in stage folders under `src/content/blog/`:
-- `backlog/` — ideas/outlines; **not** in the Astro collection (never on site)
+- `angles/` — per-episode ore files, `ep-{N}-angles.md`; **not** in the Astro collection (never on site)
+- `backlog/` — freeform ideas/outlines not tied to one episode; **not** in the Astro collection (never on site)
 - `drafts/` — WIP; collection-loaded, keep `draft: true` (filtered out of site)
 - `published/YYYY-MM/` — live / scheduled; `draft: false`. Month folder is from the post date (e.g. `published/2026-08/`). Filename stays `YYYY-MM-DD-slug.md`.
 
-Loader only picks `{published,drafts}/**/*.md`. Schema (`src/content.config.ts`): `title`, `date` (ISO, Z), `permalink` ("YYYY/MM/DD/slug" — must match date; never change on existing posts), `description` (<160 chars), `featured` (optional image path), `draft` (default false). Filtering lives in `src/lib/posts.ts` (`publishedPosts()`): drafts and future-dated posts are excluded everywhere (homepage, RSS, page generation). Promote: move file into `published/YYYY-MM/` + flip `draft`. Images stay in `public/images/YYYY/MM/`.
+Transcripts live outside the collection entirely, at `transcripts/ep-{N}.txt` in the repo root.
+
+Loader only picks `{published,drafts}/**/*.md`, so `angles/` and `backlog/` are invisible to the build. Schema (`src/content.config.ts`): `title`, `date` (ISO, Z), `permalink` ("YYYY/MM/DD/slug" — must match date; never change on existing posts), `description` (<160 chars), `featured` (optional image path), `draft` (default false). Filtering lives in `src/lib/posts.ts` (`publishedPosts()`): drafts and future-dated posts are excluded everywhere (homepage, RSS, page generation). Promote: move file into `published/YYYY-MM/` + flip `draft`. Images stay in `public/images/YYYY/MM/`.
 
 Images: `public/images/YYYY/MM/`, referenced as `/images/YYYY/MM/name.png`.
 

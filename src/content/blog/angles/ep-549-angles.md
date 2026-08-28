@@ -12,6 +12,23 @@ Mailbag (Lee, insurance) is the prompt, not the article. Skip vacation banter.
 
 **Mike-only (do not write as Tommy):** intern/CS-stack architecture layer; Power Designer DAX hardcoded week-6 vs week-5; CALCULATE ALL catch as his experiment; Copilot DAX is garbage; Joe Zuneth token-fleece post; 60/20/20 senior split; “maybe stop hiring juniors.”
 
+## Locked decisions (2026-08-28, from Tommy)
+
+- **Title:** Agents Raise the Floor and Lower the Ceiling.
+- **Merge in `backlog/2026-08-08-reviewing-is-the-new-writing.md` (ep 537)** and retire that draft. Take: "my MCP server is my junior developer", reading-vs-writing as separate skills, the question bank, trust as the final differentiator. Drop its "looks Italian to me" analogy (same job as the orchestra).
+- **Extended analogy: "you can direct the orchestra because you played in it"** (ep 541). Keep the ep-541 Notion Idea row alive; Tommy wants a dedicated orchestra post later.
+- **No JavaScript.** The self-own is C#: ships apps in it, is not a C# senior.
+- **Punch level:** recommend proving the fundamentals, framed as sequencing rather than gatekeeping, and stay honest that nobody knows how this plays out yet.
+- **Scope:** ~2,300–2,600 words. Two code blocks (YTD-with-no-calendar trap, the explain-this-DAX eval). Banner + 3 diagrams. One `/prompts/` artifact under `playbooks`: the DAX readiness gate.
+
+**Verified adjacent Tommy lines (quotes confirmed in transcripts):**
+- Ep 522: "utilizing AI's not just so you don't have to do the work. It frees up your own time as long as you have the expertise and the background knowledge."
+- Ep 528: "if I were to hire someone to say, 'Yeah, 95% of what I do is agents and I have workflows and AI and I don't write DAX anymore.' Are you hiring that person?"
+- Ep 530: "If I was writing a math test for AI, and I stunk at math, how would I validate that?"
+- Ep 494: an MCP against a semantic model "almost screams beginner... an intern could do that." (Tommy's own bull case for the raised floor.)
+
+**Not a real quote:** "a skill.md is extra markdown, not scar tissue" — paraphrase, never said. Do not use.
+
 ## ★ Write first: Agents Raise the Floor and Lower the Ceiling
 
 **Thesis:** Give DAX agents to juniors who have not had the filter-context mind shift and you make them productive while capping how far they can go. Prove the fundamentals first. Then the agent is leverage instead of a token furnace.

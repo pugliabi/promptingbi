@@ -12,13 +12,15 @@ Astro 5 static blog deployed to GitHub Pages at https://promptingbi.com. Content
 
 ```
 src/content/blog/
-  backlog/              # ideas / outlines — NOT loaded by Astro (never on site)
+  angles/               # per-episode ore, ep-{N}-angles.md — NOT loaded by Astro
+  backlog/              # freeform ideas / outlines — NOT loaded by Astro
   drafts/               # WIP — in collection, keep draft: true (filtered out of site)
   published/            # live (or future-dated scheduled) — draft: false
     YYYY-MM/            # month buckets from the post date, e.g. 2026-08/
+transcripts/            # repo root, ep-{N}.txt — NOT loaded by Astro
 ```
 
-Promote by moving the file: backlog → drafts → `published/YYYY-MM/`. Filename stays `YYYY-MM-DD-slug.md`. Agents: focus on `drafts/` unless asked about backlog or published. Images stay in `public/images/YYYY/MM/` — do not nest or move them with the post.
+Promote by moving the file: angles or backlog → drafts → `published/YYYY-MM/`. Filename stays `YYYY-MM-DD-slug.md`. Agents: focus on `drafts/` unless asked about angles, backlog, or published. Images stay in `public/images/YYYY/MM/` — do not nest or move them with the post.
 
 ## Creating a new post
 
@@ -47,7 +49,7 @@ Rules:
 - To publish: move file to `published/YYYY-MM/` (YYYY-MM from the post date) and set `draft: false`. URLs do not change (`permalink` is the route). Do not move images.
 - slug = kebab-case; `description` under 160 characters
 - `source` is optional editor/agent metadata (episode, Notion URL, local transcript path). Never render it on the site.
-- Transcripts live in `transcripts/ep-{N}.txt`. Fetching one always writes there. Creating or editing a post always reads from there first (Notion/YouTube only on a miss). Never dump transcripts in `backlog/` or the repo root.
+- Transcripts live in `transcripts/ep-{N}.txt`. Fetching one always writes there. Creating or editing a post always reads from there first (Notion/YouTube only on a miss). Never dump transcripts in `angles/`, `backlog/`, or the repo root.
 
 ## Prompts library (`/prompts/`)
 

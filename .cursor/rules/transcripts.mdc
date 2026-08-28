@@ -21,4 +21,4 @@ Filename: `ep-{N}.txt` (`ep-545.txt`). Non-episode recordings: kebab slug, still
 2. If missing, fetch, save, then draft/edit from that file.
 3. Set `source.transcript: "transcripts/ep-{N}.txt"` in front matter (editor-only, never rendered).
 
-Never dump transcripts into `src/content/blog/backlog/` or the repo root.
+Never dump transcripts into `src/content/blog/angles/`, `src/content/blog/backlog/`, or the repo root.

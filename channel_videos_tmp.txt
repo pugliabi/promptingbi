@@ -1,0 +1,263 @@
+PoCCmEJx-VU|Fixing!! Fabric SQL w Anonymous Access - 035 Agentic Thinking|684
+WoloqX8nnY8|557 - LLMs: What Data Viz Teaches Us - No Ads|4108
+tM8fHPzqA1w|034: Fabric SQL w Anonymous Access - No Ads|4153
+wqf13t860Ik|MCP and SPN - 032 Agentic Thinking|3531
+6jyXfVQyDDg|033: The AI Horizon - No Ads|3242
+tZay8SEGH50|554 - Fabric as a Backend - No Ads|3833
+zKCel3Qny7Y|555 - Anonymous Rayfin Fabric Apps - No Ads|4184
+vdCi5DThrks|031: Fable and MCP landscape - No Ads|2256
+7l8LRwYeds4|032: MCP and SPN - No Ads|3531
+lsydwvPiQgw|547 - The Hype of Rayfin - No Ads|4275
+VT_QsklXsW0|548 - Can We Trust AI Pipelines - No Ads|3565
+Mp5N7jaKuOY|549 - Training Staff on Agents for DAX - No Ads|2839
+rZrHKLSV8-M|550 - BI in the Age of AI - No Ads|2427
+TvUN1g0B4Nk|553 - Crawl, Walk, Run with AI in PBI - No Ads|2312
+UdxYGKrPor4|551 - Return of the Composite Model - No Ads|3611
+DdbrocQO8O0|542 - Slow AI Adoption - No Ads|4063
+8c3t0-bqWes|543 - App Usage in Fabric - No Ads|3780
+EBn3zxJGFRA|544 - Using Harnesses for Fabric Projects - No Ads|4412
+nRWeUqJCZ2w|545 - Agents Helping with Data Governance - No Ads|4267
+Ysvw_iZuofc|546 - Teaching Orgs to Question Themselves - No Ads|3398
+qlROSkgoBZY|AT029: Loops with Agents - No Ads|1939
+LE1vNifzeCw|AT030: VS Code and MCP servers - No Ads|1264
+ReCsGeUTc-4|540 - Self Service with AI Part 2 - No Ads|3795
+AOOReAXK4aI|AT028: Copilot Web Modeling - No Ads|783
+vtY60DWEV-Q|541 - Helping Leaders Speak Data - No Ads|4149
+mjFXrK_K_14|AT026 - Skills for Fabric - No Ads|2730
+VvafKcNn6aI|539 - Self Service Analytics with AI - No Ads|4140
+J5z-lwi48xM|538 - Team vs. Individual skills - No Ads|3804
+pO53DlBd1vY|AT024: Loops for Agents - No Ads|2709
+72Z6_CJC8q4|AT025: Replit and Fabric Apps Rayfin - No Ads|1131
+ymcbhGr-Vvc|AT023: Fabric Apps Rayfin - No Ads|3508
+VQzCXZOEzqA|AT022: Fabric App - Rayfin Templates Build - No Ads|2741
+qLnUlDqGLVk|537 - Are We Now Professional QA? - No Ads|3804
+1mdagaiKQ9E|536 - All about Rayfin (Fabric Apps) - No Ads|3852
+NUlLt0l1A1M|AT021: Rayfin Templates Build - No Ads|723
+o4XNBIeooWI|AT020: Rayfin Build - No Ads|4130
+ozEISRDuMPg|537 - Are We Now Professional QA? - No Ads|3785
+HdTpntSh6Mw|535 - Microsoft Build Recap - No Ads|3510
+qBh01ymeQCI|AT019: Rayfin - No Ads|2980
+aTp2so065hQ|AT017: Build Recap - No Ads|3324
+SPSIpAbyp-Y|AT018: Fabric Skills - No Ads|1196
+6yg3Oc0luWA|AT016: Community Skills - No Ads|2273
+8TQnQN9B49Y|532 - Move Faster in Power BI - No Ads|3944
+xqyaD_wVc0A|534 - CI/CD Automation with Agents - No Ads|3684
+glKPmCdmjwg|AT015: Skills and Agent Automation - No Ads|1997
+pMkB2q71bsk|531 - You are Wasting your Time! - No Ads|4204
+tgk9laeYpow|AT013: How i Build it - No Ads|3185
+owwz6_jnFGs|533 - Claude Design & Power BI Embedded - No Ads|4685
+dU19snW0qSA|AT012: Less Guessing, More Building - No Ads|2812
+bd-XJfv1-u4|Less Guessing, More Building - 012 Agentic Thinking|2812
+mjQS5VaPhDA|529 - AI Driving Your CoE - No Ads|4156
+biJbkYpss1A|AT011: Improving the Agent - No Ads|3684
+4bsolzrq-Rs|528 - Importance of Skills for the Fabric Developer - No Ads|4376
+Zc521sKzwns|AT010: Goals in Agents - No Ads|2619
+opGIyKm1Ixc|AT009: Optimize for Agents - No Ads|2744
+3N26_-FH-0I|527 - Semantics Layer Genie & Data Agents - No Ads|4387
+P2zdD9bq7eg|526 - Stop Using Bookmarks - No Ads|3848
+U__xMmfiE78|Hyper-Personalized Tooling - Conversations with Armando|3982
+O-Sf3xWRkWg|AT008: Rethinking Work - No Ads|3007
+g4XW7DszJyo|525 - Less Guessing? More Building! - No Ads|3840
+PmYm_ugxlNw|AT007: Issues Resolved - No Ads|3313
+6ekoLxMbXkc|524 - Fabric's Most Underrated Features - No Ads|3874
+EA6HoHjnmRQ|AT006: Starving for Tokens - No Ads|2427
+iWvV-65P96c|523 - Databricks, Fabric, Development and Vibe - No Ads|4498
+XCdISqo03-8|AT005: GitHub has Issues - No Ads|2566
+KJflSbsSpnQ|522 - Improving Your AI Skills for Fabric - No Ads|3794
+RvLGDvxqzgU|AT004: Agentic Roundup - No Ads|2545
+KXsLiblYh0M|521 - Looking at AI Assisted Development - No Ads|4905
+dXV8pU-F60I|AT003: power bi + mcp + github copilot demo - No Ads|2716
+A68wCmSjJgs|520 - Overfed and Sick Golden Datasets - No Ads|4252
+tppD6wLI2Z8|AT002: BIBuddy.ai - No Ads|2488
+urhqyCihYeI|AT001: Entering the AI Mind Palace - No Ads|1781
+xk3cfT6Y2L0|519 - Enhancing PBI Reports: Marketing Insights Integration - No Ads|3894
+6OZP-iB2jGo|516 - Subscriptions as a Silent Hero - No Ads|4081
+QF6Y5xjcaOU|518 - FABCON 2026 Recap Part 2 - No Ads|3960
+vkcZT8zlVwk|517 - FABCON 2026 Recap Part 1 - No Ads|3710
+Wt7YZR28fzo|Explicit Measures Song made it to the big stage!!  |28
+_4qCeAWQJqE|510 - What's Next? Building a 3 - Year Power BI Roadmap - No Ads|4211
+NxnHiDmWmug|509 - Fabric Ideas That Stick, and What's Next - No Ads|4524
+VIpYj6OdxwY|515 - DAX Complexity & Power Query ETL Tips - No Ads|4036
+ug4-DVOzEkk|514 - Help! How Do We CI/CD - No Ads|3863
+5QA2FEWauww|508 - Kicking Off Fabric the Right Way - No Ads|4015
+_rZI5qKkkGU|507 - AI-Assisted TMDL Workflow & Hot Reload - No Ads|4092
+BhhcRa0fKFE|513 - Git Best Practices Diff Noise & Naming - No Ads|4258
+fl0zodrVLeo|504 - Living in a Direct Lake World - No Ads|3973
+HgmIfn-OnR8|512 - Publish to Web vs. Embedded - No Ads|4119
+B_iOdhFO9-M|506 - Filter Overload - No Ads|4427
+HhcgcqF07ls|505 - Excel vs. Field Parameters - No Ads|3829
+zK7U8a85k-I|511 - Scaling a Power BI Side Hustle - No Ads|3040
+WLWqzgWxN04|503 - Hiring the Report Developer - No Ads|3820
+3SxUhENUK18|502 - Trusting In Microsoft Fabric - No Ads|3429
+yx4mZgakeJc|501 - Central BI & Workspace Strategies - No Ads|3691
+QejIXrDE1t4|Explicit Measures Theme Song|190
+IZLn0Q26O6w|500 - We Made it!! - No Ads|4696
+YzVQdZYvly4|499 - Late Adopter Advantage? AI Readiness - No Ads|3774
+vC9vxNf_EYE|498 - Define the Problem Before Tools - No Ads|4171
+Wh1aTB9JJUI|497 - Remote Fabric Jupyter & Local VS Code - No Ads|4376
+jMXcWvt0m34|Oh, that Bad Bad DAX go go remix|216
+Z_x8szx7pnA|AI Won't Steal Your Job, But Your Skills MUST Evolve! #shorts|86
+9V8BVKUTcVA|Automate Tasks, Elevate People Skills: The Future of Work! #shorts|38
+ilxnmSPjdbg|AI Empowers Business Analysts: Brainstorm, Mockups, and Requirements! #shorts|53
+NnpODV2Z5MA|AI Needs Clear Commands: Stop Vague Requests! #shorts|41
+00D3FOU6ots|AI Builds Code: You Tweak, Perfect, and Understand Faster! #shorts|55
+XwOwGbuy5xA|AI is My Secret Weapon in Consulting!  #shorts|32
+qVoUiNS1i3U|496 - Experience Overuse - No Ads|3765
+31_5RMBTSiY|Coding Good Vibes|190
+oe-RZDSYlXM|495 - Do You Really Need Fabric? - No Ads|3760
+MkCqa7C4iB4|494 - MCP Your Fabric Data - No Ads|4231
+eMelSIOKYrY|493 - AI Drives Fabric Success - No Ads|4014
+3QroWNl8I1c|492 - Fabric Awards - No Ads|3899
+Xf5KK-mluuo|491 - Our Fabric Resolutions - No Ads|3601
+5xsDFnWgB_I|487 - The Intelligence Developer - No Ads|4151
+zjhclb_t-YM|488 - Power BI Secret Santa - No Ads|3034
+aXjdeetq1Rs|485 - 1-Click Notebooks - No Ads|3029
+4d1yd1G6Nyw|490 - Revisiting Dataflows Gen 2 - No Ads|4030
+SHElDuy1WC0|483 - Semantic Modeling on the Web - No Ads|3470
+FroQnzFZRHA|484 - Data Governance with Fabric IQ - No Ads|4052
+qsZk1tBMmZs|489 - Why Fabric IQ Will Cause Friction - No Ads|3949
+mk7L0FxMUFE|482 - Microsoft Ignite & November Recap - No Ads|4442
+YxgxwyC9CZo|478 - Untangling Workspace, Branching, and Artifact Chaos - No Ads|4293
+_3hJqlCb5l8|481 - From Fragmented Models to Unified Semantics - No Ads|3867
+h_wcfJgHwP8|475 - Source Control in BI: Necessary, Painful, or Both? - No Ads|3920
+6JUdsMgJbio|480 - Why Product Teams Should Own Data - No Ads|3286
+uGWgoshMRv4|474 - Modeling Without the Keyboard - No Ads|4236
+uRzxuNc-o4g|479 - Tracking App Usage at Scale - No Ads|3402
+InWWBVLRyQk|473 - DevEx for Pros: UDFs, the Tools That Stick - No Ads|3365
+7pKcZbW397g|477 - Start with the Why - No Ads|3910
+jZp3ySuvAjA|472 - Getting Started with Real Time Intelligence - No Ads|3803
+vuoyNFSarUA|471 - Data modeling in event driven architectures - No Ads|3981
+EqOROxA4GAo|Data Shares using Entelexos|229
+MkXpulhxSMw|468 - Action Systems + AI Applications - No Ads|3780
+CjissU8X4xM|470 - Measure Total Shenanigans - No Ads|4253
+HQIDnayrKbU|467 - What Is Real-Time Intelligence? - No Ads|3495
+4UdmezY3pOM|469 - PBIP or PBIX? - No Ads|3592
+WvWhZQsVqlE|464 - Is Microsoft Fabric Business Intelligence? - No Ads|4032
+ZD1zhrvDe1Y|463 - User Defined Functions in DAX - No Ads|4062
+pnXsUdOiuws|466 - Data Agents and Semantic Models - No Ads|3753
+cCvWZ4Fysfc|462 - Microsoft Fabric Feature Pyramid - No Ads|4377
+gzBv_EyMLyo|461 - Fabcon Vienna - No Ads|3458
+CeYJTH7_s8E|465 - Subscription Use Cases - No Ads|3798
+2ueH-8aizG0|460 - Composite Models vs Reusable Datasets - No Ads|3832
+IWXk107WCHU|458 - The Fabric Magic Wand - No Ads|3492
+GI3waRzA1vU|2025-09 Q&A session - Semantic Model Refresh Templates|3497
+IVp3UDGJ29U|457 - Planning Your Capacity - No Ads|3730
+P9xuI5f-rrE|455 - Power BI Report Accessibility - No Ads|3837
+yy-OFjok1UE|456 - Accessibility; methods, process, and adoption - No Ads|4151
+ZZ-Bhc9fbvw|459 - Initial Impressions of Data Agents - No Ads|3663
+586abKlX7b8|454 - Looking at the Warehouse Roadmap - No Ads|4393
+J3Tq0fBodDs|440 - A Reflection of 10 Years with Power BI - No Ads|3999
+5l3u9e9o-Ho|441 - What is your numeracy? - No Ads|4128
+N-2NbjYg8ec|442 - What's up with DAX? - No Ads|3921
+hNIQUW-gZ0Q|443 - Future-Proofing Excel - No Ads|3109
+fTJXuyLRON0|444 - Optimal Power BI Architecture in Fabric - No Ads|4131
+mKUDqDSsDss|445 - Evolution of an Analyst - No Ads|3995
+BQ9PEKOUoy0|446 - AI is now Ready - SQLBI - No Ads|3758
+bV03N8FY-Jk|447 - Translytical Is So Much More - No Ads|3626
+9n2F-EpLCC4|448 - UI For Easy Ingestion leads to Issues - No Ads|3739
+Yt94yxCrhEk|449 - Microsoft Fabric Lakehouse vs. Warehouse - No Ads|3836
+FjGFbkpruPE|450 - The end of the line for datamarts - No Ads|3748
+vCsQdxoxM4U|451 - Lets Talk SQL and New Features: The Future? - No Ads|3557
+V25ZQZp1wGA|452 - Calculation Groups in Practice - No Ads|3464
+hM3AGaHhcDg|453 - Creature Comforts of Data Warehouse - No Ads|4003
+97OTakTO004|Promote Your Subscription & LinkedIn: Build Visuals & CI/CD|212
+aR-9IKC7fAQ|Entelexos a Power BI Embedded Accelerator|201
+3QHZXkyQqFo|Introducing Power Designer: Unleash Your Inner Report Wizard!|61
+axo-7mbszy8|Excel vs. Power BI: Which Tool Wins?|193
+rBtL1o9Z2iI|2024 Ignite React|1014
+YvY8gJlSqRI|Automatic Visual Objects with AI|309
+TBQFtlFvsFs|Tips + Theme Generator Tutorial - Gallery - Copy & Edit|339
+hE24W1yQ_YA|Fabric Learn about the Lakehouse - Season 7 Ep. 1|1515
+VpMSvBgZoCc|Fabric and the Lakehouse - Season 7 Ep.3|1753
+HGDaA3wWKV4|Fabric Parquet and Delta Tables - Season 7 Ep.2|2616
+pcjrk3wStVY|Tips + Theme Generator Tutorial - Gallery Project Download Tutorial|204
+stIgaDS1qgM|Creating Layouts and Themes - Season 6 Ep.3|3711
+lkHxdO3YL-A|Error Importing Theme File - Quick Tip|306
+47MZk_xJBJA|Strong Spoke, No Hub - Ep.127 - Power BI Tips from the Real World|3846
+m0iwh1ks4ws|The Lost Episode - Ep.84 - Power BI Tips from the Real World|3719
+I2yWEbsCH2s|Goals - Creating Your First Scorecard and Goal - Season 4 Ep. 3|314
+yeKFxHTfc4s|Goals - Status Based Rules - Season 4 Ep. 6|240
+wAKrSWF2rsY|Goals - Connecting to Cards, Bar and Line Charts - Season 4 Ep. 5|369
+iiK3ZgRTOxU|Goals - Connecting Data From a Report - Season 4 Ep. 4|158
+V_wHezTLQUw|Goals - Component Overview - Season 4 Ep. 2|332
+NzE63dJKe5Y|Goals - Introduction - Season 4 Ep. 1|411
+CpKIgZ-6YVc|Deneb - Bar Charts - Season 3 Ep. 2|865
+gYAQpxvzcKE|Deneb - Introduction - Season 3 Ep. 1|3526
+aYp4YVi6xCw|Power BI Version Control - Installation and Configuration|976
+WyHeCKh45VM|Power BI Version Control - How to Use The App|639
+OKQ0pINt_mw|App Build - Demo of Order Fulfillment App - Milwaukee Power Platform User Group|2916
+3BlqxWBnxr8|A Human Centered Process | Getting the most out of the Power Platform - Milwaukee Power Platform|2916
+h-nRVOu8YD0|Do you need to join a User Group to be a PBI Pro - Episode 032 - Explicit Measures - Podcast|2082
+KdSFrcn8odo|Table or No Table - Episode 031 - Explicit Measures - Podcast|1937
+eJIJ3H1kA9w|Introduction to Power BI Embedded - Data Minds Presentation|4573
+pXcgoBeJLi4|MVPs React - Feb 2021 - Desktop Update - Live Edit|2235
+iV371zX100s|PowerBI.tips - Tutorial - Modify Default Dataset|522
+sygIUPMlgi0|PowerBI.tips - Hot Swap Connections Webinar|3199
+QBK-qtSEBiQ|PowerBI.tips - PUG - External Tools & Business Ops|3314
+aoAC4yoYnRo|PowerBI.tips - Tutorial - Monkey Tool Introduction - Part 2|3898
+OM9RkcwYPeo|PowerBI.tips - Tutorial - Monkey Tool Introduction - Part 1|3772
+oo2FSNHFVEs|MVPs React - July 2020 - Desktop Update|3096
+944Bc6QkKk4|PowerBI.Tips - Tutorial - DAX Studio Release 2.11.1|3092
+3YZWlCiYiI4|PowerBI.Tips - PUG - dataflows and shared datasets|3969
+5XBzO0m1UI4|PowerBI.Tips - PUG - Building a COVID-19 Dataset in Power BI|4266
+cH7u9NuCHHo|PowerBI.Tips - Tutorial - Custom Styles in MapBox|468
+0aX60Bq6ZXI|PowerBI.Tips - Tutorial - Drill Down Maps in MapBox|289
+z2htN953pxA|PowerBI.Tips - Tutorial - Using the New Lasso Tool|113
+ET6FHSXewsM|PowerBI.Tips - PUG - Creating a World Class Center of Excellence|5070
+d6ppyWQU-f0|PowerBI.Tips - Tutorial - DAX Studio Query Performance Tuning - By Marco Russo|3659
+SoqF-c4KtHQ|PowerBI.Tips - Tutorial - DAX Studio Full Features Review - By Darren Gosbell|4991
+ERGpV4yt30w|PowerBI.Tips - Tutorial - Model Performance Tuning in DAX Studio - By Marco Russo|4142
+jpZnCHRauPU|PowerBI.Tips - Tutorial - Introduction to DAX Studio - By Darren Gosbell|3614
+T-3QgVIhxiY|PowerBI.Tips - Tutorial - Using Open Broadcaster Software with Teams|2558
+U6j0VCGHUYw|PowerBI.Tips - Tutorial - 3D maps in MapBox|286
+yKvMrQlUrCU|PowerBI.Tips - Tutorial - ALM ToolKit with Christian Wade|2549
+fzZgXe3MjhI|PowerBI.Tips - Tutorial - Using DevOps in Tabular Editor|5045
+5WnN0NG2nBk|PowerBI.Tips - Tutorial - Best Practice Analyzer in Tabular Editor|3942
+EHs5r3XCkO8|PowerBI.Tips - Tutorial - Using Scripts in Tabular Editor|4171
+c-jZMzsvKnM|PowerBI.Tips - Tutorial - Intro to Tabular Editor|3813
+0w589b5_Z3o|PowerBI.Tips - Tutorial - MapBox 101|519
+lXZeva5L8jc|PowerBI.Tips - Pug Feb 2020 - Making Custom Analyze in Excel Files - Part 9|415
+I3lh-57khjU|PowerBI.Tips - Pug Feb 2020 - Using Paginated Reports - Part 8|391
+rWCSyJRTJDk|PowerBI.Tips - Pug Feb 2020 - Local Development - Part 7|451
+KBgbO0nwkBY|PowerBI.Tips - Pug Feb 2020 - Connecting to Excel - Part 6|1846
+C4YjxA_WmRs|PowerBI.Tips - Pug Feb 2020 - Versioning Files - Part 5|901
+hUST1JaAG4g|PowerBI.Tips - Pug Feb 2020 - Live Connect to Report - Part 4|416
+AU4eu-8FT-U|PowerBI.Tips - Pug Feb 2020 - Upload PBIX to SharePoint - Part 3|210
+zGMGIKJSFj8|PowerBI.Tips - Pug Feb 2020 - Create V2 Workspace - Part 2|173
+mfFMafo-JCo|PowerBI.Tips - Pug Feb 2020 - Intro - Part 1|412
+PIFNN7Ox4YQ|Power Platform World Tour - Chicago - Promoting & Governing Power BI in your Organization|158
+BVTTKWM5s8c|Power Platform World Tour - Chicago - Power App Write-back to Power BI|64
+jSu8T8Kf9Go|Power Platform World Tour - Chicago - No Code Custom Visuals|68
+E7Fp-vBHS04|PowerBI.Tips - Tutorial - Using the Versatile Scrim|324
+b9wwm-aSKes|PowerBI.Tips - Tutorial - Contextual Help for End Users|582
+h1hkw-xPX7U|PowerBI.Tips - Pug Jan 2020 - Top Tutorials for 2019 - Part 3|1086
+gAsvAfEDz38|PowerBI.Tips - Pug Jan 2020 - Paginated Reports - Part 4|499
+kETnkKuUbVs|PowerBI.Tips - Pug Jan 2020 - Top Tutorials for 2019 - Part 2|623
+1mgdHS_jxnE|PowerBI.Tips - Pug Jan 2020 - Top Tutorials for 2019 - Part 1|495
+eMoby0nvGl0|PowerBI.Tips - Tutorial - Scale a Visual Using Groups|729
+Omt-Swzluuk|PowerBI.Tips - Tutorial - Stacked Bar Chart with Grand Totals|434
+ykRKkwEKhmo|PowerBI.Tips - PUG - October 2019 - Act like the business, Think like IT|4656
+0ZRbipyigng|PowerBI.Tips - Tutorial - How to Create Power BI Desktop Source (PBIDS) Files|391
+dtZI9OoR6yA|PowerBI.Tips - Tutorial - Filled Donut Chart|849
+Dw6FKHcYiDg|PowerBI.Tips - PUG - September 2019 - Power Apps in Power BI|4468
+KmZRjGQ9pdQ|PowerBI.Tips - Tutorial - Dual Y Axis Chart|723
+mxtwyW7epwI|Microsoft Business Application Summit 2019 - Ribbon Chart Demo|805
+2zgRVk38h6Q|PowerBI.Tips - Tutorial - Building Custom Visuals - A Basic Bar Chart|487
+UVHdL8UuDUI|PowerBI Tips Introducing Custom Visuals Gallery|350
+WfopifqbUB8|PowerBI.Tips - Tutorials - Respect The Layers|293
+3SsxIw7Y9Pk|PowerBI.Tips - Layouts - The Bend|310
+rsjvz7i2qYU|How to use Tooltips in Power BI|82
+b0QMsPtWYe0|How to Navigate Hierarchies on a Visual in Power BI|319
+OcHQita6k-o|How to use Focus Mode in Power BI|167
+dK3fcDcb4hY|How to use the Ellipsis in Power BI|164
+qi6hJ6_pXSc|How to use Drillthrough in Power BI|100
+zgmfVYMDm60|PowerBI.Tips - Layouts - Grids|287
+ix4egyJJNqY|PowerBI.Tips - Tutorials - Centering the X-Axis on Line Charts|305
+ADj4DPXvNpM|PowerBI.Tips - Tutorials - Segmented Filtering with Slicers|571
+1SReYZLkhPQ|PowerBI.Tips - Tutorial - Data Table Filtering - My Favorite Feature of 2018|156
+4n_2ZGord2k|PowerBI.Tips - Tutorials - Apply a Filter to a Slicer|367
+9aISCQjvgtw|PowerBI.Tips - Tutorials - When to use Publish to Web|438
+476NS1LAvvo|PowerBI.Tips - Tools - Introducing Lingo|699
+7OJZc9hzORQ|PowerBI.Tips - Layouts - Splash o Red|132
+XTwBrceuPzw|PowerBI.Tips - Layouts - Sunset|249
+UgJN_eyOGAc|PowerBI.Tips - Layouts|283
