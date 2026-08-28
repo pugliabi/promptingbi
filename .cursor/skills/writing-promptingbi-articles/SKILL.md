@@ -25,6 +25,8 @@ Three fetch routes. Pick whichever matches what Tommy gave you; ask only if none
 
 **A. EMP episode (Notion).** Find the episode page in the EMP data source (`collection://3bb02401-3320-4eb7-92fe-d5197943f569`) by name or EpNum. The transcript is usually a Notion AI meeting note on or linked from the episode page: fetch it with `include_transcript: true`. The episode page also carries the agent agenda columns (GPT / Google / Claude) and the Description — useful for framing, but the transcript is the source of truth for what Tommy actually argued. After fetching, save the meeting-note transcript (not the AI summary) to `transcripts/ep-{N}.txt`.
 
+> **Critical:** a Notion meeting note usually contains BOTH a `<transcript>` and an AI-written `<summary>`, and that summary is composed in Tommy's first-person voice. It reads exactly like him and it is not him. Polished lines that appear only in the summary were written by an automation, not spoken on the recording. Mine the transcript for what Tommy actually argued; treat summary-only phrasing as a theme you may develop, never as a quote or as evidence of what he said. Note too that the `<transcript>` often comes back as a placeholder pointing at a `#`-anchored URL rather than the text itself, which takes a second, deliberate fetch of that URL — skip it and you are left holding only the summary.
+
 **B. YouTube URL.** Run `scripts/fetch_youtube_transcript.py <url>` from the repo. It pulls captions with yt-dlp, cleans rolling-caption duplication, and writes `transcripts/ep-{N}.txt` by default. Requires `pip install yt-dlp`. Episodes stream at youtube.com/powerbitips.
 
 **C. Pasted or uploaded transcript.** Save it to `transcripts/ep-{N}.txt` (or `transcripts/{kebab}.txt` if it isn't an episode), then use that file.
@@ -40,8 +42,6 @@ Extract the ideas, arguments, opinions, examples, and analogies **Tommy** raised
 Don't pick for him. Lay out the distinct angles the transcript supports — usually 3 to 6 — each as a one-line thesis with a title direction, the transcript material that powers it, and how fresh it is against articles already in the database (check for existing rows tied to the same episode first; the meeting-note automation may have already claimed the top angle). Recommend one, but the choice is his. Once he picks, the whole post is built around that single angle. Leftover angles become new rows in the articles database with an early-stage Status ("Idea" if the option exists) and a one-paragraph note — the backlog builds itself.
 
 In the repo, the whole mapping lives in one ore file per episode: `src/content/blog/angles/ep-{N}-angles.md` (source links, mined Tommy material, attribution landmines, locked decisions once he picks, leftover angles). Not loaded by Astro. See `src/content/blog/angles/README.md`.
-
-If Tommy grants batch autonomy ("don't ask, take the best topic"), pick the strongest fresh angle yourself, still checking the database for angle collisions first, and still filing the leftovers as Ideas.
 
 If Tommy grants batch autonomy ("don't ask, take the best topic"), pick the strongest fresh angle yourself, still checking the database for angle collisions first, and still filing the leftovers as Ideas.
 
@@ -89,7 +89,22 @@ The repo is `prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/
 
 **Never commit or push without Tommy's explicit go.** Pushing `main` deploys the live site via GitHub Actions. Offer: preview with `npm run dev`, then he says push, or he pushes himself. If the repo isn't reachable from the current environment, produce the finished `.md` file (correct name, correct front matter) as a download and say exactly where to drop it.
 
-## Step 9 — Close the loop
+## Step 9 — Deliver the artifact to the /prompts/ library
+
+If the post shipped real code, that code also gets its own page. `/prompts/` holds the **complete** copy-paste artifact (full instruction page, agent brief, validation cell, DAX query); the post shows only the teaching slice its argument needs. Duplication between the two is intentional: don't thin the post to avoid it, and don't publish a partial artifact because the post already quoted some of it.
+
+`npm run scan-prompts` reports every published post whose fenced code blocks (8+ non-blank lines; `mermaid` diagrams never count) have no artifact naming them. It runs as the first step of `npm run build` with `--quiet`, so code-heavy posts can't ship stranded, and it never fails the build. `-- --write` scaffolds a draft per gap with the code pre-filled. When a post's code genuinely doesn't belong in the library, set `promptsExempt: true` on the post to silence the scan for it.
+
+**Create one with `npm run new-prompt "Artifact Title" <category-id>`.** Flat folder, no staging: the file lands at `src/content/prompts/<slug>.md` and serves at `/prompts/<slug>/`, so the filename is the permanent URL slug. `draft: true` is the only gate. Front matter (the `prompts` collection in `src/content.config.ts`) requires `title`, `description` (the one-liner on the index), `category`, and `date`; `format` is badge text defaulting to `markdown` (`dax`, `python`), and `updated`, `source`, and `draft` are optional.
+
+- **`category` must be an id from `src/lib/prompt-categories.mjs`** — the zod enum reads that same file, so a typo fails the build. Array order sets section order on `/prompts/` and each id is that section's anchor, which makes the ids permanent.
+- **`source.permalink` must match an existing published post's `permalink`.** A miss logs `[prompts] <id>: source.permalink "..." matches no published post` at build and renders the artifact unlinked, so read the build output. A list is allowed when one artifact was assembled from two posts.
+- **Both directions of the post ↔ artifact link are generated. Never hand-write either one.** The artifact page renders a "From the post" callout and the post template renders a "Prompts and code from this post" box for any artifact citing it, so adding an artifact needs no edit to the post.
+- **Never point a published artifact at a draft one.** Drafts are filtered out of the build, so that link is dead on the live site.
+
+Page shape, matching existing entries: a sentence or two of setup, the artifact in a fenced block, then a short **"Adapting it"** list naming the load-bearing lines and the mistake each one prevents. No "Takeaways" section — that belongs to posts.
+
+## Step 10 — Close the loop
 
 When Tommy approves a post: move the file from `drafts/` to `published/YYYY-MM/` (YYYY-MM from the post date) and flip `draft: true` to `false` (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Do not move images. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. The banner and in-article diagrams were already generated, placed in `public/images/YYYY/MM/`, and wired in during Step 6 — just confirm the `featured` path resolves and the body `![alt](...)` references render.
 
