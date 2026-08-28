@@ -24,8 +24,6 @@ So I ran it again with different inputs. Screenshots of a report page I wanted t
 
 Nothing changed about the tooling between those two runs. What changed was the **context**. And that is the whole ballgame now that agents can genuinely author reports: the bottleneck moved off the tooling and onto whether you can hand over what you know.
 
-![A flat list of measure tokens on the left flowing through a converging node into a structured report page of chart shapes on the right, with a second stream of meeting artifacts joining the flow](/images/2026/08/design-from-the-meeting-banner.png)
-
 ## The Measure List Is Inventory, Not a Requirement
 
 Microsoft's [Skills for Fabric](https://github.com/microsoft/skills-for-fabric) repo shipped skills that author PBIR files, capture screenshots, and iteratively refine report pages. I've used them and I've been genuinely astounded at how well they work. Not perfect. But two months before that, the honest answer to "can an agent design my report?" was no, and the reason "build a report with Copilot" never impressed anybody is that it was guessing at intent from a field list.

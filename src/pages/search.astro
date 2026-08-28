@@ -13,7 +13,7 @@ import Base from '../layouts/Base.astro';
           new window.PagefindUI({ element: '#search', showSubResults: true });
         } else {
           document.getElementById('search').textContent =
-            'Search index not found — it is generated during the production build (npm run build).';
+            'Search index not found. It is generated during the production build (npm run build).';
         }
       });
     </script>

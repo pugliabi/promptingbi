@@ -23,8 +23,6 @@ I'll own something up front: I am AI ready. I can deploy agents, manage them, an
 
 None of that makes my organization AI ready. Not even close.
 
-![A person at a desk surrounded by connected agent nodes on the left, separated by a long dotted gap from a team around a conference table whose dashboard sits unconnected on the right](/images/2026/08/youre-ai-ready-your-organization-isnt-banner.png)
-
 **Nobody has defined what AI ready means for an organization.** We have a decent picture of what it means for a person. We have almost nothing for a group of people who have to produce something together. No roles, no delivery story, no training path, no shared idea of what done looks like. You cannot adopt something nobody has defined, and that, more than any tool gap, is why adoption is crawling.
 
 ## Four Blockers, and Only One Is Real

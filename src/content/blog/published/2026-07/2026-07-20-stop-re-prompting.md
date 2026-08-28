@@ -31,9 +31,7 @@ If you asked me for the one thing you need to make AI work on a real Fabric proj
 
 A harness that works needs four things. **Skills**, so the agent knows how to do the work correctly instead of guessing at what a semantic model even is. **Agents** with intentional, defined roles, not one chatbot you ask to do everything. **Organized context**, not a pile of notes. And the **ability to talk to other tooling**, because no single environment does all of this well. Those four wheels make up the car. Lose one and you're pushing it uphill.
 
-Here's the whole system on one page. The left loop organizes business context around a project hub. That context gets distilled into an instructions page in the middle, and the right loop executes it over MCP against Power BI and Fabric. Results flow back to the left, and the cycle repeats.
-
-![Two-harness workflow: an organizing second brain on the left connected through a central instructions page to an execution harness on the right that produces a Power BI dashboard, with a dotted return arc feeding results back](/images/2026/07/stop-re-prompting-banner.png)
+The first harness organizes business context around a project hub. That context gets distilled into an instructions page, and the second harness executes it over MCP against Power BI and Fabric. Results flow back to the hub, and the cycle repeats.
 
 ## Give Context a Home
 

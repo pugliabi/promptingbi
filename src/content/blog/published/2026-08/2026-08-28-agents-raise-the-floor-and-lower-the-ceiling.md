@@ -24,11 +24,11 @@ Point somebody brand new at a semantic model through an MCP server and ask for a
 
 That is the part of agentic tooling I do not think teams have priced in yet. Not that it fails loudly. That it succeeds quietly at the wrong thing.
 
-So let me make a prediction rather than a complaint, because I think this is simply what is going to happen as agentic tooling lands on data teams: **hand DAX agents to people who have not done the work, and you will raise their floor while lowering their ceiling.** Both halves of that are real. The floor going up is immediate, visible, and genuinely good. The ceiling coming down is slow, quiet, and it lands on the person instead of the project. Which is exactly why it is the one you have to design around.
+So let me make a prediction rather than a complaint, because this is simply what is going to happen as agentic tooling lands on data teams: **hand DAX agents to people who have not done the work, and you will raise their floor while lowering their ceiling.** Both halves of that are real. The floor going up is immediate, visible, and genuinely good. The ceiling coming down is slow, quiet, and it lands on the person instead of the project. Which is exactly why it is the one you have to design around.
 
-![A small figure standing on top of four solid ascending steps with their head close beneath a heavy horizontal plane that caps the staircase, the steps above it continuing only as faint dotted outlines while flowing lines and nodes drift up past the cap toward a target circle the figure cannot reach](/images/2026/08/floor-ceiling-banner.png)
+![A figure standing on a low platform pushed upward by a thick arrow from below while a heavy horizontal plane above is pressed down by an arrow from above, compressing the space between them into one narrow band where flowing lines and nodes travel right into a bar chart and a dashboard card, and faint dotted paths stop against the underside of the plane beneath a cluster of ERD table cards the figure cannot reach](/images/2026/08/floor-ceiling-narrowing-band.png)
 
-## The Floor Is Real, and I Am the One Who Said So
+## The Floor Can Be Real
 
 I have argued the bull case myself, so I am not going to pretend otherwise now. Put an MCP server against a development semantic model, hand it to someone on their first week, and say "go see what we have and help organize it." Write the descriptions. Clean up the measure names. Tell me what relationships exist and which ones look wrong. That work is genuinely valuable, it used to require somebody who already understood tabular modeling, and now it does not. An intern could do it. A data steward could do it. A chat interface that executes real functions against a real model is one of the best introductions to a semantic model that has ever existed.
 
@@ -40,7 +40,7 @@ Sit with that for a second, because both sentences are true at the same time.
 
 ## DAX Punishes This More Than Anything Else
 
-Every language has a version of this problem. DAX has the worst one, and it is worth being specific about why.
+Every language has a version of this problem. DAX has the worst one.
 
 When people struggle to learn Python, they are usually struggling with the size of the language. There is a function for everything and you do not know which one exists. DAX is not like that. There are maybe ten functions that matter for the overwhelming majority of real work. CALCULATE. FILTER. The time intelligence family. If you master those you have covered most of what you will write in a career. The catalog is not the wall.
 
@@ -82,23 +82,23 @@ So what do I want somebody to prove before I hand them agentic tooling? Three th
 
 **Gate one: semantic modeling.** DAX success is the model. Your measures and your relationships ARE the business logic, and the semantic layer is where the meaning lives. Want better DAX? Build a better model. That is not a slogan, it is usually the literal fix.
 
-Here is the demo I show in every DAX training I run, because it lands harder than any explanation. Somebody skips building a date table, because the fact table already has dates on it, and then asks for year to date:
+Here is the demo I show in every DAX training I run. Same function, same intent, one difference:
 
 ```dax
--- No date table in the model, so time intelligence is pointed at the fact table
+-- WRONG. No date table, so time intelligence is pointed at a fact column and
+-- only sees the dates sitting in the current filter context. On a product row
+-- that is the dates that product happened to sell on, so every product gets
+-- its own private year to date off its own last order.
 Sales YTD =
 TOTALYTD ( SUM ( Sales[Amount] ), Sales[OrderDate] )
-```
 
-Drop that on a card. The total looks right. Put it in a table by product and it starts lying. Time intelligence needs a contiguous calendar, and when you point it at a fact column it works with only the dates present in the current filter context. On a product row, that is only the dates that product happened to sell on. So each product's year to date resolves against its OWN most recent order date. A product that stopped selling in March shows a complete-looking year. The grand total still looks plausible, because across all products the dates fill in.
-
-```dax
--- With a marked date table and a relationship, "year" means the calendar's year
+-- RIGHT. Marked date table, related to Sales, contiguous calendar. "Year"
+-- means the calendar's year no matter which row the measure lands on.
 Sales YTD =
 TOTALYTD ( SUM ( Sales[Amount] ), 'Date'[Date] )
 ```
 
-Same function. Same intent. Entirely different truth. How would somebody who never learned modeling catch that? They would not, and neither would the agent, because nothing about the first version is malformed.
+You know what that does. The part worth sitting with is that nothing about the first version is malformed, so nothing flags it: both look fine on a card, the wrong one only starts lying once you break it out by product, and neither the person who asked nor the agent that wrote it has any reason to go looking.
 
 ![Three sequential gate arches labeled by shape rather than text, a model card set then a nested context frame then a calculation engine node, opening onto an agent node on the right](/images/2026/08/floor-ceiling-three-gates.png)
 
@@ -108,32 +108,30 @@ Same function. Same intent. Entirely different truth. How would somebody who nev
 
 ## What "Prove It" Actually Looks Like
 
-I get asked whether new hires should still take the SQLBI courses, or whether you can just let them drive straight into the tooling. My answer is that yes, I still insist, and I do not think that is a nostalgic position.
+I get asked whether new hires should still take the SQLBI courses, or whether you can just let them drive straight into the tooling. Yes, I still insist. That is not nostalgia.
 
 But a certificate is not the gate. What I actually want is **a series of tests, plus real time working alongside them.** Not a single exam with a pass mark. A repeated demonstration that they can see what is in front of them, checked by somebody who can already see it.
 
-The single best test I know is the cheapest one to run, and it inverts the usual exercise. Do not ask them to write DAX. Put DAX in front of them and have them explain it back to you as if the agent had just handed it over:
+The single best test I know is the cheapest one to run, and it inverts the usual exercise. Do not ask them to write DAX. Put DAX in front of them and have them explain it back to you as if the agent had just handed it over. Somebody asked for revenue from orders above five thousand dollars, and this came back:
 
 ```dax
-Margin % =
-DIVIDE (
-    CALCULATE (
-        SUM ( Sales[Amount] ) - SUM ( Sales[Cost] ),
-        ALL ( 'Product' )
-    ),
-    SUM ( Sales[Amount] )
+-- [Total Sales] = SUM ( Sales[Amount] )
+Sales From Large Orders =
+SUMX (
+    FILTER ( Sales, [Total Sales] > 5000 ),
+    Sales[Amount]
 )
 ```
 
-What does this return on a product row? Why? Is that what anybody wanted?
+What is this filtering? Why? Is that what anybody wanted?
 
-The measure runs. It returns a percentage. It will look entirely respectable on a card. It is also comparing all-product margin against a single product's sales, which is a number that means nothing at all. Somebody who has made the shift sees the `ALL` and knows the numerator and denominator are living in different contexts. Somebody who has not made the shift sees a percentage and moves on. That is the whole gate, in one measure, in about ninety seconds.
+The measure runs. It returns a believable number that sits happily next to last quarter's. It is also filtering line items instead of orders, because referencing a measure inside `FILTER` over the fact table triggers context transition, so `[Total Sales]` gets evaluated one line at a time and the order total never enters the picture. Somebody who has made the shift asks what context `[Total Sales]` is being evaluated in before they look at the number at all. Somebody who has not made the shift reads it the way it reads in English and moves on. That is the whole gate, in one measure, in about ninety seconds.
 
 From there, build the question bank, because expert review is really just a list of questions that only exist because you have been burned before. Why this cardinality? Why is cross-filtering bidirectional here? Are there three FILTER functions stacked inside this measure, and is there a simpler pattern? Is this time intelligence pointed at a real date table? Every failure you catch becomes a permanent new question on the list, and the list is the thing you are actually training.
 
 Because here is who pays if you skip this. A junior cannot QA their own work when the failure mode is invisible to them. They will look at it. They will not know what to look for. So it lands on the senior, and reviewing DAX all day is not a fun job. It is also not what you hired that person for.
 
-And this is where I will part ways slightly with the optimistic version of this story. Yes, seniors should be pouring their knowledge into skills and custom agents. I completely agree with that, and it is the best answer anybody has offered to a problem we have never solved, which is how you get expertise out of one person's head and into the organization. Tools like Skill Vault make that genuinely practical now. But baking a senior's knowledge into an agent does not give a junior the reps. It gives them a better agent. Those are not the same thing, and I do not think we should let the first one quietly stand in for the second.
+This is where I part ways with the optimistic version of this story. Yes, seniors should be pouring their knowledge into skills and custom agents. That is the best answer anybody has offered to a problem we have never solved, which is how you get expertise out of one person's head and into the organization. Tools like Skill Vault make that genuinely practical now. But baking a senior's knowledge into an agent does not give a junior the reps. It gives them a better agent. Those are not the same thing, and we should not let the first one quietly stand in for the second.
 
 ## Then the Agent Stops Being a Token Furnace
 
@@ -147,7 +145,7 @@ They stop burning tokens rediscovering the same solved problem in a slightly dif
 
 And you have not quietly capped somebody's career on their way in the door.
 
-I keep coming back to a question I cannot shake, which is what happens when somebody interviews and tells me that ninety-five percent of what they do is agents, they have workflows and AI, and they do not really write DAX anymore. Am I hiring that person? Am I letting that become the standard process on my team? I genuinely do not think we know the answer yet, and I am suspicious of anybody who says they do.
+I cannot shake this question. Somebody interviews and tells me that ninety-five percent of what they do is agents, they have workflows and AI, and they do not really write DAX anymore. Am I hiring that person? Am I letting that become the standard process on my team? I genuinely do not think we know the answer yet, and I am suspicious of anybody who says they do.
 
 What I do know is that one thing in this story is not moving. When a senior sits with a stakeholder, that stakeholder has to be able to trust what they are hearing. You can prompt an artifact into existence. You cannot prompt your way into being believed in the room, because eventually somebody asks a follow-up question and you either know or you do not.
 

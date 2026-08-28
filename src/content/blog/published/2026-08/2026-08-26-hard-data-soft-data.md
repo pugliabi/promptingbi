@@ -25,8 +25,6 @@ Nothing in your semantic model can fix that.
 
 We've spent fifteen years getting very good at **hard data**: the relational, tabular, modeled world that lives in Power BI and Fabric. Whether agentic analytics works at your company gets decided by the other kind, what I call **soft data**. The decision logs, the org structure, the roadmaps, the meeting notes, the pile of context that explains what your hard data means. Almost every team skips it, because it never shows up as a deliverable. It became part of the BI estate anyway.
 
-![Two parallel streams flowing left to right into one dashboard: the top stream is structured table cards and star schema shapes, the bottom stream is loose documents, chat bubbles, and org chart nodes, and the two merge at a single node before the chart](/images/2026/07/hard-data-soft-data-banner.png)
-
 ## Two Kinds of Data
 
 **Hard data** is everything we already treat as our job. Fact tables, dimensions, relationships, measures. Modeled, refreshed, secured, living in a semantic model where every column has a place. When someone says "data," this is what BI professionals picture.

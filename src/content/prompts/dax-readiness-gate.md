@@ -21,21 +21,21 @@ The exercises deliberately invert the usual test. Nobody is asked to write DAX. 
 Purpose: decide whether this person gets agentic DAX tooling yet.
 Not a certificate. A series of checks, repeated, with someone who can already see it.
 
-## Gate 1 — Semantic modeling
+## Gate 1. Semantic modeling
 - [ ] Can draw our star schema on a whiteboard from memory: facts, dimensions, grain
 - [ ] Can explain why a date table exists and what "mark as date table" changes
 - [ ] Can name one relationship in our model that is deliberately single-direction, and why
 - [ ] Given a new requirement, can say whether it needs a new measure, a model change,
       or an upstream change
 
-## Gate 2 — Filter and evaluation context
+## Gate 2. Filter and evaluation context
 - [ ] Has personally hit "works in a table, blank on a card" and can explain the cause
 - [ ] Can predict what a measure returns on a total row before running it
 - [ ] Can explain what CALCULATE does to filter context in their own words,
       without using the word "context" more than twice
 - [ ] Can spot when a numerator and denominator are evaluated in different contexts
 
-## Gate 3 — How Power BI wants to calculate
+## Gate 3. How Power BI wants to calculate
 - [ ] Can explain why DAX recalculates on every interaction
 - [ ] Can say what belongs in DAX (filtering, aggregation) vs upstream (row-by-row work,
       pre-computed comparisons)
@@ -52,7 +52,7 @@ Soft pass = they find it after one hint. Repeat in two weeks.
 Fail = "it returns a percentage." Not ready. Keep pairing.
 
 ## Outcome
-- [ ] Gates 1–3 demonstrated, more than once, on our actual model
+- [ ] Gates 1 through 3 demonstrated, more than once, on our actual model
 - [ ] At least three read-back exercises passed
 - [ ] Then: agentic tooling, supervised, with review for the first month
 ```
@@ -62,12 +62,15 @@ Fail = "it returns a percentage." Not ready. Keep pairing.
 Four measures that run clean and mean nothing. Each one fails differently on purpose.
 
 ```dax
--- 1. Mismatched contexts. Numerator ignores Product, denominator doesn't.
--- Listen for: they notice ALL() before they comment on the number.
-Margin % =
-DIVIDE (
-    CALCULATE ( SUM ( Sales[Amount] ) - SUM ( Sales[Cost] ), ALL ( 'Product' ) ),
-    SUM ( Sales[Amount] )
+-- 1. Context transition. [Total Sales] inside FILTER over the fact table is
+--    evaluated one line at a time, so this keeps line items over 5000 rather
+--    than orders over 5000. The request said orders.
+-- Listen for: they ask what context [Total Sales] is evaluated in.
+-- [Total Sales] = SUM ( Sales[Amount] )
+Sales From Large Orders =
+SUMX (
+    FILTER ( Sales, [Total Sales] > 5000 ),
+    Sales[Amount]
 )
 
 -- 2. Time intelligence on a fact column with no date table.

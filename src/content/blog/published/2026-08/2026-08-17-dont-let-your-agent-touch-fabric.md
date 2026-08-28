@@ -26,8 +26,6 @@ And my honest first reaction is not suspicion. It's *holy crap, an agent did tha
 
 That feeling is the single most dangerous thing in agentic data engineering, and it's why every Fabric MCP session I open starts the same way. The first prompt doesn't build, doesn't edit, doesn't run anything. It asks the agent to report back on what it sees, and nothing gets touched until it does.
 
-![A large eye on the left casting dotted sight lines across a wired grid of Fabric items on the right: lakehouse cylinders, table cards, and notebook documents all connected to each other](/images/2026/08/agent-touch-fabric-banner.png)
-
 ## The Failure Mode With No Red Squiggly Line
 
 The risk is not that the agent writes bad code. Give a modern model decent instructions and it writes genuinely good PySpark. It authenticates properly, it factors shared logic into helpers, and it doesn't dump seventeen operations into one giant cell. Review it the way you'd review a colleague's pull request and you won't find much to complain about, because there isn't much. The code is direct and efficient and it does exactly what it says.

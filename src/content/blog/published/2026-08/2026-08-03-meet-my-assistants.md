@@ -19,15 +19,13 @@ source:
 ---
 
 **Harness series**
-1. [Part 1 — Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)
-2. [Part 2 — Meet My Assistants](/2026/08/03/meet-my-assistants/) *(this post)*
-3. [Part 3 — Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/)
+1. [Part 1: Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)
+2. [Part 2: Meet My Assistants](/2026/08/03/meet-my-assistants/) *(this post)*
+3. [Part 3: Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/)
 
 Every consulting project I've ever seen has the same quiet lie in it: the records say one thing and reality says another. The milestone reads "In progress" two weeks after the work shipped. The deliverable says "Not started" when it was finished on a Tuesday call nobody logged. Left alone, that gap grows until the status update becomes an archaeology project you do the night before the client call.
 
 I used to close that gap by hand. Now my assistants close it with me. This is part two of the harness series ([part one](/2026/07/29/anatomy-of-a-project-hub/) built the hub), and it's the part that ties the harness together: the assistants are what make the organized context, the MCP sessions, and the Fabric project work function as one system instead of separate tricks. Because a second brain with stale records isn't a second brain. It's a liability with good formatting.
-
-![Two agent figures at a project board on the left passing a checklist through a human approval checkpoint into an updated status document on the right](/images/2026/08/the-department-audit-banner.png)
 
 ## These Are My Assistants
 

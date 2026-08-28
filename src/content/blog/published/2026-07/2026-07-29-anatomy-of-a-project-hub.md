@@ -17,17 +17,15 @@ source:
 ---
 
 **Harness series**
-1. [Part 1 — Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/) *(this post)*
-2. [Part 2 — Meet My Assistants](/2026/08/03/meet-my-assistants/)
-3. [Part 3 — Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/)
+1. [Part 1: Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/) *(this post)*
+2. [Part 2: Meet My Assistants](/2026/08/03/meet-my-assistants/)
+3. [Part 3: Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/)
 
 When I wrote [Stop Re-Prompting](/2026/07/20/stop-re-prompting-second-brain-agent-instructions/), the idea that got the most questions wasn't the agents. It wasn't the MCP servers either. It was the hub. People wanted to see it. What does "the project is the hub" actually look like on the page? What kinds of pages? How do they connect? What does an agent actually read when it walks in the door?
 
 Fair enough. This post is the tour. It also kicks off a series on the two-harness loop: this one covers the **organized context**, the next introduces **my assistants**, the agents that keep the whole thing honest, and the third runs the **MCP execution session**.
 
 So let's take a project. We'll call it **Northside Baseball**, a baseball team with a front office sitting on ticketing data, a CRM, and a books system that don't talk to each other. The engagement covers a semantic model and Power BI reporting, a Fabric data platform underneath it, and the notebooks that tie it all together. The structure you're about to see is the structure of every project I run.
-
-![A central project hub node connected by relation lines to milestone cards, meeting notes, deliverable checklists, and agent badges, flowing right into a Power BI dashboard](/images/2026/07/anatomy-of-a-project-hub-banner.png)
 
 ## The Project Is the Hub, Everything Else Is a Relation
 

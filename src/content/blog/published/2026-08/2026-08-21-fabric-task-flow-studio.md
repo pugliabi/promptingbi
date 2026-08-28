@@ -22,8 +22,6 @@ Here is the thing nobody tells you about starting a Fabric project. The hard par
 
 I walked a room through this last week and the reaction I kept getting was some version of "wait, it actually made the items?" It did. So let's go through the whole thing: what it is, how to get it running, and what each phase actually gives you.
 
-![A speech bubble on the left flowing through a chain of connector nodes into a cluster of lakehouse cylinders, a notebook card, and a bar chart on the right](/images/2026/08/fabric-task-flow-studio-banner.png)
-
 ## What It Actually Is
 
 Microsoft's Alex Powers built [fabric-task-flows](https://github.com/microsoft/fabric-task-flows), a set of agent skills and registries that drive a Fabric architecture pipeline from the terminal. That is the engine. It ships 13 pre-defined task flows (medallion, streaming, hybrid, ML, API, governance, and more), 7 decision guides, and a registry of 45 Fabric item types with their API paths, CI/CD strategy, and deployment order.
