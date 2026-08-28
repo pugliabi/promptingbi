@@ -10,14 +10,14 @@ Local source-of-truth for episode transcripts. Not a content collection. Never o
 ## When Tommy asks for a transcript
 
 1. Check `transcripts/ep-{N}.txt` first. If it exists, use it (do not re-fetch unless he says refresh/update).
-2. Otherwise fetch: Notion meeting note preferred (speaker labels; `include_transcript: true`). Else YouTube via `.cursor/skills/writing-promptingbi-articles/scripts/fetch_youtube_transcript.py`. Else a paste.
+2. Otherwise fetch: YouTube first, running `.cursor/skills/writing-promptingbi-articles/scripts/fetch_youtube_transcript.py` on the link Tommy gives you. Else a paste. No source carries speaker labels.
 3. Write `transcripts/ep-{N}.txt` with the header in `transcripts/README.md`. Overwrite on refresh.
 
 Filename: `ep-{N}.txt` (`ep-545.txt`). Non-episode recordings: kebab slug, still under `transcripts/`.
 
 ## When creating or editing an article
 
-1. If the post has `source.episode` or Tommy names an episode, read `transcripts/ep-{N}.txt` **before** Notion/YouTube.
+1. If the post has `source.episode` or Tommy names an episode, read `transcripts/ep-{N}.txt` **before** fetching from YouTube.
 2. If missing, fetch, save, then draft/edit from that file.
 3. Set `source.transcript: "transcripts/ep-{N}.txt"` in front matter (editor-only, never rendered).
 

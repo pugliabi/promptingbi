@@ -1,6 +1,6 @@
 ---
 name: writing-promptingbi-articles
-description: "Turn a podcast transcript into a standalone, publish-ready PromptingBI blog article in Tommy Puglia's voice, delivered to BOTH the ✍️ Prompting BI Articles database in Notion AND the prompting-bi Astro repo (promptingbi.com). Sources: an Explicit Measures / EMP episode page or its Notion meeting-note transcript, a YouTube URL (bundled yt-dlp script pulls and cleans the captions), or a pasted transcript file. Use whenever Tommy wants to blog an episode, convert a transcript or recording into an article, draft a PromptingBI post, grab a YouTube transcript, or says things like 'blog this episode', 'turn ep 504 into an article', 'write this up for Prompting BI', 'get the transcript from this YouTube link', 'add this to the articles database'. Also use to file leftover episode topics as Idea entries in the articles database."
+description: "Turn a podcast transcript into a standalone, publish-ready PromptingBI blog article in Tommy Puglia's voice, delivered to BOTH the ✍️ Prompting BI Articles database in Notion AND the prompting-bi Astro repo (promptingbi.com). Sources: a YouTube URL for an Explicit Measures / EMP episode (bundled yt-dlp script pulls and cleans the captions) or a pasted transcript file. Use whenever Tommy wants to blog an episode, convert a transcript or recording into an article, draft a PromptingBI post, grab a YouTube transcript, or says things like 'blog this episode', 'turn ep 504 into an article', 'write this up for Prompting BI', 'get the transcript from this YouTube link', 'add this to the articles database'. Also use to file leftover episode topics as Idea entries in the articles database."
 ---
 
 # Writing PromptingBI Articles
@@ -13,83 +13,83 @@ Every article ships to BOTH places, every run, in this order:
 
 Read `references/voice-and-style.md` and `references/article-structure.md` before drafting a single sentence, and `references/publishing-targets.md` before writing to Notion or the repo. They are short and they are the spec.
 
-## Step 1 — Get the transcript
+## Step 1: Get the transcript
 
-**Local cache first.** Transcripts live in the prompting-bi repo at `transcripts/ep-{N}.txt`. Before Notion or YouTube:
+**Local cache first.** Transcripts live in the prompting-bi repo at `transcripts/ep-{N}.txt`. Before any fetch:
 
 1. If Tommy named an episode (or a post's `source.episode` is set), read `transcripts/ep-{N}.txt` if it exists.
 2. Use it as-is unless he said refresh/update.
-3. On a miss or refresh, fetch via A/B/C below, then write that file (overwrite on refresh). Set `source.transcript: "transcripts/ep-{N}.txt"` on the post.
+3. On a miss or refresh, fetch via A/B below, then write that file (overwrite on refresh). Set `source.transcript: "transcripts/ep-{N}.txt"` on the post.
 
-Three fetch routes. Pick whichever matches what Tommy gave you; ask only if none apply.
+Two fetch routes, YouTube first. Pick whichever matches what Tommy gave you; ask only if neither applies.
 
-**A. EMP episode (Notion).** Find the episode page in the EMP data source (`collection://3bb02401-3320-4eb7-92fe-d5197943f569`) by name or EpNum. The transcript is usually a Notion AI meeting note on or linked from the episode page: fetch it with `include_transcript: true`. The episode page also carries the agent agenda columns (GPT / Google / Claude) and the Description — useful for framing, but the transcript is the source of truth for what Tommy actually argued. After fetching, save the meeting-note transcript (not the AI summary) to `transcripts/ep-{N}.txt`.
+**A. YouTube URL (primary).** Tommy hands over the episode's YouTube link. Run `scripts/fetch_youtube_transcript.py <url>` from the repo. It pulls captions with yt-dlp, cleans rolling-caption duplication, and writes `transcripts/ep-{N}.txt` by default. Requires `pip install yt-dlp`. Episodes stream at youtube.com/powerbitips.
 
-> **Critical:** a Notion meeting note usually contains BOTH a `<transcript>` and an AI-written `<summary>`, and that summary is composed in Tommy's first-person voice. It reads exactly like him and it is not him. Polished lines that appear only in the summary were written by an automation, not spoken on the recording. Mine the transcript for what Tommy actually argued; treat summary-only phrasing as a theme you may develop, never as a quote or as evidence of what he said. Note too that the `<transcript>` often comes back as a placeholder pointing at a `#`-anchored URL rather than the text itself, which takes a second, deliberate fetch of that URL — skip it and you are left holding only the summary.
+**B. Pasted or uploaded transcript (fallback).** Save it to `transcripts/ep-{N}.txt` (or `transcripts/{kebab}.txt` if it isn't an episode), then use that file.
 
-**B. YouTube URL.** Run `scripts/fetch_youtube_transcript.py <url>` from the repo. It pulls captions with yt-dlp, cleans rolling-caption duplication, and writes `transcripts/ep-{N}.txt` by default. Requires `pip install yt-dlp`. Episodes stream at youtube.com/powerbitips.
+Notion still holds the episode metadata, just not the transcript. Find the episode page in the EMP data source (`collection://3bb02401-3320-4eb7-92fe-d5197943f569`) by name or EpNum for the agent agenda columns (GPT / Google / Claude) and the Description, which help with framing and with the angle-collision check in Step 3. The transcript is still the source of truth for what Tommy actually argued.
 
-**C. Pasted or uploaded transcript.** Save it to `transcripts/ep-{N}.txt` (or `transcripts/{kebab}.txt` if it isn't an episode), then use that file.
+No source carries speaker labels, so attribution is Step 2's job. Never leave transcripts in `src/content/blog/angles/`, `src/content/blog/backlog/`, or the repo root.
 
-YouTube auto-captions carry no speaker labels; Notion meeting notes usually do. Note which situation you are in — it changes how you do Step 2. Never leave transcripts in `src/content/blog/angles/`, `src/content/blog/backlog/`, or the repo root.
+## Step 2: Mine Tommy's points
 
-## Step 2 — Mine Tommy's points
+Extract the ideas, arguments, opinions, examples, and analogies **Tommy** raised. No source carries speaker labels, so attribute by **vocative voting**: the transcript segments turns with `>>`, and the two hosts address each other by name constantly, so a turn containing "Mike" but not "Tommy" is Tommy speaking, and a turn containing "Tommy" but not "Mike" is Mike. Turns naming neither host are discarded, not guessed at. Across 19 episodes this produced 32,505 attributed Tommy words from 228 turns and threw away roughly 87 percent of the raw corpus, which is the right trade. Discarding unattributable material is correct; inferring authorship from topic or tone is not, because putting a co-host's position in Tommy's mouth is the exact failure this prevents. Skip mailbag questions, news/product-update segments, and co-host tangents unless one directly sharpens a point of his.
 
-Extract the ideas, arguments, opinions, examples, and analogies **Tommy** raised. With speaker labels, this is mechanical. Without them, infer from context: Tommy is the consultant/MVP voice talking governance, semantic models, prompting, agentic workflows, client stories; when attribution is genuinely uncertain, treat the idea as shared material and only build on it if it fits his known positions — never put a co-host's hot take in his mouth. Skip mailbag questions, news/product-update segments, and co-host tangents unless one directly sharpens a point of his.
+**Mine adjacent episodes too, not just the source one.** Once the angle is set, query the EMP data source for earlier episodes on the same theme, then get each transcript from the local `transcripts/` cache first and from YouTube via `scripts/fetch_youtube_transcript.py` otherwise. You are after supplementary Tommy material: a better analogy, a sharper one-liner, a client story, the same argument he made more clearly six weeks earlier. Dispatch a subagent per transcript (they are 50-80 KB each) and ask it to return only angle-relevant material with per-item attribution by the same vocative-voting rule: confidently Tommy, confidently co-host, or unattributable and therefore dropped. This is what separates an article from a single-episode recap, and Tommy asks for it by name.
 
-## Step 3 — Map the angles, then Tommy picks ONE
+## Step 3: Map the angles, then Tommy picks ONE
 
-Don't pick for him. Lay out the distinct angles the transcript supports — usually 3 to 6 — each as a one-line thesis with a title direction, the transcript material that powers it, and how fresh it is against articles already in the database (check for existing rows tied to the same episode first; the meeting-note automation may have already claimed the top angle). Recommend one, but the choice is his. Once he picks, the whole post is built around that single angle. Leftover angles become new rows in the articles database with an early-stage Status ("Idea" if the option exists) and a one-paragraph note — the backlog builds itself.
+Don't pick for him. Lay out the distinct angles the transcript supports (usually 3 to 6), each as a one-line thesis with a title direction, the transcript material that powers it, and how fresh it is against articles already in the database (check for existing rows tied to the same episode first; an earlier run may have already claimed the top angle). Recommend one, but the choice is his. Once he picks, the whole post is built around that single angle. Leftover angles become new rows in the articles database with an early-stage Status ("Idea" if the option exists) and a one-paragraph note. The backlog builds itself.
 
 In the repo, the whole mapping lives in one ore file per episode: `src/content/blog/angles/ep-{N}-angles.md` (source links, mined Tommy material, attribution landmines, locked decisions once he picks, leftover angles). Not loaded by Astro. See `src/content/blog/angles/README.md`.
 
 If Tommy grants batch autonomy ("don't ask, take the best topic"), pick the strongest fresh angle yourself, still checking the database for angle collisions first, and still filing the leftovers as Ideas.
 
-## Step 4 — Walk the areas (this is what makes it his)
+## Step 4: Walk the areas (this is what makes it his)
 
-Before drafting, go through the planned areas with Tommy, one quick pass: for each area, ask for his take in a sentence — a client story, a contrarian position, the analogy he'd reach for, what people get wrong. Keep it fast and conversational; one message with the areas listed is enough, and "just draft it" is always an acceptable answer. Anything he gives you here outranks the transcript. This pass is the difference between an AI summary of a show and Tommy's article, so don't skip offering it — unless he has explicitly waived it for a batch run.
+Before drafting, go through the planned areas with Tommy, one quick pass. For each area, ask for his take in a sentence: a client story, a contrarian position, the analogy he'd reach for, what people get wrong. Keep it fast and conversational; one message with the areas listed is enough, and "just draft it" is always an acceptable answer. Anything he gives you here outranks the transcript. This pass is the difference between an AI summary of a show and Tommy's article, so don't skip offering it unless he has explicitly waived it for a batch run.
 
-## Step 5 — Draft
+## Step 5: Draft
 
-Write 1,200–1,800 words following `references/voice-and-style.md` (how it sounds) and `references/article-structure.md` (how it's shaped). Hard rules worth repeating because they get violated: first person, no em dashes anywhere, no episode references, no invented facts/features/stats not supported by the transcript or by Tommy in Step 4, end with the meta description and 5–8 topic tags. If the article walks a worked example or shows agent tooling, follow the "Worked examples and code blocks" section of `voice-and-style.md`: no demo/fictional framing, no plumbing code (SQL/MCP config), instruction-page markdown slices as the signature code blocks, sourced from Tommy's real instruction pages when they exist.
+Write 1,200 to 1,800 words following `references/voice-and-style.md` (how it sounds) and `references/article-structure.md` (how it's shaped). **Code-heavy articles run longer, and that is what Tommy wants:** when a post walks a worked example with several real code blocks, 2,500 to 3,000+ words is correct, and cutting code to hit a word target is the wrong trade every time. The word range governs prose padding, not worked examples. Hard rules worth repeating because they get violated: first person, no em dashes anywhere, no episode references, no invented facts/features/stats not supported by the transcript or by Tommy in Step 4, end with the meta description and 5 to 8 topic tags. If the article walks a worked example or shows agent tooling, follow the "Worked examples and code blocks" section of `voice-and-style.md`: no demo/fictional framing, no plumbing code (SQL/MCP config), instruction-page markdown slices as the signature code blocks, sourced from Tommy's real instruction pages when they exist.
 
-## Step 6 — Generate the banner AND in-article helper diagrams
+## Step 6: Generate the banner AND in-article helper diagrams
 
-Read `references/image-style.md` first — it is the PromptingBI image house style (monochrome teal on white, flat editorial vector, left→right BI narrative) and is mandatory for every image so new art matches the existing banners.
+Read `references/image-style.md` first. It is the PromptingBI image house style (monochrome teal on white, flat editorial vector, left→right BI narrative) and is mandatory for every image so new art matches the existing banners.
 
 **Generate real images by default, not just prompts, and not just the hero.** Every article ships with:
 
 1. **One hero banner** (16:9) used as the `featured` front-matter image (doubles as the OG image).
-2. **Two to four in-article helper diagrams**, one per major section or concept — the visuals that walk a reader through each area of the argument, not decoration. Map each planned diagram to the section it illustrates before generating.
+2. **Two to four in-article helper diagrams**, one per major section or concept. These are the visuals that walk a reader through each area of the argument, not decoration. Map each planned diagram to the section it illustrates before generating.
 
 Workflow for each image:
 
 - Write a complete standalone subject description (subject, setting, left→right composition) and append the style suffix from `references/image-style.md`.
 - Pass an existing banner (e.g. `public/images/2026/07/governance-agent-banner.png`) as a **style reference image** so palette and line weight stay consistent. If the generator borrows too literally from the reference's motifs (it will sometimes reuse the boardroom circle or folder), regenerate that one image tighter and without the reference.
-- Aspect ratio: **16:9** for the banner, **4:3** for in-article diagrams (the built-in generator accepts `1:1 / 4:3 / 3:4 / 16:9 / 9:16` only — 3:2 is rejected, use 4:3).
+- Aspect ratio: **16:9** for the banner, **4:3** for in-article diagrams (the built-in generator accepts `1:1 / 4:3 / 3:4 / 16:9 / 9:16` only, so 3:2 is rejected; use 4:3).
 - Name files `<slug>-banner.png` for the hero and `<slug>-<concept>.png` for each diagram (e.g. `stop-re-prompting-handoff.png`).
 - Save/copy every file into `public/images/YYYY/MM/` mirroring the post date.
 - Wire them in: set `featured: /images/YYYY/MM/<slug>-banner.png` in front matter, and reference each diagram in the body right after the paragraph it illustrates as `![descriptive alt](/images/YYYY/MM/name.png)`. The `featured` banner only renders on the built site, so if the article benefits from an at-a-glance overview, also place the banner inline in the body once. Write real, descriptive alt text for all of them (images carry no text, so alt text does the explaining).
 
 If Tommy hands a hand-drawn diagram or sketch, treat it as the source of truth for the banner concept and break its regions into the per-section helper diagrams.
 
-**Fallback (only when no image-generation tool is available in the environment):** output 2–4 ready-to-run, paste-ready prompts instead (same subjects + style suffix), tell Tommy the target filenames and where they go, and still wire the markdown `![alt](...)` references so dropping the files in later is zero-friction.
+**Fallback (only when no image-generation tool is available in the environment):** output 2 to 4 ready-to-run, paste-ready prompts instead (same subjects + style suffix), tell Tommy the target filenames and where they go, and still wire the markdown `![alt](...)` references so dropping the files in later is zero-friction.
 
-## Step 7 — Deliver to Notion
+## Step 7: Deliver to Notion
 
 Create the page in the ✍️ Prompting BI Articles data source using the property map and page-content pattern in `references/publishing-targets.md` (article body, then collapsible Image Ideas and SEO Notes toggles, matching existing entries). Fill the Episode relation when the source was an EMP episode. Status starts at "Drafting".
 
-## Step 8 — Deliver to the repo
+## Step 8: Deliver to the repo
 
-The repo is `prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/prompting-bi` under WSL). Before writing anything, read the repo's `CLAUDE.md` and `src/content.config.ts` — the front-matter schema is enforced at build time and a bad post fails the deploy. Write the post per the contract in `references/publishing-targets.md`, including the required `permalink` in `YYYY/MM/DD/slug` form (this preserves URL structure from the WordPress era; never route by filename).
+The repo is `prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/prompting-bi` under WSL). Before writing anything, read the repo's `CLAUDE.md` and `src/content.config.ts`. The front-matter schema is enforced at build time and a bad post fails the deploy. Write the post per the contract in `references/publishing-targets.md`, including the required `permalink` in `YYYY/MM/DD/slug` form (this preserves URL structure from the WordPress era; never route by filename).
 
 **Filename rule (always):** name the file `src/content/blog/drafts/YYYY-MM-DD-<slug>.md`, where `YYYY-MM-DD` is the post's `date` and `<slug>` is the kebab-case title slug (the same slug used in the `permalink`). Example: date `2026-07-20` + slug `my-post` -> `drafts/2026-07-20-my-post.md`. The filename does not affect the URL (routing is by `permalink`). Stages: `angles/` (per-episode ore, not loaded) and `backlog/` (freeform ideas, not loaded) → `drafts/` (WIP) → `published/YYYY-MM/` (live, `draft: false`; month folder from the post date). The repo's `npm run new-post "Title"` scaffolds into `drafts/`.
 
-**Source metadata (when from an EMP episode):** set frontmatter `source.episode` (EpNum), `source.title` (episode Name), `source.notion` (EMP page URL), and `source.transcript` (`transcripts/ep-{N}.txt`). Later edits read that file first; Notion/YouTube only on a miss or refresh. Omit `source` for original / non-episode posts. This is editor-only and must never appear in the published article body.
+**Source metadata (when from an EMP episode):** set frontmatter `source.episode` (EpNum), `source.title` (episode Name), `source.notion` (EMP page URL), and `source.transcript` (`transcripts/ep-{N}.txt`). Later edits read that file first; YouTube only on a miss or refresh. Omit `source` for original / non-episode posts. This is editor-only and must never appear in the published article body.
 
 **Never commit or push without Tommy's explicit go.** Pushing `main` deploys the live site via GitHub Actions. Offer: preview with `npm run dev`, then he says push, or he pushes himself. If the repo isn't reachable from the current environment, produce the finished `.md` file (correct name, correct front matter) as a download and say exactly where to drop it.
 
-## Step 9 — Deliver the artifact to the /prompts/ library
+## Step 9: Deliver the artifact to the /prompts/ library
 
 If the post shipped real code, that code also gets its own page. `/prompts/` holds the **complete** copy-paste artifact (full instruction page, agent brief, validation cell, DAX query); the post shows only the teaching slice its argument needs. Duplication between the two is intentional: don't thin the post to avoid it, and don't publish a partial artifact because the post already quoted some of it.
 
@@ -97,20 +97,20 @@ If the post shipped real code, that code also gets its own page. `/prompts/` hol
 
 **Create one with `npm run new-prompt "Artifact Title" <category-id>`.** Flat folder, no staging: the file lands at `src/content/prompts/<slug>.md` and serves at `/prompts/<slug>/`, so the filename is the permanent URL slug. `draft: true` is the only gate. Front matter (the `prompts` collection in `src/content.config.ts`) requires `title`, `description` (the one-liner on the index), `category`, and `date`; `format` is badge text defaulting to `markdown` (`dax`, `python`), and `updated`, `source`, and `draft` are optional.
 
-- **`category` must be an id from `src/lib/prompt-categories.mjs`** — the zod enum reads that same file, so a typo fails the build. Array order sets section order on `/prompts/` and each id is that section's anchor, which makes the ids permanent.
+- **`category` must be an id from `src/lib/prompt-categories.mjs`.** The zod enum reads that same file, so a typo fails the build. Array order sets section order on `/prompts/` and each id is that section's anchor, which makes the ids permanent.
 - **`source.permalink` must match an existing published post's `permalink`.** A miss logs `[prompts] <id>: source.permalink "..." matches no published post` at build and renders the artifact unlinked, so read the build output. A list is allowed when one artifact was assembled from two posts.
 - **Both directions of the post ↔ artifact link are generated. Never hand-write either one.** The artifact page renders a "From the post" callout and the post template renders a "Prompts and code from this post" box for any artifact citing it, so adding an artifact needs no edit to the post.
 - **Never point a published artifact at a draft one.** Drafts are filtered out of the build, so that link is dead on the live site.
 
-Page shape, matching existing entries: a sentence or two of setup, the artifact in a fenced block, then a short **"Adapting it"** list naming the load-bearing lines and the mistake each one prevents. No "Takeaways" section — that belongs to posts.
+Page shape, matching existing entries: a sentence or two of setup, the artifact in a fenced block, then a short **"Adapting it"** list naming the load-bearing lines and the mistake each one prevents. No "Takeaways" section; that belongs to posts.
 
-## Step 10 — Close the loop
+## Step 10: Close the loop
 
-When Tommy approves a post: move the file from `drafts/` to `published/YYYY-MM/` (YYYY-MM from the post date) and flip `draft: true` to `false` (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Do not move images. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. The banner and in-article diagrams were already generated, placed in `public/images/YYYY/MM/`, and wired in during Step 6 — just confirm the `featured` path resolves and the body `![alt](...)` references render.
+When Tommy approves a post: move the file from `drafts/` to `published/YYYY-MM/` (YYYY-MM from the post date) and flip `draft: true` to `false` (every post is written as a draft so a stray push can't leak it), then he commits and pushes. Do not move images. Once live: set Published URL (`https://promptingbi.com/<permalink>/`), Publish Date, and Status on the Notion page. The banner and in-article diagrams were already generated, placed in `public/images/YYYY/MM/`, and wired in during Step 6. Just confirm the `featured` path resolves and the body `![alt](...)` references render.
 
 ## Environment fallbacks
 
 - **No Notion MCP** (e.g., Claude Code without the connector): still draft and write the repo post; output the would-be Notion page as markdown for manual paste, and say which properties to set.
 - **No repo access** (claude.ai container): still create the Notion page; deliver the Astro `.md` as a downloadable file.
-- **No yt-dlp / offline**: ask for a pasted transcript or the Notion meeting note instead.
+- **No yt-dlp / offline**: ask Tommy for a pasted transcript instead.
 - Never block the whole workflow because one destination is unreachable; deliver what you can and name what's missing.
