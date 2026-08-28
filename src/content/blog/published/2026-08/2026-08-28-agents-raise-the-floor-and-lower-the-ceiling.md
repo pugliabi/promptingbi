@@ -4,6 +4,7 @@ date: 2026-08-28T09:00:00Z
 permalink: "2026/08/28/agents-raise-the-floor-and-lower-the-ceiling"
 description: "Hand a DAX agent to someone who never learned filter context and you make them productive while capping how far they can go. Prove the fundamentals first."
 featured: /images/2026/08/floor-ceiling-banner.png
+draft: false
 tags:
   - dax
   - ai-agents
