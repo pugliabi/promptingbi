@@ -241,7 +241,7 @@ Sample record (values are real, except the four diarization fields which are ill
   "speaker_turns": "data/speakers/ep-549.jsonl",
   "tommy_corpus": "transcripts/tommy/ep-549.txt",
   "angles": "src/content/blog/angles/ep-549-angles.md",
-  "posts": ["2026/08/31/agents-raise-the-floor-and-lower-the-ceiling"],
+  "posts": ["2026/08/28/agents-raise-the-floor-and-lower-the-ceiling"],
   "sources_seen": ["youtube"],
   "updated": "2026-08-28T15:00:00Z"
 }

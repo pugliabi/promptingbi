@@ -2,10 +2,10 @@
 title: "The DAX Readiness Gate"
 description: "The three gates, four trap measures, and pass criteria I use to decide whether someone is ready for agentic DAX tooling."
 category: playbooks
-date: 2026-08-31T09:00:00Z
+date: 2026-08-28T09:00:00Z
 format: markdown
 source:
-  permalink: "2026/08/31/agents-raise-the-floor-and-lower-the-ceiling"
+  permalink: "2026/08/28/agents-raise-the-floor-and-lower-the-ceiling"
 draft: false
 ---
 
@@ -116,4 +116,4 @@ Start here, then add a question every time a review catches something. The list 
 - **Keep the trap measures in source control** and rotate them, because the moment they circulate they stop testing anything.
 - **The read-back is the load-bearing part.** If you only do one thing on this page, hand somebody a broken measure and listen to how they talk about it.
 
-The reasoning behind the gate, and why the order is model first: [Agents Raise the Floor and Lower the Ceiling](/2026/08/31/agents-raise-the-floor-and-lower-the-ceiling/).
+The reasoning behind the gate, and why the order is model first: [Agents Raise the Floor and Lower the Ceiling](/2026/08/28/agents-raise-the-floor-and-lower-the-ceiling/).
