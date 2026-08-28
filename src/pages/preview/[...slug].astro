@@ -1,5 +1,6 @@
 ---
-// DEV-ONLY preview for drafts, scheduled posts, and backlog ideas.
+// DEV-ONLY preview for drafts, scheduled posts, and the two unloaded idea
+// folders (angles/ ore files and backlog/ freeform ideas).
 // `npm run dev` → http://localhost:4321/preview/
 // In `npm run build` getStaticPaths returns [], so nothing here is ever
 // emitted to dist/ or deployed.
@@ -9,27 +10,42 @@ import Base from '../../layouts/Base.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { tagDisplay } from '../../lib/tags.mjs';
 
+// The two folders the content collection never loads. README.md in each is
+// folder documentation, not an idea, so it stays out of the preview.
+const IDEA_FOLDERS = {
+  angles: import.meta.glob('../../content/blog/angles/*.md', { eager: true }),
+  backlog: import.meta.glob('../../content/blog/backlog/*.md', { eager: true }),
+} as Record<string, Record<string, any>>;
+
+function ideaFiles(folder: string) {
+  return Object.entries(IDEA_FOLDERS[folder])
+    .map(([path, mod]) => ({ file: path.split('/').pop()!.replace(/\.md$/, ''), path, mod }))
+    .filter((f) => f.file.toLowerCase() !== 'readme')
+    .sort((a, b) => a.file.localeCompare(b.file));
+}
+
 export async function getStaticPaths() {
   if (!import.meta.env.DEV) return [];
   const posts = await getCollection('blog');
-  const backlog = import.meta.glob('../../content/blog/backlog/*.md', { eager: true });
   return [
     { params: { slug: undefined }, props: { kind: 'index' } },
     ...posts.map((post) => ({
       params: { slug: post.id },
       props: { kind: 'post', post },
     })),
-    ...Object.entries(backlog).map(([path, mod]) => ({
-      params: { slug: `backlog/${path.split('/').pop()!.replace(/\.md$/, '')}` },
-      props: { kind: 'backlog', path, mod },
-    })),
+    ...Object.keys(IDEA_FOLDERS).flatMap((folder) =>
+      ideaFiles(folder).map(({ file, path, mod }) => ({
+        params: { slug: `${folder}/${file}` },
+        props: { kind: 'idea', folder, path, mod },
+      }))
+    ),
   ];
 }
 
 const props = Astro.props as
   | { kind: 'index' }
   | { kind: 'post'; post: CollectionEntry<'blog'> }
-  | { kind: 'backlog'; path: string; mod: any };
+  | { kind: 'idea'; folder: string; path: string; mod: any };
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
@@ -38,18 +54,20 @@ const now = new Date();
 // Index data
 let drafts: CollectionEntry<'blog'>[] = [];
 let scheduled: CollectionEntry<'blog'>[] = [];
-let backlogFiles: { slug: string; title: string }[] = [];
+let ideaSections: { folder: string; files: { slug: string; title: string }[] }[] = [];
 if (props.kind === 'index') {
   const posts = await getCollection('blog');
   const newestFirst = (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
     b.data.date.valueOf() - a.data.date.valueOf();
   drafts = posts.filter((p) => p.data.draft).sort(newestFirst);
   scheduled = posts.filter((p) => !p.data.draft && p.data.date.valueOf() > now.valueOf()).sort(newestFirst);
-  const backlog = import.meta.glob('../../content/blog/backlog/*.md', { eager: true });
-  backlogFiles = Object.entries(backlog).map(([path, mod]: [string, any]) => {
-    const file = path.split('/').pop()!.replace(/\.md$/, '');
-    return { slug: `backlog/${file}`, title: mod.frontmatter?.title ?? file };
-  });
+  ideaSections = Object.keys(IDEA_FOLDERS).map((folder) => ({
+    folder,
+    files: ideaFiles(folder).map(({ file, mod }) => ({
+      slug: `${folder}/${file}`,
+      title: mod.frontmatter?.title ?? file,
+    })),
+  }));
 }
 
 // Post preview data
@@ -69,7 +87,7 @@ const title =
     ? 'Preview — Prompting BI'
     : props.kind === 'post'
       ? `[PREVIEW] ${props.post.data.title}`
-      : `[BACKLOG] ${props.mod.frontmatter?.title ?? props.path.split('/').pop()}`;
+      : `[${props.folder.toUpperCase()}] ${props.mod.frontmatter?.title ?? props.path.split('/').pop()}`;
 ---
 <Base title={title} description="Local preview. Not published.">
   <div class="preview-ribbon">
@@ -80,8 +98,11 @@ const title =
         <a href="/preview/">back to preview index</a>
       </>
     )}
-    {props.kind === 'backlog' && (
-      <>BACKLOG IDEA · not in the content collection · <a href="/preview/">back to preview index</a></>
+    {props.kind === 'idea' && (
+      <>
+        {props.folder === 'angles' ? 'EPISODE ORE' : 'BACKLOG IDEA'} · not in the content collection ·{' '}
+        <a href="/preview/">back to preview index</a>
+      </>
     )}
   </div>
 
