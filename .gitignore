@@ -17,5 +17,12 @@ dist/
 # secret hides inside an archive where *.env above cannot catch it.
 .cursor/skills/*.zip
 
+# Agent scratch dumps (channel_videos_tmp.txt, emp_playlist_tmp.txt and friends).
+# Kept narrow on purpose: transcripts/*.txt are real tracked content, so a broad
+# *.txt rule would hide them. Name throwaway files <thing>_tmp.<ext>.
+*_tmp.txt
+*_tmp.json
+*_tmp.md
+
 __pycache__/
 *.pyc

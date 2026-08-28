@@ -4,7 +4,6 @@ date: 2026-08-31T09:00:00Z
 permalink: "2026/08/31/agents-raise-the-floor-and-lower-the-ceiling"
 description: "Hand a DAX agent to someone who never learned filter context and you make them productive while capping how far they can go. Prove the fundamentals first."
 featured: /images/2026/08/floor-ceiling-banner.png
-draft: false
 tags:
   - dax
   - ai-agents
@@ -26,7 +25,7 @@ That is the part of agentic tooling I do not think teams have priced in yet. Not
 
 So let me make a prediction rather than a complaint, because I think this is simply what is going to happen as agentic tooling lands on data teams: **hand DAX agents to people who have not done the work, and you will raise their floor while lowering their ceiling.** Both halves of that are real. The floor going up is immediate, visible, and genuinely good. The ceiling coming down is slow, quiet, and it lands on the person instead of the project. Which is exactly why it is the one you have to design around.
 
-![A figure on a rising platform on the left producing a glowing dashboard, with a descending ceiling plane compressing the space above, flowing right into a bar chart whose tallest columns are cut flat](/images/2026/08/floor-ceiling-banner.png)
+![A small figure standing on top of four solid ascending steps with their head close beneath a heavy horizontal plane that caps the staircase, the steps above it continuing only as faint dotted outlines while flowing lines and nodes drift up past the cap toward a target circle the figure cannot reach](/images/2026/08/floor-ceiling-banner.png)
 
 ## The Floor Is Real, and I Am the One Who Said So
 
@@ -63,6 +62,8 @@ A conductor who never played an instrument can still stand on the podium and kee
 Directing is a different job from playing. But the ability to direct WELL was purchased by playing.
 
 Agentic tooling handed everybody a podium. That is the raised floor, and I want to keep saying it is a real gift. The ear is the ceiling, and the ear is not included.
+
+![A conductor silhouette on a podium with a raised baton stopped short by a low horizontal plane hanging directly above the hand, flowing lines and nodes fanning out to the right toward an orchestra seating curve whose player positions are ERD table cards, bar chart clusters, and dashboard panels](/images/2026/08/floor-ceiling-orchestra.png)
 
 I will indict myself here rather than a hypothetical junior, because I am living in this exact gap. Every application I ship right now runs on C#. I could not sit down at a blank file and write it. I know what the language is capable of, I know roughly how the pieces fit, and I can read enough of it to notice when something looks off. I am not a C# senior and I am not going to pretend to be one. Agents wrote that code. I direct it, and I direct it reasonably well, because I have spent years learning how to specify and evaluate work in general.
 
