@@ -7,8 +7,8 @@ restated, and the entry carries only the call you have to make.
 | | |
 |---|---|
 | Written | 2026-08-28 |
-| Contents | Nine open items, ordered by consequence rather than by when they arose |
-| Read-only | This file is the only thing this pass created. Nothing was committed or pushed. |
+| Contents | Eleven open items, ordered by consequence rather than by when they arose. The numbers are stable ids assigned when an item arrived, which is why 10 and 11 sit second and third. |
+| Read-only | Writing this file created and changed nothing else. Entry 10 records changes that earlier passes made outside it. |
 | Every entry ends with | "If you do nothing." Several of these are genuinely fine to leave alone and you should be able to see which at a glance. |
 
 ## Triage table
@@ -16,7 +16,9 @@ restated, and the entry carries only the call you have to make.
 | # | Decision | In one line | Effort if you act |
 |---|---|---|---|
 | 1 | [Cursor auto-commit and the `Co-authored-by` trailer](#1-cursor-auto-commit-and-the-co-authored-by-trailer) | Unrequested commits have been pushed to `main`, and one of them briefly put two files on the same permalink. | Minutes to rule, once the settings findings land |
-| 2 | [Which copy of the article skill is canonical](#2-which-copy-of-the-article-skill-is-canonical) | Two copies exist and the global one holds five style rules the repo copy lost, so the rules that apply depend on which tool loaded the skill. | 15 minutes to rule, half a day to apply |
+| 10 | [How the skills are actually stored](#10-how-the-skills-are-actually-stored-and-the-unversioned-copy-of-the-voice-rules) | Nearly every skill is one file behind several names. The one exception is the article skill's `.claude` directory, which is real, unversioned, and holds the only copy of five voice rules. | 10 minutes to rule, 15 minutes to apply |
+| 11 | [The uncommitted anti-slop plan contradicts itself](#11-the-uncommitted-anti-slop-plan-contradicts-itself-in-one-section) | Its working copy is half-converted to the corrected model, so section 12 now tells you to do things section 9 says not to. | 30 to 45 minutes to finish section 12 |
+| 2 | [Which copy of the article skill is canonical](#2-which-copy-of-the-article-skill-is-canonical) | Superseded by entry 10. The premise of two independent copies was wrong, but the five-rule gap it describes is real and still needs your ruling. | 15 minutes to rule, 15 minutes to apply |
 | 3 | [Voice enrollment and the voiceprint policy](#3-voice-enrollment-and-the-voiceprint-policy) | The episode-index build cannot start until you record 60 seconds of your own voice and decide what may be stored for co-hosts and guests. | 2 minutes of recording, then 9 to 10.5 working days of build |
 | 4 | [Whether the real-tenant-code rule applies to teaching posts](#4-whether-the-real-tenant-code-rule-applies-to-teaching-posts) | A style rule says pull code from the tenant, but constructed teaching traps are often the better artifact. | 5 minutes to rule, no code change needed if you scope it |
 | 5 | [Astro 5 to 7 upgrade timing](#5-astro-5-to-7-upgrade-timing) | The only way to clear the last three audit entries, none of which is reachable on a static site. | 5 to 7 hours in one sitting |
@@ -68,22 +70,244 @@ happened once, and it does not depend on understanding the cause.
 **If you do nothing.** The trailer is cosmetic and harmless. The unrequested commits are not: the
 failure mode is silent, it reached `main`, and nothing currently prevents a repeat.
 
+## 10. How the skills are actually stored, and the unversioned copy of the voice rules
+
+**Supersedes the two-copies model.** Entry 2, entry 4, and three plan documents were all built on the
+belief that `writing-promptingbi-articles` exists as two independent copies that a mirror script has to
+reconcile. That is not how the skills are stored. Read this entry before ruling on 2 or 4, and treat the
+canonicalization sections of [`plans/skill-drift-reconciliation.md`](skill-drift-reconciliation.md),
+[`plans/skill-canonicalization-decision.md`](skill-canonicalization-decision.md), and the committed
+version of [`plans/anti-slop-and-voice-design.md`](anti-slop-and-voice-design.md) as unreliable. It sits
+second on this list because one finding is a live data-loss exposure and another is a hook that commits
+and pushes without being asked.
+
+**The decision.** Whether to replace the one real `.claude` directory with a link into the vault. That
+collapses three paths onto one file and ends the drift structurally, rather than papering over it with a
+synchronizing process that has to keep running correctly forever. Two smaller calls ride along: whether
+to push the vault's two unpushed commits, and whether the `no-ai-slop` retirement planned elsewhere still
+makes sense now that its real blast radius is known.
+
+**Why it is open.** Because the correct model was only established today, after the plans that depend on
+it were written, and because one of its consequences (the five voice rules living in a single
+unversioned directory) is the kind of exposure that should be closed on a deliberate decision rather than
+by whichever agent next happens to touch the file.
+
+**Verified by direct observation.** Raw paths and results are kept here so you can confirm without
+re-deriving any of it.
+
+1. **This repo links out, it does not store.** `dir /AL C:\Github\Prompting-BI\.cursor\skills` returns
+   five junctions and no real directories among them: `mcp-builder`, `memory-manager`, `no-ai-slop`,
+   `northside-demo-project`, and `writing-promptingbi-articles`, each targeting
+   `C:\Github\agent-skills\skills\skills\<name>`. Three unrelated real directories also sit in that
+   folder, `promptingbi-article`, `pugliabi-fabric-api`, and `ste`, and this repo tracks files in all
+   three.
+2. **The vault.** `C:\Github\agent-skills` is its own git repository, remote
+   `https://github.com/pugliabi/agent-skills.git`. Under the doubled `skills\skills\` path it holds 246
+   skill directories. Call it the vault. Every junction above resolves into it.
+3. **The global Claude directory points into the same vault.** Of the 156 directories now in
+   `C:\Users\pugli\.claude\skills`, 153 are reparse points, 135 `SymbolicLink` and 18 `Junction`. So
+   most skills are one file reachable under several names, and an edit through any name is an edit to
+   all of them.
+4. **`no-ai-slop` is one file, not two.** It is a junction in both `.cursor\skills` and `.claude\skills`,
+   both pointing at the vault. The two copies previously described as byte-identical are the same bytes.
+5. **Exactly three directories in `.claude\skills` are real**, and one of them matters: `commands`
+   (which contains no `SKILL.md`), `executing-plans`, and `writing-promptingbi-articles`. For the last
+   of these, `Get-Item` returns `Attributes : Directory` with an empty `LinkType` and an empty `Target`,
+   where every linked sibling returns a reparse point and a vault target. This was the load-bearing
+   inference of the first pass and it is now confirmed: the one skill that drifts is the one skill that
+   is copied rather than linked.
+6. **That real directory has diverged from the vault in three of its six files.**
+   `git diff --no-index --numstat` against the vault copy gives `SKILL.md` 2 insertions and 2 deletions,
+   `references/publishing-targets.md` 3 and 10, and `references/voice-and-style.md` 5 and 1.
+   `references/article-structure.md`, `references/image-style.md`, and
+   `scripts/fetch_youtube_transcript.py` are identical.
+7. **The five voice rules exist in exactly one unversioned place.** The `voice-and-style.md` difference
+   is rules V1 through V5. The vault, and therefore every path this repo or Cursor can reach, holds one
+   summary line where the real `.claude` directory holds five detailed rules. That directory is not
+   inside any git repository: no history, no remote, no backup, one accidental overwrite from gone. The
+   anti-slop work depends on that file. This is a live data-loss exposure, not a tidiness problem, and
+   it is the single most important line in this entry.
+8. **The two git histories had already diverged, so double-tracking is not a theoretical worry.** Before
+   the vault commit noted next, `HEAD:.cursor/skills/writing-promptingbi-articles/SKILL.md` in this repo
+   was blob `1bf40b9` while `HEAD:skills/skills/writing-promptingbi-articles/SKILL.md` in the vault was
+   `9f51be9`. One set of bytes on disk, two repositories tracking it, two different recorded states.
+   Both now read `1bf40b9`.
+9. **Vault state.** The 33 changed lines that were sitting uncommitted during the first pass are now
+   commit `f992eca`, held back from the remote on purpose so the Stop hook below could not sweep them
+   into a mislabelled adopt commit. `git status -sb` in the vault now reports
+   `## main...origin/main [ahead 2]` with a clean tree.
+10. **What `sv-sync` is.** `C:\Github\agent-skills\hooks\session-stop.ps1`, registered in
+    `~\.claude\settings.json` as a Claude Code `Stop` hook, so it fires at the end of every Claude Code
+    session with no confirmation. It scans `~\.claude\skills` for real directories containing a
+    `SKILL.md`, runs `sv adopt --from claude --yes --push` on any it finds, then runs `git add -A`,
+    commit, and push against the vault. `git log --oneline --grep='\[sv-sync\]'` returns 52 commits, the
+    most recent two today at 10:42 and 11:37.
+11. **The adopt inside it has never run.** In PowerShell, `sv` is a built-in alias for `Set-Variable`,
+    and aliases take precedence over external executables, so no process is ever launched. Under
+    `powershell.exe -NoProfile`, `Get-Command sv` returns the alias and `$LASTEXITCODE` is empty
+    afterward. The decisive independent check is a timestamp: the `.claude` copy of
+    `publishing-targets.md` was modified at 11:01 today, and the 11:37 hook run committed only
+    `SKILL.md`. A working adopt would have carried both files.
+12. **A case-sensitivity bug in the skill text.** It spells the repo `C:\Github\prompting-bi` where the
+    real directory is `C:\Github\Prompting-BI`. It resolves only because Windows is case-insensitive,
+    and it would break on any other filesystem.
+
+**What is still unverified.** Everything above was observed directly. These three are not, and the
+distinction matters here because the first pass drew a confident wrong conclusion from exactly this kind
+of gap:
+
+- Whether the same file being tracked by two git repositories has caused a divergence beyond the
+  `1bf40b9` against `9f51be9` case, for instance in the five files not compared by hash.
+- Whether other machines or checkouts of the vault exist, which determines what pushing `f992eca`
+  actually exposes.
+- The current internal state of `plans/anti-slop-and-voice-design.md`, which is entry 11 and is
+  reported second-hand there rather than inspected.
+
+**The correction to the earlier account.** The first pass concluded that nothing had ever synced the
+copies, then reversed and concluded that `sv-sync` was a one-way destructive copy from `.claude` into the
+vault that overwrote repo-side edits. Both are wrong, and the second one is wrong in a way that is
+written into the committed spec, so it is worth stating the replacement plainly.
+
+**No special mechanism is needed to explain the drift.** `.claude` holds a real directory that nothing
+syncs. Agents edit whichever path they were pointed at. Each side keeps its own edits. That is the entire
+explanation, and the bidirectional drift, where each side held an improvement the other lacked, is
+exactly what that predicts. There was never an overwriting process, so there is no need to reason about
+which edits survived an adopt and which did not.
+
+**What does run every session is the git block.** The adopt is a silent no-op, but the `git add -A`,
+commit, and push that follow it are not conditional on the adopt succeeding. So at the end of every
+Claude Code session, whatever happens to be dirty anywhere in the vault gets committed under a message
+describing an adoption that did not occur. 52 commits carry that message. This is a real hazard on its
+own terms: unrelated work in a 246-skill repository gets swept into misleading commits automatically,
+and the commit log is now an unreliable record of why the vault changed.
+
+**What this changes.** Five consequences, in rough order of how much each one alters an existing plan.
+
+**The mirror script becomes unnecessary.** Replacing the real `.claude` directory with a symlink to the
+vault collapses three paths onto one file and ends the drift structurally. A synchronizing process
+prevents drift only while it keeps running and keeps being correct; a single file cannot drift from
+itself. This retires `sync-skill.mjs` as specified in
+[`plans/host-episodes-and-voice-style.md`](host-episodes-and-voice-style.md) section 6.5, along with the
+ledger gate described there, because the failure it guards against stops being reachable.
+
+**`executing-plans` has to be linked too, or the hook stays armed.** It is the other real directory with
+a `SKILL.md`, and it is byte-identical to its vault copy, so linking it is free. Leaving it real means
+the Stop hook keeps finding a directory to adopt and keeps generating `[sv-sync]` commits even after the
+article skill is linked. Two links, not one.
+
+**Retiring `no-ai-slop` is much larger than the spec assumed, and that may change the answer.** It is
+not a directory local to this repo. It is a vault directory shared with every project that links to it,
+plus a junction here, plus a junction in `.claude`, plus two files tracked by this repo. The
+retirement was scoped as deleting something local. It is not, and the wider blast radius is a reason to
+re-examine the decision rather than execute it.
+
+**`no-ai-puglia` should be created in the vault and linked out**, matching the pattern every other
+shared skill follows, rather than as a real directory inside this repo. A real directory here would
+reproduce the exact condition that caused the only drift on the machine.
+
+**The five-rule gap in entry 2 survives the correction, but its urgency inverts.** The gap is real and
+still needs your ruling. What changes is the risk profile: the unique content is not in a copy that a
+sync process might overwrite, it is in the only directory on the machine that no repository is watching.
+
+**Options.** Link the `.claude` directory to the vault and rule on the five rules in the same sitting.
+Or link it and postpone the rules, accepting that linking overwrites or discards one side and therefore
+forces the ruling anyway. Or leave the layout alone and build `sync-skill.mjs` as specified, which means
+writing and then maintaining a process to solve a problem that a symlink removes.
+
+**Recommendation.** Link both real directories to the vault, but copy the five rules into the vault copy
+first, in that order. The ordering is the whole point: linking is destructive to whichever side loses,
+and the losing side currently holds the only copy of V1 through V5. So port first, verify the vault copy
+holds them, then replace the directory with a link. Do the two environment-specific lines in `SKILL.md`
+at the same time, and see the open question below on why rewording beats choosing. Disarm or remove the
+Stop hook as part of the same change rather than relying on it finding nothing to do, because a hook
+that unconditionally commits and pushes a shared repository is worth removing on its own merits.
+
+**Open questions to leave for later.** Four, none of them blocking the recommendation above.
+
+- **What to do about the two environment-specific lines.** One file cannot hold both an absolute Windows
+  path and a repo-relative one. Before choosing which environment wins, check whether the text can be
+  reworded to be true from either location. If it can, that beats choosing, because choosing leaves the
+  other environment permanently slightly wrong and reintroduces a reason for someone to edit one side.
+- **Whether to push the vault's two commits.** They are deliberately unpushed. Pushing settles the
+  divergence in item 8 for good; not pushing keeps them local and leaves the exposure that a future hook
+  run could bundle them with unrelated work under a wrong message.
+- **Whether the double-tracked file has diverged anywhere else**, and whether one repository should stop
+  tracking those six files rather than both continuing to.
+- **Whether the same pattern exists on other machines.** The hook message names `PUGLIA-DESKTOP`, which
+  implies the design anticipated more than one.
+
+**Live hazard, now defused but worth knowing.** During the first pass the vault held 33 uncommitted lines
+in `SKILL.md`. Because the Stop hook commits and pushes whatever is dirty, an end-of-session run would
+have swept them into a commit claiming to be an adopt. That specific exposure is closed, they are
+`f992eca` now, but the mechanism is unchanged and will do the same to the next dirty file.
+
+**Small cleanup, not decisions.** Both authorized `brainstorming` links have been removed, from this
+repo's `.cursor\skills` and from `~\.claude\skills`, after confirming the vault target was absent and no
+tracked files existed on either side. Cursor was loading a working `brainstorming` from the superpowers
+plugin cache the whole time, so nothing changed functionally. Three links still dangle in
+`~\.claude\skills`: `grok-imagine-prompting`, `xai-media`, and `xai-skill`. A fourth dangles at
+`~\.cursor\skills\brainstorming` and was left alone as outside the authorized scope. None of these needs
+a ruling.
+
+**If you do nothing.** The five voice rules stay in an unversioned directory that no backup covers, and
+that is the one consequence here that is not safe to leave. Everything else degrades slowly rather than
+breaking: the drift continues, the plans keep describing a layout that does not exist, and the Stop hook
+keeps adding commits to the vault with messages that misdescribe what changed.
+
+## 11. The uncommitted anti-slop plan contradicts itself in one section
+
+**Reported, not verified here.** `plans/anti-slop-and-voice-design.md` was deliberately not opened while
+writing this entry, because a pass was interrupted mid-edit and its state was being reported separately.
+Everything below comes from that report. Confirm it when you open the file.
+
+**The situation.** The file is modified and uncommitted at 905 lines, up from 721 committed. Seven
+sections were updated to the corrected model described in entry 10 before the pause, but section 12 was
+not finished, and it now contradicts section 9. Its sequencing still says to wait for the dash pass, to
+delete `.cursor/skills/no-ai-slop/`, and to mirror to the global directory. Its hazards table still
+claims 22 em dashes per copy and byte-identical `no-ai-slop` copies. Entry 10 shows all three of those
+instructions to be wrong, and the two copies to be one file.
+
+**So there are two bad versions, in different ways.** The committed version is internally consistent and
+describes the wrong model throughout. The working copy is much closer to correct but contradicts itself
+in one section, which is arguably worse to hand to an agent, because a consistent wrong document
+produces one predictable wrong outcome while an inconsistent one produces whichever outcome the reader
+happens to reach first.
+
+**The action.** Finish section 12. This is the first task on resuming, ahead of anything in entry 10,
+because entry 10's recommendations cannot be executed from a document that still instructs the opposite
+in its sequencing section.
+
+**If you do nothing.** The contradiction sits in an uncommitted working copy, so nothing propagates on
+its own. The risk is entirely that someone, or some agent, reads section 12 and acts on it, and the
+`no-ai-slop` deletion it prescribes has the blast radius described in entry 10.
+
 ## 2. Which copy of the article skill is canonical
 
-Full detail: [`plans/skill-drift-reconciliation.md`](skill-drift-reconciliation.md). The gap below is
-its section 4; the ordered application sequence is its section 9.
+**Corrected by entry 10, read that first.** This entry originally described two independent copies of the
+skill needing reconciliation. That premise was wrong. `.cursor/skills/writing-promptingbi-articles/` in
+this repo is a junction into the vault at `C:\Github\agent-skills\skills\skills\`, not a copy, so what
+this entry called "the repo copy" is the vault copy seen under another name. The
+`C:\Users\pugli\.claude\skills\writing-promptingbi-articles\` directory is the only real second copy on
+the machine, and it is the only skill directory of its kind. The five-rule gap below is real and still
+needs your ruling; only the storage model and the mechanics of applying it have changed.
 
-**The decision.** Which copy of `writing-promptingbi-articles` is authoritative going forward, and
-specifically whether the repo copy should adopt the five voice rules that exist only in the global copy.
-The two copies are `.cursor/skills/writing-promptingbi-articles/` in this repo and
-`C:\Users\pugli\.claude\skills\writing-promptingbi-articles\`.
+Full detail was [`plans/skill-drift-reconciliation.md`](skill-drift-reconciliation.md), and the gap below
+is its section 4. Be careful with the rest of it: that document mentions junctions, symlinks, and the
+vault nowhere at all, so it is built end to end on the superseded model and its section 9 application
+sequence should not be followed. Entry 10 replaces it.
+
+**The decision.** Whether the five voice rules that exist only in the real `.claude` directory should be
+adopted into the vault copy, which is the copy this repo and Cursor both see. Canonicality itself is no
+longer in question: entry 10 recommends collapsing the paths onto the vault file, which makes the vault
+copy canonical by construction. What is left is purely editorial, which of the five rules you want.
 
 **Why it is open.** Right now the rules that govern a draft depend on which tool loaded the skill. The
-plan's section 4 is the sharpest case: the repo has one summary line where the global copy has five
-detailed rules, roughly 1,650 bytes of operational content the summary cannot reconstruct. Three of the
-five name concrete assets (the `pugliabi-fabric-api` skill and the Northside workspace, the
-`# ---- Validation ----` and `left_anti` notebook convention, the interior-designer analogy). The global
-copy is not version controlled, so that content currently exists in exactly one place.
+plan's section 4 is the sharpest case: the vault copy has one summary line where the real `.claude`
+directory has five detailed rules, roughly 1,650 bytes of operational content the summary cannot
+reconstruct. Three of the five name concrete assets (the `pugliabi-fabric-api` skill and the Northside
+workspace, the `# ---- Validation ----` and `left_anti` notebook convention, the interior-designer
+analogy). That directory sits inside no git repository, so the content exists in exactly one unversioned
+place, which entry 10 records as the most serious finding on this list.
 
 **Progress since the plan was written.** I re-hashed both copies. Four of the plan's objective fixes
 have landed: the `tags` prohibition is gone from the global `publishing-targets.md`, the repo `SKILL.md`
@@ -92,22 +316,31 @@ are now byte-identical across both copies. The voice-and-style gap is untouched:
 `B16124F6600E6656`, exactly as the plan recorded it, and `Pull real code out of the tenant` appears in
 the global copy and nowhere in the repo copy. `SKILL.md` and `publishing-targets.md` still differ.
 
-**Options.** Declare the repo copy canonical and port the five rules into it, then sync outward.
-Or declare the global copy canonical and accept that the authoritative version of the skill is not
-backed up. Or rule rule-by-rule, which is what the plan's section 9 is built for.
+Entry 10 puts exact numbers on what is left: of the six files, three are identical and three differ, by
+2 changed lines in `SKILL.md` (both of them environment-specific paths), 13 in `publishing-targets.md`,
+and 5 in `voice-and-style.md`, which are the five rules.
 
-**Recommendation.** Repo canonical, and port all five rules in as written, with one carve-out handled
-separately as entry 4 below. The reasoning is asymmetric risk rather than editorial preference: the
-global copy has no version history and no backup, so every day it holds unique content is a day those
-five rules can be lost to a single overwrite. There is also no evidence the repo copy's single line was
-a deliberate simplification; the timestamps show the global copy being edited three weeks later and the
-repo copy simply never receiving the update.
+**Options.** Port all five rules into the vault copy, then link, which is entry 10's sequence. Or port
+some and reject others, which is the same sequence with an editorial pass first. Or link without porting
+and lose the five rules, which is the outcome to avoid and is what happens by accident if anyone links
+the directories without reading this. The plan's section 9 rule-by-rule structure is still usable as a
+checklist even though its surrounding mechanics are superseded.
+
+**Recommendation.** Port all five rules in as written, with one carve-out handled separately as entry 4
+below, then link. The reasoning is asymmetric risk rather than editorial preference: the real `.claude`
+directory has no version history and no backup, so every day it holds unique content is a day those five
+rules can be lost to a single overwrite. There is also no evidence the vault copy's single line was a
+deliberate simplification; the timestamps show the `.claude` copy being edited three weeks later and the
+vault copy simply never receiving the update. Porting before linking is not optional, because linking
+discards whichever side loses.
 
 **If you do nothing.** The drift persists and drafts stay non-deterministic depending on which tool ran.
-More importantly, the five rules stay in an unversioned directory. Note that
-[`plans/host-episodes-and-voice-style.md`](host-episodes-and-voice-style.md) section 6.5 already accounts
-for this: `sync-skill.mjs` is specified to refuse a repo-to-global push until a ledger records that this
-ruling has been applied, so the loss scenario is guarded in design but not yet in code.
+More importantly, the five rules stay in an unversioned directory. One correction here too:
+[`plans/host-episodes-and-voice-style.md`](host-episodes-and-voice-style.md) section 6.5 specifies
+`sync-skill.mjs` to refuse a repo-to-global push until a ledger records that this ruling has been
+applied, which reads as a guard against the loss scenario. It is not one. The exposure is not a sync
+process overwriting a copy, it is a directory no repository is watching, and entry 10 retires that script
+rather than implementing it.
 
 ## 3. Voice enrollment and the voiceprint policy
 
