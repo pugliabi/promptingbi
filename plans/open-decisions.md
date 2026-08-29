@@ -55,9 +55,23 @@ line changes nothing. The duplicate file sharing one permalink is the real defec
 not on every commit. It is on the six most recent, starting at `c8619a6` (10:45 today), and absent from
 `a382891` and everything before it.
 
-**Local git mechanisms are ruled out.** No `commit.template` is set at any scope. `core.hooksPath` is
-unset. `.git/hooks` contains only the fourteen stock `.sample` files. The trailer is therefore applied
-by Cursor at the tool layer, not by this repository.
+**Local git mechanisms, corrected.** No `commit.template` is set at any scope and `core.hooksPath` is
+unset, so the trailer is applied by Cursor at the tool layer rather than by this repository. But
+`.git/hooks` is not stock. Alongside the fourteen `.sample` files sits a real `commit-msg`, 1,435 bytes,
+written 2026-08-28 at 12:40, whose only job is stripping the Cursor trailer and trimming the blank run
+it leaves behind. It exits 0 on every path, so it can never abort a commit. That is why the trailer
+stops after `0d027bf` and every commit since is clean. A later pass reported this directory as empty and
+concluded there was no backstop. That observation was wrong; the hook has been in place since 12:40 that
+day.
+
+**So the trailer half of this item is closed.** What stays open is the unrequested commits, which the
+hook does nothing about.
+
+**One reported recurrence was a false alarm.** `eaec67b` on 2026-08-29 was attributed to auto-commit by
+an agent that staged the file, found the index empty moments later, and saw a commit it had not made.
+That commit was made in the foreground by the same session that had delegated the task, and its message
+is verbatim the one written there. Two processes racing on one commit, not Cursor. Worth knowing before
+counting it as evidence of a repeat.
 
 **Options.** Wait for the settings findings and then rule. Or, independently of the findings, add a
 cheap guard: a build-time or pre-push check that no two posts share a permalink, which is the specific
