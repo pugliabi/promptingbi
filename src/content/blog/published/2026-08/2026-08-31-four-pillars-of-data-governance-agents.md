@@ -1,5 +1,5 @@
 ---
-title: "The Four Pillars of Data Governance (and the Agent That Reports to Each)"
+title: "The Four Pillars of Data Governance (and the Agent That Reports to Each) - Part 1"
 date: 2026-08-31T09:00:00Z
 permalink: "2026/08/31/four-pillars-of-data-governance-agents"
 description: "Enablement and promotion are the first two governance pillars. What actually lives in each, what doesn't, and the agent job to hire under both."

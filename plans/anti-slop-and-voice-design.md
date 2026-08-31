@@ -7,11 +7,12 @@ replaces it. Nothing from the rejected delivery mechanism survives.
 | | |
 |---|---|
 | Written | 2026-08-28 |
+| Revised | 2026-08-28, same day. Sections 4.1, 4.3, 8, 9, and 12 were rewritten after a filesystem audit found that `.cursor/skills/` holds junctions into a shared skill vault rather than real directories. Section 9 was wrong about the mechanism and is replaced. The voice model, the corpus design, the script-versus-prose split, and the two modes are unaffected |
 | Status | Approved. Ready to build |
-| Delivers | One new skill, `.cursor/skills/no-ai-puglia/`, with a bundled script and a bundled corpus, plus two remaining edits to `writing-promptingbi-articles`. A third edit to that skill has already landed, see section 8 |
-| Retires | `.cursor/skills/no-ai-slop/`, the generic editor whose rules conflict with the house voice spec |
+| Delivers | One new skill, `no-ai-puglia`, created in the skill vault at `C:\Github\agent-skills\skills\skills\no-ai-puglia\` and linked into this repo, with a bundled script and a bundled corpus, plus two remaining edits to `writing-promptingbi-articles`. A third edit to that skill has already landed, see section 8 |
+| Retires | `no-ai-slop`, the generic editor whose rules conflict with the house voice spec. It lives in the vault and is shared with every project on the machine, so retirement is scoped in section 9.4 rather than being a delete inside this repo |
 | Touches no | `package.json`, the repo's `scripts/` directory, the build, or any git hook |
-| Read-only | This document created no other file, changed no code, and committed nothing |
+| Read-only | This document created no other file, changed no code, and committed nothing. The 2026-08-28 revision is not read-only: it removed three dangling `brainstorming` links and committed one vault file, both recorded in 9.1 |
 
 ## Contents
 
@@ -23,7 +24,7 @@ replaces it. Nothing from the rejected delivery mechanism survives.
 6. [The bundled script and the corpus file](#6-the-bundled-script-and-the-corpus-file)
 7. [The voice guidance the skill applies](#7-the-voice-guidance-the-skill-applies)
 8. [Edits to `writing-promptingbi-articles`](#8-edits-to-writing-promptingbi-articles)
-9. [Canonicalization, the mirror, and the stale third copy](#9-canonicalization-the-mirror-and-the-stale-third-copy)
+9. [Canonicalization, the vault, and the stale third copy](#9-canonicalization-the-vault-and-the-stale-third-copy)
 10. [What simplification cut](#10-what-simplification-cut)
 11. [Scope, success, and the non-goal](#11-scope-success-and-the-non-goal)
 12. [Sequencing, and hazards left open](#12-sequencing-and-hazards-left-open)
@@ -46,9 +47,10 @@ last thing that happens while drafting. Not a linter, not a build step, not a ho
 counting lives in a script bundled inside that skill, and the corpus it counts against ships in the same
 directory.
 
-It is a new skill rather than a revision of the generic `no-ai-slop`, which is retired from the repo in
-the same change. Section 2.4 is the reason: the two skills disagree about three constructions, and one
-personalized skill settles that where two overlapping ones cannot.
+It is a new skill rather than a revision of the generic `no-ai-slop`. Section 2.4 is the reason: the two
+skills disagree about three constructions, and one personalized skill settles that where two overlapping
+ones cannot. `no-ai-slop` is unlinked from this repo in the same change, and whether the vault copy
+itself survives is a separate and larger question, settled in 9.4.
 
 ## 2. The evidence
 
@@ -182,12 +184,12 @@ machine tell. Section 7.2 carries the replacement text.
 
 ### 4.1 Shape on disk
 
-`.cursor/skills/no-ai-puglia/` is a **new** skill, personalized to Tommy. The layout mirrors
-`writing-promptingbi-articles`, which is the only bundled-script precedent in the repo, so an agent that
-knows one knows the other.
+`no-ai-puglia` is a **new** skill, personalized to Tommy. It is created in the skill vault and linked
+into this repo, which is the established pattern for every shared skill here and is the subject of 9.5.
+The real directory is:
 
 ```
-.cursor/skills/no-ai-puglia/
+C:\Github\agent-skills\skills\skills\no-ai-puglia\
   SKILL.md                      # the pass itself: two modes, the judgment rules, the pattern list
   eval.md                       # self-check, structure borrowed from the retired skill
   references/
@@ -196,6 +198,11 @@ knows one knows the other.
     voice_check.py              # bundled counter, stdlib only
     voice-corpus.json           # the frequency profile it counts against
 ```
+
+It reaches this repo as `.cursor/skills/no-ai-puglia`, a junction to that directory, so every relative
+path below reads the same from either end. The layout mirrors `writing-promptingbi-articles`, which is
+the only bundled-script precedent among the skills this repo loads, so an agent that knows one knows the
+other.
 
 **Filenames, and why these.** Nothing inside the skill repeats the person's name, because the directory
 already carries it and `no-ai-puglia/scripts/puglia-corpus.json` says it twice. `voice_check.py` and
@@ -245,9 +252,11 @@ step runs every time, which is the difference between a rule that exists and a r
 
 ### 4.3 The skill must not violate the rules it states
 
-A root cause worth naming, because the new skill is unusually exposed to it.
-`writing-promptingbi-articles/SKILL.md` says "no em dashes anywhere" and **contains 22 em dashes**,
-verified today in both copies. The rule leaked into drafts twice this week and needed sweeping by hand.
+A root cause worth naming, because the new skill is unusually exposed to it. Until earlier today
+`writing-promptingbi-articles/SKILL.md` said "no em dashes anywhere" while **containing 22 em dashes and
+3 en dashes** of its own. The rule leaked into drafts twice this week and needed sweeping by hand. The
+dash pass in section 8 fixed it: both copies now measure zero and zero, verified by character count. The
+principle below is why that mattered, and it is stated in the past tense only for the specific file.
 
 The likely mechanism: a model imitates the prose it reads more reliably than it obeys a rule stated in
 that prose. An instruction file is not only instructions; it is also a sample of the register the model
@@ -535,8 +544,8 @@ files today:
 
 | File | End state, verified |
 |---|---|
-| `writing-promptingbi-articles/SKILL.md`, repo copy | Zero `include_transcript` references. Two fetch routes, YouTube primary with a paste fallback. The Notion meeting-note hazard block is gone. Step 1 now says no source carries speaker labels and Step 2 documents vocative voting with the 32,505 words, 228 turns, and 87 percent discard figures. The dead "With speaker labels, this is mechanical" branch is removed |
-| Same file, global copy | Same end state, verified independently |
+| `writing-promptingbi-articles/SKILL.md`, the vault file this repo links to | Zero `include_transcript` references. Two fetch routes, YouTube primary with a paste fallback. The Notion meeting-note hazard block is gone. Step 1 now says no source carries speaker labels and Step 2 documents vocative voting with the 32,505 words, 228 turns, and 87 percent discard figures. The dead "With speaker labels, this is mechanical" branch is removed. Zero em dashes, zero en dashes |
+| The real copy at `~\.claude\skills\writing-promptingbi-articles\SKILL.md` | Same end state, verified independently. It differs from the vault file by exactly two lines, both environment-specific, both resolved in 9.3. Zero em dashes, zero en dashes |
 | `.cursor/rules/transcripts.mdc` | Zero Notion references of any kind |
 
 **Notion survives as the articles database and as episode metadata**, which is why Step 7 delivery and
@@ -544,8 +553,11 @@ the Step 8 `source.notion` field are untouched and correct. Section 11's criteri
 mode B draft to reach Notion and the repo already corrected, refers to that delivery path and is
 unaffected by the routing change.
 
-These changes are uncommitted, so confirm they survive to `main` before treating the line as closed.
-Nothing here proposes doing any of it again.
+**These changes have landed.** This repo committed them as `1bd8e52`, 35 insertions and 35 deletions
+across `SKILL.md` and `transcripts.mdc`, and `main` is level with `origin/main`. The same bytes were
+committed to the vault repo separately, because the file is reached through a junction and therefore sits
+in two indexes at once; 9.1 explains why that is not a duplicate. Nothing here proposes doing any of it
+again, and no further verification is owed.
 
 The correction is load-bearing for this design rather than incidental. Section 6.5's rebuild implements
 the same vocative rule the skill now documents, so the corpus and the drafting workflow describe
@@ -563,64 +575,236 @@ here, so that the constructions are prescribed in one file and counted in anothe
 keep in step. Line 18's illustration of contrast framing stays in running prose for the reason given in
 4.3: that line prescribes the construction, and demonstrating what you prescribe is correct.
 
-## 9. Canonicalization, the mirror, and the stale third copy
+## 9. Canonicalization, the vault, and the stale third copy
 
-Settled in `plans/skill-canonicalization-decision.md`, committed as `72b4da1`. This design depends on
-its rulings and changes none of them. It does change which skills the mirror carries, which the decision
-anticipated by specifying a list rather than a path.
+`plans/skill-canonicalization-decision.md`, committed as `72b4da1`, settled this on a model of two
+independent copies kept in step by a script. **That model is wrong about the filesystem**, so its C1
+ruling and its sync-mechanism spec do not apply as written. What follows replaces them. The editorial
+rulings in that document, D1 through D6, M1, M2, and V1 through V5, are unaffected and still stand:
+they are about what the text should say, not about where the bytes live.
 
-**The repo copy is canonical.** `C:\Users\pugli\.claude\skills\` becomes a generated mirror nobody
-hand-edits. The reason is auditability rather than preference: the global copy has no git history, so it
-cannot be reviewed, rolled back, or reproduced on a fresh clone.
+### 9.1 The architecture, as measured
 
-**Both copies of a live skill must keep existing.** There is no `.claude/skills/` directory in this
-repo, verified, so Claude Code running here loads only the global copy. Deleting it would remove the
-skill from one of the two tools that use it.
+`.cursor/skills/` in this repo does not contain skill directories. It contains **five Windows junctions
+into a shared skill vault**, plus three real directories that are genuinely local to this repo.
 
-**New evidence for the mirror, found while this document was being written.** The in-flight drift pass
-on `writing-promptingbi-articles` is reconciling two items in opposite directions: Step 5's
-code-heavy-articles guidance existed only in the global copy and is being added to the repo copy, and
-Step 8's fuller source-metadata paragraph existed only in the repo copy and is being brought to the
-global one. **Each copy held an improvement the other never received**, which is direct proof that
-nothing has ever synced them and that the drift is bidirectional rather than one copy lagging. A one-way
-push from a canonical source is exactly the mechanism that prevents this, and it is worth noting that
-building it will require a deliberate merge first, since a naive push would have destroyed whichever
-improvement lived only on the receiving side.
+| Entry | Kind | Resolves to |
+|---|---|---|
+| `mcp-builder`, `memory-manager`, `no-ai-slop`, `northside-demo-project`, `writing-promptingbi-articles` | Junction | `C:\Github\agent-skills\skills\skills\<name>` |
+| `promptingbi-article`, `pugliabi-fabric-api`, `ste` | Real directory | Themselves. Local to this repo |
 
-**The mirror list is now `writing-promptingbi-articles` and `no-ai-puglia`.** The committed decision
-already specifies that the sync mechanism take a list of skills rather than one hardcoded path, and that
-still holds; only the membership changes. Building that mechanism belongs to the canonicalization work,
-not to this design, and this design asks three things of it:
+`C:\Github\agent-skills` is a separate git repo, a skill vault of roughly 246 skills under a doubled
+`skills\skills\` path, managed by an `sv` CLI whose config at `~\.skill-vault\config.json` names four
+link targets: `~\.claude\skills`, `~\.cursor\skills`, `~\.copilot\skills`, and this repo's
+`.cursor\skills` under the label `Prompting BI`. `~\.claude\skills` holds 156 entries of which **153 are
+links into the same vault**, mostly `SYMLINKD` with some `JUNCTION`.
 
-| # | Requirement |
+The consequences that matter to this design:
+
+| Finding | Consequence |
 |---|---|
-| 1 | The list is `writing-promptingbi-articles` and `no-ai-puglia`. `no-ai-slop` comes off it |
-| 2 | It syncs `scripts/` and the corpus JSON, not just `*.md`. A markdown-only copy leaves the global skill invoking a script that is not there, and `no-ai-puglia` is the first skill where the data file is load-bearing |
-| 3 | It can **delete**, not only copy. A rename is a create plus a delete, and a copy-only sync would push `no-ai-puglia` out while leaving the retired `no-ai-slop` live in the global directory forever |
+| `no-ai-slop` exists at exactly three paths: the vault directory and two links to it, from this repo and from `~\.claude\skills`. All three return hash `16719EFD6DC6FE59` | The "dual-copy and byte-identical" claim was true and meaningless. There was never a second copy to keep in step. It is one file |
+| `~\.claude\skills\writing-promptingbi-articles` is a **real directory**, the only skill among 156 that is a real directory with a `SKILL.md` besides `executing-plans` | This is the one place the two-copies model was correct, and it is the only skill this design has to canonicalize |
+| That skill's vault file is reached by two junctions, from this repo and from `~\.cursor\skills` | Three paths, two files. Not three files |
+| The vault file is tracked by **two git repos at once**: this one at `.cursor/skills/...` and the vault at `skills/skills/...` | One set of bytes, two histories, and they had already diverged. This repo's `HEAD` held blob `1bf40b9`; the vault's held the pre-dash-pass `9f51be9`. Reconciled by committing the same bytes to the vault |
+| `brainstorming` was a link in three places and its vault target did not exist | Three dangling links, no working skill behind any of them. Cursor loads a working `brainstorming` from the superpowers plugin cache instead, so the vault copy was retired deliberately |
 
-**Retirement, and what happens to the global copy.** `no-ai-slop` is dual-copy and byte-identical,
-verified today by hash. Retiring it means deleting `.cursor/skills/no-ai-slop/` from this repo. The
-global copy at `~/.claude/skills/no-ai-slop/` is **Tommy's call**, and it is worth being exact about the
-consequence rather than filing it as harmless.
+**What the 2026-08-28 audit changed.** Two authorized actions, recorded here so the document is not the
+only place they exist:
 
-Because this repo has no `.claude/skills/` directory, global skills load *here*. So keeping the generic
-skill globally does not confine it to non-PromptingBI writing; it leaves `no-ai-slop` and
-`no-ai-puglia` both loadable while working in this repo, with an agent free to pick either. That is the
-same overlap ruling 6 retires the repo copy to end, and it is the same mechanism that made the stale
-third copy a hazard below.
+1. Removed the dangling `brainstorming` links at `.cursor\skills\brainstorming` in this repo and at
+   `~\.claude\skills\brainstorming`, after confirming the vault target was absent from disk and tracked
+   zero files in the vault index. Counts before and after: this repo 9 entries to 8, `~\.claude` 157 to
+   156, vault `skills\skills` unchanged at 246. A third dangling link survives at
+   `~\.cursor\skills\brainstorming` because it was outside the authorization.
+2. Committed the vault's copy of the section 8 dash and drift work, which was sitting uncommitted while
+   this repo had already committed and pushed the same bytes. Not pushed.
 
-The recommendation is therefore to delete both, and to accept that generic slop-editing for other
-writing is a capability worth losing. If Tommy would rather keep it, the clean version is to keep it
-globally under a name that cannot be confused with the new one and with a `description` scoped to
-non-PromptingBI prose, so an agent choosing between them has something to choose on. Either way this is
-his decision and the repo-side retirement does not wait on it.
+### 9.2 No mirror script. Replace the real directory with a link
 
-**The third copy stays.** `.cursor/skills/promptingbi-article/reference/editorial-guide.md` is a
-git-tracked, unloadable third copy of the voice spec, carrying its own versions of all three
-constructions at lines 18, 51, 58, and 60. The committed decision recommended deleting it; Tommy chose
-to leave it. Recorded here as a **known stale-guidance hazard**: after section 8's edits land, that file
-still says "if a sentence needs a second breath, split it" and still illustrates contrast framing with
-the flagged string. Nothing in this design touches it, and no change to it is proposed.
+**The sync mechanism is not built.** A script that copies one skill's files from here to
+`~\.claude\skills` would be solving a problem that exists for exactly one skill, and it would solve it by
+adding a process that has to run, be trusted, and be maintained.
+
+**The fix is structural.** Delete the real directory at
+`~\.claude\skills\writing-promptingbi-articles` and replace it with a link to the vault, matching what
+the other 153 entries in that directory already do:
+
+```
+cmd /c rmdir /s /q "%USERPROFILE%\.claude\skills\writing-promptingbi-articles"
+cmd /c mklink /J "%USERPROFILE%\.claude\skills\writing-promptingbi-articles" "C:\Github\agent-skills\skills\skills\writing-promptingbi-articles"
+```
+
+Merge first, per 9.3, because the delete is irreversible for anything living only on that side.
+
+That collapses three paths onto one file. There is then no drift to detect, no ledger, no staleness
+warning, and no `skill:check` in the build pre-step, because two files that are one file cannot
+disagree. The canonicalization decision's own "contrarian option worth five seconds" proposed exactly
+this and recommended against it on three grounds. **All three are answered by the vault, which that
+document did not know was there:**
+
+| Objection in `72b4da1` | Answer |
+|---|---|
+| "The global skill silently changes when you switch git branches" | It links to the vault, not to this repo's working tree. Branching here does not touch it. The objection was aimed at a junction pointing into `C:\Github\Prompting-BI`, which is not what is proposed |
+| "It breaks entirely on a machine without the repo cloned" | The vault is the thing that has to be cloned, and it already is on every machine, which is the whole point of it. This repo is not a dependency |
+| "It is invisible in a directory listing" | `dir /AL` shows it, and 153 siblings are already links, so a real directory is the anomaly rather than the link |
+
+The auditability argument for canonicalization **survives intact and is now satisfied without a
+script**: the vault is a git repo with a remote at `github.com/pugliabi/agent-skills`, so the content
+has history, can be rolled back, and reproduces on a fresh clone. That was the whole case for C1 and the
+vault delivers it directly.
+
+One consequence to accept rather than solve: the file stays tracked by two repos. Editing it through
+`.cursor/skills/` dirties both indexes, and a commit in one leaves the other showing a modification.
+That is untidy and it is not drift, because there is only one set of bytes and both repos are looking at
+them. The habit that keeps it honest is to commit both, as was done today. Nothing automated is needed
+and nothing should be built for it.
+
+### 9.3 The two environment-specific lines
+
+One file cannot hold two different paths, so the merge needs a decision on exactly two lines. Both were
+already ruled on as D1 and M1 in `72b4da1`, and **both rulings hold, for a reason that is now stronger
+than when they were written**: the ruling was "state both forms" and "take the unambiguous phrasing,"
+which is what a single shared file requires.
+
+| Line | Vault and this repo | The real `~\.claude` copy | Resolution |
+|---|---|---|---|
+| Step 1, transcript cache | "Transcripts live in the prompting-bi repo at `transcripts/ep-{N}.txt`" | "...at `C:\Github\prompting-bi\transcripts\ep-{N}.txt`" | **Neither wins. Rewrite.** Name the repo and keep the path repo-relative, because Step 8 of the same file already gives the absolute root. Nothing needs to be chosen |
+| Step 1A, script working directory | "Run `scripts/fetch_youtube_transcript.py <url>` from the repo" | "...from the prompting-bi repo" | **The `~\.claude` phrasing wins.** "The repo" is only unambiguous to a reader already inside it |
+
+**The rewrite is strictly better than choosing, and it is available.** Step 8 already reads "The repo is
+`prompting-bi` (locally `C:\Github\prompting-bi`, or `/mnt/c/Github/prompting-bi` under WSL)," so the
+absolute root is stated once, in the step that actually writes files. Step 1 then only has to point at
+it: transcripts live in the prompting-bi repo at `transcripts/ep-{N}.txt`, repo root as given in Step 8.
+That sentence is true read from a Cursor session rooted in this repo and true read from a Claude Code
+session rooted anywhere, so the divergence has no reason to reappear.
+
+Two other divergences exist in the same skill and are not environmental, so they are ordinary merges
+under the `72b4da1` rulings rather than decisions for this design: `references/publishing-targets.md`
+differs by 3 insertions and 10 deletions, where the `~\.claude` copy carries the better explanation of
+the silent `tags` failure and this repo's copy carries the fuller `source` block, which is D5 and D6
+exactly; and `references/voice-and-style.md` differs by 5 lines, all of them the V1 through V5 rules
+present only on the `~\.claude` side. **V1 through V5 exist in exactly one unversioned directory right
+now**, so they must be merged into the vault file before the real directory is deleted. That is the only
+irreversible step in this section and `72b4da1` already flagged it as such.
+
+### 9.4 Retiring `no-ai-slop`, re-derived at vault scope
+
+The earlier recommendation was to delete both copies. **Re-derived at the real scope, that
+recommendation changes.**
+
+`no-ai-slop` is one directory in a vault shared by every project on the machine and synced by git to
+every other machine. Deleting it is not removing a copy local to this repo. It removes the skill from
+every project, every agent tool, and every machine, and the manifest records that it was also packaged
+and uploaded to Claude Desktop, which no vault deletion reaches. That is a much larger action than
+ruling 6 asked for, and it buys nothing extra: **the overlap ruling 6 exists to end is local to this
+repo.**
+
+| Step | Action | Scope |
+|---|---|---|
+| 1 | `cmd /c rmdir ".cursor\skills\no-ai-slop"` | This repo only. Removes the link, never the target |
+| 2 | Drop `"Prompting BI"` from the skill's `targets` array in `C:\Github\agent-skills\skills\skills.json` | Stops the link being recreated. Without this, step 1 is undone the next time the push half of `sv` runs successfully |
+| 3 | Leave the vault directory and the `~\.claude\skills` link alone | Generic slop editing survives for every other project, which is where it was never in conflict |
+
+Step 3 is the change of answer. The old argument for global deletion was that global skills load in this
+repo too, so keeping it leaves both slop skills loadable here with an agent free to pick either. **That
+argument is still sound and step 2 is what defeats it**, because the manifest is what decides whether
+this repo is a target at all. Removing this repo from the target list is a narrower instrument than
+deleting the skill and it achieves the same thing here.
+
+Verify after step 1 that `~\.claude\skills\no-ai-slop\SKILL.md` still resolves and still hashes to
+`16719EFD6DC6FE59`. Because all three paths are one file, a wrong delete would take the skill out
+everywhere at once, and that is the failure this ordering exists to prevent.
+
+If Tommy would rather the generic skill disappear machine-wide, that is available and it is his call,
+but it is a vault decision with no relationship to this repo and it should be made on its own merits
+rather than as a side effect of shipping `no-ai-puglia`.
+
+### 9.5 Creating `no-ai-puglia` in the vault
+
+Correct, and for the same reason 9.2 argues for the link: a real directory inside this repo would be the
+odd one out among skills this repo shares, would have no history outside this repo, and would be
+unreachable from Claude Code sessions in other projects. The concrete steps:
+
+| # | Step |
+|---|---|
+| 1 | Create `C:\Github\agent-skills\skills\skills\no-ai-puglia\` with the layout in 4.1 and write every file there, not here |
+| 2 | Add the manifest entry to `C:\Github\agent-skills\skills\skills.json`, matching the shape `writing-promptingbi-articles` uses: `"targets": ["claude", "cursor", "Prompting BI"]`, `"stage": "production"`, and a `"source"` string naming this design document and the date |
+| 3 | Create the links. `mklink /J "C:\Github\Prompting-BI\.cursor\skills\no-ai-puglia" "C:\Github\agent-skills\skills\skills\no-ai-puglia"`, and the same for each other target in the entry |
+| 4 | Commit the vault: the new directory and the manifest edit in one commit, conventional-commit prefix, matching that repo's convention |
+| 5 | Verify the skill loads under its junction path and that `python scripts/voice_check.py` resolves its sibling JSON through the link |
+
+**Do not rely on `sv push` to create the links.** In PowerShell `sv` is a built-in alias for
+`Set-Variable`, and aliases outrank external executables in command resolution, so `sv push` silently
+sets a variable named `push` and exits without running `sv.exe`. Verified under
+`powershell.exe -NoProfile`, where `Get-Command sv` returns the alias and `$LASTEXITCODE` is empty after
+the call, meaning no process ran. `copilot` and `cursor` are listed as targets for `no-ai-slop` and
+neither link exists on disk, which is what that bug looks like from the outside. Invoke
+`& "C:\Users\pugli\.local\bin\sv.exe" push no-ai-puglia` if the CLI is wanted, or use `mklink` directly.
+
+`--rebuild` needs a checkout of **this** repo, since it reads `transcripts/` and the 2024 posts, while
+the skill itself lives in the vault. That split is fine and it is the same asymmetry 6.5 already
+describes: rebuilding is rare and happens where the corpus source is, and checking works anywhere the
+skill loads.
+
+### 9.6 Why both copies drifted, corrected
+
+The earlier claim was that bidirectional drift proved nothing had ever synced the two copies. **The
+observation was right and the mechanism was wrong.** Each copy really did hold an improvement the other
+lacked: Step 5's code-heavy carve-out and the V1 through V5 voice rules existed only in
+`~\.claude\skills`, and Step 8's fuller `source` contract and the front-matter example existed only on
+this side. That is measured and it is not in dispute.
+
+What was not true is that nothing ever tried to sync them. Something has tried **51 times**, and it is
+worth naming precisely because it is still armed.
+
+`~\.claude\settings.json` wires two Claude Code hooks into scripts in the vault. The `Stop` hook, which
+fires at the end of **every Claude Code session**, scans `~\.claude\skills` for real directories
+containing a `SKILL.md`, and if it finds any it runs `sv adopt --from claude --yes --push` to import them
+into the vault and replace them with junctions. It then runs `git add -A` on the whole vault and, if
+anything is dirty, commits with the message `[sv-sync] adopt from claude on PUGLIA-DESKTOP: <names>` and
+pushes.
+
+Three things follow, and they explain the whole history:
+
+| Observation | Explanation |
+|---|---|
+| 51 commits with that message, the last two at 10:42 and 11:37 today, all naming the same two skills for two months | `$newSkills` is `executing-plans` and `writing-promptingbi-articles`, the only real directories with a `SKILL.md`. The list never changes because the adopt never converts them |
+| The real directory is still a real directory after 51 adoptions | The adopt never ran. `sv` resolves to the `Set-Variable` alias, so the line is a silent no-op and only the git block below it does anything |
+| The commits are real and their message is false | `git add -A` runs regardless, so whatever happened to be dirty in the vault gets committed under an adopt message it has nothing to do with |
+
+The decisive check: the `~\.claude` copy of `publishing-targets.md` was modified at 11:01 today, and the
+11:37 hook run committed only `SKILL.md`. Had adopt run, that file would have been copied and committed
+too. It was not, so it did not.
+
+**So the drift has a single cause and it is not a missing sync.** `writing-promptingbi-articles` is the
+one skill with two real copies, an agent editing it tends to write whichever path it was loaded from,
+and the mechanism meant to reconcile them has never once executed. Today's dash pass happens to have
+written both, 43 seconds apart, which is why they now differ by only the two environmental lines in 9.3.
+That is a coincidence of one careful pass, not a system working.
+
+**The risk this leaves, and it is not the obvious one.** Because adopt does not run, there is no danger
+of `~\.claude` content overwriting the vault. The live risk is the git block: the next Claude Code
+session that ends will `git add -A` the vault and push whatever is dirty under a `[sv-sync] adopt from
+claude` message. Work is not lost, it is mislabelled and pushed without asking. Collapsing the real
+directory into a link per 9.2 disarms this completely, because `$newSkills` goes empty and the entire
+block stops firing. **That is a second reason to prefer the link over a mirror script**, and it is the
+stronger one: a mirror script would leave the hook armed and add a second process on top of it.
+
+`executing-plans` is currently byte-identical to its vault copy, so it is not drifting, but it is the
+other real directory keeping the hook armed. Linking it as well is the same one-line fix and it is
+outside this design's scope, recorded in section 12's hazards.
+
+### 9.7 The third copy stays
+
+`.cursor/skills/promptingbi-article/reference/editorial-guide.md` is a real, git-tracked, unloadable
+third copy of the voice spec, carrying its own versions of all three constructions at lines 18, 51, 58,
+and 60. It is genuinely local to this repo, verified as a real directory rather than a link, so
+everything the earlier version of this section said about it is still correct. The committed decision
+recommended deleting it; Tommy chose to leave it. Recorded here as a **known stale-guidance hazard**:
+after section 8's edits land, that file still says "if a sentence needs a second breath, split it" and
+still illustrates contrast framing with the flagged string. Nothing in this design touches it, and no
+change to it is proposed.
 
 ## 10. What simplification cut
 
@@ -641,7 +825,7 @@ so nobody rebuilds it by accident.
 | `data/voice/corpus-profile.json` in the repo | Moved inside the skill, where its only consumer lives |
 | The two-increment A and B split | An artifact of coordinating a script, a build change, and three file edits. One skill rebuild does not need phasing |
 | Acceptance criteria written as CI gates, runtime budgets, and exit-code tests | Not applicable to a skill a person invokes |
-| Editing `no-ai-slop` in place | Ruling 6. A generic skill carrying three writer-specific exceptions is worse than two clean skills, and keeping it alongside `no-ai-puglia` recreates the overlap in section 2.4. Its good parts are copied out first, per 4.1, then it is deleted |
+| Editing `no-ai-slop` in place | Ruling 6. A generic skill carrying three writer-specific exceptions is worse than two clean skills, and keeping it alongside `no-ai-puglia` recreates the overlap in section 2.4. Its good parts are copied out first, per 4.1, then it is unlinked from this repo per 9.4. Editing it in place would now also change it for every other project on the machine, which is a second and independent reason not to |
 | A repair to `plans/host-episodes-and-voice-style.md` section 5.6 | That section specifies `scripts/voice-lint.mjs`, a repo linter this design no longer builds or supersedes. Its "at least one self-answering question per post" floor is now inert rather than harmful. Noted, not repaired |
 
 **Also considered and deferred: audio-based speaker identification.** Tommy asked whether podcast audio
