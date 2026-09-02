@@ -33,7 +33,7 @@ So here's where I've landed. Agents won't lead your data governance program, but
 
 Governance is not security. Access control matters, but "who can see what" is one slice of one pillar, and I argued that out at length in [should an AI agent sit on your data governance committee](/2026/07/16/should-an-ai-agent-sit-on-your-data-governance-committee/). It's also not a project. There's no glorious Friday where you declare it complete and move on with your life. New systems arrive, new data flows in, definitions drift. I think in pillars because projects end and pillars stand.
 
-This post takes the first two pillars and the agent that reports to each. Part 2 takes the other two, where most of the damage actually is.
+This post takes the first two pillars and the agent that reports to each. [Part 2](/2026/09/02/write-the-contract-before-you-hire-the-watchdog/) takes the other two, where most of the damage actually is.
 
 ## Pillar 1: Enablement and Empowerment
 
@@ -118,4 +118,4 @@ So my org chart rule is short. Every agent in your governance program is staff, 
 - A yes with no budget or headcount attached is permission to fail quietly. Approval and sponsorship are different things.
 - Roughly 70 percent of a governance program happens in a room with no computer in it, which is why every agent stays staff and never chair.
 
-Those are the first two. Accountability and culture are the two where I see the most damage, and they're where the data contract comes in. Part 2 takes both of those, then lays out the 30-day plan for scoring all four and making your first agent hire.
+Those are the first two. Accountability and culture are the two where I see the most damage, and they're where the data contract comes in. [Part 2 takes both of those](/2026/09/02/write-the-contract-before-you-hire-the-watchdog/), then lays out the 30-day plan for scoring all four and making your first agent hire.
