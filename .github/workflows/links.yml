@@ -1,4 +1,14 @@
-# Monthly dead-link check across post content
+# Monthly dead-link check.
+#
+# This checks the BUILT site in dist/, not the markdown in src/. Post URLs are
+# virtual: each post declares a `permalink` in front matter and
+# [...permalink].astro generates the route from it, so nothing under src/ ever
+# matches a link like /2026/09/02/write-the-contract-before-you-hire-the-watchdog/.
+# Checking source flagged every internal link and every /images/ path as broken.
+#
+# Building first also keeps editor-only front matter out of the check. `source.notion`
+# points at private Notion pages that would 404 for an anonymous checker, and it is
+# never rendered on the site.
 name: Check links
 
 on:
@@ -14,13 +24,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check links in content
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Check links in the built site
         uses: lycheeverse/lychee-action@v2
+        env:
+          # Authenticates github.com links so they don't hit the anonymous rate limit
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >-
             --no-progress
+            --root-dir "${{ github.workspace }}/dist"
+            --index-files index.html
+            --remap "^https://promptingbi\.com file://${{ github.workspace }}/dist"
+            --exclude-loopback
+            --accept '200..=299,403,429'
             --exclude 'web\.archive\.org'
             --exclude 'outlook\.office365\.com'
-            'src/content/**/*.md'
-            'README.md'
+            'dist/**/*.html'
           fail: true
