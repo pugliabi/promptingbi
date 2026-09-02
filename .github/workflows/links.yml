@@ -23,9 +23,9 @@ jobs:
   link-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -39,13 +39,19 @@ jobs:
           # Authenticates github.com links so they don't hit the anonymous rate limit
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          # Accepted statuses beyond 2xx: 403 and 429 are sites that block or
+          # throttle bots (learn.microsoft.com), 999 is LinkedIn's nonstandard
+          # bot rejection that its profile links always return.
+          # Comments cannot live inside the args block below; YAML would pass
+          # them to lychee as arguments.
           args: >-
             --no-progress
             --root-dir "${{ github.workspace }}/dist"
             --index-files index.html
+            --fallback-extensions html
             --remap "^https://promptingbi\.com file://${{ github.workspace }}/dist"
             --exclude-loopback
-            --accept '200..=299,403,429'
+            --accept '200..=299,403,429,999'
             --exclude 'web\.archive\.org'
             --exclude 'outlook\.office365\.com'
             'dist/**/*.html'
