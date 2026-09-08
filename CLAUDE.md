@@ -43,8 +43,15 @@ permalink: "2026/07/20/my-new-post"   # required; no leading/trailing slash
 description: "Teaser shown on homepage and in RSS."   # optional
 featured: "/images/..."   # optional; used as OG image
 draft: true
+# series:                    # omit unless this is a multi-part series
+#   id: stop-re-prompting
+#   title: "Stop Re-Prompting"
+#   part: 2
+#   partTitle: "Anatomy of a Project Hub"
 ---
 ```
+
+Optional `series` (`id`, `title`, `part`, `partTitle`) drives the nav at the top of the post. Same `id`/`title` on every part. The template renders it; do not paste a part list into the markdown.
 
 Publish: move to `src/content/blog/published/YYYY-MM/` (YYYY-MM from the post date) and set `draft: false`. Per-episode ore files go in `angles/` and freeform ideas in `backlog/` (neither is loaded by Astro). Images stay in `public/images/YYYY/MM/`.
 

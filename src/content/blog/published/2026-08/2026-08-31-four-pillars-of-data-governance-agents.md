@@ -12,6 +12,11 @@ tags:
   - microsoft-fabric
   - mcp
 draft: false
+series:
+  id: data-governance-pillars
+  title: "Data Governance Pillars"
+  part: 1
+  partTitle: "Enablement and Promotion"
 source:
   episode: 545
   title: "Agents Helping with Data Governance"

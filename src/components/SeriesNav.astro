@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { seriesHref, seriesParts, seriesPartTitle } from '../lib/series';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  preview?: boolean;
+}
+
+const { post, preview = false } = Astro.props;
+const series = post.data.series;
+const parts = series ? await seriesParts(series.id, { includeUnpublished: preview }) : [];
+const show = Boolean(series) && parts.length >= 2;
+---
+{show && series && (
+  <nav class="series-nav" aria-label={`${series.title} series`}>
+    <p class="series-nav-title">{series.title}</p>
+    <ol>
+      {parts.map((part) => {
+        const current = part.id === post.id;
+        const label = `Part ${part.data.series!.part}`;
+        const name = seriesPartTitle(part);
+        return (
+          <li class:list={[{ current }]}>
+            {current ? (
+              <span aria-current="page">
+                <span class="series-nav-part">{label}</span>
+                <span class="series-nav-name">{name}</span>
+              </span>
+            ) : (
+              <a href={seriesHref(part, { preview })}>
+                <span class="series-nav-part">{label}</span>
+                <span class="series-nav-name">{name}</span>
+              </a>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </nav>
+)}

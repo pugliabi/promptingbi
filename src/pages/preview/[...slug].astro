@@ -9,6 +9,7 @@ import { resolve } from 'node:path';
 import Base from '../../layouts/Base.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { tagDisplay } from '../../lib/tags.mjs';
+import SeriesNav from '../../components/SeriesNav.astro';
 
 // The two folders the content collection never loads. README.md in each is
 // folder documentation, not an idea, so it stays out of the preview.
@@ -154,6 +155,7 @@ const title =
       )}
       <h1>{post.data.title}</h1>
       <p class="post-date">{fmt(post.data.date)} · Tommy Puglia</p>
+      <SeriesNav post={post} preview />
       {post.data.featured && !bannerMissing && (
         <img class="post-banner" src={post.data.featured} alt={`Banner illustration for ${post.data.title}`} />
       )}
