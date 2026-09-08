@@ -31,6 +31,11 @@ description: "TODO: one-sentence teaser (under 160 chars)"
 # featured: /images/${yyyy}/${mm}/${slug}.png  # uncomment once the hero image exists
 tags: []  # leave empty and run \`npm run auto-tag\`, or list slugs from src/lib/tags.mjs
 draft: true
+# series:                    # omit unless this post is part of a multi-part series
+#   id: stop-re-prompting
+#   title: "Stop Re-Prompting"
+#   part: 2
+#   partTitle: "Anatomy of a Project Hub"
 # source:                    # editor-only; omit if not from an EMP episode
 #   episode: 544
 #   title: "Episode Title"

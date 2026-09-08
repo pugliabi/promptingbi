@@ -11,6 +11,11 @@ tags:
   - microsoft-fabric
   - semantic-models
   - claude
+series:
+  id: stop-re-prompting
+  title: "Stop Re-Prompting"
+  part: 1
+  partTitle: "Stop Re-Prompting"
 source:
   episode: 544
   title: "Using Harnesses for Fabric Projects"

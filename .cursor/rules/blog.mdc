@@ -49,6 +49,7 @@ Rules:
 - To publish: move file to `published/YYYY-MM/` (YYYY-MM from the post date) and set `draft: false`. URLs do not change (`permalink` is the route). Do not move images.
 - slug = kebab-case; `description` under 160 characters
 - `source` is optional editor/agent metadata (episode, Notion URL, local transcript path). Never render it on the site.
+- For a multi-part series, set `series` on every part (`id`, `title`, `part`, optional `partTitle`). The post template renders the nav. Do not paste a part list into the markdown.
 - Transcripts live in `transcripts/ep-{N}.txt`. Fetching one always writes there. Creating or editing a post always reads from there first (Notion/YouTube only on a miss). Never dump transcripts in `angles/`, `backlog/`, or the repo root.
 
 ## Prompts library (`/prompts/`)

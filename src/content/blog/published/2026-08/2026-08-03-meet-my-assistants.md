@@ -2,7 +2,7 @@
 title: "Meet My Assistants: The Three Agents That Keep My Projects Honest"
 date: 2026-08-03T09:00:00Z
 permalink: "2026/08/03/meet-my-assistants"
-description: "Part two of my harness series: the Notion assistants that organize context, drive requirements, and draft status updates for my Fabric projects."
+description: "Part 3 of Stop Re-Prompting: the Notion assistants that organize context, drive requirements, and draft status updates for my Fabric projects."
 featured: /images/2026/08/the-department-audit-banner.png
 draft: false
 tags:
@@ -12,20 +12,20 @@ tags:
   - microsoft-fabric
   - power-bi
   - reporting
+series:
+  id: stop-re-prompting
+  title: "Stop Re-Prompting"
+  part: 3
+  partTitle: "Meet My Assistants"
 source:
   episode: 544
   title: "Using Harnesses for Fabric Projects"
   notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
 
-**Harness series**
-1. [Part 1: Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)
-2. [Part 2: Meet My Assistants](/2026/08/03/meet-my-assistants/) *(this post)*
-3. [Part 3: Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/)
-
 Every consulting project I've ever seen has the same quiet lie in it: the records say one thing and reality says another. The milestone reads "In progress" two weeks after the work shipped. The deliverable says "Not started" when it was finished on a Tuesday call nobody logged. Left alone, that gap grows until the status update becomes an archaeology project you do the night before the client call.
 
-I used to close that gap by hand. Now my assistants close it with me. This is part two of the harness series ([part one](/2026/07/29/anatomy-of-a-project-hub/) built the hub), and it's the part that ties the harness together: the assistants are what make the organized context, the MCP sessions, and the Fabric project work function as one system instead of separate tricks. Because a second brain with stale records isn't a second brain. It's a liability with good formatting.
+I used to close that gap by hand. Now my assistants close it with me. This is part 3 of the series ([part 2](/2026/07/29/anatomy-of-a-project-hub/) built the hub), and it's the part that ties the harness together: the assistants are what make the organized context, the MCP sessions, and the Fabric project work function as one system instead of separate tricks. Because a second brain with stale records isn't a second brain. It's a liability with good formatting.
 
 ## These Are My Assistants
 
@@ -107,7 +107,7 @@ Notice what both pages share. A purpose the assistant can't wander from. A hand-
 
 None of this works without intake, and intake is a habit, not a feature. Anything with project context in it goes into the hub, related to the project, the day it arrives. A list of requirements lands in my email: in. The client sends over a file: in. A meeting happens: transcribed, filed, related. The second brain idea people talk about is usually framed as note-taking, but for me it's this: one place where meetings, emails, and files stop being separate piles and become connected records my assistants can actually work with. I do the feeding. They do the organizing and the connecting.
 
-Here's the day-to-day payoff, and it's the same example I used in part one because it's the one that sells people. On a Northside call we find out we can't get access to a column we need from the ticketing system. The meeting summary doesn't bury that in a paragraph. My meeting instructions classify every issue by severity: routine items like open questions and client commitments, warnings like scope creep and dependencies, and critical items, the blockers and data gaps where work is actually stopped. A missing column is a data gap, and blocked data equals blocked deliverables. So the item gets an owner, it names the exact deliverable it blocks, and it states the single next step that unblocks it.
+Here's the day-to-day payoff, and it's the same example I used in the hub tour because it's the one that sells people. On a Northside call we find out we can't get access to a column we need from the ticketing system. The meeting summary doesn't bury that in a paragraph. My meeting instructions classify every issue by severity: routine items like open questions and client commitments, warnings like scope creep and dependencies, and critical items, the blockers and data gaps where work is actually stopped. A missing column is a data gap, and blocked data equals blocked deliverables. So the item gets an owner, it names the exact deliverable it blocks, and it states the single next step that unblocks it.
 
 Polpette reads that summary and the blocker lands on the project hub, linked back to the conversation where it surfaced. When the access comes through two weeks later on another call, the same machinery clears it. I never wrote a ticket in either direction.
 
@@ -154,7 +154,7 @@ None of this is Notion magic. It's four requirements you can meet in whatever yo
 
 Start with one project. Write two instruction pages first, small, using the slices above as the shape. Then run one meeting through the loop and watch the proposed action plan show up without you asking.
 
-If someone stopped me on my way out the door and gave me ten seconds to say what a harness needs, I'd give them four things: skills, agents, organized context, and the ability to talk to other harnesses. Those four wheels make up the car that runs my business, and the same car runs my Fabric projects. Part one of this series was the organized context. This one was the agents and the skills. The last one is harnesses talking to each other.
+If someone stopped me on my way out the door and gave me ten seconds to say what a harness needs, I'd give them four things: skills, agents, organized context, and the ability to talk to other harnesses. Those four wheels make up the car that runs my business, and the same car runs my Fabric projects. Part 2 of this series was the organized context. This one was the agents and the skills. The last one is harnesses talking to each other.
 
 ## Takeaways
 

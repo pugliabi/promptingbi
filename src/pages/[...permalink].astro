@@ -5,6 +5,7 @@ import { publishedPosts } from '../lib/posts';
 import { promptsForPost, promptHref } from '../lib/prompts';
 import { tagDisplay } from '../lib/tags.mjs';
 import Comments from '../components/Comments.astro';
+import SeriesNav from '../components/SeriesNav.astro';
 
 export async function getStaticPaths() {
   const posts = await publishedPosts();
@@ -28,6 +29,7 @@ const fmt = (d: Date) =>
   <article>
     <h1>{post.data.title}</h1>
     <p class="post-date">{fmt(post.data.date)} · Tommy Puglia</p>
+    <SeriesNav post={post} />
     {post.data.featured && (
       <img class="post-banner" src={post.data.featured} alt={`Banner illustration for ${post.data.title}`} />
     )}
