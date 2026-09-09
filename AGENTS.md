@@ -20,7 +20,9 @@ Posts live in stage folders under `src/content/blog/`:
 
 Transcripts live outside the collection entirely, at `transcripts/ep-{N}.txt` in the repo root.
 
-Loader only picks `{published,drafts}/**/*.md`, so `angles/` and `backlog/` are invisible to the build. Schema (`src/content.config.ts`): `title`, `date` (ISO, Z), `permalink` ("YYYY/MM/DD/slug" — must match date; never change on existing posts), `description` (<160 chars), `featured` (optional image path), `draft` (default false). Filtering lives in `src/lib/posts.ts` (`publishedPosts()`): drafts and future-dated posts are excluded everywhere (homepage, RSS, page generation). Promote: move file into `published/YYYY-MM/` + flip `draft`. Images stay in `public/images/YYYY/MM/`.
+Loader only picks `{published,drafts}/**/*.md`, so `angles/` and `backlog/` are invisible to the build. Schema (`src/content.config.ts`): `title`, `date` (ISO, Z), `permalink` ("YYYY/MM/DD/slug" — must match date; never change on existing posts), `description` (<160 chars), `featured` (optional image path), `draft` (default false), optional `series` (`id`, `title`, `part`, optional `partTitle`). Filtering lives in `src/lib/posts.ts` (`publishedPosts()`): drafts and future-dated posts are excluded everywhere (homepage, RSS, page generation). Promote: move file into `published/YYYY-MM/` + flip `draft`. Images stay in `public/images/YYYY/MM/`.
+
+Series posts: set the same `series.id` and `series.title` on every part, with `part` as 1-based order. `src/components/SeriesNav.astro` renders the nav at the top of the post template. Do not copy-paste a part list into the markdown. Non-series posts omit `series` and get no nav.
 
 Images: `public/images/YYYY/MM/`, referenced as `/images/YYYY/MM/name.png`.
 
@@ -44,6 +46,7 @@ Flat folder, no staging: `src/content/prompts/<slug>.md`, URL `/prompts/<slug>/`
 - `src/pages/index.astro` — post list; `[...permalink].astro` — post pages; `prompts/index.astro` + `prompts/[...slug].astro` — prompts library; `about.astro`; `search.astro` (Pagefind UI, only works on built site); `rss.xml.js`
 - `src/components/Comments.astro` — giscus, disabled until repo IDs are filled in (instructions inside the file)
 - `src/components/CodeCopy.astro` — injects a Copy button on every `pre:not(.mermaid)`; included once in `Base.astro`, styles live in the global block (`.code-wrap` / `.copy-btn`)
+- `src/components/SeriesNav.astro` — series part list at the top of a post; driven by `series` front matter
 
 ## Guardrails
 

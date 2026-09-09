@@ -12,20 +12,20 @@ tags:
   - semantic-models
   - power-bi
   - dax
+series:
+  id: stop-re-prompting
+  title: "Stop Re-Prompting"
+  part: 4
+  partTitle: "Inside an MCP Execution Session"
 source:
   episode: 544
   title: "Using Harnesses for Fabric Projects"
   notion: "https://app.notion.com/p/36de74c69c1880fdbbfbef7c346cd3b1"
 ---
 
-**Harness series**
-1. [Part 1: Anatomy of a Project Hub](/2026/07/29/anatomy-of-a-project-hub/)
-2. [Part 2: Meet My Assistants](/2026/08/03/meet-my-assistants/)
-3. [Part 3: Inside an MCP Execution Session](/2026/08/05/inside-an-mcp-execution-session/) *(this post)*
+At the end of [part 3](/2026/08/03/meet-my-assistants/) I said a harness needs four wheels: skills, agents, organized context, and the ability to talk to other harnesses. [Part 2](/2026/07/29/anatomy-of-a-project-hub/) built the organized context. Part 3 covered the agents and the skills. This is the fourth wheel, and it's my whole thesis in one sentence: harnesses work best when they can talk to each other. This post is that conversation happening: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
 
-At the end of [part two](/2026/08/03/meet-my-assistants/) I said a harness needs four wheels: skills, agents, organized context, and the ability to talk to other harnesses. [Part one](/2026/07/29/anatomy-of-a-project-hub/) built the organized context. Part two covered the agents and the skills. This is the fourth wheel, and it's my whole thesis in one sentence: harnesses work best when they can talk to each other. This post is that conversation happening: the session where I open Claude, type one line, and semantic model changes start landing in Power BI over MCP while I do something else.
-
-The whole trick sits in a single artifact. For every project I run, my Notion agents generate a **Claude instructions page**, written from the hub: every meeting, every deliverable status, every scope decision. It's the handoff between the second brain that organizes and the harness that executes. And because I get asked what one actually looks like, I'm going to walk you through the real one from my Northside Baseball project (the team from part one) section by section.
+The whole trick sits in a single artifact. For every project I run, my Notion agents generate a **Claude instructions page**, written from the hub: every meeting, every deliverable status, every scope decision. It's the handoff between the second brain that organizes and the harness that executes. And because I get asked what one actually looks like, I'm going to walk you through the real one from my Northside Baseball project (the team from the hub tour) section by section.
 
 ## This Is Not a Prompt. It's an Operational Brief.
 
@@ -215,7 +215,7 @@ The last instruction on the page is the one that makes this a loop instead of a 
 
 Skip the recap and you're back where everyone starts: a pile of good work your system never learned from, and a next session that opens with re-explaining. The recap is cheap. Amnesia is expensive. The instructions page ends with the whole philosophy in one line: a session without a recap is not done.
 
-The assistants that review all this, catch what the records missed, and put a human checkpoint on the changes? That was [part two](/2026/08/03/meet-my-assistants/).
+The assistants that review all this, catch what the records missed, and put a human checkpoint on the changes? That was [part 3](/2026/08/03/meet-my-assistants/).
 
 ## Run One Session This Week
 

@@ -27,6 +27,18 @@ const blog = defineCollection({
         transcript: z.string().optional(), // local cache, e.g. transcripts/ep-545.txt
       })
       .optional(),
+    // Multi-part series. When present, the post template renders a nav of every
+    // live part at the top of the page. `id` groups posts; `title` is the series
+    // name shown in the nav; `part` is the 1-based order; `partTitle` is the
+    // short label (falls back to the post title).
+    series: z
+      .object({
+        id: z.string().min(1),
+        title: z.string().min(1),
+        part: z.number().int().positive(),
+        partTitle: z.string().min(1).optional(),
+      })
+      .optional(),
   }),
 });
 
