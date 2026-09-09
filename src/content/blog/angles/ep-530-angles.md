@@ -10,7 +10,7 @@ Ore file. Draft later from `transcripts/ep-530.txt`. Do not treat this as the ar
 
 Collisions to avoid as write-first: reviewing-is-the-new-writing, Stop Re-Prompting, inside-an-MCP-execution-session.
 
-**Claimed 2026-09-09** by `drafts/2026-09-14-you-cant-keep-up-with-ai.md` (feed-as-theater angle, multi-episode): the Twitter "$15,000 by building 18 agents" line, FOMO / "position around what people are trying to accomplish," "we're in 1999 of the internet era," the five-kinds-of-jobs forecast, and the "talk about today, not the future" challenge. The ★ angle below is still open.
+**Claimed 2026-09-09** by `published/2026-09/2026-09-09-you-cant-keep-up-with-ai.md` (feed-as-theater angle, multi-episode): the Twitter "$15,000 by building 18 agents" line, FOMO / "position around what people are trying to accomplish," "we're in 1999 of the internet era," the five-kinds-of-jobs forecast, and the "talk about today, not the future" challenge. The ★ angle below is still open.
 
 ## ★ Write first: Spend the 4.5 Hours on the Business
 
