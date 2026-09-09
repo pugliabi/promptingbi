@@ -58,10 +58,6 @@ Name the job. An agent working on your Power BI or Fabric project can only be mi
 
 Run your own stack through those four and the duplicates show up fast. Two MCP servers with hands on the same model is one MCP server plus a tax on every prompt. Three note systems is zero memory, because context split three ways is context you'll end up re-providing by hand.
 
-There's a test underneath the four that decides whether a tool should exist at all, and I've been calling it the **creator agent**. Point AI at uncertainty: the thing you haven't done before, the API you've never seen, the discovery work. Once the behavior is known, capture it in deterministic code. A script, a command, a validated report.
-
-That's what a new tool is for. It converts an unknown into a known, once. If you're paying an agent to answer the same question every Tuesday, you're renting an answer you already own, and Microsoft will sell you that all day long.
-
 ## Two Lanes
 
 None of this means stop trying new things. I try new things constantly. I run two lanes, and the admission standards are nothing alike.
@@ -148,7 +144,6 @@ Then once a quarter, walk the list and cut. Anything you can't write a one-sente
 
 - Theater has a personal version, and it's a tool that arrived before the job did. Organizations do it with licenses and pilots; practitioners do it with trending repos.
 - Four gaps, and every tool fills one: knowledge (skills), hands (MCP servers), memory (the harness), eyes (verification). Two tools in one slot is duplication with a running cost.
-- A tool earns its place by turning an unknown into a known. Once the behavior is known, put it in deterministic code instead of paying an agent to rediscover it weekly.
 - Run two lanes with different doors. Chase everything you want in the weekend lane. Nothing reaches client work without passing the intake test.
 - Microsoft already assigned one tool per Power BI layer. Read that table before you install all five and then ask which to use.
 - Specify, bound, validate. Never validate by reading; validate by integrating the data, and write the test into the instruction so running it isn't optional.
