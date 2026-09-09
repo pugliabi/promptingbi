@@ -1,8 +1,8 @@
 ---
 title: "You Can't Keep Up With AI. You Were Never Supposed To."
-date: 2026-09-09T18:00:00Z
-permalink: "2026/09/09/you-cant-keep-up-with-ai"
-draft: false
+date: 2026-09-14T09:00:00Z
+permalink: "2026/09/14/you-cant-keep-up-with-ai"
+draft: true
 description: "The AI feed is a show, and chasing it turns your work into theater. What the research says about these tools, and a simple strategy that holds up."
 featured: /images/2026/09/you-cant-keep-up-with-ai-banner.png
 tags:
@@ -25,7 +25,7 @@ I know that feeling of falling behind. I've had it in my stomach on a Tuesday wh
 
 Here's what I've landed on. The feed is a show. It's produced for an audience, on a schedule set by people whose job is the announcement. The moment you try to be IN the show, everything you do turns into theater, because you're performing "keeping up" instead of doing work that somebody is paying for.
 
-I wrote about [the personal version of AI theater](/2026/09/09/you-dont-have-an-ai-strategy/) already: the tool list that grew faster than the jobs it was supposed to do. This post is about where that list came from. You didn't invent it. You were handed it, one scroll at a time.
+I wrote about [the personal version of AI theater](/2026/09/09/you-dont-have-an-ai-strategy/) a few days ago: the tool list that grew faster than the jobs it was supposed to do. This post is about where that list came from. You didn't invent it. You were handed it, one scroll at a time.
 
 ## The Show Isn't For You
 
