@@ -85,42 +85,78 @@ So I built a **skill converter**. It takes a skill written for Claude, including
 Skills are interchangeable. That is the good news. The bad news is that **managing skills across harnesses is the hardest part of this whole practice**, and a converter is the only answer I have found that does not scale linearly with the number of tools I use.
 
 ```markdown
-# Skill: Convert a Claude Skill into a Notion AI Skill
+# Converting Claude Skills to Notion AI Skills
 
-Trigger: "convert <skill> for Notion"
+Convert a Claude skill into a single Notion page that works as a Notion AI Skill (@mention-able in Notion Agent chat) AND as a context page Claude can read later via the Notion MCP.
 
-## The constraint that shapes everything
-Notion cannot execute scripts. Convert the knowledge, the context, and the
-decision logic. Never convert the mechanics.
+## Why this works
 
-## Classify before you write
-- Workflow skill (interview processes, drafting wizards): the procedure is the
-  value. Preserve the steps, the interaction contract, the output format.
-- Technical skill (semantic models, DAX, notebooks): the knowledge is the
-  value, because the target can never run the mechanics. Write a domain brief.
+Notion Custom Skills (released March 2026) are just pages marked "Use as AI Skill." Notion's own best practices mirror Claude skill anatomy: write the page like a strong prompt (goal, inputs, constraints, output format) and keep it short. The big difference: **Notion cannot execute scripts.** So the conversion's job is to distill *knowledge, context, and decision logic* — not implementation.
 
-## Rewrite rules
-1. A script the target cannot run becomes the reasoning that script encoded:
-   the steps, the inputs, and the shape of the expected output. Never paste the
-   code itself.
-2. Never drop a step because the target cannot perform it. Convert it into a
-   hand-off that names the harness that can, and what it needs handed over.
-3. Preserve every guardrail verbatim. The guardrails are the part that cost
-   someone a bad afternoon to learn.
-4. Copy business facts exactly. Rates, hour estimates, naming conventions.
-   A rephrased rate is a wrong rate.
-5. Put the load-bearing rules at the very top and the very bottom. Attention is
-   strongest at both ends.
-6. Resolve nothing by guessing. If the source assumes a tool the target lacks
-   and there is no hand-off available, say so and stop.
+The converted page serves two readers:
+1. **Notion Agent** — uses it as a skill to draft content, answer questions, and work within Notion using the domain knowledge.
+2. **Claude (later)** — reads the page via Notion MCP to pick up full project context, then executes the technical work locally.
 
-## Report back (required)
-- What was kept, what was compressed, what was dropped
-- Which steps became hand-offs back to a harness that can execute
-- Any secret found in the source and refused
+## Workflow
+
+### Step 1: Locate and read the source skill
+
+Find the skill in this priority order:
+1. Installed skills in the current environment (`/mnt/skills/user/<name>/`, `/mnt/skills/plugins/<name>/`)
+2. The Skill Vault via Filesystem MCP (`C:\Github\agent-skills`) — if the Filesystem connector is available
+3. Files the user uploads or points to
+
+Read **everything**: SKILL.md, all reference files, and all scripts. Don't skip scripts — you need to understand what they do to describe them. If the skill is large, read references and scripts enough to capture their purpose, inputs, outputs, and decision logic.
+
+### Step 2: Classify the skill, then distill into a single Notion page (~1,500 words max)
+
+First decide which conversion profile fits — this determines what the page optimizes for:
+
+- **Workflow skill** (interaction patterns, wizards, interview/drafting processes — e.g., grill-me, building-puglia-sow): the *procedure* is the value. Preserve steps, interaction contracts, and output formats faithfully. The page is a runnable prompt.
+- **Technical/domain skill** (script- or code-heavy expertise — Power BI, Fabric, DAX, TMDL, semantic modeling, extension development): the procedure is Claude-executable mechanics that Notion can never run. The value is the *knowledge*. The page is a **domain brief**: what the system/technology IS, core concepts and vocabulary, Tommy's conventions and patterns, design rules, gotchas, and how the work connects to clients and the rest of the stack. Compress the workflow to a short "how work proceeds" overview and put ALL scripts/code mechanics into the "What Claude automates" section. The goal: an AI reading this page becomes conversant in the domain the way Tommy practices it — able to discuss, draft, plan, and recognize when to hand execution to Claude — without the original skill installed.
+
+Most skills lean one way; some (like building-rayfin-apps) are hybrids — give each half its weight.
+
+Read `references/notion-skill-page-template.md` for the page structure (it has a section-weighting note per profile), then write the page.
+
+Compression priorities when the source is large (most Claude skills are):
+- **Keep**: purpose, when-to-use, core concepts/vocabulary, workflow steps, decision logic, output formats, constraints and rules, business context (rates, estimates, patterns)
+- **Compress**: long examples → one short example; multiple reference docs → key takeaways
+- **Drop**: environment-specific minutiae (local file paths, CLI flags, install commands), code listings, anything only meaningful at execution time
+
+Scripts and executable assets become a **"What Claude automates"** section: for each script, state what it accomplishes, what inputs it needs, what it produces, and any decision logic baked into it — written so a reader (human, Notion Agent, or future Claude) understands the capability and knows the actual run happens in Claude Desktop/Code. Never paste script code into the page.
+
+Place the most critical rules at the very top and very bottom of the page — AI attention is strongest at those positions.
+
+### Step 3: Write to Notion
+
+Parent page: **📚 AI Skills** — page ID `<your AI Skills page ID>`.
+
+1. Fetch the AI Skills page FIRST and scan ALL existing page links on it (every section, not just Claude Conversions) for a page whose title matches the converted skill. If a match exists, STOP and ask the user before creating anything: replace that page's content in place (update-page replace_content — default, these are living documents), or create a separate new page under Claude Conversions. Do not create the page until this is resolved.
+2. Check whether a `# Claude Conversions` heading exists on the AI Skills page. If it doesn't, append it (insert_content at end) with a one-line intro ("Skills converted from Claude — knowledge and instructions only; execution happens in Claude.").
+3. Create the new skill page with `parent: page_id = <your AI Skills page ID>`. Title it in plain human-readable form (e.g., `building-rayfin-apps` → "Building Rayfin Apps"). Give it a fitting emoji icon.
+4. Notion places new sub-pages at the end of the parent — verify a link to the new page sits under the Claude Conversions heading; if the created page link landed elsewhere or duplicated, fix the parent page content so exactly one link appears under that heading.
+
+### Step 4: Hand off to the user
+
+The MCP cannot mark a page as an AI Skill. After creating the page, tell the user:
+- The page URL
+- To activate it: open the page → ••• menu → **Use with AI** → **Use as AI Skill** (or Settings → Notion AI → Skills → + Add a Skill)
+- A one-line summary of what was kept vs. compressed, so they can sanity-check
+
+## Rules
+
+- One page per skill. No reference sub-pages — everything distilled into the single page.
+- Target ~1,200–1,500 words. If you genuinely can't fit the essentials, prioritize decision logic and context over examples, and say so in the handoff summary.
+- Write in second person imperative ("Review the model...", "Estimate hours using...") — it's a prompt, not documentation.
+- Preserve concrete business facts exactly: rates, hour estimates, naming conventions, branded colors, contact patterns. These are the highest-value content for Notion's use cases.
+- If the source skill references Notion pages or databases that exist in the workspace (e.g., the Milestones database), link them with @-style page links instead of describing them.
+- Never include secrets, API keys, tokens, or personal credentials found in source skills. Flag them to the user instead.
 ```
 
-Read rule 2 again, because it is the one that keeps a converted skill honest. When a harness cannot do something, the temptation is to quietly drop the step. Six weeks later a validation pass is missing and nobody remembers deciding to skip it. A hand-off leaves the step visible and names who owns it.
+The "What Claude automates" section is the part that keeps a conversion honest. When the target cannot run something, the temptation is to leave it off the page entirely. Then the converted skill quietly loses a third of its abilities and nobody remembers deciding that. Naming the capability, its inputs, and what it produces keeps the step visible and says out loud that the run happens somewhere else.
+
+Step 2 is where I get the most value and where I got it wrong first. Convert a DAX or TMDL skill as a procedure and you get a page describing steps Notion can never execute. Convert it as a domain brief and the agent can discuss the model, plan the work, and recognize the moment to hand execution back.
 
 ![One skill document card on the left passing through a single conversion node and emerging as three differently shaped output cards on the right, each linked onward to a distinct destination icon: a code bracket block, a lakehouse cylinder, and a dashboard panel](/images/2026/09/build-the-thing-converter.png)
 
@@ -201,7 +237,7 @@ Pick one job you keep re-explaining and stand up the thing that does it.
 - **Split what changes from what never does.** The parts that never change are the skill. The parts that change every project are what the generator reads. Mixing them is why your last template rotted.
 - **Give it one trigger phrase and keep it forever.** Mine is "update the instructions for this project." A phrase you never change is what makes this a reflex.
 - **Make it read the previous version and diff.** A generator that starts from zero every run will silently drop things you needed. Diffing is what makes regeneration safe.
-- **Answer four questions before you convert anything.** Can the target execute code, can it reach your tenant, where does it read context from, can it write back. Those answers decide the entire shape of the converted skill.
+- **Classify the skill before you convert it.** Workflow skill or technical skill: the first preserves the procedure, the second becomes a domain brief. Getting that backwards is how you end up with a page describing steps the target can never run.
 - **Keep the canonical copy where more than one tool can reach it.** Every harness stores skills its own way, some on disk, some in your account, and that is fine. Just make sure the version you regenerate from lives somewhere versioned, so the next harness starts from your skill instead of a copy of a copy.
 - **Make the executor gather before it builds.** Ask what it can see in the tenant, and what in this week's notes is going to be a problem. Both answers come before a line of code.
 - **Change your measure of done.** The measure is "I can regenerate this page in under five minutes, hand it to an executor, and trust what comes back."
@@ -214,7 +250,7 @@ Pick one job you keep re-explaining and stand up the thing that does it.
 - Accuracy sliding from 95% to 65% in a month with nothing broken is what a hand-maintained context layer does on its own. Artifacts expire, which is why they cannot be the asset.
 - When 90% of your commits are context edits, hand-editing context is a staffing plan you will never fund. Make the emit cheap and maintenance stops needing discipline.
 - Skills are recipes: procedural knowledge sitting on top of the declarative knowledge in your model. A recipe box is not a cook, and the cook is what you want to own.
-- Managing skills across harnesses is the hardest part of this practice. A converter that translates execution assumptions beats retyping the same skill per tool, and it should never drop a step the target cannot perform. Name a hand-off instead.
+- Managing skills across harnesses is the hardest part of this practice. A converter that translates execution assumptions beats retyping the same skill per tool, and it should never quietly drop what the target cannot run. Name the capability and where it executes instead.
 - Governance still applies. No ownership of definitions, no agentic rollout, and no announcement to stakeholders until a frozen evaluation slice clears a bar.
 
 **Key takeaway:** this week, take the job you have re-explained to an agent three times and build the executor that does it: the agent, the skills, and the context it reads, in the harness that can reach your tenant. Then hand it a brief you generated instead of typed.
