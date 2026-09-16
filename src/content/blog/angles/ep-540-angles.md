@@ -12,7 +12,15 @@ No published post sourced from 540. Skip Mike: Replit, Lineage View product tour
 
 Collisions: Hard Data Soft Data, You’re AI Ready, Good for Humans Bad for Agents, committee-governance post.
 
-## ★ Write first: Build the Thing That Creates the Thing
+## ✅ WRITTEN 2026-09-16: Build the Thing That Creates the Thing
+
+Live at `published/2026-09/2026-09-16-build-the-thing-that-creates-the-thing.md`. Artifacts: `/prompts/skill-converter/`, `/prompts/project-instruction-writer/`.
+
+Locked decisions from Tommy on this run:
+- Harness section is titled "You Are Betting on the Harness, Not the Model" but the argument is **your harness carries the proper context regardless of model, and you know what that harness is best at**. Not a vendor comparison; OpenAI/Copilot are not named.
+- Reframed the whole build-time claim as **executors**: he is not prompting for the same notebook edit, he is building the agent + context + skills that gather requirements and execute against Fabric and Power BI.
+- **Do not repeat** "Anthropic doesn't hardcode skill locations." Claude Code does have skill locations; Claude Desktop stores them in your account. Portability point is now "keep the canonical copy somewhere versioned that more than one tool can reach."
+- Governance guardrails (no rollout without owned definitions, gate the launch behind a frozen eval slice) stay as a short block, so the eval angle below is now half-spent.
 
 **Thesis:** The durable asset is not the notebook, the SOW, or the instruction page. It is the converter/agent that can emit those artifacts on demand, across harnesses.
 
