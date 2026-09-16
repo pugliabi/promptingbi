@@ -11,7 +11,7 @@ draft: false
 
 I keep the same skills running in a coding harness, a second brain that cannot execute anything, and an agent sitting on top of Fabric. Retyping a skill per tool does not scale, and the copies drift the second one of them gets edited. This converter is what I run instead: the source skill is never touched, and each target gets a rewrite that keeps the procedural knowledge and is honest about what that target cannot do.
 
-The capability block is the part people skip and the part that decides everything. Answer it before writing a line of the converted skill.
+The capability block is the part people skip, and it decides the shape of everything under it. Answer it before writing a line of the converted skill.
 
 ```markdown
 # Skill: Skill Converter (target-harness rewrite)
