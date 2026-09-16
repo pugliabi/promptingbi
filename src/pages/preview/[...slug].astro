@@ -147,7 +147,7 @@ const title =
   )}
 
   {props.kind === 'post' && post && (
-    <article>
+    <article class="post-body">
       {bannerMissing && (
         <p class="preview-warning">
           ⚠️ Featured image <code>{post.data.featured}</code> not found in <code>public/</code>

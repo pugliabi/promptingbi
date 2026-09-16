@@ -269,9 +269,17 @@ const year = new Date().getFullYear();
     border-radius: 8px;
     padding: 1rem 1.25rem;
     margin: 1.5rem 0;
-    overflow-x: auto;
+    overflow: auto;
     font-size: .88rem;
     line-height: 1.55;
+  }
+  /* Capped inside posts only. /prompts/ pages hold the full artifact and are
+     meant to be read and copied in one piece, so they stay uncapped. */
+  .post-body pre:not(.mermaid) {
+    max-height: min(32rem, 70vh);
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #30363d #0d1117;
   }
   pre code { background: none; padding: 0; border-radius: 0; font-size: 1em; }
   pre.mermaid { background: none; margin: 2rem 0; text-align: center; }

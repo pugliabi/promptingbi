@@ -26,7 +26,7 @@ const fmt = (d: Date) =>
   description={post.data.description}
   ogImage={post.data.featured}
 >
-  <article>
+  <article class="post-body">
     <h1>{post.data.title}</h1>
     <p class="post-date">{fmt(post.data.date)} · Tommy Puglia</p>
     <SeriesNav post={post} />
