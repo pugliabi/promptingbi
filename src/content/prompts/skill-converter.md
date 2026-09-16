@@ -1,6 +1,6 @@
 ---
-title: "Skill Converter: Rewrite a Skill for a Different Harness"
-description: "Takes a skill written for one harness and emits it for another, preserving procedural knowledge and turning what the target cannot do into named hand-offs."
+title: "Skill Converter: Rewrite a Claude Skill as a Notion AI Skill"
+description: "The converter I actually run. Turns a Claude skill into one Notion page that works as an AI Skill and as a context page Claude reads back later."
 category: agent-skills
 date: 2026-09-16T09:00:00Z
 format: markdown
@@ -9,72 +9,98 @@ source:
 draft: false
 ---
 
-I keep the same skills running in a coding harness, a second brain that cannot execute anything, and an agent sitting on top of Fabric. Retyping a skill per tool does not scale, and the copies drift the second one of them gets edited. This converter is what I run instead: the source skill is never touched, and each target gets a rewrite that keeps the procedural knowledge and is honest about what that target cannot do.
+This is the converter that moved my Fabric skills out of a coding harness and into a Notion advisor. Notion Custom Skills are pages you mark "Use as AI Skill," so the conversion target is a single page, and the whole job is deciding what survives the trip. Notion cannot execute scripts, so the mechanics cannot travel. The knowledge, the conventions, and the decision logic can.
 
-The capability block is the part people skip, and it decides the shape of everything under it. Answer it before writing a line of the converted skill.
+The converted page has two readers, and both matter. Notion Agent uses it as a skill to draft, answer, and plan inside Notion. Claude reads the same page back over the Notion MCP to pick up project context before it executes anything locally. Write for both.
 
 ```markdown
-# Skill: Skill Converter (target-harness rewrite)
+# Skill: Convert a Claude Skill into a Notion AI Skill
 
-Trigger: "convert <skill> for <target harness>"
+Trigger: "convert <skill> for Notion"
 
-## What this does
-Takes a skill written for one harness and emits the same skill for another.
-Same procedural knowledge, different execution assumptions. Never edit the
-source skill. Conversion always writes a new file and names its source, so a
-converted skill can be regenerated instead of maintained.
+## The constraint that shapes everything
+Notion cannot execute scripts. Convert the knowledge, the context, and the
+decision logic. Never convert the mechanics. Any step that only exists at
+execution time becomes reasoning or a named hand-off back to Claude.
+
+## What this produces
+One page under the AI Skills parent, marked as an AI Skill by a human after
+you write it. Never edit the source skill. Every conversion writes a new page
+and names the source it came from, so it can be regenerated later instead of
+maintained by hand.
 
 ## Read first, every run
 | Source | Why |
 |---|---|
-| The source skill, in full | The procedural knowledge being preserved |
-| Target capability block (below), answered | What the target can actually do |
-| Two existing skills already living in the target | Match their shape |
-| The last conversion report for this target | Known gaps, do not rediscover them |
+| SKILL.md, every reference file, every script | You cannot describe a script you did not read |
+| Two skill pages already living in the target | Match their shape and headings |
+| The parent page, in full | Duplicate check before you create anything |
 
-## Target capability block
-Answer all five before writing a line of the converted skill. If an answer is
-"I don't know," stop and go find out. Guessing here corrupts everything below.
-- Can it execute code? If no, every script step becomes a reasoning step.
-- Can it reach MCP servers or APIs? Name them. If none, that step is a hand-off.
-- Where does it read context from? Name the database, folder, or repo exactly.
-- Can it write back? If no, the skill ends in a report, not an update.
-- What is this harness actually best at? Say it in one line, and let that line
-  decide which steps belong here at all.
+## Step 1: Classify the skill
+The profile decides what the page optimizes for. Pick one before writing a line.
+- **Workflow skill** (interview processes, drafting wizards, review loops): the
+  procedure is the value. Preserve the steps, the interaction contract, and the
+  output format faithfully. The page is a runnable prompt.
+- **Technical skill** (semantic models, DAX, TMDL, notebooks, anything
+  script-heavy): the knowledge is the value, because the target can never run
+  the mechanics. The page is a domain brief: what the system is, the
+  vocabulary, the house conventions, the design rules, the gotchas, and how the
+  work connects to the rest of the stack. Compress the workflow down to a short
+  "how work proceeds" section.
+- **Hybrid**: give each half its own weight. Do not average them into mush.
 
-## Rewrite rules
-1. A script the target cannot run becomes the reasoning that script encoded:
-   the steps, the inputs, and the shape of the expected output.
-2. Never drop a step because the target cannot perform it. Convert it into a
-   hand-off that names the harness that can, and what it needs handed over.
-3. Preserve every guardrail verbatim. The guardrails are the part that cost
-   someone a bad afternoon to learn.
-4. Keep the trigger phrase identical across every target, so muscle memory
-   works no matter which harness I am sitting in.
-5. Rewrite context paths to the target's actual location. Never carry over a
-   path from the source harness and hope it resolves.
-6. Resolve nothing by guessing. If the source skill assumes a tool the target
-   lacks and there is no hand-off available, say so and stop.
-7. Match the target's own conventions for headings, front matter, and file
-   naming. A converted skill that looks foreign gets ignored.
+## Step 2: Compress on purpose
+- Keep: purpose, when to use it, core concepts and vocabulary, decision logic,
+  output formats, hard constraints, and business facts copied exactly. Rates,
+  hour estimates, naming conventions, and brand colors are the highest-value
+  lines on the page.
+- Compress: long examples down to one, several reference docs down to their
+  takeaways.
+- Drop: local paths, CLI flags, install steps, code listings, and anything that
+  only means something at execution time.
+
+## Step 3: Convert scripts without converting code
+Every script becomes one entry in a "What the executor automates" section:
+what it accomplishes, what inputs it needs, what it produces, and the decision
+logic baked into it. Never paste script code onto the page. The reader needs to
+know the capability exists and that the run happens somewhere else.
+
+## Step 4: Put the rules where attention is
+Load-bearing rules go at the very top and the very bottom of the page.
+Attention is strongest at both ends, so a rule buried mid-page is a rule the
+agent skips.
+
+## Step 5: Write it
+One page per skill. No reference sub-pages and no appendices: everything
+distilled into the one page, 1,200 to 1,500 words. Second person imperative,
+because this is a prompt and not documentation. Where the source names a page
+or database that already exists in the workspace, link it natively instead of
+describing it. Title the page in plain human-readable form and give it a
+fitting icon.
 
 ## Never
-- Never merge two source skills into one converted skill to save an emit.
-- Never soften a hard stop into a suggestion because the target is chattier.
-- Never convert a skill that is already stale. Refresh the source first.
+- Never carry a key, token, or credential found in the source. Stop and report
+  it instead.
+- Never invent a convention the source skill does not state.
+- Never create the page before checking the parent for one with the same title.
+  If it exists, ask whether to replace it in place or write a new one alongside.
+- Never claim the conversion is live. Marking a page as an AI Skill is a human
+  click that no API performs for you.
 
 ## Report back (required)
-- Which steps converted cleanly, which became hand-offs, which were blocked
-- Every assumption you had to make about the target
-- What the target is best at, in the one line from the capability block
-- Where the converted file was written, and which source skill it came from
+- What was kept, what was compressed, and what was dropped, one line each
+- The URL of the page written, and the source skill it came from
+- The activation step, spelled out: open the page, ••• menu, Use with AI,
+  Use as AI Skill
+- Any secret found in the source and refused
 ```
 
 ## Adapting it
 
-- **The five capability questions are the whole design.** Code execution, MCP reach, context location, write-back, and what the harness is best at. Those answers determine the shape of the output, which is why they get answered before any writing happens.
-- **Rule 2 is the one that keeps conversions honest.** The temptation when a target cannot do something is to quietly drop the step. Six weeks later a validation pass is missing and nobody remembers deciding to skip it. A named hand-off leaves the step visible and assigns an owner.
-- **Rule 3 exists because guardrails are the expensive part.** Steps can be rephrased. A hard stop that came from a real incident gets copied word for word or it stops working.
-- **Rule 4 is why this becomes a reflex.** One trigger phrase across every harness means you never think about which tool you are in before you can start.
-- **The "what is this harness best at" line prevents the worst outcome**, which is converting a skill into a harness that has no business running it. If the one-liner does not cover the job, the answer is a hand-off, not a conversion.
-- **The report-back is what makes the converted skill disposable.** With the assumptions and gaps written down, the next conversion is a regeneration rather than an archaeology project.
+- **The constraint at the top is doing the work.** "Notion cannot execute scripts" is the one fact that decides every other line. Swap in a different target and the first thing you write is that target's version of the same sentence, because that is what the whole conversion bends around.
+- **Classification before writing is what keeps technical skills useful.** Convert a DAX or TMDL skill as a procedure and you get a page describing steps the target can never run. Convert it as a domain brief and the agent can discuss, plan, and recognize the moment to hand execution back.
+- **Business facts get copied, never paraphrased.** Rates, hour estimates, and naming conventions are the lines a Notion agent quotes to a client. A rephrased rate is a wrong rate.
+- **The "what the executor automates" section replaces the code, not the capability.** A reader still needs to know the script exists and what it produces, otherwise the converted skill quietly loses a third of its abilities.
+- **Rules at both ends is not formatting advice.** Attention falls off in the middle of a long page, so the guardrail you care most about goes first or last.
+- **The human click is part of the workflow, not a footnote.** No API marks a page as an AI Skill, so a conversion that does not end by naming the activation step ends with a page nobody activated.
+- **Never carrying secrets applies to whole skills.** Some source skills have a token inline in an example. Flag it and keep going; the converted page is going somewhere more people can read it.

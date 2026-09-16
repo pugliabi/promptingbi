@@ -66,7 +66,7 @@ Here is the session that made it concrete for me. During a discovery phase I nee
 
 **It was never just the prompt. It is the harness behind it.** A harness is a workbench, and the executors are what you assemble on it, which makes the model the least interesting variable in the setup. What matters is whether **your harness carries the proper context**, and whether you know what that harness is best at.
 
-Those two go together. One harness holds context beautifully, reasons over it, and cannot execute a line of code. Another executes against your tenant all day and knows nothing about the conversation you had on Tuesday. Both are useful. It is why the converter below opens by asking what the target can do: I am not hunting for one harness that does everything, I am matching each job to what a harness is good at, then handing off across the gap. Get that pairing right and the model underneath barely registers. Get it wrong and no model saves you.
+Those two go together. One harness holds context beautifully, reasons over it, and cannot execute a line of code. Another executes against your tenant all day and knows nothing about the conversation you had on Tuesday. Both are useful. It is why the converter below starts from what the target cannot do: I am not hunting for one harness that does everything, I am matching each job to what a harness is good at, then handing off across the gap. Get that pairing right and the model underneath barely registers. Get it wrong and no model saves you.
 
 Context is more than the prompt, too. It is the meetings, the statement of work, the tenant state, and [the decisions somebody made in April](/2026/08/26/hard-data-soft-data/). That has to live somewhere organized the harness can reach, shaped around how you work, because your workflow is not mine. Keep it somewhere your next harness can reach as well. The tool you use in a year may not be on your machine today. Your context should not care.
 
@@ -85,44 +85,39 @@ So I built a **skill converter**. It takes a skill written for Claude, including
 Skills are interchangeable. That is the good news. The bad news is that **managing skills across harnesses is the hardest part of this whole practice**, and a converter is the only answer I have found that does not scale linearly with the number of tools I use.
 
 ```markdown
-# Skill: Skill Converter (target-harness rewrite)
+# Skill: Convert a Claude Skill into a Notion AI Skill
 
-Trigger: "convert <skill> for <target harness>"
+Trigger: "convert <skill> for Notion"
 
-## What this does
-Takes a skill written for one harness and emits the same skill for another.
-Same procedural knowledge, different execution assumptions. Never edit the
-source skill. Conversion always writes a new file and names its source.
+## The constraint that shapes everything
+Notion cannot execute scripts. Convert the knowledge, the context, and the
+decision logic. Never convert the mechanics.
 
-## Read first, every run
-| Source | Why |
-|---|---|
-| The source skill, in full | The procedural knowledge being preserved |
-| Target capability block (below), answered | What the target can actually do |
-| Two existing skills already living in the target | Match their shape |
-
-## Target capability block
-Answer all four before writing a line of the converted skill.
-- Can it execute code? If no, every script step becomes a reasoning step.
-- Can it reach MCP servers or APIs? Name them. If none, that step is a hand-off.
-- Where does it read context from? Name the database, folder, or repo exactly.
-- Can it write back? If no, the skill ends in a report, not an update.
+## Classify before you write
+- Workflow skill (interview processes, drafting wizards): the procedure is the
+  value. Preserve the steps, the interaction contract, the output format.
+- Technical skill (semantic models, DAX, notebooks): the knowledge is the
+  value, because the target can never run the mechanics. Write a domain brief.
 
 ## Rewrite rules
 1. A script the target cannot run becomes the reasoning that script encoded:
-   the steps, the inputs, and the shape of the expected output.
+   the steps, the inputs, and the shape of the expected output. Never paste the
+   code itself.
 2. Never drop a step because the target cannot perform it. Convert it into a
    hand-off that names the harness that can, and what it needs handed over.
 3. Preserve every guardrail verbatim. The guardrails are the part that cost
    someone a bad afternoon to learn.
-4. Keep the trigger phrase identical across every target, so my muscle memory
-   works no matter which harness I am sitting in.
-5. Resolve nothing by guessing. If the source skill assumes a tool the target
-   lacks and there is no hand-off available, say so and stop.
+4. Copy business facts exactly. Rates, hour estimates, naming conventions.
+   A rephrased rate is a wrong rate.
+5. Put the load-bearing rules at the very top and the very bottom. Attention is
+   strongest at both ends.
+6. Resolve nothing by guessing. If the source assumes a tool the target lacks
+   and there is no hand-off available, say so and stop.
 
 ## Report back (required)
-- Which steps converted cleanly, which became hand-offs, which were blocked
-- Every assumption you had to make about the target
+- What was kept, what was compressed, what was dropped
+- Which steps became hand-offs back to a harness that can execute
+- Any secret found in the source and refused
 ```
 
 Read rule 2 again, because it is the one that keeps a converted skill honest. When a harness cannot do something, the temptation is to quietly drop the step. Six weeks later a validation pass is missing and nobody remembers deciding to skip it. A hand-off leaves the step visible and names who owns it.
@@ -206,7 +201,7 @@ Pick one job you keep re-explaining and stand up the thing that does it.
 - **Split what changes from what never does.** The parts that never change are the skill. The parts that change every project are what the generator reads. Mixing them is why your last template rotted.
 - **Give it one trigger phrase and keep it forever.** Mine is "update the instructions for this project." A phrase you never change is what makes this a reflex.
 - **Make it read the previous version and diff.** A generator that starts from zero every run will silently drop things you needed. Diffing is what makes regeneration safe.
-- **Answer the capability block before you convert anything.** Code execution, MCP reach, context location, write-back. Four questions, and they decide the shape of the converted skill.
+- **Answer four questions before you convert anything.** Can the target execute code, can it reach your tenant, where does it read context from, can it write back. Those answers decide the entire shape of the converted skill.
 - **Keep the canonical copy where more than one tool can reach it.** Every harness stores skills its own way, some on disk, some in your account, and that is fine. Just make sure the version you regenerate from lives somewhere versioned, so the next harness starts from your skill instead of a copy of a copy.
 - **Make the executor gather before it builds.** Ask what it can see in the tenant, and what in this week's notes is going to be a problem. Both answers come before a line of code.
 - **Change your measure of done.** The measure is "I can regenerate this page in under five minutes, hand it to an executor, and trust what comes back."
