@@ -10,20 +10,8 @@ import Base from '../../layouts/Base.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { tagDisplay } from '../../lib/tags.mjs';
 import SeriesNav from '../../components/SeriesNav.astro';
-
-// The two folders the content collection never loads. README.md in each is
-// folder documentation, not an idea, so it stays out of the preview.
-const IDEA_FOLDERS = {
-  angles: import.meta.glob('../../content/blog/angles/*.md', { eager: true }),
-  backlog: import.meta.glob('../../content/blog/backlog/*.md', { eager: true }),
-} as Record<string, Record<string, any>>;
-
-function ideaFiles(folder: string) {
-  return Object.entries(IDEA_FOLDERS[folder])
-    .map(([path, mod]) => ({ file: path.split('/').pop()!.replace(/\.md$/, ''), path, mod }))
-    .filter((f) => f.file.toLowerCase() !== 'readme')
-    .sort((a, b) => a.file.localeCompare(b.file));
-}
+// Imported, not declared here: getStaticPaths runs in its own module scope.
+import { ideaFiles, ideaFolderNames } from '../../lib/preview-ideas';
 
 export async function getStaticPaths() {
   if (!import.meta.env.DEV) return [];
@@ -34,7 +22,7 @@ export async function getStaticPaths() {
       params: { slug: post.id },
       props: { kind: 'post', post },
     })),
-    ...Object.keys(IDEA_FOLDERS).flatMap((folder) =>
+    ...ideaFolderNames.flatMap((folder) =>
       ideaFiles(folder).map(({ file, path, mod }) => ({
         params: { slug: `${folder}/${file}` },
         props: { kind: 'idea', folder, path, mod },
@@ -62,7 +50,7 @@ if (props.kind === 'index') {
     b.data.date.valueOf() - a.data.date.valueOf();
   drafts = posts.filter((p) => p.data.draft).sort(newestFirst);
   scheduled = posts.filter((p) => !p.data.draft && p.data.date.valueOf() > now.valueOf()).sort(newestFirst);
-  ideaSections = Object.keys(IDEA_FOLDERS).map((folder) => ({
+  ideaSections = ideaFolderNames.map((folder) => ({
     folder,
     files: ideaFiles(folder).map(({ file, mod }) => ({
       slug: `${folder}/${file}`,
