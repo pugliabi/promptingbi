@@ -24,6 +24,27 @@ No published/draft post from this episode. Prequel to published “Agent Skills 
 
 **Freshness:** fresh. Distinct from theme-file governance (538) and from “reviewing is the new writing.”
 
+## LOCKED (2026-09-21)
+
+Tommy merged the two lead angles into ONE article: "A skill.md Is Not Wisdom" (the problem) + "Grill the Plan, Then Combine Fabric Skills" (the mechanism). Thesis: a `skill.md` carries instructions and context, never the judgment that says this FILTER dies on that model or that is 6 hours not 2. So the workflow has to pull the judgment out of you before the agent builds: a short interrogation skill stacked on top of the Fabric skills, in one conversation.
+
+Collision guard: do NOT re-argue "skills are recipes, recipes are not cooks" (published 2026-09-16 "Build the Thing That Creates the Thing") or "you can direct the orchestra because you played in it" (2026-08-28). The differentiator here is the extraction ritual, not the skill/cook distinction.
+
+Leftover angles below stay leftover. The hiring jab ("let me see your repo") gets one closing line, not a section.
+
+**Shipped 2026-09-21 (published, `draft: false`, awaiting push):**
+- Post: `published/2026-09/2026-09-21-a-skill-md-is-not-wisdom.md`, permalink `2026/09/21/a-skill-md-is-not-wisdom`
+- Artifact: `src/content/prompts/grill-the-fabric-plan.md`, category `agent-skills`
+- delete-ai-words + humanizer passes run on the final copy; see the Editing Notes toggle on the Notion page for what was cut
+- Images: `public/images/2026/09/a-skill-md-is-not-wisdom-{banner,measures,frontier,stack}.png`
+- Notion: https://app.notion.com/p/3e2e74c69c188117bc7deb1eb27b0c6c (Status Drafting, Episode relation set)
+
+**Open with Tommy:**
+- The two community Fabric skill authors the captions mangled as "Kerp Buller or Alex Miller" are written around as "the architecture and notebook skills the community has published." Names needed to credit them properly.
+- The DAX pair in section 2 is illustrative, not pulled from a real model. Swap in a real Northside measure via the modeling MCP if he wants it verbatim.
+- The SOW hook uses the generic "not two hours, six." A real invented-deliverable specific would sharpen it.
+- `mattpocock/skills` star count (API reports ~267k) deliberately left out of the post as a single-source number.
+
 ## Other angles
 
 ### Grill the Plan, Then Combine Fabric Skills
