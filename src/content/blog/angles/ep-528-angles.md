@@ -36,6 +36,7 @@ Leftover angles below stay leftover. The hiring jab ("let me see your repo") get
 - Post: `published/2026-09/2026-09-21-a-skill-md-is-not-wisdom.md`, permalink `2026/09/21/a-skill-md-is-not-wisdom`
 - Artifact: `src/content/prompts/grill-the-fabric-plan.md`, category `agent-skills`
 - delete-ai-words + humanizer passes run on the final copy; see the Editing Notes toggle on the Notion page for what was cut
+- Contraction density: measured the whole `published/2026-09/` folder rather than eyeballing one post. Four of five September posts run 1.8% to 2.8% contractions per word; `build-the-thing` at 0.3% is the outlier. This post shipped at 2.55%. If a future post reads stiff, measure the folder before deciding the house voice is contraction-light.
 - Images: `public/images/2026/09/a-skill-md-is-not-wisdom-{banner,measures,frontier,stack}.png`
 - Notion: https://app.notion.com/p/3e2e74c69c188117bc7deb1eb27b0c6c (Status Drafting, Episode relation set)
 
