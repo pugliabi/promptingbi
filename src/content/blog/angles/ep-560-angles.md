@@ -38,6 +38,53 @@ Adjacent: 550 *Your Semantic Model Is Not Semantic*; 540 *I Will Not Roll Agenti
 **Attribution:** Tommy. Do not write Mike’s “I’d rather just MCP the model and skip the data agent” as Tommy’s conclusion; Tommy is arguing the opposite for the enterprise.
 **Freshness:** fresh. 550 is ontology/burned word “semantic.” 540 is no agents on ungoverned Fabric. This is **the item called Data Agent, as a sub-agent.**
 
+## Locked decisions (2026-09-23)
+
+- **Title:** "A Data Agent Should Be a Sub-Agent" (Tommy: *should be*, not *is*).
+- **Frame:** most people use data agents as the chat window; the value is as a sub-agent called from Foundry / M365 Copilot / Copilot Studio.
+- **Tenant artifact:** created `Ride Coach Agent` (DataAgent `0f4bdd77-fa45-4eb3-9a28-073858b9f2ee`) in Puglia - Hobbies on `Strava_SM`, instructions open with "You are the Ride Coach, a SUB-AGENT." Draft + published stages. Screenshots of instructions pane go in `public/images/2026/09/`.
+- **Adjacent transcripts fetched:** ep-459 (Initial Impressions of Data Agents), ep-466 (Data Agents and Semantic Models), ep-527 (Semantics Layer Genie & Data Agents).
+- **Artifact:** `/prompts/` agent-briefs page = full Ride Coach sub-agent instructions.
+
+## Mined material (attributed, 2026-09-23)
+
+**Tommy (vocative unless noted):**
+- 560 ~121-127: "A data agent to me right now is seeing more and more of its purpose to be a subagent as a tooling rather than the primary way of communication... an agentic subprocess." / "my primary agents would spin up the data agent when needed."
+- 560 ~179-181: "I say you are a sub agent... of any Foundry or Copilot agent that calls on you." Sales + finance agents cross-check each other.
+- 560 ~181-185: data agents haven't taken off because nobody understood "is it the main agent?" / "I probably don't ever need to directly talk to a data agent as a user." MCP = "the standard now rather than a feature."
+- 560 ~107-111: Foundry agent can connect to multiple data agents; OneLake catalog in Foundry (no more copying IDs); Copilot Studio adds data agent as a tool. "not just upgraded, but its purpose changed."
+- 560 ~137-143 (context): Microsoft "shifted the purpose of a data agent, not just the features." Client pitch = build a Foundry/Copilot agent; data agents are its sub-agents.
+- 560 ~89-93: instruction anatomy (purpose, key relationships, key columns, core measures, how to reply). Ride coach: "your goal is to coach the user, not just answer questions." Without instructions "it's just going to try to query it every time."
+- 560 ~105: narrow purpose; "you're the doctor sales guy... diagnose people's quotas."
+- 560 ~85 (context): Copilot is general, answers the direct question; data agent is bound to a source and has a purpose.
+- 560 ~155 + 508 ~127: most orgs won't allow MCP access in their own Anthropic harness without an enterprise harness ("Mike is binary").
+- 560 ~199-203: 1,000 people asking "how are sales"; can any harness without instructions get the right answer every time? Data agents lag on features but exist for consistent answers.
+- 559 ~91-93 (context): "it's where it's located... now available in Foundry... I want to use this anywhere and when I'm needed."
+- 554 ~179: "agents are not to be used for ambiguous one-time queries... 'Just answer questions.' You're not going to get great answers."
+- 542 ~38-41 (context): API has no consuming view; only portal, Copilot agent, or Foundry.
+- 542 ~191-193 (context): 30-60-90: clean semantic models first, discovery at 60, agent at 90.
+- 508 ~29: client projects: primary recommendation is a semantic model as the source.
+- 556 ~183: "never going to use [it] with an agent with a two sentence prompt."
+
+**Tommy, older episodes (459 Sep 2025 / 466 Oct 2025 / 527 May 2026):**
+- 459 ~117-121: "Limit your possibilities per data agent... I have orchestration... I don't want a single data agent to do a lot of general things." Tested five agents on one model: "you are the sales agent... you're my date time intelligence agent." 300-line prompt loses priority; "limit our data agents, but create more of them."
+- 459 ~123-125: "rather than a data agent can solve all things is many data agents can solve a lot of little things."
+- 459 ~25-27, ~41: Copilot Studio orchestration is the more significant feature; Studio connects to a data agent that's already created.
+- 459 ~157: "I'm not creating a data agent for the organization. This is for [Ann] in operations." Works better in Copilot Studio than exploring in the agent.
+- 459 ~161/171: "people are expecting this data agent to be their ChatGPT... it's not meant for that." / "you're not creating ChatGPT in a data agent."
+- 459 ~63-65: three parts: instructions, data source, the user query. "I only have control on one of these."
+- 466 ~59: Copilot = the toy in the box; data agent = you can update the motherboard, standalone and cross-platform.
+- 466 ~61: impact is "the instruction-based side... a specific task, rather than Copilot... Q&A."
+- 466 ~161-163: semantic model is the highway; missing the subway (input/output examples). "right output three out of six times, I'm not using it."
+- 466 ~177-179: Zelda: raw data is child Link; the semantic model already has the horse and arrows.
+- 527 ~135: "AI is not a prompting problem. It is a data problem first."
+- 527 ~201-205: layering instructions like nested claude.md files. ~197: "the death of process with AI is isolation."
+- 527 ~57: not yet at a point to push MCP-based setups onto the client.
+
+**Evolution note:** Tommy wasn't a skeptic who converted. The narrow-orchestrated-agent idea is already there in 459. What changed is the platform (Foundry multi-agent, OneLake catalog, Copilot Studio tool) and his wording: "you are the sales agent" (2025) became "you are a sub-agent" (2026). Frame "sub-agent" as his current view; the phrase only appears in 560.
+
+**Mike only, do not give to Tommy:** context lives in the model (Marco Russo); 15K char limit so split agents per source; sub-agents get fresh smaller context windows (coding analogy); 400 CU / 4 queries on F2, "150 CUs per chat"; modeling MCP does what a data agent does; data agents "junk" abstraction (541); router at top of org (554); logs must be agent-analyzed.
+
 ## Other angles
 
 ### Observability Is Usage Analytics, Not a Trust Badge
