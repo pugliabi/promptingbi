@@ -7,7 +7,7 @@ Two surfaces share one model:
 - **`pbir set` / `pbir get`**. dot-path reads and scalar edits on existing CF entries. Primary surface for daily work.
 - **`pbir visuals cf`**. structural authoring: create CF from scratch, copy CF between visuals, convert to theme tokens, convert to measure-driven.
 
-The old `pbir visuals cf --info`/`--list`/`--has`/`--set-color`/`--remove`/`--remove-all` flags are **deprecated** and redirect to `pbir set`/`pbir get`. See the [Deprecated Flags](#deprecated-flags) section.
+The old `pbir visuals cf --info`/`--list`/`--has`/`--set-color`/`--remove`/`--remove-all` flags no longer exist. See the [Removed Flags](#removed-flags) section for the rewrite table.
 
 ## CF Types
 
@@ -18,8 +18,33 @@ The old `pbir visuals cf --info`/`--list`/`--has`/`--set-color`/`--remove`/`--re
 | **Measure-driven** | Extension measure returns theme token | `Measure` with `dataViewWildcard` |
 | **Data bars** | Inline bars showing magnitude | `dataBars` property |
 | **Icons** | Icon sets based on thresholds | Icon-specific CF structure |
+| **Image** | Measure returning an image URL or SVG data URI | `imageUrl` + `imageType` |
 
-CF entries live in `visual.objects` (not `visualContainerObjects`). Each container (e.g., `dataPoint`, `labels`) can hold both regular entries and CF entries. CF entries are identified by `dataViewWildcard` selectors, `FillRule`/`Conditional` expressions, or `dataBars` properties.
+CF entries live in `visual.objects` for containers the visual type owns (`dataPoint`, `labels`, `values`, `error`, ...) and in `visual.visualContainerObjects` for the universal container objects every visual type shares (`title`, `subTitle`, `divider`, `background`, `border`, `dropShadow`, `visualHeader`, `visualHeaderTooltip`, `visualTooltip`, `visualLink`, `spacing`, `padding`, `general`). Writing to the wrong store saves a value the renderer never reads, so let the CLI and object model decide placement rather than constructing entries by hand.
+
+Each container can hold both regular entries and CF entries. CF entries are identified by `dataViewWildcard` selectors, `FillRule`/`Conditional` expressions, `dataBars` properties, or an unscoped measure expression on a universal container.
+
+## Finding out what accepts CF
+
+The selector shape a CF entry needs depends on the visual type, the container, and sometimes the property. A wrong shape passes every schema check and then renders nothing, which is why guessing is expensive. Ask instead:
+
+```bash
+pbir schema describe barChart.dataPoint
+pbir schema describe lineChart.error
+pbir schema describe clusteredBarChart.labels
+```
+
+The footer prints a `Conditional formatting:` line naming the properties in that container that take a measure. A starred property (`fill*`) was confirmed against a rendered report; unstarred ones come from the capability catalog. The list is not exhaustive, so an absent property may still work, but a listed one is the safe bet.
+
+Beyond data point colors, the catalog covers:
+
+- **Universal containers** on every visual type: `title.text`, `title.fontColor`, `title.background`, `subTitle.text`, `subTitle.fontColor`, `border.color`, `divider.color`, `dropShadow.color`, `visualHeader.*`, `visualTooltip.*`
+- **Axis bounds and labels**: `valueAxis.start`, `valueAxis.end`, `valueAxis.secStart`, `valueAxis.secEnd`, `categoryAxis.start`, `categoryAxis.end`, `valueAxis.titleText`, `categoryAxis.titleText`
+- **Reference lines**: `referenceLine.value`, `referenceLine.displayName`, and the `xAxisReferenceLine` / `y1AxisReferenceLine` / `y2AxisReferenceLine` variants
+- **Dynamic label text**: `labels.dynamicLabelTitle`, `labels.dynamicLabelDetail`, `labels.dynamicLabelValue`
+- **Error bars**: `error.barColor`, `error.barBorderColor`, `error.labelColor`, `error.labelBackgroundColor`, `error.shadeColor`, plus the numeric `error.barWidth`, `error.barBorderSize`, `error.markerSize`
+- **Grids**: `values.fontColor`, `values.backColor`, `values.webURL`, plus data bars and icons
+- **Markers**: `markers.transparency` (a measure; `shadow.transparency` and friends are static opacity controls that merely share the name)
 
 ## Reading CF with `pbir get`
 
@@ -185,6 +210,18 @@ pbir visuals cf "Visual.Visual" --measure "valueAxis.start _Fmt.Zero"
 pbir visuals cf "Visual.Visual" --measure "valueAxis.end _Fmt.AxisCeiling"
 ```
 
+### Verify in reading view, and mind error bars
+
+Verify published CF in the service reading view on a fresh load. An open edit-mode canvas renders its session state, not the published definition, and reliably shows stale or missing CF.
+
+Error bars can silently disable per-point `dataPoint.fill` CF on the same visual: bars fall back to the theme default color, and removing the `error` container restores the CF in the same publish cycle. Not every chart is affected (a single-measure bar chart can carry both). After adding error bars to a visual with measure-driven fill, re-check the rendering; where they conflict, choose the target tick or the per-point fill, and carry the measure signal on the data labels instead.
+
+`pbir validate --qa` flags static text colors with poor contrast (`LOW_TEXT_CONTRAST`, WCAG ratio below 3:1) on axis labels, data labels, and titles, and static or theme-default data-point fills with poor contrast (`LOW_FILL_CONTRAST`, same 3:1 threshold) on visuals with a `dataPoint.defaultColor` slot; `--contrast-against visual|page|effective` picks the background layer for both. Measure-driven colors are skipped, so verify CF ink and fill contrast by rendering.
+
+### Category axis labels cannot be colored per category
+
+`categoryAxis.labelColor` accepts a measure, but the renderer evaluates it once at visual scope and paints every category label the same color. The service UI serializes this CF selector-less, and that selector-less entry is the only shape the axis renderer consumes: entries carrying a selector of any kind (`dataViewWildcard` with `matchingOption` 0 or 1, per-category `scopeId` comparisons, `metadata` pointing at the category column or the measure, compound selector plus metadata, with or without a competing selector-less entry) are skipped outright, and the labels fall back to the theme color. Per-category axis label color does not exist in native Power BI visuals. When category items must be highlighted individually, put the measure CF on the data labels (`labels.color`) or the bar fill (`dataPoint.fill`) instead; those containers do resolve per data point.
+
 ### Gradient and Data Bars
 
 ```bash
@@ -235,9 +272,46 @@ Friendly icon names: `circle_`/`traffic_`/`flag_` + `red|yellow|green`; `arrow_u
 
 Raw PBIR names (`TriangleHigh`, `SignalBarFull`, ...) follow `<Shape><Level>` (High=green, Medium=yellow, Low=red). Unknown names are rejected -- Desktop renders them as broken images. Icons default to the `Before` layout; use `layout("icon_only")` (Python API) for icon-only columns.
 
-Shared flags: `--field` (required), `--min-color`, `--max-color`, `--mid-color`, `--mid-value`, `--positive-color`, `--negative-color`, `--on container.prop`.
+Shared flags: `--field` (required), `--min-color`, `--max-color`, `--mid-color`, `--mid-value`, `--positive-color`, `--negative-color`, `--on container.prop`, `--target-field`.
 
 Re-applying a builder on the same property and scope replaces the entry; different column scopes coexist.
+
+### Naming the target separately from the driver
+
+`--field` is the field that *drives* the format: the measure whose value decides the color, the number, or the text. On containers Power BI addresses one field at a time (grid `values`, chart `error`, card `label`), the entry also has to name the field being *formatted*. By default that is assumed to be the driving field, which is right for the common case of colouring a column by its own value and wrong the moment a helper measure drives it.
+
+```bash
+# Colour the Revenue column red when the (unshown) Margin % measure goes negative
+pbir visuals cf "Grid.Visual" --rules --field "Sales.Margin %" \
+  --rule "lt 0 bad" --on values.backColor --target-field "Sales.Revenue"
+
+# A combo chart plots columns in Y and a line in Y2; style the line's error bars
+pbir visuals cf "Combo.Visual" --rules --field "_Fmt.ErrorColor" \
+  --rule "gt 0 good" --on error.barColor --target-field "Sales.Line"
+```
+
+Without `--target-field` on a combo chart binding more than one measure, the CLI cannot tell which series you meant and will scope the entry to the driving measure. Available in `pbir set`-adjacent surfaces too: the batch v2 `cf` step takes `target_field`, and the Python builders take `.target_field("Table.Field")`.
+
+### Measure-driven images and SVG
+
+`--image` places an image whose source is a measure, which is how DAX-generated SVG (bullet bars, sparklines, KPI glyphs) reaches a card or a grid cell.
+
+```bash
+# Card: the measure fills the card's image slot
+pbir visuals cf "Card.Visual" --image --field "_SVG.Bullet" \
+  --image-size 60 --image-position Right
+
+# Grid: the measure must already be a projected column
+pbir fields add "Grid.Visual" -b Values -f "_SVG.Bullet" --type Measure
+pbir visuals cf "Grid.Visual" --image --field "_SVG.Bullet" --image-size 40
+```
+
+The measure has to satisfy the renderer's contract or the slot stays blank:
+
+- **Data type must be String/Text.** A numeric or date measure is refused.
+- **`dataCategory` must be `ImageUrl`.** Set it when creating the measure; without it the CLI warns, and with a different category it errors.
+- **Grids need the column projected first.** A grid renders images from a bound `ImageUrl` column plus `grid.imageHeight`/`grid.imageWidth`; it has no CF entry at all. The CLI refuses a field the grid does not show and points at `pbir fields add`.
+- **Cards need the discriminator.** The card entry carries `imageType: 'imageUrl'` and `show` beside `imageUrl`. These are written for you and preserved through `--keep-cf` and CF copy; do not strip them.
 
 ## Copying CF Between Visuals
 
@@ -327,12 +401,22 @@ pbir visuals cf "Visual.Visual" --rules --field "Table.Field" \
 | `value` | `fontColor` | Card visual value font color (`value.color` does not exist) |
 | `referenceLabel` | `color` | KPI reference label color |
 | `referenceLabelDetail` | `color` | KPI reference label detail |
+| `title` | `text`, `fontColor`, `background` | Dynamic title and its colors (every visual type) |
+| `subTitle` | `text`, `fontColor` | Dynamic subtitle |
+| `border` | `color` | Visual border color |
+| `valueAxis` | `start`, `end` | Measure-driven axis bounds |
+| `referenceLine` | `value`, `displayName` | Measure-driven reference line position and label |
+| `error` | `barColor`, `markerSize`, `barWidth` | Error bar styling per series |
+| `labels` | `dynamicLabelTitle`, `dynamicLabelDetail` | Dynamic data label text |
+| `image` | `imageUrl` | Card image from a measure (`--image`) |
 
-## Deprecated Flags
+This table is a starting point, not the catalog. Run `pbir schema describe <type>.<container>` for the authoritative list on any visual type.
 
-The following `pbir visuals cf` flags are **deprecated** and will be removed in 1.0.0. They emit a red error, print the equivalent `pbir set` / `pbir get` command, and exit with status 1. Update your scripts using the rewrite table below.
+## Removed Flags
 
-| Deprecated flag | Replacement |
+The following `pbir visuals cf` flags were deprecated in 0.9.29 and removed in 0.9.30 (the CLI now rejects them as unknown options). Rewrite older scripts with the table below.
+
+| Removed flag | Replacement |
 |---|---|
 | `--info dataPoint.fill` | `pbir get "<path>.dataPoint.fill.cf"` |
 | `--list` | `pbir get "<path>.**.cf"` |

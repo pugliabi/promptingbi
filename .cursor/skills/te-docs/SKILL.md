@@ -1,64 +1,12 @@
 ---
 name: te-docs
-<<<<<<< HEAD
-description: "This skill should be used when the user asks about 'Tabular Editor documentation', 'TE docs', 'how to do X in Tabular Editor', 'Tabular Editor features', 'TE3 features', '.tmuo files', 'Tabular Editor user options', 'TE3 preferences', 'Preferences.json', 'UiPreferences.json', 'Layouts.json', 'workspace database settings', 'deployment preferences', 'data source overrides', 'keyboard shortcuts', 'DAX editor settings', 'TMDL options', 'per-model TE3 configuration', or needs to search Tabular Editor documentation. Provides Tabular Editor documentation search and configuration file guidance."
-=======
-version: 26.25
 description: Tabular Editor documentation search and configuration file guidance (.tmuo, Preferences.json, UiPreferences.json, Layouts.json). Automatically invoke when the user asks about "TE docs", "Tabular Editor features", "TE3 preferences", ".tmuo files", "workspace database settings", "DAX editor settings", "per-model TE3 configuration", or needs to search Tabular Editor documentation for how-to guidance.
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ---
 
 # Tabular Editor Documentation & Configuration
 
 Guidance for searching Tabular Editor documentation and understanding TE3 configuration files (.tmuo, Preferences.json, etc.).
 
-<<<<<<< HEAD
-## Documentation Search
-
-The Tabular Editor docs site (docs.tabulareditor.com) has URL redirect issues that cause 404 errors for AI agents. Local search via ripgrep is faster and more reliable.
-
-### Setup
-
-Clone the TabularEditorDocs repository:
-
-```bash
-git clone https://github.com/TabularEditor/TabularEditorDocs.git ~/Git/TabularEditorDocs
-```
-
-### Search Commands
-
-```bash
-# Search by topic
-rg -i "topic" ~/Git/TabularEditorDocs/content --type md
-
-# Search with context
-rg -i "topic" ~/Git/TabularEditorDocs/content --type md -C 3
-
-# Search specific section
-rg -i "topic" ~/Git/TabularEditorDocs/content/features --type md
-```
-
-### Key Documentation Files
-
-| Topic | File |
-|-------|------|
-| BPA overview | `content/getting-started/bpa.md` |
-| C# script library | `content/features/CSharpScripts/csharp-script-library.md` |
-| DAX scripts | `content/features/dax-scripts.md` |
-| Preferences | `content/references/preferences.md` |
-| Keyboard shortcuts | `content/references/shortcuts3.md` |
-| Advanced Scripting | `content/how-tos/Advanced-Scripting.md` |
-
-### Directory Structure
-
-| Path | Content |
-|------|---------|
-| `content/features/` | Feature docs (BPA, DAX scripts, C# scripts) |
-| `content/getting-started/` | Onboarding and setup |
-| `content/how-tos/` | Task-specific guides |
-| `content/references/` | Preferences, shortcuts, release notes |
-| `content/kb/` | Knowledge base (BPA rules, error codes) |
-=======
 ## Pre-flight
 
 Before using documentation search, verify `pbi-search` is installed:
@@ -151,7 +99,6 @@ pbi-search sync --descriptions   # fetches meta descriptions; ~30s extra
 ```
 
 ---
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## Configuration Files (.tmuo)
 
@@ -227,10 +174,7 @@ TE3 stores application-level preferences in `%LocalAppData%\TabularEditor3\`:
 
 ## External
 
-<<<<<<< HEAD
-=======
 - [pbi-search on GitHub](https://github.com/data-goblin/pbi-search)
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 - [Tabular Editor User Options](https://docs.tabulareditor.com/references/user-options.html)
 - [Workspace Mode](https://docs.tabulareditor.com/features/workspace-mode.partial.html)
 - [Preferences Reference](https://docs.tabulareditor.com/references/preferences.html)

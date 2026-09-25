@@ -115,61 +115,6 @@ RETURN
 }
 ```
 
-<<<<<<< HEAD
-**Theme color names:** `"bad"`, `"good"`, `"neutral"`, `"minColor"`, `"midColor"`, `"maxColor"`
-
-### Two-Color Gradient (linearGradient2)
-
-No DAX required - uses min/max color scale:
-
-```json
-{
-  "dataPoint": [
-    {
-      "properties": {
-        "fill": {
-          "solid": {
-            "color": {
-              "expr": {
-                "FillRule": {
-                  "Input": {
-                    "Measure": {
-                      "Expression": {"SourceRef": {"Entity": "Orders"}},
-                      "Property": "Order Lines"
-                    }
-                  },
-                  "FillRule": {
-                    "linearGradient2": {
-                      "min": {
-                        "color": {"Literal": {"Value": "'minColor'"}}
-                      },
-                      "max": {
-                        "color": {"Literal": {"Value": "'maxColor'"}}
-                      },
-                      "nullColoringStrategy": {
-                        "strategy": {"Literal": {"Value": "'asZero'"}}
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "selector": {
-        "data": [{"dataViewWildcard": {"matchingOption": 1}}]
-      }
-    }
-  ]
-}
-```
-
-**Properties:**
-- `Input` - Measure to evaluate for gradient position
-- `min.color` - Color for lowest values
-- `max.color` - Color for highest values
-=======
 **Theme color names:** `"bad"`, `"good"`, `"neutral"`, `"minColor"`, `"maxColor"` (note: `"midColor"` is NOT a valid token; use `"neutral"` for a middle state)
 
 ### Two-Color Gradient (linearGradient2)
@@ -227,29 +172,20 @@ Two forms depending on whether you need fixed or data-relative bounds.
 - `Input` - Measure to evaluate for gradient position
 - `min.color` / `max.color` - Colors for lowest/highest values
 - `min.value` / `max.value` - Optional: fixed range bounds (explicit bounds form)
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 - `nullColoringStrategy: 'asZero'` - Treat nulls as minimum
 
 ### Three-Color Gradient (linearGradient3)
 
-<<<<<<< HEAD
-Diverging color scheme with midpoint:
-=======
 Diverging color scheme with midpoint.
 
 **Data-driven** (scale spans actual data min/max):
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ```json
 {
   "FillRule": {
     "linearGradient3": {
       "min": {"color": {"Literal": {"Value": "'minColor'"}}},
-<<<<<<< HEAD
-      "mid": {"color": {"Literal": {"Value": "'midColor'"}}},
-=======
       "mid": {"color": {"Literal": {"Value": "'neutral'"}}},
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
       "max": {"color": {"Literal": {"Value": "'maxColor'"}}},
       "nullColoringStrategy": {
         "strategy": {"Literal": {"Value": "'asZero'"}}
@@ -259,9 +195,6 @@ Diverging color scheme with midpoint.
 }
 ```
 
-<<<<<<< HEAD
-**Use case:** Red-yellow-green scale for negative-neutral-positive values.
-=======
 **Explicit bounds** (fixed thresholds — e.g., 0 is always the midpoint regardless of data range):
 
 ```json
@@ -293,7 +226,6 @@ Diverging color scheme with midpoint.
 - **Explicit bounds**: 0 (or any threshold) is always the midpoint; useful for variance measures where zero means neutral
 
 **Use case:** Red-neutral-green scale for negative-neutral-positive values.
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## Pattern 2: Line Chart Segment Colors
 
@@ -575,18 +507,6 @@ Complex UI-generated conditional logic - most verbose but UI-configurable.
 | 3 | Less than or equal (<=) |
 | 4 | Less than (<) |
 
-<<<<<<< HEAD
-### Aggregation Functions
-
-| Value | Function |
-|-------|----------|
-| 0 | SUM |
-| 1 | AVG |
-| 2 | COUNT |
-| 3 | MIN |
-| 4 | MAX |
-| 5 | DISTINCTCOUNT |
-=======
 ### Aggregation Functions (QueryAggregateFunction)
 
 | Value | Function |
@@ -600,7 +520,6 @@ Complex UI-generated conditional logic - most verbose but UI-configurable.
 | 6 | Median |
 | 7 | StandardDeviation |
 | 8 | Variance |
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ### Example: Top 10% Rule
 

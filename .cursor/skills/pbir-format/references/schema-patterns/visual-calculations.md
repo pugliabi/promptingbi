@@ -29,15 +29,6 @@ Visual calculations appear in `query.queryState` projections as `NativeVisualCal
 
 ## Window Functions
 
-<<<<<<< HEAD
-Visual calculations have access to windowing functions not available in model measures:
-
-**ROWS**: Current row set
-**FIRST()**: First value in window
-**LAST()**: Last value in window
-**INDEX()**: Current row position
-**OFFSET()**: Value N rows away
-=======
 Visual calculations have access to windowing functions not available in model measures. Functions take an optional `axis` parameter (`ROWS`, `COLUMNS`, `ROWS COLUMNS`, or `COLUMNS ROWS`).
 
 ### Navigation Functions
@@ -72,7 +63,6 @@ Visual calculations have access to windowing functions not available in model me
 The compound forms `ROWS COLUMNS` and `COLUMNS ROWS` control traversal order in matrix visuals — relevant for `RUNNINGSUM` and `OFFSET` where rows and columns intersect.
 
 **Reference:** [Visual calculations on Microsoft Learn](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview) | [dax.guide visual calculations](https://dax.guide/visual-calculations/)
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## Common Patterns
 
@@ -92,41 +82,20 @@ IF ( _Measure = LAST ( [Order Lines], ROWS ), [Order Lines] )
 
 ### Running Total
 
-<<<<<<< HEAD
-```dax
-VAR _Current = [Revenue]
-RETURN
-SUMX ( FILTER ( ROWS, INDEX() <= EARLIER(INDEX()) ), [Revenue] )
-=======
 Visual calculations use dedicated window functions — `ROWS` is an axis keyword, not a filterable table. `EARLIER()` has no meaning in visual calculation context.
 
 ```dax
 RUNNINGSUM ( [Revenue] )
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ```
 
 ### Moving Average
 
 ```dax
-<<<<<<< HEAD
-VAR _WindowSize = 3
-RETURN
-AVERAGEX (
-    FILTER ( ROWS,
-        INDEX() >= EARLIER(INDEX()) - _WindowSize + 1
-        && INDEX() <= EARLIER(INDEX())
-    ),
-    [Sales]
-)
-```
-
-=======
 MOVINGAVERAGE ( [Sales], 3 )
 ```
 
 The second argument is the window size (number of periods to average over).
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ## Multi-Series Configuration
 
 Visual calculations create separate series in the visual. You can:
@@ -196,8 +165,4 @@ This allows independent formatting of:
 
 - [expressions.md](expressions.md) - Measure expression syntax
 - [selectors.md](selectors.md) - Metadata selector patterns
-<<<<<<< HEAD
-- [visuals-catalog/lineChart.md](../visuals-catalog/lineChart.md) - Usage in line charts
-=======
 - Visual catalog - not yet available
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478

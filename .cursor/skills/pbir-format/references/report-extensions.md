@@ -4,14 +4,10 @@ Report-level DAX measures and visual calculation placeholders.
 
 **File location:** `<report>.Report/definition/reportExtensions.json`
 
-<<<<<<< HEAD
-**Schema:** `reportExtension/1.0.0`
-=======
 **Required root fields:**
 - `$schema`: `"https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportExtension/1.0.0/schema.json"`
 - `name`: Always `"extension"`
 - `entities`: Array of entity objects (extension measures grouped by table)
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## Two types of DAX in reports
 
@@ -33,19 +29,6 @@ See [measures.md](./measures.md) for complete documentation including:
 
 ## Visual Calculation Placeholders
 
-<<<<<<< HEAD
-When visual calculations are used, Power BI creates placeholder entries in `reportExtensions.json`:
-
-```json
-{
-  "name": "Order Lines (Latest Month)",
-  "dataType": "Double",
-  "expression": "",
-  "formatString": "General Number",
-  "references": {
-    "unrecognizedReferences": true
-  }
-=======
 When visual calculations are used, Power BI creates placeholder entries in `reportExtensions.json`. These are nested inside the standard `entities[]` structure:
 
 ```json
@@ -66,7 +49,6 @@ When visual calculations are used, Power BI creates placeholder entries in `repo
       }
     ]
   }]
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 }
 ```
 

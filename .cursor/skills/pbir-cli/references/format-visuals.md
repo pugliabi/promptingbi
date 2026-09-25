@@ -186,8 +186,8 @@ pbir visuals divider "Visual.Visual" --show
 
 ```bash
 pbir visuals legend "Visual.Visual" --show --position Right
-pbir visuals axis "Visual.Visual" --axis category --show --title "Month"
-pbir visuals axis "Visual.Visual" --axis value --show --title "Revenue ($)"
+pbir visuals axis "Visual.Visual" category --show --title "Month"
+pbir visuals axis "Visual.Visual" value --show --title "Revenue ($)"
 pbir visuals labels "Visual.Visual" --show --fontSize 10
 pbir visuals sort "Visual.Visual" -f "Sales.Revenue" -d Descending
 ```
@@ -198,7 +198,7 @@ pbir visuals sort "Visual.Visual" -f "Sales.Revenue" -d Descending
 pbir visuals header "Visual.Visual" --show
 pbir visuals tooltip "Visual.Visual"
 pbir visuals hide "Visual.Visual"                # Hide in view mode
-pbir visuals hide "Visual.Visual" --off          # Show again
+pbir visuals hide "Visual.Visual" --show         # Show again
 ```
 
 ## Conditional Formatting
@@ -228,8 +228,8 @@ pbir visuals cf "Visual.Visual" --measure "dataPoint.fill _Fmt.RevenueColor"
 
 Use `pbir get` / `pbir set` with a `.cf` dot-path tail. The old
 `pbir visuals cf --info`/`--list`/`--has`/`--set-color`/`--remove`/`--remove-all`
-flags are deprecated and redirect to these commands. see
-[conditional-formatting.md](conditional-formatting.md) for the full rewrite
+flags were removed in 0.9.30; see
+[conditional-formatting.md](conditional-formatting.md) for the rewrite
 table.
 
 ```bash
@@ -380,9 +380,11 @@ Notes:
 - Combined selector + interaction state in one path (e.g.
   `field(X).hover.prop`) is not yet supported and raises an explicit error.
   Apply them in two separate calls.
-- `pbir visuals format-field` and `pbir visuals format-state` are deprecated
-  aliases that print the equivalent `pbir set` command and exit non-zero.
-  Both are removed in 1.0.0.
+- `pbir visuals format-field` and `pbir visuals format-state` were removed in
+  0.9.30; the `field(...)` and `hover|press|selected` dot-path forms above are
+  the only surface.
+- `pbir visuals resize` and `pages resize` refuse zero or negative sizes before
+  saving; `pbir set --dry-run` never writes.
 
 ## Clearing Visual-Level Overrides (Reset to Theme)
 

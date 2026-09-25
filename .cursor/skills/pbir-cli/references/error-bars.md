@@ -24,7 +24,7 @@ Not supported on: `areaChart` and its stacked variants, `scatterChart`, `waterfa
 The CLI splits the work across two commands with clear boundaries:
 
 - **`pbir visuals error-bars add|list|remove`** creates, enumerates, and deletes the two-entry pair per series. It owns queryRef resolution (looking up the projection that binds the series on the visual), the `errorRange` struct, and the upsert-by-series semantics.
-- **`pbir set "error.field(<queryRef>).<property>" <value>`** sets every styling property on the styling entry after it exists. The `field(<queryRef>)` selector form maps to `{metadata: "<queryRef>"}` and merges into the styling entry, leaving the range-binding entry untouched.
+- **`pbir set "error.field(<queryRef>).<property>" --value <value>`** sets every styling property on the styling entry after it exists. The `field(<queryRef>)` selector form maps to `{metadata: "<queryRef>"}` and merges into the styling entry, leaving the range-binding entry untouched.
 
 This split exists because `pbir set` cannot array-append into a container, cannot build the `errorRange` struct from CLI args, and cannot emit the compound selector used on the range-binding entry. Once both entries exist, all styling is just `pbir set`.
 
@@ -70,9 +70,9 @@ Chaining example:
 ```bash
 QR=$(pbir visuals error-bars add "V.Visual" \
   --series "Sales.Revenue" --upper "Sales.Target" --lower "Sales.Target")
-pbir set "V.Visual.error.field($QR).markerShape" "diamond"
-pbir set "V.Visual.error.field($QR).markerSize" 10
-pbir set "V.Visual.error.field($QR).barShow" false
+pbir set "V.Visual.error.field($QR).markerShape" --value "diamond"
+pbir set "V.Visual.error.field($QR).markerSize" --value 10
+pbir set "V.Visual.error.field($QR).barShow" --value false
 ```
 
 ## Style error bars with `pbir set`
@@ -81,22 +81,22 @@ All styling lives on the second (styling) entry and is reachable via the `field(
 
 ```bash
 # Whisker width and color
-pbir set "V.Visual.error.field(Sales.Revenue).barWidth" 1
-pbir set "V.Visual.error.field(Sales.Revenue).barShow" true
+pbir set "V.Visual.error.field(Sales.Revenue).barWidth" --value 1
+pbir set "V.Visual.error.field(Sales.Revenue).barShow" --value true
 
 # Marker shape and size at the endpoints
-pbir set "V.Visual.error.field(Sales.Revenue).markerShape" "diamond"
-pbir set "V.Visual.error.field(Sales.Revenue).markerSize" 10
-pbir set "V.Visual.error.field(Sales.Revenue).markerShow" true
+pbir set "V.Visual.error.field(Sales.Revenue).markerShape" --value "diamond"
+pbir set "V.Visual.error.field(Sales.Revenue).markerSize" --value 10
+pbir set "V.Visual.error.field(Sales.Revenue).markerShow" --value true
 
 # Data labels on the error bar itself
-pbir set "V.Visual.error.field(Sales.Revenue).labelShow" true
-pbir set "V.Visual.error.field(Sales.Revenue).labelFormat" "range"
-pbir set "V.Visual.error.field(Sales.Revenue).labelFontSize" 10
+pbir set "V.Visual.error.field(Sales.Revenue).labelShow" --value true
+pbir set "V.Visual.error.field(Sales.Revenue).labelFormat" --value "range"
+pbir set "V.Visual.error.field(Sales.Revenue).labelFontSize" --value 10
 
 # Tooltip integration
-pbir set "V.Visual.error.field(Sales.Revenue).tooltipShow" true
-pbir set "V.Visual.error.field(Sales.Revenue).tooltipFormat" "range"
+pbir set "V.Visual.error.field(Sales.Revenue).tooltipShow" --value true
+pbir set "V.Visual.error.field(Sales.Revenue).tooltipFormat" --value "range"
 ```
 
 Discover all available properties with:
@@ -106,6 +106,27 @@ pbir schema describe clusteredBarChart.error
 ```
 
 Available `markerShape` values: `circle`, `square`, `diamond`, `triangle`, `x`, `shortDash`, `longDash`, `plus`, `none`. Available `labelFormat` values: `absolute`, `relativeNumeric`, `relativePercentage`, `range`.
+
+## Drive error bar styling from a measure
+
+Static values cover most cases, but the styling properties also accept a measure, so a whisker can change color or thickness with the data:
+
+```bash
+# Colour the whiskers by a formatting measure
+pbir visuals cf "V.Visual" --measure "error.barColor _Fmt.VarianceColor" \
+  --target-field "Sales.Revenue"
+
+# Rules-driven marker size
+pbir visuals cf "V.Visual" --rules --field "Sales.Variance" \
+  --rule "gt 0 12" --rule "lte 0 6" --on error.markerSize \
+  --target-field "Sales.Revenue"
+```
+
+Colour slots: `barColor`, `barBorderColor`, `labelColor`, `labelBackgroundColor`, `shadeColor`. Numeric slots: `barWidth`, `barBorderSize`, `markerSize`.
+
+`--target-field` names the plotted series being styled, which is separate from the measure driving the format. On a chart binding a single measure it can be inferred; on a combo chart plotting one measure in Y and another in Y2 it cannot, so pass it explicitly. The resulting entry carries the series' query ref in `metadata`, which is the same styling entry `pbir set "V.Visual.error.field(<queryRef>).<property>"` writes to; a measure-driven property and a static one coexist there as long as they are different properties.
+
+Run `pbir schema describe <visualType>.error` to see which properties accept a measure on a given chart type.
 
 ## List error bars
 
@@ -145,9 +166,9 @@ QR=$(pbir visuals error-bars add "V.Visual" \
   --series "Sales.Revenue" \
   --upper "Sales.Target" \
   --lower "Sales.Target")
-pbir set "V.Visual.error.field($QR).markerShape" "longDash"
-pbir set "V.Visual.error.field($QR).markerSize" 12
-pbir set "V.Visual.error.field($QR).barShow" false
+pbir set "V.Visual.error.field($QR).markerShape" --value "longDash"
+pbir set "V.Visual.error.field($QR).markerSize" --value 12
+pbir set "V.Visual.error.field($QR).barShow" --value false
 ```
 
 **Forecast confidence band** with colored whiskers:
@@ -157,8 +178,8 @@ QR=$(pbir visuals error-bars add "V.Visual" \
   --series "Sales.Forecast" \
   --upper "Sales.Forecast High" \
   --lower "Sales.Forecast Low")
-pbir set "V.Visual.error.field($QR).barWidth" 2
-pbir set "V.Visual.error.field($QR).markerSize" 0
+pbir set "V.Visual.error.field($QR).barWidth" --value 2
+pbir set "V.Visual.error.field($QR).markerSize" --value 0
 ```
 
 **Range labels on every bar:**
@@ -168,12 +189,15 @@ QR=$(pbir visuals error-bars add "V.Visual" \
   --series "Sales.Revenue" \
   --upper "Sales.Max" \
   --lower "Sales.Min")
-pbir set "V.Visual.error.field($QR).labelShow" true
-pbir set "V.Visual.error.field($QR).labelFormat" "range"
+pbir set "V.Visual.error.field($QR).labelShow" --value true
+pbir set "V.Visual.error.field($QR).labelFormat" --value "range"
 ```
 
 ## Notes and caveats
 
+- **`add` writes the entries but does not turn the feature on.** The styling entry starts without `enabled`, and the service renders nothing until `pbir set "V.Visual.error.field(<queryRef>).enabled" --value true`. Always set it right after `add`; an "error bars are invisible" report is this before it is anything else.
+- **The value axis does not stretch to include the bounds.** A bound outside the current axis range clips invisibly and looks like a no-op. Sanity-check the bound measure's magnitude against the plotted values before concluding the entry is broken.
+- **A measure created moments ago fails `--upper`/`--series` validation** with "Field not found" until the model snapshot refreshes; any `pbir model -d` call against the report refreshes the cache.
 - **`error-bars add` is idempotent per series** via the upsert in point 1 above. Retrying a failed add with the same `--series` replaces the existing pair cleanly; no duplication. Retries against different series accumulate as separate pairs, which is the intended behavior.
 - **Glob + shell capture don't mix.** When `visual_path` matches multiple visuals, `add` prints one queryRef per visual to stdout; `QR=$(pbir visuals error-bars add "**/*.Visual" ...)` captures multiple lines. Target one visual at a time when chaining to `pbir set`.
 - **`--series` must be bound first.** `pbir visuals bind --add "Role:Table.Measure" --type Measure` before calling `error-bars add`. The command looks the queryRef up from the visual's `queryState.projections`; if the series is not bound, it raises a clear error pointing at `pbir visuals bind` instead of silently writing invalid JSON. Implicit measures (a column dropped on Y without an explicit Sum/Avg wrapper) are supported through queryRef equality matching.

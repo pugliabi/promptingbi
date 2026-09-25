@@ -69,11 +69,7 @@ Individual bookmark state. Each bookmark captures a snapshot of the report at a 
 | Property | Type | Description |
 |----------|------|-------------|
 | `targetVisualNames` | string[] | Visuals affected by this bookmark (empty = all) |
-<<<<<<< HEAD
-| `suppressDisplay` | boolean | Whether bookmark controls visual visibility |
-=======
 | `suppressDisplay` | boolean | When `true`, applying this bookmark will **not** change the display mode (visibility) of any visuals — their current visibility state is preserved. Set `false` (or omit) to allow the bookmark to toggle visibility. |
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 | `suppressActiveSection` | boolean | Don't change the active page when applied |
 | `suppressData` | boolean | Don't restore filter/slicer state |
 | `applyOnlyToTargetVisuals` | boolean | Only affect visuals listed in targetVisualNames |
@@ -92,12 +88,8 @@ Individual bookmark state. Each bookmark captures a snapshot of the report at a 
 
 | Path | Description |
 |------|-------------|
-<<<<<<< HEAD
-| `singleVisual.display.mode: "hidden"` | Hide the visual |
-=======
 | `singleVisual.display.mode: "hidden"` | Hide the visual (the actual mechanism for bookmark show/hide) |
 | `singleVisual.display.mode: "visible"` | Show the visual (explicitly set visible in this bookmark) |
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 | `singleVisual.objects.merge` | Override specific formatting properties |
 | `singleVisual.activeProjections` | Active drill-down field |
 | `filters.byExpr[]` | Visual-level filter state |
@@ -125,11 +117,8 @@ Bookmarks capture filter state using the same SQExpr format as filterConfig:
 }
 ```
 
-<<<<<<< HEAD
-=======
 **`expression` is required** on every filter entry — it defines which field the bookmark filter applies to. **`filter`** (with `Version`, `From`, `Where`) is optional — it is absent when there is no active filter selection on that field (the field is tracked but with no selected values).
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 `howCreated`: `0` = visual-level filter, `1` = report-level filter.
 
 ## Common Patterns

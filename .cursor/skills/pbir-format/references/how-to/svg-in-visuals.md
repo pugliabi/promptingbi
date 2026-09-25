@@ -174,11 +174,7 @@ The new card visual (cardVisual) supports SVG images in callout values.
 - **Workaround 2:** Add a Categories field (even with single category), disable small multiples
 - **Status:** Resolved by Microsoft in recent updates
 
-<<<<<<< HEAD
-**See:** [visual.json](../json-structure/05-visual-json.md) for visual structure reference
-=======
 **See:** [visual.json](../visual-json.md) for visual structure reference
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ### Slicer (New) Visual
 
@@ -211,21 +207,14 @@ The new slicer visual (advancedSlicerVisual) supports SVG in headers and items.
 }
 ```
 
-<<<<<<< HEAD
-=======
 > **Note:** The property names `showHeader` and `headerImageUrl` shown above have not been verified against a live Power BI Desktop export of an SVG-configured slicer. If these properties produce no effect, export the slicer from Power BI Desktop as PBIP and check the actual `objects.general.properties` keys in the resulting `visual.json`.
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 **Common use cases:**
 - Custom filter icons
 - Category indicators
 - Interactive buttons with SVG styling
 
-<<<<<<< HEAD
-**See:** [visual.json](../json-structure/05-visual-json.md) for visual structure reference
-=======
 **See:** [visual.json](../visual-json.md) for visual structure reference
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ### Scatter Chart Background
 
@@ -236,11 +225,7 @@ Scatter charts support SVG images as background overlays.
 - Use `plotArea.image` property in visual configuration
 - SVG scales to plot area dimensions
 
-<<<<<<< HEAD
-**See:** [visual.json](../json-structure/05-visual-json.md) for visual structure reference
-=======
 **See:** [visual.json](../visual-json.md) for visual structure reference
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ---
 

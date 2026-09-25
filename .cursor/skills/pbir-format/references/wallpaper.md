@@ -172,27 +172,20 @@ To add an image to the wallpaper, you must:
    StaticResources/RegisteredResources/image_name_unique_id.png
    ```
 
-<<<<<<< HEAD
-2. **Register the image in report.json:**
-=======
 2. **Register the image in `definition/report.json`** (not the bare `report.json` at the report root — that is the PBIR-Legacy file).
 
    **IMPORTANT:** Add to the existing `RegisteredResources.items` array — do NOT replace the entire `resourcePackages` array, or you will lose the `SharedResources` base theme registration.
 
    The complete `resourcePackages` should look like this:
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
    ```json
    {
      "resourcePackages": [
        {
-<<<<<<< HEAD
-=======
          "name": "SharedResources",
          "type": "SharedResources",
          "items": [{"name": "CY24SU10", "path": "BaseThemes/CY24SU10.json", "type": "BaseTheme"}]
        },
        {
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
          "name": "RegisteredResources",
          "type": "RegisteredResources",
          "items": [
@@ -464,11 +457,8 @@ Result: Dark blue wallpaper with tiled pattern shows through 80% transparent whi
 
 1. **outspace = wallpaper** - Behind/around the canvas area
 2. **background = canvas** - Where visuals sit (separate object)
-<<<<<<< HEAD
-3. **Image must be registered** - Add to RegisteredResources and register in report.json
-=======
-3. **Image must be registered** - Add to RegisteredResources and register in `definition/report.json`
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
+3. **Use the CLI for registration** - `pbir pages background --image` copies and registers a
+   canvas image; `pbir pages wallpaper --image` sets a wallpaper URL
 4. **PackageType: 1** - Always use 1 for RegisteredResources
 5. **Scaling quoted strings** - `'Fit'`, `'Fill'`, `'Tile'`, `'Normal'` (with single quotes)
 6. **Name vs ItemName** - name is display name, ItemName is file name

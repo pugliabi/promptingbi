@@ -1,17 +1,13 @@
 # Filter Pane and Filters
 
-<<<<<<< HEAD
-> For slicer visuals (on-canvas filters), see `references/slicers.md` (planned).
-=======
 > For slicer visuals (on-canvas filters), slicer visual documentation is not yet available.
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## General Guidance
 
 - The filter pane is the preferred place to set filters for Power BI reports.
 - Slicers should only be used when a filter is so important that the user must see it on the page, or when the UX mandates it (button slicers, conditional formatting, specific designs).
 - The filter pane is generally preferred because it's a more effective use of space and provides a clear UX.
-- If the report is not using the filter pane, hide it by setting `visible: false` in report.json.
+- If the report is not using the filter pane, run `pbir filters pane-hide "Report.Report"`.
 - Filter pane styling must be done in the theme JSON -- see [theme.md](./theme.md) "Filter Pane and Filter Card Formatting in Themes".
 
 ## Filter Types
@@ -96,22 +92,6 @@ pbir model "Report.Report" -q "EVALUATE DISTINCT('Date'[Calendar Year (ie 2021)]
 pbir model "Report.Report" -q "EVALUATE VALUES('Exchange Rate'[From Currency])" -F table
 ```
 
-<<<<<<< HEAD
-### te query (Tabular Editor CLI)
-
-```bash
-# Query distinct values (explicit workspace/model)
-te query -q "EVALUATE VALUES('Date'[Calendar Year (ie 2021)])" -s "My Workspace" -d "My Model"
-
-# Query with CSV output for processing
-te query -q "EVALUATE VALUES('Exchange Rate'[From Currency])" --output csv
-
-# Query from file
-te query -f query.dax -s "My Workspace" -d "My Model"
-```
-
-=======
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ### fab api (Fabric CLI -- for remote models)
 
 ```bash
@@ -334,13 +314,8 @@ Filter a column to values within a range (inclusive on both bounds):
             "Property": "Date"
           }
         },
-<<<<<<< HEAD
-        "LowerBound": {"Literal": {"Value": "datetime'2024-01-01T00:00:00.000000"}},
-        "UpperBound": {"Literal": {"Value": "datetime'2024-12-31T00:00:00.000000"}}
-=======
         "LowerBound": {"Literal": {"Value": "datetime'2024-01-01T00:00:00.0000000'"}},
         "UpperBound": {"Literal": {"Value": "datetime'2024-12-31T00:00:00.0000000'"}}
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
       }
     }
   }]
@@ -466,22 +441,14 @@ Combine multiple conditions with `And` or `Or` wrappers:
       "Comparison": {
         "ComparisonKind": 2,
         "Left": {"Column": {"Expression": {"SourceRef": {"Source": "d"}}, "Property": "Date"}},
-<<<<<<< HEAD
-        "Right": {"Literal": {"Value": "datetime'2024-01-01T00:00:00.000000"}}
-=======
         "Right": {"Literal": {"Value": "datetime'2024-01-01T00:00:00.0000000'"}}
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
       }
     },
     "Right": {
       "Comparison": {
         "ComparisonKind": 3,
         "Left": {"Column": {"Expression": {"SourceRef": {"Source": "d"}}, "Property": "Date"}},
-<<<<<<< HEAD
-        "Right": {"Literal": {"Value": "datetime'2024-06-30T00:00:00.000000"}}
-=======
         "Right": {"Literal": {"Value": "datetime'2024-06-30T00:00:00.0000000'"}}
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
       }
     }
   }

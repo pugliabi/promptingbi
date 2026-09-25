@@ -61,11 +61,7 @@
                   "Property": "OTD % (Value; PY REPT)"
                 }
               },
-<<<<<<< HEAD
-              "queryRef": "On-Time Delivery.OTD % (Value; PY)",
-=======
               "queryRef": "On-Time Delivery.OTD % (Value; PY REPT)",
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
               "nativeQueryRef": "PY",
               "displayName": "PY"
             }
@@ -111,11 +107,7 @@
             }
           },
           "selector": {
-<<<<<<< HEAD
-            "metadata": "On-Time Delivery.OTD % (Value; PY)"
-=======
             "metadata": "On-Time Delivery.OTD % (Value; PY REPT)"
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
           }
         }
       ]

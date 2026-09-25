@@ -1,14 +1,9 @@
 # Enumerated Values
 
 **Sources:**
-<<<<<<< HEAD
-- `tmp/Test/Test.Report/StaticResources/SharedResources/BaseThemes/CY24SU10.json`
-- `tmp/Test/Test.Report/definition/pages/*/visuals/*/visual.json`
-=======
 - `examples/K201-MonthSlicer.Report/StaticResources/SharedResources/BaseThemes/CY24SU10.json` (bundled base theme)
 - `examples/K201-MonthSlicer.Report/StaticResources/RegisteredResources/SqlbiDataGoblinTheme.json` (bundled custom theme)
 - `examples/K201-MonthSlicer.Report/definition/pages/*/visuals/*/visual.json` (real visual examples)
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 This document lists valid string values for properties that accept enumerations.
 
@@ -16,48 +11,13 @@ Note that this is not an exhaustive list. Please pull the schema files directly 
 
 ## Visual Types
 
-<<<<<<< HEAD
-Valid `visualType` values (from theme.visualStyles):
-
-```
-- lineChart
-- scatterChart
-- map
-- azureMap
-- pieChart
-- donutChart
-- pivotTable
-- multiRowCard
-- kpi
-- cardVisual
-- advancedSlicerVisual
-- slicer
-- waterfallChart
-- columnChart
-- clusteredColumnChart
-- hundredPercentStackedColumnChart
-- barChart
-- clusteredBarChart
-- hundredPercentStackedBarChart
-- areaChart
-- stackedAreaChart
-- lineClusteredColumnComboChart
-- lineStackedColumnComboChart
-- ribbonChart
-- hundredPercentStackedAreaChart
-- group
-- basicShape
-- shape
-- image
-- actionButton
-- pageNavigator
-- bookmarkNavigator
-- textbox
-- page
-=======
 Valid `visualType` values. **[K201]** = confirmed in K201 example; **[theme]** = confirmed from bundled theme files.
 
-The authoritative enumeration of built-in `visualType` ids (and the `objects` names valid per type) is Microsoft's core visual schema catalog, bundled and pinned by the pbir CLI. Query it with `pbir visuals list` and `pbir visuals capabilities <type>`; the list below is a convenience subset. The catalog is preview, so unknown but plausible ids and custom visuals can still be valid.
+The authoritative enumeration of built-in `visualType` ids and valid objects is the core visual
+catalog bundled by `pbir`. Run `pbir add visual --list` for type ids,
+`pbir visuals properties --registry` for the registry, and
+`pbir schema describe <type> [object]` for properties and allowed values. The list below is only a
+convenience subset; custom visuals can use other ids.
 
 ```
 --- Charts ---
@@ -126,7 +86,6 @@ filter                             [theme]
 
 --- Internal ---
 page                               [theme] -- theme visualStyles key ONLY; NOT a valid visualType in visual.json
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ```
 
 ## Common Property Values
@@ -142,13 +101,6 @@ page                               [theme] -- theme visualStyles key ONLY; NOT a
 
 ### legend.position
 ```
-<<<<<<< HEAD
-- "RightCenter"
-- (other positions to be documented)
-```
-
-**Source:** theme.visualStyles.pieChart.*.legend.position
-=======
 - "Top"
 - "Bottom"
 - "Left"
@@ -160,7 +112,6 @@ page                               [theme] -- theme visualStyles key ONLY; NOT a
 ```
 
 **Source:** theme.visualStyles.pieChart.*.legend.position, K201 LineChart and ScatterChart examples
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ### labels.labelStyle
 ```
@@ -189,19 +140,11 @@ page                               [theme] -- theme visualStyles key ONLY; NOT a
 
 ### markerRangeType
 ```
-<<<<<<< HEAD
-- "auto"
-- (other values to be documented)
-```
-
-**Source:** theme.visualStyles.scatterChart.*.bubbles.markerRangeType
-=======
 - "auto"    -- Automatic range based on data
 - "magnitude" -- Range based on value magnitude
 ```
 
 **Source:** theme.visualStyles.scatterChart.*.bubbles.markerRangeType, K201 ScatterChart example
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## Boolean Properties
 
@@ -354,20 +297,14 @@ Common fonts (to be confirmed):
 ### lineStyles
 - strokeWidth: numeric
 - lineChartType: string (see enumerations above)
-<<<<<<< HEAD
-- showMarker: boolean
-=======
 - lineStyle: string (see below)
 - showMarker: boolean
 - markerShape: string (see below)
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 - markerSize: numeric with D suffix
 - segmentGradient: boolean
 - areaShow: boolean
 - transparency: numeric 0-100
 
-<<<<<<< HEAD
-=======
 ### markerShape
 ```
 - "circle"   (confirmed from SqlbiDataGoblinTheme.json)
@@ -389,7 +326,6 @@ Controls line dash pattern (distinct from `lineChartType` which controls smooth/
 
 **Source:** SqlbiDataGoblinTheme.json `lineStyles.lineStyle`
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ### background
 - show: boolean
 - transparency: numeric 0-100

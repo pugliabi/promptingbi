@@ -1,10 +1,6 @@
 # Inferring DAX queries from visual metadata
 
-<<<<<<< HEAD
-Visual queries are `SUMMARIZECOLUMNS` queries. You can infer the query by looking at the visual's metadata.
-=======
 Most visual queries use `SUMMARIZECOLUMNS`. Slicers are the primary exception; they use `CALCULATETABLE + SUMMARIZE + VALUES`. You can infer the query structure by looking at the visual's metadata.
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## Basic structure
 
@@ -81,15 +77,6 @@ SUMMARIZECOLUMNS(
 
 | Visual | Grouping Roles | Measure Roles |
 |--------|----------------|---------------|
-<<<<<<< HEAD
-| Card | - | Values |
-| Line/Column Chart | Category | Y |
-| Bar Chart | Category | Y |
-| Slicer | Values | - |
-| KPI | TrendLine | Indicator, Goal |
-| Table | Values (dims) | Values (measures) |
-| Scatter | X, Y | Size, Gradient |
-=======
 | card (old card) | - | Values |
 | cardVisual (new card) | - | Data |
 | lineChart | Category | Y (also Y2 for combo) |
@@ -103,7 +90,6 @@ SUMMARIZECOLUMNS(
 | pivotTable (matrix) | Rows, Columns | Values |
 | Scatter | Category | X, Y, Size, Tooltips |
 | multiRowCard | Values (dims) | Values (measures) |
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ### 3. Filters → Variables
 
@@ -152,8 +138,6 @@ SUMMARIZECOLUMNS(
 
 Note: Cards use `IGNORE()` since there are no grouping columns.
 
-<<<<<<< HEAD
-=======
 ### cardVisual (New Card)
 
 The new card visual uses the **`Data`** role, not `Values`. This is a direct conflict with the old `card` — use the correct role name for the visual type.
@@ -191,7 +175,6 @@ SUMMARIZECOLUMNS(
 
 Note: Same no-grouping `IGNORE()` pattern as the old card.
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ### Line chart
 
 **Metadata:**
@@ -404,13 +387,6 @@ SUMMARIZECOLUMNS(
     'Date'[Month],
     'Date'[Month Number],
     "Budget_vs__Turnover____", 'Budget'[Budget vs. Turnover (%)],
-<<<<<<< HEAD
-    "Formatting", IGNORE('_Demo of SVG Measures'[Formatting])
-)
-```
-
-Note: Extension measures typically use `IGNORE()` wrapper.
-=======
     "Formatting", '_Demo of SVG Measures'[Formatting]
 )
 ```
@@ -453,7 +429,6 @@ SUMMARIZECOLUMNS(
 ```
 
 Note: The matrix's row/column layout is controlled by the visual rendering, not by the DAX query. The query returns a flat table; Power BI pivots it visually.
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## Quick reference
 
@@ -473,12 +448,8 @@ Note: The matrix's row/column layout is controlled by the visual rendering, not 
 
 - `SourceRef.Schema = "extension"`
 - Add to DEFINE section
-<<<<<<< HEAD
-- Include in SUMMARIZECOLUMNS (usually with `IGNORE()`)
-=======
 - Include in SUMMARIZECOLUMNS without `IGNORE()` (charts with grouping columns)
 - Use `IGNORE()` only when there are **no grouping columns** (cards and KPIs without a TrendLine bound). A KPI with a TrendLine has a grouping column — do not use `IGNORE()` in that case.
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 **Alias naming:**
 

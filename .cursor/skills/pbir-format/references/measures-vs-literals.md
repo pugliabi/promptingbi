@@ -82,11 +82,7 @@ Dynamic values from DAX measures.
   "Measure": {
     "Expression": {
       "SourceRef": {
-<<<<<<< HEAD
-        "Schema": "extension",  // Only for thin report measures
-=======
         "Schema": "extension",  // Only for extension (report-level) measures defined in reportExtensions.json
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
         "Entity": "<EntityName>"
       }
     },
@@ -102,15 +98,9 @@ Dynamic values from DAX measures.
 
 ## Extension Measures vs Model Measures
 
-<<<<<<< HEAD
-### Extension Measures (Thin Report Measures)
-
-Defined in \`reportExtensions.json\`, scoped to the report only.
-=======
 ### Extension Measures (Report-Level Measures)
 
 Defined in `reportExtensions.json`, scoped to the report only. Extension measures exist in both thick and thin PBIR reports — the distinction is between report-level DAX (extension) and model-level DAX (model measures), not between report connection types.
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 **Definition in reportExtensions.json:**
 ```json
@@ -323,11 +313,7 @@ When creating extension measures for formatting:
 - Cannot use color names
 
 **Sizes/Transparency:**
-<<<<<<< HEAD
-- dataType: \`"Integer"\` or \`"Double"\`
-=======
 - dataType: \`"Int64"\` or \`"Double"\`
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 - Return numeric values
 - Visual converts to appropriate format
 
@@ -345,15 +331,10 @@ Measures work with different selectors:
   "metadata": "Sales.Revenue"
 }
 ```
-<<<<<<< HEAD
-- Evaluates measure once globally
-- Simple but not per-point
-=======
 - Targets a specific named field (measure or column) by its `queryRef` string
 - Applies formatting to the series or column matching that exact queryRef
 - Does not evaluate per data point — all points in that series share the same formatting
 - Distinct from no-selector (which applies to the entire visual)
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 **dataViewWildcard selector:**
 ```json

@@ -1,6 +1,5 @@
 ---
 name: executing-spark
-version: 26.25
 description: Execute arbitrary Python or PySpark code on Fabric Spark compute without creating a notebook artifact; ephemeral Livy sessions with full Delta table access. Automatically invoke when the user asks to "run PySpark in Fabric", "create a Livy session", "execute Python on Fabric compute", "run Spark without a notebook", "submit code to Fabric", "ephemeral Spark execution", "run ETL in Fabric".
 ---
 
@@ -89,7 +88,26 @@ Results are in `output.data["text/plain"]` when `state: "available"` and `output
 | Scheduled ETL | Notebook via `fab job run` |
 | Agent-driven compute (Dagster, orchestrators) | Livy session |
 
+## Persisting code as a notebook: poll the definition LRO tightly
+
+This skill is for ephemeral execution with no artifact. When you instead want to **persist or change** a notebook (deploy new code, iterate on an existing one), that is an item-definition change, and the poll interval is the single biggest performance lever. `fab import`, `nb create`, and `nb cell edit` take 25-60s because they poll the create/update long-running operation at the server's advertised `Retry-After: 20`; the work itself finishes in ~1s, and neither CLI lets you change that interval. Poll the LRO at ~0.3s and the same deploy takes ~1-2s. The `fabric-cli` skill ships [`scripts/deploy_notebook.py`](../../../fabric-cli/skills/fabric-cli/scripts/deploy_notebook.py) which does this (auto-detects create vs update, `--poll-interval` default 0.3s); strongly prefer it over `fab import` / `nb` for any notebook definition change.
+
+## Sessions vs Batch Jobs
+
+A Livy **session** (this skill) is interactive: create it, submit statements, read output as it runs, delete it. It stays alive and you pay for idle time until you delete it or it times out (~20 min).
+
+A Livy **batch** is one-shot: submit a single job (a file or inline job spec), poll it to a terminal state, done. No idle-CU footgun, nothing to remember to delete. For scheduled or fire-and-forget agent ETL, prefer a batch over a session; keep sessions for interactive, multi-statement work. Same base URL, `/batches` instead of `/sessions` -- see [`references/livy-api.md`](./references/livy-api.md#batch-jobs-one-shot).
+
+## Livy vs Notebook Jobs: reading the outcome
+
+A Livy statement returns its result **directly** in the response (`output.status` = `ok`/`error`), so you always know whether it worked. A notebook run via `fab job run` does not -- its job status reports `Completed` even when the notebook caught an exception and exited a failure payload. If you run notebooks as batch jobs instead of Livy, you must read the notebook's **exit value** to get its real verdict. The `fabric-cli` skill (in the `fabric-cli` plugin) documents that endpoint and ships `scripts/run_notebook_checked.py` for it.
+
 ## References
 
-- **`references/livy-api.md`** -- Full API reference with endpoints, request/response formats, and error handling
+- **`references/livy-api.md`** -- Full API reference with endpoints (sessions + batches), request/response formats, and error handling
 - **`references/example-script.md`** -- Complete working script that creates a session, queries data, writes results, and cleans up
+
+## Related
+
+- `using-duckdb` skill (same `etl` plugin) -- read-only Delta querying, local or in-notebook, when you don't need Spark compute
+- `fabric-cli` skill (`fabric-cli` plugin) -- `nb exec` / `fab job run` for notebooks, reading a notebook's exit value, the SQL-endpoint metadata sync after a Spark write, and `scripts/deploy_notebook.py` for fast notebook definition changes (tight LRO polling)

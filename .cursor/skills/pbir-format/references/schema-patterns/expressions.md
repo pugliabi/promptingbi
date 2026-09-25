@@ -1,10 +1,6 @@
 # Expression Patterns
 
-<<<<<<< HEAD
-**Source:** `schemas/semanticQuery/1.3.0/schema.json`
-=======
 **Source:** `schemas/semanticQuery/1.4.0/schema.json`
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ALL visual properties use the `expr` field with one of these types.
 
@@ -78,11 +74,7 @@ Static values with type-specific formatting.
 ### DateTime Literals
 
 ```json
-<<<<<<< HEAD
-"expr": {"Literal": {"Value": "datetime'2024-01-15T00:00:00.000000"}}
-=======
 "expr": {"Literal": {"Value": "datetime'2024-01-15T00:00:00.0000000'"}}
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ```
 
 ### Null Literals
@@ -241,8 +233,6 @@ Maps numeric measure values (0-1) to color gradients:
 }
 ```
 
-<<<<<<< HEAD
-=======
 **Two forms of linearGradient2:**
 
 **Explicit bounds** (fixed thresholds — min/max at known values like 0–1):
@@ -253,16 +243,11 @@ Maps numeric measure values (0-1) to color gradients:
 
 The example above uses explicit bounds (`0D` to `1D`). For data-driven, remove the `value` entries from `min` and `max`. See [conditional-formatting.md](../schema-patterns/conditional-formatting.md) for the data-driven pattern.
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 **Structure:**
 - `Input.Measure` - Returns numeric value (e.g., 0.75 for 75%)
 - `min.color` - Theme color reference for minimum value (e.g., 'minColor', 'badColor')
 - `max.color` - Theme color reference for maximum value (e.g., 'maxColor', 'goodColor')
-<<<<<<< HEAD
-- `min.value` / `max.value` - Numeric range bounds (typically 0D and 1D)
-=======
 - `min.value` / `max.value` - Optional numeric range bounds (explicit bounds form only; typically 0D and 1D)
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 - `nullColoringStrategy.strategy` - How to handle BLANK():
   - `'asZero'` - Treat null as 0
   - `'specificColor'` - Use specified color
@@ -313,11 +298,7 @@ Maps numeric measure values to three-point color gradients (min, mid, max):
       "linearGradient3": {
         "min": {
           "color": {"Literal": {"Value": "'#f0a787'"}},
-<<<<<<< HEAD
-          "value": {"Literal": {"Value": "0D"}}
-=======
           "value": {"Literal": {"Value": "-1D"}}
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
         },
         "mid": {
           "color": {"Literal": {"Value": "'#FFFFFF'"}},
@@ -325,11 +306,7 @@ Maps numeric measure values to three-point color gradients (min, mid, max):
         },
         "max": {
           "color": {"Literal": {"Value": "'#999999'"}},
-<<<<<<< HEAD
-          "value": {"Literal": {"Value": "0D"}}
-=======
           "value": {"Literal": {"Value": "1D"}}
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
         },
         "nullColoringStrategy": {
           "strategy": {"Literal": {"Value": "'asZero'"}}
@@ -625,8 +602,6 @@ Some properties require nested expr structures:
 }
 ```
 
-<<<<<<< HEAD
-=======
 ## SourceRef Context Rules
 
 **Critical gotcha:** `SourceRef` uses different fields depending on context.
@@ -644,29 +619,19 @@ In any context where `"Source"` is used, a `"From"` array must declare the alias
 
 Using `"Entity"` in a filter `Where` condition produces broken filter JSON. See [filter-pane.md](../filter-pane.md) and [visual-json.md](../visual-json.md) for full examples.
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ## Common Mistakes
 
 | Error | Cause | Fix |
 |-------|-------|-----|
 | `"smooth"` in JSON | Missing inner quotes | Use `"'smooth'"` |
 | `"Value": 50` | Missing D suffix | Use `"50D"` |
-<<<<<<< HEAD
-| `"Value": "true"` | Quotes around boolean | Use `true` (no quotes) |
-| `"Value": "True"` | Wrong case | Use `true` (lowercase) |
-=======
 | `"Value": true` | Bare JSON boolean — `Value` field must always be a JSON string | Use `"Value": "true"` (string with quotes) |
 | `"Value": "True"` | Wrong case | Use `"Value": "true"` (lowercase) |
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 | Measure not found | Missing Schema field | Add `"Schema": "extension"` for report measures |
 
 ## Schema Definition Path
 
-<<<<<<< HEAD
-Full specification: `schemas/semanticQuery/1.3.0/schema.json` → `definitions.QueryExpressionContainer`
-=======
 Full specification: `schemas/semanticQuery/1.4.0/schema.json` → `definitions.QueryExpressionContainer`
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 Available expression types (from schema):
 - Literal

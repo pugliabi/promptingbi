@@ -72,8 +72,6 @@ Registers themes, images, and other static resources. Every custom theme and ima
 
 Item types: `"BaseTheme"`, `"CustomTheme"`, `"Image"`. See [images.md](./images.md) for image usage.
 
-<<<<<<< HEAD
-=======
 ### Custom Visual Registration
 
 A `visualType` set to a custom visual's GUID is inert on its own. Rendering requires a matching registration elsewhere AND the visual being installed/approved in the consuming environment.
@@ -101,7 +99,6 @@ Pitfalls:
 - `disabled: true` on an `organizationCustomVisuals` entry means the admin pulled the visual from the org store
 - AppSource/org-store visuals are unavailable in Power BI Report Server; private `.pbiviz` must be used there instead
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ### settings
 
 Report-wide behavioral settings. Values are bare (not wrapped in expr).
@@ -132,12 +129,6 @@ Key settings:
 
 ### objects
 
-<<<<<<< HEAD
-Report-level formatting. Currently only `outspacePane` (filter pane visibility).
-
-```json
-"objects": {
-=======
 Report-level formatting. Two valid properties: `outspacePane` (filter pane visibility) and `section` (canvas vertical alignment).
 
 ```json
@@ -147,7 +138,6 @@ Report-level formatting. Two valid properties: `outspacePane` (filter pane visib
       "verticalAlignment": {"expr": {"Literal": {"Value": "'Middle'"}}}
     }
   }],
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
   "outspacePane": [{
     "properties": {
       "visible": {"expr": {"Literal": {"Value": "false"}}},
@@ -157,11 +147,8 @@ Report-level formatting. Two valid properties: `outspacePane` (filter pane visib
 }
 ```
 
-<<<<<<< HEAD
-=======
 `section.verticalAlignment` values: `'Top'`, `'Middle'`, `'Bottom'`. Sets the default canvas alignment for all pages.
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 **CRITICAL:** At report level, ONLY `visible` and `expanded` work on outspacePane. Styling properties (backgroundColor, width, etc.) must be in the theme JSON. Putting them here causes deployment errors.
 
 ### filterConfig
@@ -183,12 +170,6 @@ Report-level filters that apply to all pages. See [filter-pane.md](./filter-pane
       "isHiddenInViewMode": false,
       "isLockedInViewMode": false
     }
-<<<<<<< HEAD
-  ]
-}
-```
-
-=======
   ],
   "filterSortOrder": "Custom"
 }
@@ -196,7 +177,6 @@ Report-level filters that apply to all pages. See [filter-pane.md](./filter-pane
 
 `filterSortOrder`: controls filter pane sort order. `"Custom"` preserves the `ordinal` field ordering; omit to use the default sort.
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ### annotations
 
 Report-level metadata annotations (name-value pairs):

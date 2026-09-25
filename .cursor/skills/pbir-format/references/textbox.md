@@ -10,11 +10,7 @@ Textbox visuals (`visualType: "textbox"`) are used for static text content, titl
 
 ```json
 {
-<<<<<<< HEAD
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
-=======
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
   "name": "visual_id",
   "position": {
     "x": 42,
@@ -26,12 +22,6 @@ Textbox visuals (`visualType: "textbox"`) are used for static text content, titl
   },
   "visual": {
     "visualType": "textbox",
-<<<<<<< HEAD
-    "query": {
-      "queryState": {}
-    },
-=======
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
     "objects": {
       "general": [
         {
@@ -106,17 +96,8 @@ Textbox visuals (`visualType: "textbox"`) are used for static text content, titl
 ## Key Components
 
 ### Query
-<<<<<<< HEAD
-Textboxes always have an empty `queryState`:
-```json
-"query": {
-  "queryState": {}
-}
-```
-=======
 
 Textboxes do **not** use a `query` object — omit it entirely. Real textbox visual.json files have no `query` key at all. Adding an empty `query: {queryState: {}}` is harmless but unnecessary and inconsistent with Power BI Desktop output.
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ### Paragraphs Property
 
@@ -302,10 +283,6 @@ Within a paragraph, you can have multiple text runs with different styles:
 {
   "visual": {
     "visualType": "textbox",
-<<<<<<< HEAD
-    "query": {"queryState": {}},
-=======
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
     "objects": {
       "general": [{
         "properties": {
@@ -381,8 +358,6 @@ For page titles, typical positioning:
 }
 ```
 
-<<<<<<< HEAD
-=======
 ## Dynamic Text Runs (Measure-Bound Values)
 
 A text run can bind to a measure instead of a static literal, so prose like "Revenue is 12.3M, up 8% on plan" updates with filter context. This is the UI's `fx` (Values) button on a textbox.
@@ -425,7 +400,6 @@ Pitfalls:
 - `pbir validate` does not catch a malformed dynamic run; round-trip through Desktop to confirm
 - For conditionally-styled clauses inside one sentence (e.g., a clause that turns red on a miss), an SVG narrative measure is the right tool; the Smart Narrative visual is non-deterministic and cannot be diffed
 
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 ## Drill Filtering
 
 Textboxes should not filter other visuals:

@@ -11,11 +11,7 @@
       "type": "SharedResources"
     },
     "customTheme": {
-<<<<<<< HEAD
-      "name": "SqlbiDataGoblinTheme0699179381108107.json",
-=======
       "name": "SqlbiDataGoblinTheme.json",
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
       "reportVersionAtImport": {
         "visual": "2.1.0",
         "report": "2.1.0",
@@ -561,13 +557,8 @@
       "type": "RegisteredResources",
       "items": [
         {
-<<<<<<< HEAD
-          "name": "SqlbiDataGoblinTheme0699179381108107.json",
-          "path": "SqlbiDataGoblinTheme0699179381108107.json",
-=======
           "name": "SqlbiDataGoblinTheme.json",
           "path": "SqlbiDataGoblinTheme.json",
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
           "type": "CustomTheme"
         }
       ]

@@ -48,13 +48,8 @@ Array of sort specifications. Each entry defines:
 - `"Ascending"` - Smallest to largest
 
 ### sortDefinition.isDefaultSort (boolean)
-<<<<<<< HEAD
-- `true` - This is the default sort for the visual
-- `false` or omitted - User-customized sort
-=======
 - `true` - Marks this as the default sort (Power BI may reset it to this when users clear their custom sort)
 - `false` or omitted - The sort array is applied as-is without the "default" flag; programmatic sorts often omit this property
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 
 ## Examples
 
@@ -190,9 +185,5 @@ You can specify multiple sort criteria (evaluated in order):
 
 ## Related Documentation
 
-<<<<<<< HEAD
-- [visual.json](./json-structure/05-visual-json.md) - Visual structure including query
-=======
 - [visual.json](./visual-json.md) - Visual structure including query
->>>>>>> 9704f1d00f37f3d79a5d65b618571d0088ce6478
 - [expressions.md](./schema-patterns/expressions.md) - Field reference patterns
