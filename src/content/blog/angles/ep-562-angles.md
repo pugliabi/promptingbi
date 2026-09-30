@@ -49,6 +49,7 @@ Tommy reframed the write-first: not "handoff" but **distributed wisdom** from ag
 - Artifact: `src/content/prompts/skill-library-playbook.md` (playbooks, draft)
 - Bridges to A skill.md Is Not Wisdom: you distribute the override loop, not the file.
 - Folded in: AI IP Goes in the Packet (section 2), 30/60/90 (success section), opening choice (one paragraph). Still open as its own post: The Opening Choice Is the Handoff.
+- Revised same day: retitled "Agentic Distributed Wisdom: Why Your Team's AI Skills Can't Live in One Head". Broadened from Fabric engagement to shared AI skills on any team (Fabric as the high-stakes case). Coined **agentic distributed wisdom**; external anchors Nonaka & Toyama 2007 "distributed practical wisdom (phronesis)" (doi 10.1093/icc/dtm014) and Hutchins, Cognition in the Wild. Kept consultant's-last-day hook, pivots to the team's one power user. Added link to Agent Skills Are the New Theme Files.
 
 ## Other angles
 
