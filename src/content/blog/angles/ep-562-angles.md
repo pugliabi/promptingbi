@@ -39,6 +39,17 @@ Adjacent: published [Central BI Is a Tiger Team Now](/2026/09/18/central-bi-is-a
 **Attribution:** Tommy. Do not write Mike’s Ferrari, “prompts they cannot read,” or “governance is a different SOW” as Tommy’s close. Tommy already put governance **inside** the technical handoff.
 **Freshness:** leftover vs tiger-team (who owns the lakehouse after central BI floats) and You’re AI Ready (org maturity). This is **consultant-to-client packet + agentic IP**, not the tiger-team operating model.
 
+## Locked (2026-09-30)
+
+Tommy reframed the write-first: not "handoff" but **distributed wisdom** from agentic IP. Conceptual why + what success looks like. Used the Four Seasons AI-Ready Fabric SOW as the *shape* only (small in-house BI team, knowledge in one head, "direction alongside their own execution", knowledge capture → skills, repo + Notion + harness every tool reads, seed skills then build together, measure register, agent access pattern, team-owned roadmap). No client name, no pricing, no deliverable list.
+
+- Post: `published/2026-09/2026-09-30-distribute-the-wisdom.md`, permalink `2026/09/30/distribute-the-wisdom` (published 2026-09-30 after humanizer + delete-ai-words pass)
+- Title: "Distribute the Wisdom: What a Fabric Engagement Should Leave Behind" (first draft title "Don't Hand Off Fabric. Distribute the Wisdom." dropped as a reframe heading)
+- Images: `public/images/2026/09/distribute-the-wisdom-{banner,box-vs-journey,one-head,seed}.png`
+- Artifact: `src/content/prompts/skill-library-playbook.md` (playbooks, draft)
+- Bridges to A skill.md Is Not Wisdom: you distribute the override loop, not the file.
+- Folded in: AI IP Goes in the Packet (section 2), 30/60/90 (success section), opening choice (one paragraph). Still open as its own post: The Opening Choice Is the Handoff.
+
 ## Other angles
 
 ### The Opening Choice Is the Handoff
