@@ -18,6 +18,16 @@ Skip news: data-agent visuals / Flint, gateway decision-tree article.
 
 Adjacent: 553 (skills are the walk); 557 (validation is the last step); 561 (iteration, not the bar chart).
 
+## Locked (2026-10-02)
+
+- **Written:** [Same Prompt, Two Reports: Desktop Bridge Needs a Spec, Not a Sentence](../drafts/2026-10-02-same-prompt-two-reports.md), permalink `2026/10/02/same-prompt-two-reports`. Notion: https://app.notion.com/p/3ede74c69c1881948e25c1f76fb092fa (Drafting).
+- Spine: A/B experiment → Bridge decides nothing → open decisions are coin flips → three skills as a sequence → kickoff from the instruction page.
+- Worked example: Northside Game Day Command Center instruction page (B-06): brief, skills table + step 5 ("don't reopen scope"), decisions D4/D6/D8, page plan §9.4. Not the Desktop Bridge page top / loop / warnings (already shown in the context-harness post).
+- Skill facts sourced from `powerbi-report-planning` SKILL.md (one question at a time, `_brief/report-spec.md`, Design Contract Gate, "don't ask the authoring agent to choose between conflicting instructions").
+- Walk-the-areas pass skipped (autonomous run).
+- Filed as Notion Ideas: "Pick a Visual Library. You Currently Have Two", "Agents Made Custom Menus Cheap. That Doesn't Make Them a Good Idea".
+- `/prompts/` artifact (Desktop Bridge session spec, `playbooks`) still open; create it once the post publishes so `source.permalink` resolves.
+
 ## Best plots
 
 - **Write first leftover:** worked experiment. Same prompt, two runs, two reports.
