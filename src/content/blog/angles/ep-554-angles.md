@@ -14,6 +14,14 @@ Skip news recap as the article: Chicago Task Flow Studio meetup, “build a data
 
 Adjacent: ep-546 Notion leftover *Fabric Needs a Backend*; published [Build the Thing That Creates the Thing](/2026/09/16/build-the-thing-that-creates-the-thing/); ep-555 anonymous Rayfin; ep-563 Fabric Apps.
 
+## Locked (2026-10-05)
+
+- Drafted: `drafts/2026-10-05-fabric-is-best-as-a-backend.md` ("Fabric Is Best as a Backend"). Notion: https://app.notion.com/p/3f0e74c69c1881d48900fe8212b82c44
+- Tommy's call: name and credit Mike Carlo (LinkedIn link) as the FaaB coiner; Mike-owned facts (SQL DB light bulb, content-tracking app, GraphQL, $50/mo rebuild, production apps) are written as Mike's, not Tommy's.
+- Absorbed into the post: Jobs/iPad test (keynote link), standalone question, workspace identity + Git as the win, one-time-query rewrite, Fabric API surface (~729 REST ops / 55 spec areas from microsoft/fabric-rest-api-specs, counted 2026-10-05), Microsoft's agent tooling (CLI, fabric-cicd, MCP servers, Skills for Fabric, Semantic Link Labs), cost skepticism.
+- Artifact: `src/content/prompts/fabric-backend-builder-brief.md` (agent-briefs, draft).
+- "Git and Workspace Identity Are the Product" and "Agents Should Emit Code" are now covered by this post. Don't re-file them.
+
 ## Best plots
 
 - **Write first:** opinion + Jobs/iPad test. Strongest Tommy take in the episode.
