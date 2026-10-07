@@ -276,9 +276,7 @@ Ask only after applying the inferred first-build scope from Round 2:
 
 > Which report shape should we use?
 
-Present 2–3 named compositions (e.g., *Executive landing + Analytical
-exploration + Comparative ranking* for a multi-domain ask, or *Single
-executive landing* for a focused ask). Recommend one based on Rounds 1–2
+Present 2–3 named compositions (e.g., *Executive landing + Analytical exploration + Comparative ranking* for a multi-domain ask, or *Single executive landing* for a focused ask). Recommend one based on Rounds 1–2
 and mark it `(Recommended)`.
 
 Draft page list in the answer after the user chooses:
@@ -398,7 +396,7 @@ absolute path explicitly.
 The user-approval doc and agent handoff contract. The Markdown captures
 sign-off granularity; the embedded YAML captures exact implementation intent.
 
-````markdown
+```markdown
 # Report Spec
 
 ## Report identity
@@ -468,7 +466,7 @@ must implement this block; surrounding prose is context and conflict detection.
 - Desktop screenshot verification:
 - Publishing boundary:
 - Risks:
-````
+```
 
 ### Required acceptance checks before approval
 
@@ -512,8 +510,7 @@ When the user approves, execute this sequence:
 
 1. Re-read the approved canonical report spec (normally `_brief/report-spec.md`,
    or the explicitly carried alternate absolute path) and extract the embedded
-   `Design Brief:` YAML block. Verify it has `generated_by:
-   powerbi-report-design`, `contract_version`, one populated `layout_contract`
+   `Design Brief:` YAML block. Verify it has `generated_by: powerbi-report-design`, `contract_version`, one populated `layout_contract`
    per page, and `space_audit` per page before authoring. For greenfield, verify
    the canvas is FHD (`1920 x 1080`) unless the user chose another size, and
    verify the largest/dominant region is not a bare single-value `cardVisual`.

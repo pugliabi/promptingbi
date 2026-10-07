@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+  <title id="t">The Power BI pro effort graph</title>
+  <desc id="d">Level of effort from 2015 to 2026 against a 100 percent cap. Effort climbs to 99 percent during the Power BI years, jumps past 100 percent when Fabric arrives in 2023, and comes back under the cap with agent skills in 2026, opening a band of headroom.</desc>
+  <defs>
+    <clipPath id="over">
+      <rect x="0" y="0" width="960" height="206" />
+    </clipPath>
+  </defs>
+  <style>
+    text { font-family: 'Source Sans 3', 'Segoe UI', Helvetica, Arial, sans-serif; fill: #1f2d31; }
+    .axis { font-size: 15px; fill: #6b7a80; }
+    .note { font-size: 17px; }
+    .note-strong { font-size: 17px; font-weight: 600; fill: #14606a; }
+    .era { font-size: 14px; fill: #6b7a80; letter-spacing: 0.08em; text-transform: uppercase; }
+  </style>
+
+  <rect width="960" height="470" fill="#ffffff" />
+
+  <!-- era bands -->
+  <rect x="640" y="60" width="195" height="320" fill="#f1f6f7" />
+  <rect x="835" y="60" width="65" height="320" fill="#e3eff0" />
+
+  <!-- axes -->
+  <line x1="110" y1="60" x2="110" y2="380" stroke="#6b7a80" stroke-width="1.5" />
+  <line x1="110" y1="380" x2="900" y2="380" stroke="#6b7a80" stroke-width="1.5" />
+  <text class="axis" transform="translate(38 220) rotate(-90)" text-anchor="middle">Level of effort</text>
+
+  <!-- year ticks -->
+  <g class="axis" text-anchor="middle">
+    <line x1="120" y1="380" x2="120" y2="387" stroke="#6b7a80" /><text x="120" y="406">2015</text>
+    <line x1="250" y1="380" x2="250" y2="387" stroke="#6b7a80" /><text x="250" y="406">2017</text>
+    <line x1="380" y1="380" x2="380" y2="387" stroke="#6b7a80" /><text x="380" y="406">2019</text>
+    <line x1="510" y1="380" x2="510" y2="387" stroke="#6b7a80" /><text x="510" y="406">2021</text>
+    <line x1="640" y1="380" x2="640" y2="387" stroke="#6b7a80" /><text x="640" y="406">2023</text>
+    <line x1="770" y1="380" x2="770" y2="387" stroke="#6b7a80" /><text x="770" y="406">2025</text>
+    <line x1="835" y1="380" x2="835" y2="387" stroke="#6b7a80" /><text x="835" y="406">2026</text>
+  </g>
+  <g class="era" text-anchor="middle">
+    <text x="375" y="440">Power BI pro</text>
+    <text x="737" y="440">Fabric</text>
+    <text x="867" y="440">Agents</text>
+  </g>
+
+  <!-- 100% cap -->
+  <line x1="110" y1="206" x2="900" y2="206" stroke="#14606a" stroke-width="1.5" stroke-dasharray="6 6" />
+  <text class="axis" x="100" y="211" text-anchor="end">100%</text>
+
+  <!-- overload area above the cap -->
+  <path clip-path="url(#over)" fill="#14606a" fill-opacity="0.16"
+        d="M600,209 C630,209 645,140 680,135 L800,128 C815,128 824,160 832,185 C835,195 837,201 838,206 L600,206 Z" />
+
+  <!-- effort line: solid through 2025 -->
+  <path fill="none" stroke="#14606a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+        d="M120,284 C200,240 300,212 380,210 L600,209 C630,209 645,140 680,135 L800,128 C815,128 824,160 832,185" />
+  <!-- 2026 dip: dashed, it's a "may" -->
+  <path fill="none" stroke="#14606a" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"
+        d="M832,185 C840,210 852,250 875,255 L900,257" />
+
+  <!-- headroom band below the cap -->
+  <path fill="#14606a" fill-opacity="0.10"
+        d="M838,206 C845,232 855,252 875,255 L900,257 L900,206 Z" />
+
+  <circle cx="490" cy="209" r="6" fill="#14606a" />
+  <circle cx="720" cy="131" r="6" fill="#14606a" />
+  <circle cx="880" cy="256" r="6" fill="#ffffff" stroke="#14606a" stroke-width="3" />
+
+  <!-- annotations -->
+  <text class="note-strong" x="490" y="245" text-anchor="middle">Already at 99%</text>
+  <text class="note" x="490" y="268" text-anchor="middle">models, DAX, governance, visuals, every hat</text>
+
+  <text class="note-strong" x="720" y="90" text-anchor="middle">Past the cap</text>
+  <text class="note" x="720" y="111" text-anchor="middle">"it's just part of Power BI"</text>
+
+  <text class="note-strong" x="890" y="300" text-anchor="end">Headroom to think</text>
+  <text class="note" x="890" y="322" text-anchor="end">agent skills</text>
+</svg>

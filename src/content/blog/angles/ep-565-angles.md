@@ -25,6 +25,14 @@ Adjacent: 562 handoff; 563 Fabric Apps interesting≠useful; 564 argue-with-the-
 - Artifact: none. Department of Common Sense is a shirt gag, not a `/prompts/` page.
 - Honest: Kurt/Mike own most of the “liberation / bigger than the tool” rhetoric. Tommy’s owned slice is the capacity graph + the transfer pushback.
 
+## Locked (2026-10-07)
+
+- Drafted: `drafts/2026-10-07-agent-skills-give-the-power-bi-pro-room-to-think.md` ("Agent Skills Give the Power BI Pro Room to Think"). Notion: https://app.notion.com/p/3f2e74c69c1881078c69fce9733187f3
+- Title: Tommy rejected "already at 99%" and "under 100%" (reads as less effort). Frame is headroom: effort moves from typing to thinking. Keep "capacity" out of titles (reads as Fabric CUs).
+- Effort graph is a hand-built SVG (labels needed), not a generated image. 2026 label: "Headroom to think".
+- Adjacent mining done (508, 522, 528, 531, 538, 550, 562, 566). Folded in: 528 think-rather-than-type / 10% typing / 95%-agents hiring line; 566 80% in context; 508 two-folders story + "work on other things" + "make everyone learn that?"; 562 non-DE Fabric orgs + "right things"; 538 "then what am I doing here?" + garage hours. Tommy confirmed as his: 562 "PBI experience maybe helps 5%" and 528 "not Power BI 2.0".
+- Not yet done: walk-the-areas pass.
+
 ## ★ Write first: You Were Already at 99%. Fabric Broke the Graph. Agents Might Fix It.
 
 **Thesis:** Calling yourself a Power BI person was never a calm job. Before Fabric you were already at the effort ceiling: models, governance, DAX, visuals, every hat. Fabric shoved that past 100% without splitting the role. Agent tooling is the first time an individual might see the line drop under 100% again. The identity crisis is not “AI took my niche.” It is “the niche was already too big, and now the tool that overloaded you is also the tool that can unload you.”
