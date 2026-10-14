@@ -3,6 +3,7 @@ title: "Anonymous Access Lets Fabric Apps Leave the Tenant"
 date: 2026-10-14T09:00:00Z
 permalink: "2026/10/14/anonymous-access-fabric-apps"
 description: "Anonymous access lets people outside your tenant write into a Fabric App. What I learned shipping Fabric Quest, and where it beats Publish to web."
+featured: /images/2026/10/anonymous-access-fabric-apps-banner.jpg
 draft: false
 promptsExempt: true
 tags:
@@ -30,6 +31,8 @@ I couldn't have built that until anonymous data access showed up in Fabric Apps.
 
 **Anonymous access is the first time Fabric has let something you build take input from people outside your tenant.** Publish to web lets the public read your data. Anonymous access lets them send you data, which means a Fabric App can now be built for customers, residents, and anyone else who will never have an account in your tenant.
 
+![Three people outside a dotted tenant boundary send data along flowing lines through an open gap into a database inside the boundary, which feeds a rising bar chart](/images/2026/10/anonymous-access-fabric-apps-banner.jpg)
+
 ## Everything assumed you were in the tenant
 
 Think about how Power BI and Fabric have always worked. Reports, Fabric items, and Fabric Apps by default all start the same way: someone signs in with Entra ID. The app knows who you are, passes that identity down to the data, and row-level security decides what you see. That's good system design, and for internal work I'd never argue against it.
@@ -49,6 +52,8 @@ Here's how the two compare for a public project:
 | Scope | Anyone with the link sees the whole report | Set per table, per action, per column |
 | Where input lands | Nowhere | A SQL database in Fabric |
 | Sign-in | None | Optional, and you can mix both |
+
+![Top row, a report sends data one way out to three viewers; bottom row, three people exchange data in both directions with an app that writes to a database](/images/2026/10/anonymous-access-fabric-apps-look-vs-write.jpg)
 
 One line in Microsoft's documentation is worth taping to your monitor: anonymous access is an **authorization** option, not a replacement for authentication. Security stays on. You decide, table by table, what a caller with no identity is allowed to do, and most of the time the answer is "insert a row and nothing else."
 
@@ -89,6 +94,8 @@ export class HallOfFame {
 
 The top four lines are the whole security model for that table. Signed-in users can read it. Anyone can create a row. Anyone can read back only the columns listed. Activities has the first two roles and not the third, so the public can write commands and never read them.
 
+![An anonymous user sees only the top four columns of a table through a small window, while a signed-in user with a badge connects to every column](/images/2026/10/anonymous-access-fabric-apps-column-scope.jpg)
+
 Two things bit me. Know both before you start:
 
 1. **Never leave an entity with only anonymous roles.** When one did, the entire data API returned "Internal server error" for every request on every table. Keep `@authenticated('read')` on everything.
@@ -97,6 +104,8 @@ Two things bit me. Know both before you start:
 Capacity was the other lesson. A small capacity that's been throttled can take 20 seconds or more to serve the first byte of a page, which is a terrible first impression for a game. (Throttlor, it turns out, is real.) So the game also runs as a static copy on GitHub Pages that calls the Fabric App's API for scores and telemetry. The page loads instantly and the database still gets every row. The browser batches commands too, sending them every 10 seconds or every 25 rows, so a busy night doesn't hammer a small SKU.
 
 Then point a OneLake shortcut from a Lakehouse at the app's database. Activities becomes a fact table, with Quests and HallOfFames as its dimensions. I can chart deaths by cause and pull the commands the parser didn't understand most often. A silly game produced a star schema.
+
+![A pixel castle game screen sends rows into a database, then a lakehouse, then a star schema with a fact table and three dimensions, ending in a bar chart](/images/2026/10/anonymous-access-fabric-apps-quest-to-star-schema.jpg)
 
 ## What else you can build
 
