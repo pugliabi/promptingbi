@@ -14,6 +14,14 @@ Skip: Chicago meetup, Runtime 2.0 recap (belongs to 559), Skills for Fabric SQL 
 
 Adjacent: 554 FaaB; 563 Fabric Apps + Kurt; 546 *Fabric Needs a Backend*; published Task Flow Studio.
 
+## Locked (2026-10-14)
+
+- Drafted: `drafts/2026-10-14-anonymous-access-fabric-apps.md` ("Anonymous Access Lets Fabric Apps Leave the Tenant"). Notion: https://app.notion.com/p/3f9e74c69c1881c6a4a2f09b3417ff1e
+- Tommy's call: retitle away from "write-back, not Publish to web" to the power/impact of anonymous access; make Fabric Quest the worked example; Publish to web is the use-case comparison, not the thesis.
+- Fabric Quest facts come from the repo (`C:\Github\Fabric-Quest`: README, `docs/building-and-deploying.md`, `rayfin/rayfin.yml`, `rayfin/data/*.ts`), not a transcript. Color from 566 (open) and 568/569 (East US 2 move).
+- Forms-vs-Fabric beat is already in [Fabric Is Best as a Backend](/2026/10/05/fabric-is-best-as-a-backend/); the new post links to it instead of repeating it.
+- Leftover filed as Idea: "TMDL in the Browser Would Have Been a Game Changer in 2023."
+
 ## Best plots
 
 - **Write first:** opinion. Anonymous access is write-back into OneLake, not Publish to web.
