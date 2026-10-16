@@ -16,6 +16,17 @@ Skip news: Snowflake private-link copy, warehouse medallion part 3 (layer contam
 
 Adjacent: 556 Bridge A/B; 557 validation-last; published [Design the Report From the Meeting You Already Had](/2026/08/19/design-the-report-from-the-meeting-you-already-had/); 564 conversational vs architect (Kurt).
 
+## Locked (2026-10-16)
+
+- Published: `published/2026-10/2026-10-16-one-visual-was-never-the-job.md` ("One Visual Was Never the Job"), permalink `2026/10/16/one-visual-was-never-the-job`, published 2026-10-16 after humanizer + delete-ai-words pass (sentence-case headers, reframes removed). Notion: https://app.notion.com/p/3fbe74c69c1881f192a0dac803381b7b.
+- Title: Tommy picked "One Visual Was Never the Job" over "The Bar Chart Is the Cheap Part" and "Stop Asking AI for a Chart. Ask It for the Page." Walk-the-areas offered; he said just draft it.
+- Foil correction: the Nightingale author is **Rituparna Das** ("Three Ways I Actually Use AI in Data Viz", 2026-07-22), not "Eva". Her conclusion ("compresses the time between idea and output") is credited to her in the post; Tommy agrees, then argues past it.
+- Spine: bar chart is a demo → a page is a lineup (baseball analogy, 3s/30s/3m skill) → notebook charts are for you (story framing vs storytelling, Strava) → the agent's best work is the data behind the visual (Northside toggle, `Games Selected` what-if, trailing-5, SVG KPI strip; base vs display measures; red email KPI) → the last step is the click → practical list.
+- Adjacent mining folded in: 557 holy grail / single CSV / validation-last / pixel perfect / sycophancy; 566 design ~30% / "fill" ambiguity; 565 "no one wants a report" / Strava / 3s-30s-3m; 530 "build a bunch of conditional formatting measures, too"; 546 red email open rate (kept short, so "Color Is a Conclusion" stays open for the ownership argument); 541 row-count check before design.
+- Links the [Northside spec](/2026/10/02/same-prompt-two-reports/) without re-showing it. No code blocks, so no `/prompts/` artifact.
+- Images: `public/images/2026/10/one-visual-was-never-the-job-{banner,lineup,data-behind,the-click}.jpg`.
+- Filed as Notion Ideas: "Your Meeting Questions Are for the Agent Now" (sibling of 538's "Put the Agent in the Meeting"), "Clients Think They Have to Use Fabric Because Power BI Now Lives There". "Bronze That Cleans Is Not Bronze" not filed; fold into 558.
+
 ## Best plots
 
 - **Write first:** opinion. The unlock is iteration between related visuals, not AI drawing a bar.
