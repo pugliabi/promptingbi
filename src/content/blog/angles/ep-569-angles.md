@@ -16,6 +16,19 @@ Skip as the article: Chicago Fabric user group, Oct 22, MCP install night, Meetu
 
 Adjacent: 567 semantic views as YAML / OSI tease; 568 ontology authoring and apps-vs-visuals; 563 Fabric Apps; 555 anonymous Rayfin.
 
+## Locked (2026-10-19)
+
+- Scheduled: `published/2026-10/2026-10-21-stop-hitting-reply-on-your-data.md` ("Stop Hitting Reply on Your Data"), permalink `2026/10/21/stop-hitting-reply-on-your-data`, `draft: false`, goes live with the Wed 2026-10-21 13:00 UTC cron build once on `main`. Re-dated from the 10-19 draft after humanizer + delete-ai-words pass (reframe pivots cut, "X get Y" parallel run broken up, bold trimmed to two, netbook metaphor dropped, closer kept as "I know it's cheesy, but I'm writing forward"). Notion: https://app.notion.com/p/3fee74c69c188117a7f0c47a3aea6265 (Approved, Publish Date 2026-10-21, Published URL set).
+- Tommy's call: keep write forward, find a catchier title. His added premise is the spine: writeback only made sense when reports sat directly on the source SQL database; with lakehouses + Direct Lake as the default, never write to the semantic model or gold, period.
+- Title alternates if he wants to swap: "Writeback Is Dead. Write Forward." / "Gold Is Read-Only". Swap means title + permalink + filename together.
+- Extended analogy: his email reply vs forward line. Worked contrast: plant-equipment status cell vs Open Work Order (illustrative, not a client).
+- Additions to confirm with Tommy: the "What about budgets?" paragraph (extension of his principle, not said on air); Power Apps event-planning "View Report" story and the timing-app aside attributed by turn order (no vocative), so treat as needs-confirm.
+- Attribution fix: the cost aside ("how much are you willing to pay for writeback", analytical task flow items vs paid planner CUs) is **Mike's** turn (it names Tommy). Kept out of the post. Mike's flip ("embed reports inside the app"), columnar-vs-row explainer, partition-refresh API, and 30-45 min client form also kept out.
+- Walk-the-areas skipped: Tommy gave the premise and said go.
+- No code blocks, so no `/prompts/` artifact.
+- Images: `public/images/2026/10/stop-hitting-reply-on-your-data-{banner,then-and-now,forward-loop,report-inside-the-app}.jpg`.
+- Filed as Notion Ideas: "DAX Inside OSI Will Grow Best Practices Whether You Asked or Not", "IQ Sharing Is a Skill Shelf, Not a Skill".
+
 ## Best plots
 
 - **Write first:** opinion. Retire the word writeback. The job is writing forward: an action that leaves the report.
