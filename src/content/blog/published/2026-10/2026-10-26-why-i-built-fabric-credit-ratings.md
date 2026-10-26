@@ -1,9 +1,9 @@
 ---
-title: "Score the Workstream, Not the Artifact: Why I Built Fabric Credit Ratings"
+title: "Why I Built Fabric Credit Ratings: A Common Language for Fabric"
 date: 2026-10-26T09:00:00Z
 permalink: "2026/10/26/why-i-built-fabric-credit-ratings"
 description: "Why I built Fabric Credit Ratings: bond-style grades for 58 Fabric items, how to read them against your workstream, and the Fabric backend behind it."
-# featured: /images/2026/10/why-i-built-fabric-credit-ratings-banner.jpg # uncomment once the banner exists
+featured: /images/2026/10/why-i-built-fabric-credit-ratings-banner.jpg
 draft: false
 tags:
   - microsoft-fabric
@@ -76,7 +76,7 @@ Some grades will surprise nobody. Pipelines, lakehouses, and semantic models are
 
 If none of us felt qualified to score an item, it doesn't have a grade yet.
 
-## Score the workstream
+## Preferred depends on the job
 
 I've also been reading *Fatal Risk*, Roddy Boyd's book on the rise and fall of AIG. AIG sorted its practices into four buckets: preferred, accepted, discouraged, and unacceptable. PADU. The book's example is customer statements. Quarterly statements online with no paper were preferred, and online statements plus a printed annual report were accepted. Defaulting customers to paper was discouraged. Print-only was unacceptable.
 

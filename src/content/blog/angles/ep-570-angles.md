@@ -22,8 +22,8 @@ Adjacent: 568 ontology authoring; 563 Fabric Apps; 554 Fabric as a backend.
 
 ## Published (2026-10-26)
 
-- Merged with the Fabric Credit Ratings launch (ep 573, `transcripts/ep-573.txt`) into `published/2026-10/2026-10-26-why-i-built-fabric-credit-ratings.md` ("Score the Workstream, Not the Artifact: Why I Built Fabric Credit Ratings"), live at https://promptingbi.com/2026/10/26/why-i-built-fabric-credit-ratings/. Notion: https://app.notion.com/p/405e74c69c1881c39b74c6399b75ed45 (Published, Episode = 573 + 570).
-- Tommy's second pass added the "Why I built it" section: community, quarterly rounds with history, why outlook matters (Dataflow Gen1 BBB+ with outlook 2, Copilot in Fabric 2/2 with outlook 4.5), and the MVP LinkedIn ask. Humanizer + delete-ai-words pass done. Published without a banner; `featured` is commented out in the front matter.
+- Merged with the Fabric Credit Ratings launch (ep 573, `transcripts/ep-573.txt`) into `published/2026-10/2026-10-26-why-i-built-fabric-credit-ratings.md` ("Why I Built Fabric Credit Ratings: A Common Language for Fabric"; first shipped as "Score the Workstream, Not the Artifact: ...", renamed same day, PADU section now "Preferred depends on the job"), live at https://promptingbi.com/2026/10/26/why-i-built-fabric-credit-ratings/. Notion: https://app.notion.com/p/405e74c69c1881c39b74c6399b75ed45 (Published, Episode = 573 + 570).
+- Tommy's second pass added the "Why I built it" section: community, quarterly rounds with history, why outlook matters (Dataflow Gen1 BBB+ with outlook 2, Copilot in Fabric 2/2 with outlook 4.5), and the MVP LinkedIn ask. Humanizer + delete-ai-words pass done. Banner generated in house style and added as `featured` (`why-i-built-fabric-credit-ratings-banner.jpg`).
 - Uses the book, the four rungs, the SQL database contrast, and the paginated exception. "Preferred Is Not Mandatory" is folded in. The "trust and data quality 50/50 with CUs" line is in the draft as Tommy's (same speaker says "what I love about… the book"); confirm with him.
 - Filed as Idea: "Somewhat Good Is Not the Skill" (https://app.notion.com/p/405e74c69c1881069894cab81944cd0e).
 
