@@ -68,3 +68,10 @@ Two sentences in the FabCon post: database-agent capabilities exposed through MC
 
 ### Don’t Write Monthly Active Agents as His Metric
 He floated monthly active tokens. Mike shot it down (optimize tokens, don’t count them, or everyone sits on the most expensive model). The agent-count metric is Mike’s. Tommy only picks it back up as a callback in 569.
+
+## Locked (2026-10-28)
+
+- The write-first routing card was never drafted on its own. It's folded into the ep 575 post: `src/content/blog/drafts/2026-10-28-dont-spend-fable-on-the-schema.md` (Notion: https://app.notion.com/p/407e74c69c1881049719df195e9897ea).
+- Used from here: the six-job scores as a table, scored as on this card and not rescored (medallion left out because it was unscored); DAX high through the write; report design at medium; notebooks low with good examples; Anthropic guy but harness and effort beat brand; read the provider docs; no tracker, so it's partly feel; the "report's done" verification story.
+- Attribution: the scores are credited to Tommy per this file. A strict vocative pass on the transcript couldn't pin every score to a named turn. Flagged to Tommy.
+- Don't redraft the routing card as a separate post.
