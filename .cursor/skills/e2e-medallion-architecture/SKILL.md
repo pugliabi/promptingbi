@@ -17,9 +17,9 @@ description: "Plans and builds end-to-end Fabric data platforms on the Bronze, S
 
 Read these companion documents — they contain the foundational context this skill depends on:
 
-- [COMMON-CORE.md](../../common/COMMON-CORE.md) — Fabric REST API patterns, authentication, token audiences, item discovery
-- [COMMON-CLI.md](../../common/COMMON-CLI.md) — `az rest`, `az login`, token acquisition, Fabric REST via CLI
-- [SPARK-AUTHORING-CORE.md](../../common/SPARK-AUTHORING-CORE.md) — Notebook deployment, lakehouse creation, job execution
+- [COMMON-CORE.md](common/COMMON-CORE.md) — Fabric REST API patterns, authentication, token audiences, item discovery
+- [COMMON-CLI.md](common/COMMON-CLI.md) — `az rest`, `az login`, token acquisition, Fabric REST via CLI
+- [SPARK-AUTHORING-CORE.md](common/SPARK-AUTHORING-CORE.md) — Notebook deployment, lakehouse creation, job execution
 - [notebook-api-operations.md](../spark-cli/references/authoring/resources/notebook-api-operations.md) — **Required for notebook creation** — `.ipynb` structure requirements, cell format, `getDefinition`/`updateDefinition` workflow
 
 For Spark-specific optimization details, see [data-engineering-patterns.md](../spark-cli/references/authoring/resources/data-engineering-patterns.md).
@@ -247,16 +247,16 @@ Build a semantic model on top of the Gold lakehouse, using DirectLake.
 ### Step-by-Step
 
 1. **Discover the Gold lakehouse SQL endpoint** — call `GET /v1/workspaces/{workspaceId}/lakehouses/{goldLakehouseId}` and extract `properties.sqlEndpointProperties.connectionString` and `provisioningStatus`; wait until status is `Success`
-2. **Verify Gold tables via SQL** — connect to the SQL endpoint using `sqlcmd` (see [COMMON-CLI.md § SQL / TDS Data-Plane Access](../../common/COMMON-CLI.md#sql--tds-data-plane-access)) and confirm the target table exists:
+2. **Verify Gold tables via SQL** — connect to the SQL endpoint using `sqlcmd` (see [COMMON-CLI.md § SQL / TDS Data-Plane Access](common/COMMON-CLI.md#sql--tds-data-plane-access)) and confirm the target table exists:
    ```sql
    SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'nyc_taxi_daily_summary'
    ```
-3. **Create a semantic model** — use the [semantic-model-authoring](../semantic-model-authoring/SKILL.md) skill for semantic model creation and TMDL deployment. Create via `POST /v1/workspaces/{workspaceId}/items` with `type: "SemanticModel"` then deploy definition via `updateDefinition` using TMDL format (see [ITEM-DEFINITIONS-CORE.md § SemanticModel](../../common/ITEM-DEFINITIONS-CORE.md#semanticmodel)):
+3. **Create a semantic model** — use the [semantic-model-authoring](../semantic-model-authoring/SKILL.md) skill for semantic model creation and TMDL deployment. Create via `POST /v1/workspaces/{workspaceId}/items` with `type: "SemanticModel"` then deploy definition via `updateDefinition` using TMDL format (see [ITEM-DEFINITIONS-CORE.md § SemanticModel](common/ITEM-DEFINITIONS-CORE.md#semanticmodel)):
    - The model must reference the Gold lakehouse SQL endpoint as its data source
    - Define a table mapping to the Gold summary table (e.g., `nyc_taxi_daily_summary`)
    - Use **Direct Lake** mode — this connects directly to Delta tables in OneLake without data import
    - Include measures for key aggregations you find interesting (e.g., `Total Trips`, `Avg Fare`, `Total Revenue`, `Month over Month Growth`)
-4. **Create a Power BI report** — `POST /v1/workspaces/{workspaceId}/items` with `type: "Report"` then deploy definition via `updateDefinition` using PBIR format (see [ITEM-DEFINITIONS-CORE.md § Report](../../common/ITEM-DEFINITIONS-CORE.md#report)):
+4. **Create a Power BI report** — `POST /v1/workspaces/{workspaceId}/items` with `type: "Report"` then deploy definition via `updateDefinition` using PBIR format (see [ITEM-DEFINITIONS-CORE.md § Report](common/ITEM-DEFINITIONS-CORE.md#report)):
    - Reference the semantic model created in step 3 via `definition.pbir`
    - Define at least one page with visuals on the Gold summary table
    - Suggested visuals: line chart (daily trend), card (KPI totals), bar chart (by category), table (detail view)

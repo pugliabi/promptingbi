@@ -1,27 +1,11 @@
 ---
 name: pipeline-migration
-description: >
-  Migrate Synapse Data Factory pipeline artifacts to Microsoft Fabric Data Factory.
-  Handles: linked services → Fabric connections, dataset definitions inlined into
-  pipeline activities, global parameters → Variable Libraries, SynapseNotebook
-  activities → TridentNotebook. SSIS, SHIR-only, and Databricks activities are parked.
-  Use when: (1) migrating Synapse pipelines to Fabric Data Factory,
-  (2) converting SynapseNotebook activities to TridentNotebook,
-  (3) translating linked services to Fabric connections,
-  (4) converting global parameters to Fabric Variable Libraries,
-  (5) inlining dataset definitions into Fabric pipeline activities.
-  Triggers: "synapse pipeline to fabric", "data factory pipeline migration",
-  "tridentnotebook pipeline activity", "global parameters to variable library",
-  "linked service to fabric connection", "inline dataset fabric pipeline",
-  "pipeline migration from synapse".
+description: "Migrates Synapse Data Factory pipelines to Fabric Data Factory, turning linked services into Fabric connections, inlining datasets into activities, converting global parameters to Variable Libraries, and mapping SynapseNotebook to TridentNotebook. Use for pipeline JSON. For Synapse Spark notebook code use synapse-migration."
 ---
 
-> **Update Check — ONCE PER SESSION (mandatory for live migration runs)**
-> The first time this skill is used in a session, run the **check-updates** skill before proceeding.
-> - **GitHub Copilot CLI / VS Code**: invoke the `check-updates` skill.
-> - **Claude Code / Cowork / Cursor / Windsurf / Codex**: compare local vs remote package.json version.
-> - Skip if the check was already performed earlier in this session.
-> - **Skip in eval / guidance-only mode**: if the user's prompt explicitly forbids tool/API calls (e.g. *"Do not call any APIs or create any resources"*) or the skill is being invoked for offline JSON translation / eval, do **not** run the update check — answer the prompt directly. The check is only required for live-migration runs that will call Fabric or Synapse APIs.
+> **Telemetry — MANDATORY.** Every `api.fabric.microsoft.com` call must carry
+> `x-ms-fabric-skill: pipeline-migration` (`az rest`: `--headers "x-ms-fabric-skill=pipeline-migration"`),
+> including every LRO poll, `fabric_lro` and retry. Snippets omit it — add it anyway.
 
 > **CRITICAL NOTES**
 > 1. To find workspace details (including its ID) from a workspace name: list all workspaces, then use JMESPath filtering
@@ -30,7 +14,7 @@ description: >
 > 4. Linked Services map to Fabric **Connections** — in pipeline activity JSON, `referenceName` on the activity's `linkedService` block uses the Fabric connection **display name** (not the connection GUID); the connection GUID is used only on Fabric REST API calls
 > 5. Notebook activities change from `SynapseNotebook` to `TridentNotebook` and reference notebooks by **GUID**, not by name
 > 6. Synapse global parameters become a **Variable Library** item in Fabric, referenced as `@pipeline().libraryVariables.<name>`. Variable Library `Number` types are not consumable in pipelines — Synapse `Float`/`Double` are mapped to `String` for runtime compatibility
-> 7. The `Validation` activity type does not exist in Fabric — it must be rewritten as `GetMetadata` + `IfCondition`
+> 7. The `Validation` activity type does not exist in Fabric — it must be rewritten as `GetMetadata` and `IfCondition`
 > 8. **Triggers are intentionally excluded** from this skill — recreate schedules manually in Fabric after migration
 > 9. SSIS package execution, SHIR-exclusive connectors, and Databricks activities are **parked** — see [pipeline-gotchas.md](resources/pipeline-gotchas.md)
 
@@ -40,10 +24,10 @@ description: >
 
 These companion documents provide general Fabric REST patterns. **Do NOT read them upfront** — reference only when a specific phase requires a pattern not already covered in this skill's resource files:
 
-- [COMMON-CORE.md](../../common/COMMON-CORE.md) — General Fabric REST API patterns, authentication & token audiences, item discovery via JMESPath
-- [COMMON-CLI.md](../../common/COMMON-CLI.md) — `az rest` / `az login` CLI patterns, authentication recipes, pipeline run/schedule operations
-- [ITEM-DEFINITIONS-CORE.md](../../common/ITEM-DEFINITIONS-CORE.md) — `DataPipeline` and `VariableLibrary` item definition structures (pipeline-content.json, variables.json)
-- [SPARK-AUTHORING-CORE.md](../../common/SPARK-AUTHORING-CORE.md) — Fabric notebook item creation (needed when notebook items don't exist yet in Fabric)
+- [COMMON-CORE.md](common/COMMON-CORE.md) — General Fabric REST API patterns, authentication & token audiences, item discovery via JMESPath
+- [COMMON-CLI.md](common/COMMON-CLI.md) — `az rest` / `az login` CLI patterns, authentication recipes, pipeline run/schedule operations
+- [ITEM-DEFINITIONS-CORE.md](common/ITEM-DEFINITIONS-CORE.md) — `DataPipeline` and `VariableLibrary` item definition structures (pipeline-content.json, variables.json)
+- [SPARK-AUTHORING-CORE.md](common/SPARK-AUTHORING-CORE.md) — Fabric notebook item creation (needed when notebook items don't exist yet in Fabric)
 
 > For the notebook side of the migration (the notebooks that pipeline activities call), use the companion **synapse-migration** skill to migrate the notebook content itself.
 
@@ -201,7 +185,7 @@ Full mapping table, before/after examples, and parking decisions are in [activit
 | `Copy` | `Copy` | ✅ Migrated — datasets inlined |
 | `Lookup` | `Lookup` | ✅ Migrated — datasets inlined |
 | `GetMetadata` | `GetMetadata` | ✅ Migrated — datasets inlined |
-| `Validation` | `GetMetadata` + `IfCondition` | ✅ Migrated — split into 2 activities |
+| `Validation` | `GetMetadata` and `IfCondition` | ✅ Migrated — split into 2 activities |
 | `ForEach` | `ForEach` | ✅ Compatible |
 | `IfCondition` | `IfCondition` | ✅ Compatible |
 | `Switch` | `Switch` | ✅ Compatible |
@@ -235,7 +219,7 @@ Full mapping table, before/after examples, and parking decisions are in [activit
 - **Create Fabric Connections before building pipeline JSON** — linked service names in Synapse become connection references in Fabric; you need the connection names before inlining datasets
 - **Inline all dataset definitions** — Fabric Data Factory has no Dataset item type; all `inputs`/`outputs` dataset properties must be embedded in each activity
 - **Replace `@pipeline().globalParameters.<name>`** with `@pipeline().libraryVariables.<name>` after creating the Variable Library
-- **Replace Validation activities** with a `GetMetadata` + `IfCondition` pair — `Validation` does not exist as an activity type in Fabric
+- **Replace Validation activities** with a `GetMetadata` and `IfCondition` pair — `Validation` does not exist as an activity type in Fabric
 - **Remove `sparkPool` and `sessionConfiguration`** from migrated notebook activities — pool selection and session config belong in the Fabric Environment attached to the notebook
 
 ### PREFER
@@ -262,7 +246,7 @@ Full troubleshooting guide is in [pipeline-gotchas.md](resources/pipeline-gotcha
 | PG1 | `NOTEBOOK_GUID_NOT_FOUND` | Notebook not yet migrated to Fabric when building TridentNotebook activity | High | Run synapse-migration skill first; get GUID from `GET /v1/workspaces/{wsId}/notebooks` |
 | PG2 | `DATASET_NOT_INLINED` | Activity still references a named dataset (not valid in Fabric) | High | Apply dataset-inlining.md patterns to embed dataset properties into activity source/sink |
 | PG3 | `GLOBAL_PARAM_EXPRESSION` | `@pipeline().globalParameters.<name>` expression left in migrated pipeline | High | Replace with `@pipeline().libraryVariables.<name>` after creating Variable Library |
-| PG4 | `VALIDATION_ACTIVITY_UNSUPPORTED` | `Validation` activity type left in pipeline JSON | High | Rewrite as `GetMetadata` + `IfCondition` — see activity-mapping.md |
+| PG4 | `VALIDATION_ACTIVITY_UNSUPPORTED` | `Validation` activity type left in pipeline JSON | High | Rewrite as `GetMetadata` and `IfCondition` — see activity-mapping.md |
 | PG5 | `SHIR_CONNECTOR_PARKED` | Activity uses a linked service backed by a Self-Hosted Integration Runtime | Medium | Must set up on-premises data gateway in Fabric; see pipeline-gotchas.md |
 | PG6 | `SSIS_ACTIVITY_PARKED` | `ExecuteSSISPackage` activity cannot be migrated | High | Parked — no Fabric equivalent; see pipeline-gotchas.md for alternatives |
 | PG7 | `DATABRICKS_ACTIVITY_PARKED` | Databricks activity type has no Fabric native equivalent | High | Parked — use Databricks REST API via WebActivity as workaround; see pipeline-gotchas.md |
@@ -279,10 +263,10 @@ After pipeline migration, hand off to these companion skills and tools:
 | Task | Skill / Tool |
 |---|---|
 | Migrate notebook content (mssparkutils → notebookutils, linked services) | **synapse-migration** skill |
-| Schedule migrated pipelines | [COMMON-CLI.md § Job Scheduling](../../common/COMMON-CLI.md) |
+| Schedule migrated pipelines | [COMMON-CLI.md § Job Scheduling](common/COMMON-CLI.md) |
 | Monitor pipeline runs | Fabric workspace → Monitor hub |
-| Build new Fabric pipelines | Refer to [ITEM-DEFINITIONS-CORE.md § DataPipeline](../../common/ITEM-DEFINITIONS-CORE.md) |
-| Explore migrated Lakehouse data post-pipeline run | `spark-consumption-cli` or `sqldw-consumption-cli` skill |
+| Build new Fabric pipelines | Refer to [ITEM-DEFINITIONS-CORE.md § DataPipeline](common/ITEM-DEFINITIONS-CORE.md) |
+| Explore migrated Lakehouse data post-pipeline run | `spark-cli` or `sqldw-cli` skill |
 
 ---
 

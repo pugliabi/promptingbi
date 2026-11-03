@@ -1,11 +1,22 @@
 ---
 name: converting-skills-to-notion
-description: Push or pull complete Claude skills (SKILL.md plus every file and folder) to and from the Notion 🪄 Skills database using only the Notion Skills API (notion-upload-skill / notion-download-skill), never summary, distilled, or hand-written pages. Handles one skill or a batch ("all my Power BI skills", "everything tagged Fabric"), creating or updating in place, and verifies every round-trip. Use to push, publish, sync, or update skills in Notion, pull skills from Notion, check whether Notion is in sync, or fix a broken Notion skill page.
+description: Push or pull complete Claude skills (SKILL.md plus every file, folder and reference) to and from the Notion 🪄 Skills database using only the Notion Skills API (notion-upload-skill / notion-download-skill), never summary, distilled, or hand-written pages. Handles one skill or a batch ("all my Power BI skills", "everything tagged Fabric"), creating or updating in place, and verifies every round-trip. ALWAYS use whenever Tommy says "use the skills API", "Skills API", "add it to Notion", "push/pull/sync skills with Notion", or asks to publish, update, pull, check sync of, or fix a skill page in Notion.
 ---
 
 # Publishing Claude Skills to Notion (Skills API)
 
 Push the **whole skill**, exactly as authored, into the Notion 🪄 Skills database with the Notion Skills API, and pull whole skills back the same way. On upload, SKILL.md becomes the page body, the frontmatter `name`/`description` become the page title and Description, and every sibling file and folder (references/, scripts/, assets/) lands in the page's **Files** property with its folder structure kept.
+
+**Tommy's standing rule: "use the skills API" means this skill, and every push or pull carries the skill's full set of files, folders and references, never a SKILL.md alone.** A Notion page whose Files property is empty is only acceptable when the skill genuinely has nothing but SKILL.md and depends on nothing outside it (see the completeness gate in step 1b).
+
+## Files in this skill
+
+| Path | What it is |
+|---|---|
+| `scripts/notion_skill_pack.py` | Packer: Notion-safe staging copy + tar.gz + CRC, completeness and quirk checks (same code as the inline copy below) |
+| `scripts/skill_status.py` | Round-trip / sync comparer (same code as the inline copy below) |
+
+The scripts are also inlined below so the skill still works when only SKILL.md was installed (a Claude account skill proposal carries SKILL.md only). If the inline and `scripts/` copies ever differ, `scripts/` wins; re-sync the inline block.
 
 ## Hard boundary: Notion Skills API + Skills database only
 
@@ -49,7 +60,17 @@ Use the first that applies:
 2. Installed or synced skills in this environment.
 3. Files Tommy attaches or points to.
 
-Reach the vault with the Filesystem MCP if it works; if it errors (it has thrown outputSchema errors), use `device_request_folder_access` on the narrowest folder (one skill, or `C:\Github\agent-skills\skills` for batches) and `device_bash` on `$HOME/mnt/<folder>`. Read SKILL.md and list every file. You publish everything, so check for secrets (API keys, tokens, client secrets, passwords) first. If you find any, stop and flag them; never upload them.
+Reach the vault with the linked-device tools (Tommy's preference): `device_request_folder_access` on the narrowest folder (one skill, or `C:\Github\agent-skills\skills\skills` for batches), then `device_bash` on `$HOME/mnt/<folder-name>`, or `device_stage_files` / `device_commit_files` when no device shell is available. The Filesystem MCP is a fallback only. Read SKILL.md and list every file. You publish everything, so check for secrets (API keys, tokens, client secrets, passwords) first. If you find any, stop and flag them; never upload them.
+
+### 1b. Completeness gate (every push, before packing)
+
+The page in Notion must hold everything the skill needs. Before packing:
+
+1. **Inventory dependencies.** Read SKILL.md for every file, folder, script, reference doc, template or companion material it points to or tells the agent to fetch, write, or run: relative paths (`references/…`, `scripts/…`, `assets/…`, `./x.md`), "write this file verbatim" blocks, docs pulled from a CLI or plugin (for example `fntk skill get …`, a plugin's `common/*.md`), setup or install scripts, and helper code the workflow relies on.
+2. **Bundle them into the skill folder** in the vault, keeping a clean layout: docs in `references/` (sub-folders by source, for example `references/microsoft/`), runnable code in `scripts/`, templates and data in `assets/`. Record where third-party material came from (one header comment or line per file). Never bundle secrets; reference the credential file by path instead.
+3. **Index them in SKILL.md** with a "Files in this skill" table (path, what it is, when to read it) so agents know the files exist.
+4. **The packer enforces it.** It aborts when SKILL.md references a relative path that isn't in the folder (`MISSING`), and it prints `NOTE: single-file skill` when SKILL.md is the only file. On that note, stop and confirm the skill really depends on nothing else before uploading; if it does, go back to step 2.
+5. If the skill was authored in this session (not yet in the vault), write the complete folder into the vault first (`device_commit_files`), then pack from it, so the vault and Notion hold the same tree.
 
 ### 2. Find the row (update vs. create)
 
@@ -64,7 +85,7 @@ Query the Skills data source for the frontmatter `name`, for example `SELECT url
 
 ### 3. Package a Notion-safe archive
 
-Write `notion_skill_pack.py` (below) to the scratch folder and run `python3 -I notion_skill_pack.py <skill_dir> <out_dir>`. It builds `<out_dir>/<name>/` (staging copy) and `<out_dir>/<name>.tar.gz` with `<name>/SKILL.md` at the top, and prints `content_length`, `checksum_crc32`, the file list, and the fixes it applied. It changes only the **staging copy of SKILL.md**, never the source, and it aborts if a fix would change any word. It also aborts on symlinks or junctions, duplicate-by-case paths, or anything over Notion's limits (20 MiB compressed, 25 MiB expanded, 1000 entries, 20 path levels, 200-byte names).
+Use `scripts/notion_skill_pack.py` (or write the inline copy below to the scratch folder) and run `python3 -I notion_skill_pack.py <skill_dir> <out_dir>`. It builds `<out_dir>/<name>/` (staging copy) and `<out_dir>/<name>.tar.gz` with `<name>/SKILL.md` at the top, and prints `content_length`, `checksum_crc32`, the file list, and the fixes it applied. It changes only the **staging copy of SKILL.md**, never the source, and it aborts if a fix would change any word. It also aborts on symlinks or junctions, duplicate-by-case paths, or anything over Notion's limits (20 MiB compressed, 25 MiB expanded, 1000 entries, 20 path levels, 200-byte names).
 
 How Notion's markdown importer behaves (all verified by round-trip tests), and what the packer does about it:
 - Only exactly-3-backtick fences open a code block. A 4-backtick fence is read as a 3-backtick fence plus a stray backtick, which swallows the following sections into one line full of `<br>`. `~~~` fences are not supported at all. The packer rewrites every fence to three backticks.
@@ -72,6 +93,8 @@ How Notion's markdown importer behaves (all verified by round-trip tests), and w
 - Raw triple backticks in prose get mangled, and so do code blocks inside a `>` blockquote (the fence turns into literal text and domains get auto-linked). The packer can't fix either safely; it prints a WARNING with the line number. Fix the source with Tommy's OK (move the code block out of the quote, or write literal backticks as a double-backtick span `` `` ``` `` ``), then re-pack. `skill_status.py` compares wording only, so it won't flag these; the packer warning is where they show up.
 - Hard-wrapped prose shows as choppy mid-sentence breaks, and inline code or emphasis that wraps across a line break turns into `<br>` or a literal `\*`. The packer reflows paragraphs and list continuations onto single lines and never touches code blocks, tables, headings, quotes, or HTML. `--no-reflow` skips this.
 - CRLF line endings are normalized to LF.
+- Placeholders named like Notion's own markup tags (`folder`, `page`, `database`, `data-source`, `callout`, `columns`, `mention-…`) are parsed as tags **even inside inline code**, and the upload's `complete` step fails with "unclosed Notion Markdown vNext tags were auto-closed". The packer aborts on them; rename the placeholder in the source (for example `<folder-name>`).
+- Inside a **table cell**, ` - `, ` + ` or ` * ` right after inline code (for example `` `fntk help --json` - every command ``) is turned into a `•` bullet, which changes the wording. The packer prints a WARNING with the line number; reword the cell (": ", "then", "and") in the source and re-pack.
 
 If the packer applied fixes to a vault skill, offer to apply the same fixes to the source so it stays clean (only with Tommy's OK).
 
@@ -81,7 +104,7 @@ If the packer applied fixes to a vault skill, offer to apply the same fixes to t
 ```python
 #!/usr/bin/env python3
 """Package a skill folder for the Notion Skills API (notion-upload-skill).
-usage: python notion_skill_pack.py <skill_dir> <out_dir> [--no-reflow]"""
+usage: python notion_skill_pack.py <skill_dir> <out_dir> [--no-reflow] [--allow-missing]"""
 import sys, os, re, json, shutil, tarfile, zlib, base64
 
 SKIP_DIRS = {'.git', '__pycache__', 'node_modules', '.venv', 'venv', '.pytest_cache', '.ipynb_checkpoints'}
@@ -175,6 +198,49 @@ def reflow(lines, fixes):
     return out
 
 
+REF = re.compile(r'(?<![\w./~-])(?:\./)?((?:references|scripts|assets|resources|templates|examples)/[\w.\-/]*\w)')
+
+
+def referenced_paths(body):
+    # Relative paths SKILL.md points at (outside code blocks); wildcards/placeholders are skipped.
+    inside = set()
+    for i, j, _ in fences(body):
+        inside.update(range(i, j + 1))
+    refs = set()
+    for k, s in enumerate(body):
+        if k in inside:
+            continue
+        for m in REF.finditer(s):
+            p = m.group(1).rstrip('.')
+            if not any(c in p for c in '*<>{}$') and '.' in p.rsplit('/', 1)[-1]:
+                refs.add(p)  # file-like refs only; bare folder mentions are prose
+    return refs
+
+
+NOTION_TAGS = ('folder', 'page', 'database', 'data-source', 'mention-user', 'mention-page',
+               'mention-database', 'mention-date', 'mention-data-source', 'synced_block', 'callout',
+               'columns', 'column', 'table_of_contents', 'unknown')
+
+
+def reserved_tags(body):
+    # Notion Markdown vNext parses these tag names even inside inline code; a bare <folder> makes
+    # upload `complete` fail with "unclosed Notion Markdown vNext tags were auto-closed".
+    inside = set()
+    for i, j, _ in fences(body):
+        inside.update(range(i, j + 1))
+    pat = re.compile(r'</?(%s)(?=[\s>/])' % '|'.join(re.escape(t) for t in NOTION_TAGS))
+    return [f'body line {k + 1}: <{m.group(1)}>' for k, s in enumerate(body) if k not in inside
+            for m in pat.finditer(s)]
+
+
+def table_cell_warnings(body, fixes):
+    # Notion turns ' - ', ' + ', ' * ' right after inline code inside a table cell into a bullet.
+    for k, s in enumerate(body):
+        if s.lstrip().startswith('|') and re.search(r'`\s[-+*]\s', s):
+            fixes.append(f'WARNING: table cell at body line {k + 1} has " - "/" + " after inline code; '
+                         'Notion turns it into a bullet. Reword the source (": ", "then", "and")')
+
+
 def words(text):
     text = text.replace(ZWSP, '')
     return [w for w in (re.sub(r'^(`{3,}|~{3,})', '', t) for t in text.split()) if w]
@@ -201,6 +267,18 @@ def main():
         sys.exit('SKILL.md frontmatter must have name and description')
     if words(raw) != words(safe):
         sys.exit('ABORT: Notion-safe transform changed words, not just layout')
+    body = split_frontmatter(safe.split('\n'))[1]
+    table_cell_warnings(body, fixes)
+    tags = reserved_tags(body)
+    if tags:
+        sys.exit('ABORT: SKILL.md uses Notion-reserved tag names that break the import (rename the '
+                 'placeholder, e.g. <folder> -> <folder-name>):\n  ' + '\n  '.join(tags))
+    missing = sorted(p for p in referenced_paths(body)
+                     if not os.path.exists(os.path.join(src, *p.split('/'))))
+    if missing and '--allow-missing' not in sys.argv:
+        sys.exit('ABORT: SKILL.md references files that are not in the skill folder - bundle them '
+                 '(completeness gate) or pass --allow-missing after Tommy confirms:\n  MISSING ' +
+                 '\n  MISSING '.join(missing))
     stage = os.path.join(out_dir, name)
     shutil.rmtree(stage, ignore_errors=True)
     os.makedirs(stage)
@@ -244,6 +322,9 @@ def main():
     if len(data) > 20 * 1024 * 1024:
         sys.exit('ABORT: archive over 20 MiB compressed')
     crc = base64.b64encode((zlib.crc32(data) & 0xffffffff).to_bytes(4, 'big')).decode()
+    if files == ['SKILL.md']:
+        fixes.append('NOTE: single-file skill - Notion Files will be empty. Confirm it depends on '
+                     'nothing else (completeness gate) before uploading')
     print(json.dumps({'name': name, 'archive': archive, 'content_length': len(data),
                       'checksum_crc32': crc, 'files': sorted(files), 'fixes': fixes}, indent=1))
 
@@ -271,7 +352,7 @@ Completion replaces the page title, Description, body, and Files in place. It do
 
 ### 6. Verify the round-trip (required)
 
-`notion-download-skill` with the page id, curl the signed `url` into a fresh folder, extract it, and run `skill_status.py` (below): `python3 -I skill_status.py <extracted>/<name> <source_skill_dir>`. Pass = `"status": "in_sync"` (every file present at the same path, non-markdown files byte-identical, markdown wording and code blocks identical). Expected, harmless export changes: frontmatter rewritten with `|-` style plus a `notion_page_id` key, code-fence languages Notion doesn't know relabeled `javascript`, ordered lists renumbered, links containing inline code split in two.
+`notion-download-skill` with the page id. It returns a signed `url` to a tar.gz when the page has Files; when the page has **no** Files it returns the SKILL.md inline as `markdown` instead (no `url`). If you uploaded folders and got only `markdown` back, the files didn't land: stop and re-upload. Otherwise curl the signed `url` into a fresh folder, extract it, list the extracted tree (it must match the packer's `files` list exactly), and run `skill_status.py` (below): `python3 -I skill_status.py <extracted>/<name> <source_skill_dir>`. Pass = `"status": "in_sync"` (every file present at the same path, non-markdown files byte-identical, markdown wording and code blocks identical). Expected, harmless export changes: frontmatter rewritten with `|-` style plus a `notion_page_id` key, code-fence languages Notion doesn't know relabeled `javascript`, ordered lists renumbered, links containing inline code split in two.
 
 If it reports `content_differs`, read the `differs` entries, fix the cause, re-pack, and re-upload.
 
@@ -359,7 +440,7 @@ if __name__ == '__main__':
 
 ## Single skill: pull from Notion
 
-Use `notion-download-skill` and nothing else. Look up the page id, download, curl the signed `url`, and extract into a fresh folder. The archive holds the complete skill folder, named by the skill's name, or by a slug of the title for legacy pages ("Data Strategy Agent" → `data-strategy-agent`), with SKILL.md plus every file and subfolder from Files in their original structure. Keep it exactly as extracted. Hand the folder to `skill-vault-bridge` to write into the vault; never overwrite a vault skill without running `skill_status.py` and showing Tommy the result first.
+Use `notion-download-skill` and nothing else. Look up the page id, download, curl the signed `url`, and extract into a fresh folder. The archive holds the complete skill folder, named by the skill's name, or by a slug of the title for legacy pages ("Data Strategy Agent" → `data-strategy-agent`), with SKILL.md plus every file and subfolder from Files in their original structure. Keep it exactly as extracted, and bring **every** file and folder across: never take SKILL.md alone. List the full tree (file count plus paths) in the report. If the call returns inline `markdown` with no `url`, the Notion page has no Files: save that markdown as SKILL.md (it is Skills API output, so this is allowed) and tell Tommy the page is a single-file skill, so he can decide whether it should get its references bundled (completeness gate) and be pushed back. Hand the folder to `skill-vault-bridge` to write into the vault; never overwrite a vault skill without running `skill_status.py` and showing Tommy the result first.
 
 ## Batch requests ("all my Power BI skills", "everything tagged Fabric", "the semantic model ones")
 
@@ -372,7 +453,7 @@ Use `notion-download-skill` and nothing else. Look up the page id, download, cur
    - `content_differs` → the vault is ahead or Notion was edited. If the differences are only vault-side edits, it's an update. If Notion contains wording that isn't in the vault, flag "Notion has edits", don't overwrite, and route it to `skill-vault-bridge` Pull.
 4. **Show a plan table and wait for Tommy's OK**: skill | action (create / update / in sync, skip / Notion has edits, ask) | files | Notion-safe fixes or warnings. Never run a batch without confirmation.
 5. **Run sequentially**, one skill at a time: pack → (empty row if new) → prepare → PUT → complete → tags → verify. Prepare each skill right before its PUT (tokens expire after 10 minutes). One failure doesn't stop the rest; record it.
-6. **Report** a table: skill | created / updated / skipped | files | fixes | verify result | page link.
+6. **Report** a table: skill | created / updated / skipped | files (count, and any single-file skills flagged) | fixes | verify result | page link.
 
 ### Batch pull (Notion → local)
 
@@ -383,6 +464,7 @@ Use `notion-download-skill` and nothing else. Look up the page id, download, cur
 
 ## Rules
 
+- "Use the skills API" = this skill. Every push and pull carries the full skill: SKILL.md plus every file, folder and reference. Run the completeness gate before every push; a SKILL.md alone is only OK for a skill that truly depends on nothing else.
 - Push = `notion-upload-skill`; pull = `notion-download-skill`. Both carry the full skill folder (SKILL.md plus every file and subfolder, structure intact). Nothing else moves skill content: no hand-written page bodies, no distilled or summary pages, no sub-pages, no attachments, no `notion-fetch` reads.
 - Work only in the 🪄 Skills database. Outside the API, only row lookups, an empty row for a new skill, and properties (Tags, is_skill, icon).
 - If the Skills API isn't available, stop and say so. There is no fallback.

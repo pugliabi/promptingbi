@@ -31,6 +31,12 @@ Reach for the narrowest capable tool, in order. Most edits never leave step 1.
 
 Ordering gate: add relationships before any measure that uses `RELATED()` or a cross-table `CALCULATE()`, or the save gate fails with `DAX0002` (no relationship in context).
 
+## Object references in DAX and metadata
+
+Write column references as `'Table'[Column]`: the table name is always present and always in single quotes. Write measure references as `[Measure]`, never prefixed with a table. This applies everywhere DAX or model metadata names an object: measure, calculated column and calculation item expressions, RLS filters, format string expressions, DAX queries (`te query`, `pbir model -q`), and descriptions or annotations that mention an object.
+
+Why: a measure belongs to the model rather than to its home table, so moving it between tables must not change any expression that uses it; a bare `[Measure]` also tells the reader at a glance that it is a measure and not a column. An unqualified column is ambiguous as soon as two tables share a column name, and quoting every table name keeps one consistent form whether or not the name needs quotes.
+
 ## Lifecycle
 
 ### Design
@@ -52,7 +58,7 @@ Audit against the categories below and produce prioritized findings with file lo
 - **Data reduction**: unfiltered fact history (no incremental refresh), unnecessary columns, detail grain not needed for reporting, logic better pushed upstream
 - **DAX correctness**: filtering tables not columns in CALCULATE, unguarded division, context-blind calc columns, variable time-shift bugs (`references/dax-authoring.md`; for query tuning use the `dax` skill)
 - **Measure hygiene**: implicit measures, report-scoped measures that belong in the model, ambiguous duplicates
-- **Documentation & AI**: missing descriptions (Copilot truncates after 200 characters), missing display folders, missing synonyms, inconsistent naming (use `standardize-naming-conventions`)
+- **Documentation & AI**: missing descriptions (Copilot truncates after 200 characters), missing display folders, missing synonyms, inconsistent naming (use `organize-semantic-model`)
 - **Design**: star-schema violations, mis-marked date table, many-to-many without a bridge, dead inactive relationships
 - **Direct Lake**: non-unique one-side keys (queries fail at runtime), DirectQuery fallback, calculated-column support by Direct Lake flavor, Delta guardrail breaches
 
@@ -63,7 +69,7 @@ Audit against the categories below and produce prioritized findings with file lo
 - `connect-pbid`: TOM / ADOMD via PowerShell against a live Desktop instance; traces; the TOM / MCP tier
 - `te-cli`: the `te` command reference
 - `c-sharp-scripting`: TOM C# scripts and macros (`te script`) for properties `te` cannot reach
-- `standardize-naming-conventions`: naming audit and remediation
+- `organize-semantic-model`: organization and naming remediation
 - `refresh-semantic-model`: refresh monitoring and troubleshooting
 - `lineage-analysis`: artifact lineage (downstream reports and models that consume this model, across workspaces); distinct from intra-model object dependencies
 - `bpa-rules` (tabular-editor): authoring BPA rules; `fabric-cli`: service / workspace operations

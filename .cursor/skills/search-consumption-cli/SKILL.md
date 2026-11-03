@@ -8,7 +8,7 @@ description: "Finds Fabric items across every workspace with the Catalog Search 
 > including every LRO poll, `fabric_lro` and retry. Snippets omit it — add it anyway.
 
 > **CRITICAL NOTES**
-> 1. The Catalog Search API finds **items**, not workspaces. To find a workspace by name, use `GET /v1/workspaces` (see [COMMON-CLI.md § Resolve Workspace Properties by Name](../../common/COMMON-CLI.md#resolve-workspace-properties-by-name)).
+> 1. The Catalog Search API finds **items**, not workspaces. To find a workspace by name, use `GET /v1/workspaces` (see [COMMON-CLI.md § Resolve Workspace Properties by Name](common/COMMON-CLI.md#resolve-workspace-properties-by-name)).
 > 2. The search text matches against item **display name**, **description**, and **workspace name**.
 > 3. Dataflow (Gen1) and Dataflow (Gen2) are not supported.
 
@@ -16,8 +16,8 @@ description: "Finds Fabric items across every workspace with the Catalog Search 
 
 ## Prerequisite Knowledge
 
-- [COMMON-CORE.md](../../common/COMMON-CORE.md) — Fabric REST API patterns, auth
-- [COMMON-CLI.md](../../common/COMMON-CLI.md) — CLI implementation (az, curl, jq)
+- [COMMON-CORE.md](common/COMMON-CORE.md) — Fabric REST API patterns, auth
+- [COMMON-CLI.md](common/COMMON-CLI.md) — CLI implementation (az, curl, jq)
 
 ## Table of Contents
 
@@ -36,7 +36,7 @@ description: "Finds Fabric items across every workspace with the Catalog Search 
 
 ### MUST DO
 
-- **Authenticate first** — see [COMMON-CORE.md § Authentication & Token Acquisition](../../common/COMMON-CORE.md#authentication--token-acquisition) and [COMMON-CLI.md § Authentication Recipes](../../common/COMMON-CLI.md#authentication-recipes). The Catalog Search API requires `Catalog.Read.All` scope.
+- **Authenticate first** — see [COMMON-CORE.md § Authentication & Token Acquisition](common/COMMON-CORE.md#authentication--token-acquisition) and [COMMON-CLI.md § Authentication Recipes](common/COMMON-CLI.md#authentication-recipes). The Catalog Search API requires `Catalog.Read.All` scope.
 - **Write the JSON body to a temp file** — avoids shell quoting issues with filter strings.
 - **Disambiguate** — if multiple results match, present display name, type, and workspace name and ask the user to confirm.
 
@@ -49,7 +49,7 @@ description: "Finds Fabric items across every workspace with the Catalog Search 
 
 ### AVOID
 
-- **Searching for workspaces** — the Catalog Search API returns items, not workspaces. Use `GET /v1/workspaces` instead (see [COMMON-CLI.md § Resolve Workspace Properties by Name](../../common/COMMON-CLI.md#resolve-workspace-properties-by-name)).
+- **Searching for workspaces** — the Catalog Search API returns items, not workspaces. Use `GET /v1/workspaces` instead (see [COMMON-CLI.md § Resolve Workspace Properties by Name](common/COMMON-CLI.md#resolve-workspace-properties-by-name)).
 - **Querying source data after the workspace/item is known** — route to the workload-specific consumption skill (`sqldw-cli`, `spark-cli`, `eventhouse-cli`, or `fabriciq`) instead of Catalog Search.
 - **Inventing filter syntax** — only `eq`, `ne`, `or`, and parentheses are supported.
 - **Assuming all item types are supported** — Dataflow (Gen1) and Dataflow (Gen2) are not returned yet.
