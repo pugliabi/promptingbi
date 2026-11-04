@@ -59,6 +59,7 @@ Adjacent: 553 (skills are the walk); 557 (validation is the last step); 561 (ite
 - Hot take: use one or the other. Pause on Fabric Apps until Flint (or whatever the app visual stack is) is in Desktop, or until agentic viz is actually how the org builds.
 - Aesthetics of Fabric app visuals are nicer. From a human (no-agent) clock, 3x the time for a prettier bar chart is not worth it. A bar chart still conveys the data.
 - “Until we’re at the point where everyone is building agentic visualizations, it is not real to assume that.”
+- **Partly absorbed 2026-11-04** into [The Agent Builds the App Faster](/2026/11/04/the-agent-builds-the-app-faster/): the two libraries plus Deneb, "nicer look, still take pause," and the 3x-for-a-prettier-bar-chart line (reframed as "agents shrank the build"). Still open: the standalone pick-one-standard argument. The Notion Idea row is marked to match.
 - Tea leaves: Kurt Beller report-design skills, community building on Bridge. That is where the wind is. Not the silent Flint blog post.
 **Plot:** opinion. Pair with 563 if the series is “when an app beats a report.”
 **Freshness:** fresh. Do not steal Mike’s Vega-lite “they borrowed a spec and danced around it.”

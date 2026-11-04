@@ -55,3 +55,9 @@ Item relations REST: typed edges, shortcuts, orchestration, workspaces. Portal l
 ### Do Not Make Kurt’s Build Path the Delivery Default
 Honest: the hour is Kurt’s. If promptingbi.com ever covers Fabric Apps as a how-to, it needs a later Tommy-owned client, not this recording.
 **Salvage:** quote Kurt’s “interesting vs useful” agreement in the write-first. Do not ghostwrite his CLI/herdr stack.
+
+## Locked (2026-11-04)
+
+- Write-first absorbed into `published/2026-11/2026-11-04-the-agent-builds-the-app-faster.md` ("The Agent Builds the App Faster. That Doesn't Make It the Deliverable."), live at https://promptingbi.com/2026/11/04/the-agent-builds-the-app-faster/. Notion: https://app.notion.com/p/40ee74c69c1881f6abdfd83f194867a4. Don't draft "Fabric Apps Are Interesting. That Is Not the Same as Useful." on its own.
+- Used from here: Kurt's interesting vs useful (by name), cool vs consumable, the doctor's-office object, Jack and Janet plus gating (Kurt, by name), the buffet and sushi line (transcript line 119), building for ourselves, Fabric Apps won't be the default, and the research garage (line 237). The Mario ladder line was cut in the humanizer pass.
+- Still open here: OneLake Catalog search and lineage as an agent API.

@@ -64,3 +64,10 @@ Homestar + Peasants Quest + capacity dragon + Duke of DAX + bronze-water-kills-y
 ### Don’t Turn Kurt’s Saturday Into a Tutorial
 Honest: the hour’s technical spine is Kurt’s. If promptingbi.com covers agentic PBIR how-to, it needs Tommy’s harness + a later client build, not “Opus low and PBIR CLI as of last weekend.”
 **Salvage:** quote requirements-as-scaling and “too early for the way” with Kurt’s name. Write-first stays on where Tommy’s hours go.
+
+## Locked (2026-11-04)
+
+- Write-first shipped 2026-09-25 as [The Context Harness and the Execution Harness](/2026/09/25/context-harness-execution-harness/). Don't redraft it.
+- Follow-up published 2026-11-04 (commit `befb673`): `published/2026-11/2026-11-04-the-agent-builds-the-app-faster.md` ("The Agent Builds the App Faster. That Doesn't Make It the Deliverable."), live at https://promptingbi.com/2026/11/04/the-agent-builds-the-app-faster/. Notion: https://app.notion.com/p/40ee74c69c1881f6abdfd83f194867a4 (Published). Merges 566 + 563 + 567, with slices of 556, 568, and 569.
+- Used from here: Fabric Quest is TypeScript, PBIR examples are scarce, the fill-property ambiguity, and Kurt's 30 to 45 minute threshold (credited to Kurt by name).
+- Leftover filed as a Notion Idea: "Kurt Never Lets the Agent Write the Plan. Mine Write Most of Mine." (https://app.notion.com/p/40ee74c69c188124acabf4353aa0af5a). Merge it with "Grill the Plan, Then Combine Fabric Skills" before drafting.

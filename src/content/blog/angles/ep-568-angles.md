@@ -60,6 +60,7 @@ Adjacent: 567 NL app vs Power BI report, YAML-in-OneLake / OSI tease; 566 contex
 ### Fabric Apps May Split in Two
 He hears two camps: apps as application development on Fabric data, and apps as the agentic visual experience inside Desktop. He is curious whether that becomes two products under one name. He does not pick a lane. Mike’s read is “speak the visual into existence.”
 **Plot:** leftover. 567 and 569 already carry the app-vs-report argument.
+**Used 2026-11-04:** one paragraph in [The Agent Builds the App Faster](/2026/11/04/the-agent-builds-the-app-faster/), framed as his curiosity, not a prediction, together with the managed self-service honorable mention. Don't draft it standalone.
 
 ### Don’t Recap Barcelona
 Arun themes (Fabric IQ as the context layer, apps GA, data engineering agent, IQ sharing, Salesforce, real-time) are orientation. The article is the draft rule and the three picks.

@@ -25,6 +25,7 @@ Adjacent: 567 semantic views as YAML / OSI tease; 568 ontology authoring and app
 - Additions to confirm with Tommy: the "What about budgets?" paragraph (extension of his principle, not said on air); Power Apps event-planning "View Report" story and the timing-app aside attributed by turn order (no vocative), so treat as needs-confirm.
 - Attribution fix: the cost aside ("how much are you willing to pay for writeback", analytical task flow items vs paid planner CUs) is **Mike's** turn (it names Tommy). Kept out of the post. Mike's flip ("embed reports inside the app"), columnar-vs-row explainer, partition-refresh API, and 30-45 min client form also kept out.
 - Walk-the-areas skipped: Tommy gave the premise and said go.
+- 2026-11-04: the timing-app aside (line 195) is used in [The Agent Builds the App Faster](/2026/11/04/the-agent-builds-the-app-faster/), attributed to Tommy by turn order: it answers Mike's 30 to 45 minute client form, and "I really wish I started my company now" fits him. Still needs his confirmation. Cut that paragraph if it's Mike's.
 - No code blocks, so no `/prompts/` artifact.
 - Images: `public/images/2026/10/stop-hitting-reply-on-your-data-{banner,then-and-now,forward-loop,report-inside-the-app}.jpg`.
 - Filed as Notion Ideas: "DAX Inside OSI Will Grow Best Practices Whether You Asked or Not", "IQ Sharing Is a Skill Shelf, Not a Skill".

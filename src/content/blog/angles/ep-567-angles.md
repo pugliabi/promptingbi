@@ -75,3 +75,8 @@ He floated monthly active tokens. Mike shot it down (optimize tokens, don’t co
 - Used from here: the six-job scores as a table, scored as on this card and not rescored (medallion left out because it was unscored); DAX high through the write; report design at medium; notebooks low with good examples; Anthropic guy but harness and effort beat brand; read the provider docs; no tracker, so it's partly feel; the "report's done" verification story.
 - Attribution: the scores are credited to Tommy per this file. A strict vocative pass on the transcript couldn't pin every score to a named turn. Flagged to Tommy.
 - Don't redraft the routing card as a separate post.
+
+## Locked (2026-11-04)
+
+- Leftover "Natural Language Builds a Fabric App, Not a Power BI Report" absorbed into `published/2026-11/2026-11-04-the-agent-builds-the-app-faster.md`, live at https://promptingbi.com/2026/11/04/the-agent-builds-the-app-faster/. Notion: https://app.notion.com/p/40ee74c69c1881f6abdfd83f194867a4.
+- Used from here: the holy-grail hook, the FabCon app building experience from a semantic model, intricate by design, and the managed self-service sprawl warning. The training-data volume line in this episode is Mike's, so the post uses Tommy's own ep 566 Fabric Quest line instead.
