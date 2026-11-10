@@ -44,6 +44,19 @@ Tommy named the angle: distributed wisdom for Fabric, two-fold. Team/org side (h
 - No code block, no `/prompts/` artifact (the playbook artifact already exists from 562).
 - Walk-the-areas pass offered after the draft, not before.
 
+## Locked (2026-11-10): part 2
+
+Tommy asked for a second ep-576 article on handoffs and sharing/managing skills, with Skill Vault, governance as how a team works with agents, agents as teammates who carry skills, and his line "You can't have a black box for agents, nor can your agents create black boxes for you." His request is the walk-the-areas input; no separate pass.
+
+- Post: `published/2026-11/2026-11-10-no-black-boxes-either-way.md`, permalink `2026/11/10/no-black-boxes-either-way`. Humanizer + delete-ai-words pass before publish.
+- Title: "No Black Boxes Either Way: Sharing Skills When Agents Are on Your Fabric Team"
+- Series `distributed-wisdom-for-fabric` added to both parts (part 1 = the 10/30 post).
+- Images: `public/images/2026/11/no-black-boxes-either-way-{banner,handoffs,vault,trail}.jpg`
+- Code block is a 5-line condensation of the real Context Write-Back Protocol (full version lives in `/prompts/master-sequence-page/`); under the scan-prompts threshold, no new artifact.
+- Adjacent Tommy material used (vocative-attributed or inferred from demo driver): 538 "only one running a custom report design skill, drastically different output" and "6 people, 4 on AI, 2 never"; 538 line-level diff "let's talk about it"; 562 consultants handed him a black box; 568 "can't do that successfully in a larger project unless context and shared skills"; Skill Vault recording "vault only, not production" and "approval process lives in the git repo"; 548 "nine countries, spec says seven, pause before we continue."
+- Skill Vault claims checked against its README/docs: origin + 6-hour checks, source-labeled version history, Production/Staging/Vault-only states, sync plan with per-row diff, assistant via app API with Activity + undo, no delete/force-overwrite Notion. No user accounts or teammate approvals exist, so the post says team review lives in git.
+- Do not reuse: Mike's test-framework-independent-of-skills, "Tommy you're HR", monthly active agents, Uncle Bob.
+
 ## Other angles
 
 ### Bring Your Own Agent: Microsoft Is Opening Fabric Up

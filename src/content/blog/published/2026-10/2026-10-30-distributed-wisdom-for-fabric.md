@@ -13,6 +13,11 @@ tags:
   - data-culture
   - governance
   - business-intelligence
+series:
+  id: distributed-wisdom-for-fabric
+  title: "Distributed Wisdom for Fabric"
+  part: 1
+  partTitle: "Your Team and Your Agents Need the Same Brain"
 source:
   episode: 576
   title: "Distributed Wisdom for Fabric"
