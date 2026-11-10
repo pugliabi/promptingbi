@@ -1,0 +1,359 @@
+Title: When Leadership Builds - Part 1 - Ep.583 - Power BI tips
+Episode: 583
+Duration: 54:00
+Source: notion
+URL: https://app.notion.com/p/413e74c69c188172bca8f047d6f22fd0
+Notion: https://app.notion.com/p/406e74c69c1880aca144ee6da9dbe4c6
+Captions: notion-meeting-note  [speakers are diarized letters, not names; B addresses Mike so B is Tommy, D addresses Tommy so D is Mike on this recording]
+Fetched: 2026-11-10
+------------------------------------------------------------------------
+
+[A] you . you you Good morning.
+
+[B] Good morning, sir. How you doing?
+
+[A] Doing well. Oh, just getting fired up. Good morning. Getting fired up.
+
+[B] Yeah. My parents are in town, so there's been a ton. I've been doing the youth ministry things. I came back late last night, so no rest. No rest for the weekend. So.
+
+[A] Yeah, there's a lot going on.
+
+[B] Yeah Since this is a two-part series that we're recording, we'll jump right into it.
+
+[A] Yeah. Okay.
+
+[C] Sounds fine.
+
+[B] We'll do 30 minutes and we'll do another 30 minutes. So I think that's perfect. Yeah. I'm getting ready to present a. Giant project this week too, which is going to be a blast, but it's... It's really, it's not the services, it's the effort involved that's going to be. the kind of the selling point there and I understand that it's gonna be like it's not two months to do But even though it's exactly what they want, so... That's planning that today. Well. So yeah, there's a lot going on. A lot of good things, but just... A lot of things to juggle which are fun.
+
+[D] Well, better to be busy than not busy at all.
+
+[B] Oh, I love it.
+
+[D] All right. So...
+
+[B] Oh, I love it. So there's no complaining. Yeah.
+
+[A] I'm just going to confirm this is just 583.
+
+[B] Yeah, 583, that's what I got.
+
+[C] 5, 8, 3, okay, No news, just follow us stuff. No thumbnail needed. 583, got it. Okay. Cloud streaming, cloud recording.
+
+[A] There we go.
+
+[C] Okay. I need to switch off the... Ending here real quick. Hang on.
+
+[E] ♪ Drew a shortcut in the dark ♪ All right.
+
+[B] All right, let's do it.
+
+[A] Good to go. All right, Gordon.
+
+[F] You ♪ F's in the mix, fabric and AI ♪ ♪ Get your fix ♪ ♪ Explicitly ♪ ♪ The Pacers ♪ Hello and welcome back to the Explicit Measures podcast with Tommy and Mike.
+
+[B] Good morning, Mike.
+
+[D] Good morning, Tommy. How you doing?
+
+[B] I am doing excellent.
+
+[D] Good to hear it. Today is a recorded episode, so we're going to get right into our main topic. We're not going to have any news or news items because who knows what's happening at the time of this release. The internet could be changing all kinds of things. AI could be... fundamentally shifting what our jobs are.
+
+[B] Or night could literally be happening as we talk and we're just not there for it or we're there, but we're not there for here.
+
+[D] It seems like it happens every other week. No. We're just not there. So we're going to just jump right into their main topic today. This topic is going to be a little bit interesting, I think. Um... -We're gonna kind of like explore a little bit what happens when leadership gets hands on AI? What happens when a leadership team starts building their own things with AI systems? What are the implications of that? And have Tommy and I seen this starting to occur Or what is happening when AI gets introduced at the leadership level? I think this is actually kind of a interesting trend that I believe we're starting to see and maybe more of this will continue to appear happening at the leadership levels of companies. Okay. Any other notes here, Tommy, you want to discuss before we get into the main topic?
+
+[B] No. Yeah. So let's build. So yeah, let's bring it in Mike, because we're actually going to do a two part series on this. And I think Mike, we've been flying by the seat of our pants with a lot of just where fabrics gone, but also the agentic tooling side of things. And just, and part of it is also just trying to keep up. Um, I feel like right now we're beginning to see some common trends, some kind of Kind of the rhythm of how organizations are beginning to adopt, whether it's informally AI, not necessarily in a formal way. And one of the bigger ways has been this idea of leadership optimization. understanding that AI obviously exists too, And how are they building or using it? both with and without the BI team, both with and without the development team. And we're going to do this two-part series on talking about AI leadership building prototypes and then handing it off to BI. And then on our next episode, 584, we're going to talk about kind of the drift between... Claude dashboards and what leadership is capable to them and how does that work with current reporting needs? But today we're talking about leadership can now build apps on Both artifacts, if they have their hands on Rayfin, if they know what it is. But most agentic tooling right now, and not even your VS Code or Cursor, Mike... Claude, chat GPT, you say, you know what I would love to see? I would love to see something to do X, Y, and Z. And it's going to build a full working app. And what do you think leadership's going to do with that, right? Are they going to hand that off to BI? Are they going to use it for themselves or with their team? And we're at this rapid pace of prototyping. that can help the BI team out. This is completely new. on how anything has worked between leadership and BI in the past. Because right now we're in this space where BI and leadership can work where not only can leadership say this conceptual idea of what they want, like we need something that does something like this and BI has to handle everything else. Leadership could literally build the prototype and just say, do that. And I think this is a very odd design where we have to think about our... careers in our teams and our relationship with leadership on how best that works. Are we going to just build exactly what they said in AI? With this astonishing rate that we can build... What does handoff even look like or that relationship between leadership and the data team? So that's kind of how I want to kind of frame our conversation for the next two episodes.
+
+[D] Sure. Yeah, let's talk about... So a couple observations I'm seeing already in organizations, right? There's a couple stances that I think that are happening right now. I believe leadership is... kind of in most organizations, leadership is acknowledging that AI is here to stay, And It depends on the leadership's experience. on how quickly this stuff starts getting rolled out across the organization, I think. For example, Um, I would imagine most leadership individuals are at least toying with or playing with a cloud code subscription. Have had that for a little bit, trying to build something with it. And in general, I think the idea here or concept that I'm Wrapping my head around is. If you have a good idea, on what delivers value for a product or an app. The barrier from your idea in your head to get into something that is a real product or something that is usable for your team or software that can be leveraging your team. That barrier got very small. The individuals in your company that can articulate a solution has preference around how this app should look, what it should do, how people sign in, what's the experience, what's the flow of work look like. People who are able to articulate that well and get an agent to build it you're in a sweet spot right now. no longer are you needing to learn all the TypeScript and React and you know, Rust, whatever language that you think you need to build it on, you could just show up and describe what kind of solution needs to be developed And with the AI's help, you can get a lot of this already built out of the box. And I'm not gonna be perfect, There is a maintenance aspect to this as well. but I look at this going, there's already like, this is pretty... easy to get going. And so I think this middle tier to leadership level building real things, it's going to be like, is going to change how we think about companies and the structure of companies.
+
+[B] And this is not going to be at every organization, right? This is so dependent on honestly the personality and the, you know, how much a certain individual that happens to be in leadership is willing to test out things themselves with AI right now. So I'm seeing organizations right now, but there's still, Like, I guess we'll use AI, use your own subscriptions. And I'm seeing more of the situations, at least we're talking about today, where the leadership team or individuals rather not, again, we're talking informal adoption here. They are using it. They're grabbing their own Excel files. They're building the application that does exactly what they want. They're much more technologically or AI friendly or savvy. And those are the situations where I think the can fundamentally shift. the relationship, both the relationship of BI and the organization, but also the relationship between BI and data and the leadership team. Because I want to back up just briefly here. When you think about that relationship between leadership and BI and data in the past, Right. It was, I would say in most situations it was an... It was an acquaintance type of relationship. Unless you tried, it took BI and data to prove themselves. And most organizations, what I've seen is if you wanted to show the value of what your team did and what BI did, it was a marketing effort, right? It was like doing a midterm campaign to prove the value of what the data team does. It's not just we're IT and we funnel data to your nice reports. There's a lot of work that goes in. not just as an IT point of view, but also from the culture and making sure we look at the right numbers. And Most organizations saw data, unless you're the CTO. The relationship between data and leadership was, I don't want to say foreign, but it wasn't an intimate relationship. Would you agree or disagree with that?
+
+[D] I would very much disagree with this statement.
+
+[B] Okay. I'm not... Yeah.
+
+[D] I don't think it's so disparate. You're making it sound so disconnected. I don't think it's disconnected at all. I think there's a very tight coupling between data and getting things out. How are things being built? who is responsible for those things, I think those have greatly changed. I think when you introduce Power BI and you have yet another tool to bring into the mix for individuals, I think that was a bit more of a risk for organizations, right? You know, bringing in Power BI, well, we already have Excel. We already have systems that let you extract data out But there's a whole bunch of background systems, processes that were developed by the business in order to get the data they needed to make decisions, right? In... No company will be successful without some sort of data decision-making system. It doesn't matter what it is. And so I think what you were seeing here is you were seeing Power BI and Tableau, the visualization tools of the world, really rock that and move people away from what traditionally was just pure Excel.
+
+[B] Oh yeah.
+
+[D] I still think there's a lot of Excel people out there, not saying there's anything less. But what we're seeing right now is, I think the... If you look at the business intelligence space, it hasn't changed. We still need information to make good decisions about our businesses to move forward. The ability for you to do this in a Power BI report versus a Claude dashboard versus a Genie dashboard from Databricks that's changing. So I think to me, the observation here is the changes are occurring, we're getting a new medium to do the same stuff. Um... what's becoming more capable to me and if I think about like Rafe and Not only are these tools just reporting out like business intelligence would typically have done inside Power BI, we're now having full application level development experiences.
+
+[B] Yeah.
+
+[D] Again, I keep leaning on this idea. I think that we're at a place where In the same way Power BI democratized reports, AI and agents are democratizing app building. And so we're just going to get a lot of apps created here in a very short amount of time. that people are going to want to build and create and add value with. And I think where, to me, I can see kind of two stories with leadership, right?
+
+[B] Sure.
+
+[D] One story of leadership is we need AI. I've experienced it. I've worked on some things with it. And they become an advocate for that AI in their organization. And I've seen... like some not maniacal, but like very fervent, very intense focus on AI. So much so that if the team members beneath that leadership don't get on board, they likely don't have an additional position at the company moving forward. It's that drastic of an effect of like we're doing AI, I need everyone to learn this one, it's all a progression. Again, as an individual who's rolled out AI in his own company, It's not that people resist it.
+
+[B] Sure.
+
+[D] It's just, it changes fundamentally like what they're capable of or what they know how to do. And for some people that really rocks their world because their perception of self was I'm a developer, I write code. And all of a sudden you're now giving middle management or leadership level or leadership other team members this really rich tool And all of a sudden, it's challenging who these individuals thought they were. And I think that's slightly scary to people. What I feel like I observed in my own company is the more I invested in helping my team educate, helping them use the tools, sending them articles, encouraging them to continue to learn and get better at what they're doing, At some point, people start saying, they start... forming a new image of themselves and how they would work with AI in this new world. And I do think there's a learning curve here.
+
+[B] So first you say I'm hot and cold.
+
+[G] But think of it though.
+
+[B] If you don't get an AI, you're gone kind of thing. That is my friend. The pedal is hot or cold on that one. But I, but I think there's a point here because you're right. Yeah.
+
+[D] But that is, like, there are certain, like... Just let's... Let's just think for just a second here about this one, right? If you have team members on your team that are doing 10x, 20x the amount of work they used to be doing and things they've never touched before, like building applications, writing React apps, building, you know, if I can give a task to Tommy and he has it done in an hour or two in a day that other team members without AI would have taken a week, a week and a half to do.
+
+[B] Right.
+
+[D] or let's call it two days, even something less drastic. As a leader, I'm going to push everyone to operate more like the AI-driven agent developer individual, right?
+
+[B] I want...
+
+[D] So that...
+
+[G] That's why I think it's so polarizing. Yes.
+
+[B] Yeah, because you're right, though, because it does disrupt if you use it. So, and I think... The BI team has a great opportunity here when you find a leadership start building because think about there are two types of things leadership generally and again generally would be building in one of their own subscriptions where data has the opportunity to be intimately involved. The first one is obvious, a dashboard, right? They're going to export Excel files. They're going to say, I want to see this over this time. And hopefully you have the relationship with your leadership where they're going to say, hey, I just took an Excel file and I built this wireframe or this prototype. Can we replicate this? To me, that's a great opportunity. That's data output, right? That's the consumption of data where when we are set up, this is what we do, right? We've dreamt of the day. We had wireframes and I don't think anyone should be even be threatened by leadership being that position where the workflow with leadership is not, I'm going to give you a, you know, bird's eye view of what I want. And you have to translate that into a visualization. Which is kind of our jobs. Now we can not only just have them draw out, but Mike... I've had some situations now where... Some of my clients, their leadership team has given me images that, It clearly was generated by Chats GPT or Claude of a wireframe or design of a report that there are features in there that did not look like Power BI can do. Obviously, I don't think you can do all of this because some of this is crazy, but this is the idea of what we're looking for. They went through the refinement process. They went through the prompting to be able to have that conversation. And not only were we able to build it, but Giving those screenshots, it's kind of weird where we're going now, by the way, just in the world that we're living. The features and the functionality that the gun kind of what they gave to me. Using Power BI Desktop Bridge, and this is doing a lot more than bar charts, was able to really not just replicate it, but give them all the functionality that also Power BI And that... It sets us up for a lot of success. The problem is If we don't have the relationship with leadership in the first place, and I think if you don't have conversations right now with your leadership team saying, are you using AI right now? Are you kind of prototyping with it? If not, we can really work together. My problem, Mike. Or my concern is not that relationship is the lack thereof, because once you get to the point where you're, Leadership is starting to build these dashboards, but they're not coming to talk to you about it. Right, to say, can we actually have this in Power BI? That's when things begin to drift. Because you're right. It's either hot or cold. We're either having this intimate relationship now where they're feeding us wireframes on everything that they've been able to generate with AI themselves to put conceptually into something tangible. And then we're building off of that. or We're getting to this point where we're beginning to drift. So my question for you is, would you agree with this, where this is a great opportunity for the data team with leadership? What's the workflow look like in that from the data consumption point of view?
+
+[D] I don't know if I'm... I don't think you were trying to say this, but I think it kind of came off that way, which was, you know, leadership is going to build things.
+
+[B] Which happens a lot.
+
+[D] reports, dashboards, things that they're creating inside other tools, right?
+
+[B] Yeah.
+
+[D] Agent related tools. And you made this comment around like, well, you know, if they're going to build things and then it's going to distill down into Harvey reports. I'm not super convinced all of our business intelligence will land in reports moving forward. What I do think I'm very confident on, I'm very pro or confident on, the semantic model is going to become more important. How we access our data is going to become more important. I think one of the areas that I feel is maybe it's getting stronger It's not quite where I think I would want it to be. How do I give agents read-only access to Power BI or Fabric artifacts.
+
+[B] Mm-hmm.
+
+[D] What does that look like? Right. So, I mean, even a little bit more fundamental here, Tommy, right? I think leadership cares about security. I think leadership cares about delivering results quickly, Right. And I think most organizations would rather have um multiple business intelligence artifacts, let's call it that, business intelligence items, that they can decide upon and decide which one is the right one to move with, right? When we, how do I say this? When we bring down the price or the time it takes to deliver some sort of business intelligence asset, Right. if a report took me two days to build and now I can build one in five minutes or I can experiment with things in two or three minutes or I can build one in an hour or two, The speed in which I can iterate through designs or have multiple designs sitting in front of me to get, you know, what is your preference here?
+
+[B] -Mm-hmm. Mm-hmm.
+
+[D] You know, here's some questions. And one of the things I found that I was doing, Tommy, when I didn't understand, where I thought I understand the data that was coming to me, again, this is my experience around with like throwing things at an AI and say, just go build this, right? I was able to spend a bit more time changing my process.
+
+[B] Mm-hmm. Sure.
+
+[D] In the past, I would do a lot of building like, okay, when I get a export of something, I would initially take that export and immediately go to Power Query, start shaping data, building out some information, and then start thinking, okay, what kind of measures or calculations would I think I would want on top of this? There's a lot of assumptions I'm making before you can put any pen to paper and design what I think is there. I've also found the opposite challenge which is if I step into building reports right away. I could wireframe them and I might have a picture in my mind of what the data would look like. But then when I put real data on that visual, it's totally different. just because the data shows a different story than my mind was thinking as I was picking up that bar chart or bringing the day together. So I think this agentic world now allows us to rapidly prototype or get out many designs in front of our users or consumers of data and let them have a preference.
+
+[B] Yeah.
+
+[D] What works? And so I'll go back to my experience. I gave it an Excel file, a CSV file of some information.
+
+[B] Mm-hmm.
+
+[D] I said, here's the kind of insights I'm looking for. So I spent more time asking questions around, I would like to answer this, this, and this. How many tokens is it? My data set that I was playing with was I extracted a week's worth of token usage on my company. We're using Cursor right now. So Cursor has a dashboard. The dashboard's okay. It doesn't give me everything I think I need. So I export the Excel file and then ask the agent, okay, Who's using the most tokens? What time of day are the most tokens being used on? you know, just general questions around what I think is presented inside the data and just said, go figure it out. And the agent did a really good job. This was using cloud dashboards, which I thought was testing it out. And it did a really good job. It said, here's the questions you asked. You asked this question and here's two or three visuals that potentially answer that question. Here's another question. Here's two or three visuals that answered that question. Just represent it in different ways. And I was really appreciative of the fact that it was like highlighting my you and then giving real results and data results to show you the answer. The other thing I found very fascinating here was, you know, a lot of times people will say, well, how do I trust it? How do I know the AI didn't just make up something? It didn't just fabricate some sort of formula and tell me what I wanted to hear as opposed to answering my actual question. Well, in the Claude design, every single visual you could click on them, and it gave you a formula of how it was built.
+
+[B] -Sure.
+
+[D] How did it get to the data table? Here's the formula. It was written in, I think it was JavaScript. Here's the functions it was writing. Here is a data table that represents that data. Again, it was almost like building its own justification to like, this is what I analyzed in the file. And here's how I got to this answer. So I'll just pause right there. What's your reaction to this one?
+
+[B] Yeah. So my first thought is... The first half of what you said I love, I agree with, I've seen myself, but I think, Mike, I have a concern. When it comes to the Claude Dashboard, the self-service side, because One, that where are you getting your data from? There's a potential here, a great potential, a great opportunity here for self-service to live actually in the agent and not necessarily in Power BI.
+
+[D] Mm-hmm.
+
+[B] Because if the whole heartbeat of Microsoft Fabric is still the semantic model... Well, could there be a potential if we have the right access and the Fabric MCP server set up to say leadership Anytime you want to build, you know, Obviously, there's Copilot, too.
+
+[G] A little bit, yes.
+
+[B] We know that. But we're also seeing, let's be clear, too, Microsoft is becoming agent agnostic when it comes to their access. So, yeah. Yeah, but I mean, we're seeing this with all the agent developer tools and the ability that I can connect to a semantic model Anywhere? Right? At this point? So, the...
+
+[D] But I would even argue the MCP server access, yes, but the MCP server access is more about editing the model.
+
+[B] It's a big deal. I mean, yeah, you're able to, you're able to, but you all, it also has a consumption read abilities and you can, based on the Microsoft entre ID, choose kind of what level of access that person has.
+
+[D] When you go to MCP level access, you're actually able to edit the model itself.
+
+[B] Yes. But I think you do need build regardless. So, um, I would love to see a point because if you have the built XML input, you need...
+
+[D] I don't know if... Yeah, the MCP server, from my understanding, runs directly against the XRP.
+
+[B] You can't just consume... yeah...
+
+[D] and you're editing while you're consuming.
+
+[B] -Yeah. Right.
+
+[D] I think from that regard, like, Yep.
+
+[B] And I-I saw this with Ray Finn.
+
+[D] So they're, Correct.
+
+[B] So they were building dashboards for RAF and new semantic models, but they needed the XMLA endpoint to be turned on and they needed to build access in that.
+
+[D] So, so I look, I think there's some...
+
+[B] So, and that's just to consume.
+
+[D] Again, this is where I'm like, some things are accessible in Fabric with agents and some things are not. And so it's a little bit unclear. I will commend Microsoft. There's a lot more of the MCP stuff that's appearing. You can, if you set your MCP server up correctly, you can specify inside the MCP server the types of actions or the things you want it to be able to do. So again, it's more on the user side. It's less on like the... it feels like it's on the wrong side of the fence, right?
+
+[B] Right. Let's go.
+
+[D] Meaning I have an MCP server. I can set up my MCP server to not edit anything, just go get data using the MCP server, no manipulations. But in that situation... I'm the user and therefore I'm turning off like the permissions of like to protect.
+
+[B] Right.
+
+[D] So it feels wrong that I'm setting the permissions. It almost feels like the other way around. Like I want the, semantic model to be exposed to MCP servers and then as an admin or an admin member of the workspace, I can specify, okay, for this model, I'm allowing these types of commands on top of this model. So it's almost like an enhanced build permission is kind of what I need.
+
+[B] I know.
+
+[D] I think, but...
+
+[B] But. But. I agree. No, we're on the same page. We need that. But let me go back to your point because I have a dream. I have an ideal pathway here because that prototype, as cool and amazing as it is, from a data governance point of view, cannot be the end of the road. It can't be the end of the road for leadership to go, even if they have the ability to connect to a semantic model and we have the right permissions. And just before you comment here, this is my ideal dream of the workflow. Build your prototypes. Build as many as you want. But I want to set up a connection to my ticketing system, be it an API that we've installed a skill on every team to say, you built that prototype, we're already working on a report like that. The agent says, just so you know, we have a report using this model. Do you want to submit a ticket with that prototype sent over? Use that prototype to enhance the BI teams building already. Because again, we are already established. We have established already that prototyping in these agents is an incredibly powerful way to build your relationship, but also build the right things. with your leadership and with your clients or with your teams. But if everyone's building all these prototypes, Mike, and they're just going, what's going to happen? Now we all have these random artifacts that are being shared. And I don't care whether without my permission or not, but what's the source of truth? And you're going to run into this eventually because someone will go, just create that back and clot again, what you did for this week. And all of a sudden, the way people are accessing, consuming, and communicating with data is coming through this back end, What I want is build your prototypes, build as many as you want to your heart's desire, but allow an avenue that that can easily be sent to our ticketing system. So you want that? You're building that? Okay, we're going to put this part of our governance in our certified and our promoted track so everyone can see this, what you're looking at, and that is verifiable. Because it can't be the end of the road with a prototype. What's your take on that?
+
+[D] I believe, I think you're part of the way there.
+
+[B] Cool.
+
+[D] I don't think I agree 100% with like, I mean, if you open up the door and Claude's going to start showing up to do things... I don't know how easy it will. So, for example. when you give out Claude subscriptions to individuals, I'm not quite confident I understand all the security controls that would be there, right? Tommy, if I roll a Claude subscription out to my team, as a team member, do I get the ability inside that cloud team interface? to turn on or turn off various features inside Cloud. Right? Let's say, for example, I want to roll it out. Here you go, everyone. Everyone gets a clawed-in phrase. Hey, everyone's getting a grokbot, whatever the thing is. Do we have the ability as a team or an enterprise to turn off specific features for individual users inside that cloud subscription? And my understanding right now is at the team level, there's not a ton of controls around. okay, Tommy, I wanna allow you to use dispatch. You can use that on your devices, but you can't use called dashboards, right? I'm not aware of a feature that does that. Maybe something that allows you to do this, but I'm not aware of it. So I think what you're speaking to, Tommy, is the increased need for governance. What is... Real data. When do we... allow things to go from a prototype. And this is the same thing This is the same pattern that's happening inside Power BI today currently.
+
+[B] Mm-hmm. Mm-hmm.
+
+[D] We have lots of people making many reports, many paginated reports. All of those things Already have designs and people have thought about them and they build those things. When we think about self-service, there's a certain amount of reports that you're just letting people create on their own. And then as we go further with the organization towards the enterprise level, these are like the sanctioned reports. We're certifying things. There's more intentional process around building those artifacts in a way, that lets the organization leverage them. And so I think from that perspective, All the agents are doing is it's opening up the ability for us to create more. and more complicated interactions with our data. it's not just a read-only artifact anymore that's a part of your report. It's a bidirectional system. It's solving potential real business problems. So I think more than ever, we're going to need to have clear, roles. Okay, if you publish a cloud dashboard, who's the owner of it? Where does it go? Is there a list of this when you need support for it? What does that look like? Are we going to allow anything from Claude to be more than just an individual contributor item? Do we have policy around moving those prototypes, that have been developed with an agent, Do we move them through our vetting process?
+
+[B] Right. you This has to be considered and I think that's the point I don't I care if people are building prototypes and I will honestly actively encourage it.
+
+[D] What does our vetting process look like to make sure this looks right?
+
+[B] But to me, it's not something I want to be passive about. That's the difference, right? I don't care if you're building them, but I do care. That making sure that if you are actually now beginning to use these and communicate and distribute these artifacts with your team, especially if you're in leadership. Especially if you're from the executive team and you're beginning to share these artifacts I guarantee you it's just like a time bomb waiting to go off until there's enough drift there and either lack of care about the reports that were currently out there in the actual ecosystem or when there's a conflict arises between two numbers, be it from Power BI, a Fabric app or whatever that leadership has built and who's right at that point. We're going to lose that trust that we have. So to your point, I care as much because I care that there is still the path to source of truth, to what we're going to consider true.
+
+[G] But it...
+
+[B] There has to be the path there.
+
+[G] But Um...
+
+[D] You say true.
+
+[B] What is truth?
+
+[D] And I think it's a little bit. I think it's a little bit... I mean...
+
+[B] -Mike.
+
+[D] In business intelligence, it's a little bit, there's some things that are able to be very consistent. Right? I think there are other areas in your business that are much more Less defined, fuzzy, more difficult to articulate into like a solid truth. And so I think, you know, if leadership says this is what the number is and they've been doing their own analysis on something, leadership's going to push for their answer to be the right thing.
+
+[B] I don't say it. Don't finish that sentence.
+
+[D] That's what they're trusting because they built it. All right, so this all turns into like a trust problem. I think.
+
+[B] I know.
+
+[D] Right.
+
+[B] All those little things that distract from Power BI or what our source of truth was, those things, and I would put Claude or whatever these AI dashboards as just another one of those elements that potentially could be in conflict with what data governance is supposed to do. I'm not saying those things are inherently bad. They don't have it. They're amoral. But again, To your point, someone in leadership will eventually go, well, this is what I've been using, so they can influence what is true. And that's when data governance fails, Mike. You know this. I'm not telling you anything new here. And because you said it, eventually they're going to push for what they think is true. And that flies in the face of everything that we've been doing for 10 years. So give me a path for these dashboards or it doesn't even have to be dashboards. The analytics that these cloud or chat GPTs or copilot are doing, give me a path so I can... Complete the cycle. I can put this in our normal workflow because. We're in a unique situation, and I want to talk about this in our second part of this on Thursday about... Us having Fabric have really the keys to the kingdom for organizations with data. and from app development to the dashboards. But before we go there, um, Mike, I think that we're just in a very unique opportunity here. where leadership is gonna have this, this has to be a conversation now. If you know But to be just if you have a relationship with your leadership team to go, hey, use an AI. Most people are going to say yes. Just so you know, if you're building dashboards, there's a great opportunity for us to rapidly build for you off the prototypes that you're doing. You're not saying don't build prototypes because you're going to break data governance. Obviously, you don't say that. But begin to introduce the concept of, hey, what you're doing here, not only does not go in conflict of the BI team that you have, it's going to help everyone out. It's going to enhance everyone's job here. Having that conversation now rather than later is where I think there's an opportunity here.
+
+[D] I think it's going to be, this is going to accelerate the need for leadership to Continually define what is acceptable uses for data. I think having agents show up and be used to build things, especially with leadership involved, I think this is going to accelerate the need for leadership to define Data ownership, data stewardship, How do we have quality checks?
+
+[B] Yeah. Yeah.
+
+[D] And again, I think As you were saying things, Tommy, something popped in my mind, which... It was probably not a contrary thought, but like just another. A word of note here, maybe a word of caution. Already today, your organization is already pushing out reports and dashboards. Today, currently. People are building things and they're sharing stuff.
+
+[B] Mm-hmm.
+
+[D] Before the introduction of AI, this existed. This problem existed before AI. There's also this issue of Tommy, how can I know and trust what you made? Do you have the proper documentation? Do we have a process in place that makes Tommy's report go from standard to certified? How do we package up the report? What's the distribution of the report look like, right? All these things matter. And they kind of came along the ride because we had Power BI and it's kind of grown up and we now have these controls and we have organizational apps, we have apps, we have all these different methods that we've kind of decided on like, okay, our business has defined it. you a path to get from I'm having a discussion with the business unit to I'm now giving out reports and information so people can make decisions on things right that Trust Path has to exist. all the AI is doing is accelerating The creation side? without necessarily bolstering or supporting more of the testing and the operational and the can we trust these numbers? side of things. So we're creating like never before. We're building faster than we ever have. And so I liken this parallel to what I see in software development. And this is very relevant also to Rafen.
+
+[B] Hmm.
+
+[D] Tommy, I've sat down and I've been building games like crazy with agents. And they're elaborate. But until I'm in them and actually using them and testing them, I don't know if it's going to work the way I expect. And the same thing is accountable for like reports, same concept. You can have a ton of reports And those reports if they're not vetted and tested and go through the process, we are unable to kind of put our sign of approval and say, this is approved. We've done the homework on it.
+
+[B] Right.
+
+[D] Ship it, it's useful. We're gonna stand behind it. Oh, and by the way, when there's a problem, we can come back to Tommy and I, the BI team, and we'll help resolve it. We'll get answers for you. And oh, yeah, there's some data issues. We'll help you fix that upstream, right? All of this needs to exist. agents are just going to make that even worse because there's going to be many more prototypes, much more things to deliver. And how are we automating not only the creation of things, but how are we also automating and handling the testing, the validation and the confirmation of this stuff? So I really do feel like there is a very strong story here around who do we trust to build and create things? What does that deployment path look like from Tommy and Mike's idea I'm just taking a CSV file. I'm asking some questions of it. I'm making a report. And to your point, Tommy, My report is now complete. but it was a one-time extract and it was a one-time report and it has one effort. It's not constantly refreshing, the thing's not interactive. I could add that to it. I could spend more time in tokens to build that portion of the report, but is it really worth it? Or is this just more of a starting point to get some creative juices out to say, okay, here's what I want to build. I'll kick it back to you, Tommy. I have one more point around where we use AI to build things. We've been talking a lot about cloud dashboards and Rayfin, but I think there's actually some other opportunities where we can leverage AI as well.
+
+[B] Right. The next episode really very much on the concept of we're the unique opportunity because the data team now can build apps and really what that allows our relationship with leadership. But I want to end at least from my point, Mike, on this idea of I'm going to come, I'm going to create a new concept and we're going to call it AI P2P. AI prototype to production and making sure that we have a path and that's going to be part of the data governance track for me. So maybe there's a better name there. I'm hoping to suggestions here. But again, like I think that has I know, I know this is going to be such an important aspect of I think any good BI team with a healthy relationship with their leadership And honestly, the organization as a whole is going to have this concept of AI P2P. AI prototype to production. How do we use the prototypes and the random things people are building to try to get and understand their data and put that into a track that is scalable with the existing data that we have? So, and I think We are just at an early stage of this, but I think those conversations can happen starting now.
+
+[D] I think this is also going to be, I want to, okay, so I'm going to close on this thought, Tommy. As I think about where we are able to apply AI, um I'm trying to write a couple notes here just so I don't lose my thought here on this one.
+
+[B] Sure.
+
+[D] So, you know, where can we apply the AI to do the things? So... Right now, I'm finding a lot of value in using AI to help me understand semantic models and build and shape semantic models right now, currently. Already, right? But that is a supplemental AI space that's helping me shape and manipulate an existing trusted source to enhance it, to add more things to it. Hey, go through this whole model, write out descriptions for everything. Hey, go through this model and add for every single measure we have, go ahead and add the formula in the measure and then format it like this, right? So I can give the agent very specific rules to follow and agentically, it'll go through the model and build out a bunch of things, which is awesome. I absolutely love it. Okay, then there is using AI agents. So now we've done the model shaping with the AI agent. Moving forward, we can now start doing report building with AI agents. I just did some workshops recently, and I was building report pages using PBIR, using Skills for Fabric, giving that to my agent, and then my agent was able to show up and say, okay, I now understand what you want to build. I can now help you prototype multiple visuals with multiple measures and multiple things. I can even start asking, I was even testing out asking some of those generic questions. Hey, agent. I want to know this, this, and this about some data. the agent is able to kind of figure it out and give me some, okay, here's some visuals I think that might work well. Now, it wasn't as good or as creative as when I was using cloud dashboards, but it was giving me like some variety and some visuals or something.
+
+[B] Yeah. There's something.
+
+[D] So I think using AI to build Reports is also a thing. I think, um, I'm seeing some things. This is one I have not personally done. NJ Park is doing a lot of good work around building custom visuals inside Power BI.
+
+[B] It's a whole new concept.
+
+[D] So one of the things that we like about Power BI Because there's already a lot of really good opinionated visuals already inside podcasting. Power BI reports, right? We've got KPI cards, we've got page navigation. There's a lot of really good fundamental elements that already exist. what happens when that business user comes to you and says, "Hey, I want a visual that looks like this." You're like, "Well, that's not natively supported by Power BI. It's not a native visual." I mean, Tommy, we've had a long standing issue with, you know, What happens when people ask for things that Power BI Desktop just can't do?
+
+[B] Oh, people love that.
+
+[D] I think there's an answer now. I think the answer now is use an AI agent and go build a custom visual. And so some of the stuff that NJ Park is building and developing are like, these are pretty impressive visuals, multi-layered visualizations, it's animating, moving data points around as you click on things. You can really... take a concept, an idea, and really turn it into something that's really useful for that report. And because the AI can build the custom visual for you, It can read all the specs. It knows how to use it. It knows how to develop the app. You can get a PBI viz file that you now load to the report and use it.
+
+[B] Which is crazy.
+
+[D] Well, I think Microsoft should spend more time in making that PBI-Viz experience integrated in the actual report. How neat would it be for like, I know we're talking about building Rayfin inside Power BI Desktop. well, why are we not bringing the same level of capability to building custom visuals for your report.
+
+[B] I think we're getting there.
+
+[D] Right? I mean, No.
+
+[B] I don't think we're far off.
+
+[D] And again, I'm just trying to understand how does this fit? So there's another layer of AI, which is now custom visuals. And then if you went full tilt on this and said, okay, look, we're not even going to use Power BI anymore. We're going to use Genie. We're going to use Cloud and build out full-on Cloud dashboards, things that are actually on top of real data. So I think we could look at this, and there's many different places now where we can apply AI. And I feel like AI is becoming a Swiss army knife. It's a... It can do anything. It can help you manipulate the semantic model. It can help you manipulate and build reports. It now helps you build custom visuals. And then you can full up just build your own dashboards or full interactive apps with Rayfin. So I think there's now more options than ever for us to build data solutions. And I think this is where we're going to have a hard time.
+
+[B] thousand percent I love that.
+
+[D] which How do I choose between building a custom visual for a report and building the full report with Raven, right? What's the decision tree look like? How do I want to maintain this? How do we certify this? I think this is where I believe leadership... is starting to explore AI And therefore, it's the leadership is getting this aha moments. Oh, this is powerful. We probably really should be doing this. This is something we really should be working on. And so I think leadership is getting wind of like this new world that we're getting into. And so proactive leaders are leaders that are doing engaging exercises with their teams. I think they're really trying to unpack like, what does this actually mean? How would this affect our business?
+
+[B] Can I ask you the last question I'll ask you and we'll close out.
+
+[G] Sure.
+
+[B] Is the onus on BI? or leadership to do that.
+
+[G] To do what?
+
+[B] to really the vision that you had there.
+
+[D] I think, yeah, I think that, again, with many things like we've talked about with the either the sponsorship for your BI or center of excellence, right?
+
+[B] I... Yes. Yes.
+
+[D] I think the vision... for what this needs to look like needs to come from leadership.
+
+[B] Okay. Good.
+
+[D] I don't think we're going to get nearly, I think if you have leadership that says, I think if leadership only pays in lip service, hey, we need to use AI to build stuff. If they only do this in lip service and don't actually get in and actually start using the product and the tools, I think you see... an increased passion, for leadership to get engaged when they start finding value of what they build with data sets, right? Give access to leadership to the semantic model, give access to leadership to let the leadership extract an Excel file and go and have them go build a dashboard with Claude. I think once they see how quickly and how useful that... That pattern is. then we can have real conversations around, okay, this is useful. How do we govern it and rule it out? And that's the question that should come next.
+
+[B] Yeah.
+
+[G] Yeah.
+
+[B] Dude. I love it. Dude, Mike, thank you for a great conversation today. I am so excited to get into our next part here. But I mean, I think hopefully now we're getting to a point where things are beginning to settle. saying they're going slower, but we're beginning to get some common ground, some solid footing beneath us on what AI is supposed to do.
+
+[D] I believe patterns are starting to...
+
+[B] So this is going to be exciting. Patterns.
+
+[D] patterns are starting to emerge, right?
+
+[B] Mm-hmm.
+
+[D] And this is, when things are so new and technology is so shifting what we do day to day, it's very hard to see a pattern in the noise.
+
+[B] Yes.
+
+[D] I think we're starting now to finally start seeing regular patterns appearing.
+
+[B] It's a great way to put it.
+
+[D] Okay, We can do this.
+
+[B] Yeah.
+
+[D] This is something that we can reuse. And I don't think we want to introduce this technology without some, like, we're going to do it. It's going to happen. But to just blanket or blindly deploy it without any other thought to like, how does it roll out? How do we have our organization use it? Like there's a whole bunch, I think, of other considerations that our organization is needing to think about and consider to make this effective and use our existing Trust models to deploy these data things.
+
+[B] Right 100%. 100%, dude. Mike, thank you for a great conversation. What else we got?
+
+[D] I think that's it for today.
+
+[B] You can find us on Apple, Spotify, wherever you get your podcasts.
+
+[D] For that being said, Tommy, where else can you find the podcast?
+
+[B] Make sure to subscribe and leave a rating. It helps us out a ton. Do you have an idea, a question, or a topic that you want us to talk about on a future episode? Head over to powerway.tips slash podcast. Scroll down, go to the envelope, see our faces, click on them, go to the mailbag and submit a question and your name so we know who you are. And finally, join us live every Tuesday and Thursday, 730 a.m. Central on all Powered At Tips social media channels.
+
+[G] Thank you all so much. song.
+
+[H] ♪ Drew a shortcut in the dark ♪ For I reach your table quick.
