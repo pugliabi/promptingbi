@@ -30,6 +30,15 @@ Ore file. Draft later from `transcripts/ep-583.txt`. Do not treat this as the ar
 - **He names it.** "AI P2P. AI prototype to production." He wants it on the data governance track. He invites a better name. The job is taking "the prototypes and the random things people are building to try to get and understand their data" and putting them on a track that scales with the data you already have. Early. The conversations can start now.
 - **Close:** patterns are starting to show, "solid footing," not slower, just finally some common ground. He agrees you do not blanket-deploy this with no thought for how the org uses the trust models you already have.
 
+## Locked (2026-11-13)
+
+Tommy turned 583 + 584 into a three-part series, `series.id: when-leadership-builds`, "When Leadership Builds".
+
+- **Part 1 (drafted):** [We Need Leadership to Build the Wireframe](../drafts/2026-11-13-leadership-builds-the-wireframe.md), permalink `2026/11/13/leadership-builds-the-wireframe`. Notion: https://app.notion.com/p/417e74c69c1881c9be60c9d4014707f6. Spent from 583: client screenshot story + Desktop Bridge, acquaintance / midterm campaign (framed as his contested read), bird's-eye-view translation, hot or cold, the "are you using AI?" conversation and "don't open with governance." Spent from 584: individual curiosity + budget app, his Fabric-app-looking Power BI report, least path of resistance T-shirt line, iPod refinement loop + "button says thank you" ticket, icy mountain (wrestling coach), "if I were still director of BI."
+- **Part 2 (Idea row):** They Won't Bring You the Prototype: AI Prototype to Production. https://app.notion.com/p/417e74c69c18811eb8eee64db94b97e6. Uses AI P2P, the ticket-plus-skill loop, the time bomb / "what is truth", plus 584's bookmark story. Do not reuse the iPod, icy mountain, or the Monday conversation.
+- **Part 3 (Idea row):** The Team That Owns the Data Should Own the App (584). https://app.notion.com/p/417e74c69c18817bba7ac96da77fba1b. Close on evolve or die, not the icy mountain.
+- Self-Service Moved Into the Agent filed as a standalone Idea: https://app.notion.com/p/417e74c69c18811e8ee3f5ba72bc4be6.
+
 ## Recommendation
 
 **AI P2P: the prototype is not the deliverable, the path is.** Title direction: "AI Prototype to Production" or "The Prototype Is Not the End of the Road." Plot: the client screenshot story, the hot/cold fork, the ticket-plus-skill loop back onto the certified model, and the sentence he will actually say to a leader on Monday. Leaves 566's "when do you build the app" alone, and leaves 584's Fabric-as-platform half for the next episode.
